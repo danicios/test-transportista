@@ -31,40 +31,50 @@ const I = {
   diana: ico('<circle cx="12" cy="12" r="8"/><circle cx="12" cy="12" r="4"/><circle cx="12" cy="12" r=".5"/>'),
 };
 
-/* ---------- Cuenta y progreso (Supabase) ---------- */
+/* ---------- Progreso (Supabase, un solo usuario con enlace privado) ---------- */
+// Sin usuario ni contraseña: una clave privada que llega en el enlace personal (#clave=...) y se guarda en el
+// navegador. En Supabase sólo hay funciones que exigen esa clave (ver supabase.sql).
 // PROG: codigo -> { a: aciertos, f: fallos, p: pendiente (fallada la última vez) }
-let sb = null, usuario = null, PROG = new Map(), progresoCargado = false, subiendo = false;
-const claveCola = () => `tt-cola-${usuario?.id}`;  // respuestas aún no subidas (p. ej. sin conexión)
-const leerCola = () => { try { return JSON.parse(localStorage.getItem(claveCola()) || "[]"); } catch { return []; } };
-const guardarCola = c => { try { localStorage.setItem(claveCola(), JSON.stringify(c)); } catch {} };
+let sb = null, conectado = false, PROG = new Map(), progresoCargado = false, subiendo = false;
+const CLAVE = "tt-clave", COLA = "tt-cola";  // clave privada y respuestas aún no subidas (p. ej. sin conexión)
+const leerLS = (k, def) => { try { return localStorage.getItem(k) ?? def; } catch { return def; } };
+const escribirLS = (k, v) => { try { v === null ? localStorage.removeItem(k) : localStorage.setItem(k, v); } catch {} };
+const leerCola = () => { try { return JSON.parse(leerLS(COLA, "[]")); } catch { return []; } };
+const guardarCola = c => escribirLS(COLA, JSON.stringify(c));
+const clave = () => leerLS(CLAVE, "");
 const pendientes = () => PREG.filter(q => PROG.get(q[5])?.p);
 
 function iniciarCuenta() {
+  // ¿Se ha abierto el enlace personal? (#clave=...) → se guarda y se quita de la barra de direcciones
+  const m = location.hash.match(/^#clave=([\w-]+)/);
+  if (m) { escribirLS(CLAVE, m[1]); history.replaceState(null, "", location.pathname + location.search + "#inicio"); }
   const cfg = window.CONFIG || {};
   if (!window.supabase || !cfg.SUPABASE_URL || cfg.SUPABASE_URL.startsWith("TU_")) return;
-  sb = supabase.createClient(cfg.SUPABASE_URL, cfg.SUPABASE_KEY);
-  sb.auth.onAuthStateChange((_evento, sesion) => {
-    const antes = usuario?.id;
-    usuario = sesion?.user || null;
-    if (usuario?.id === antes) return;
-    PROG.clear(); progresoCargado = false; marcarCuenta();
-    if (usuario) setTimeout(cargarProgreso);  // fuera del callback, como recomienda supabase-js
-    else refrescar();
-  });
+  sb = supabase.createClient(cfg.SUPABASE_URL, cfg.SUPABASE_KEY, { auth: { persistSession: false } });
   window.addEventListener("online", subirCola);
+  if (clave()) { conectado = true; marcarCuenta(); cargarProgreso(m ? "Dispositivo vinculado: tus fallos se guardarán." : ""); }
 }
 
-async function cargarProgreso() {
-  for (let desde = 0; ; desde += 1000) {  // Supabase devuelve como mucho 1000 filas por consulta
-    const { data, error } = await sb.from("respuestas").select("codigo,aciertos,fallos,pendiente").range(desde, desde + 999);
-    if (error) { toast("No se pudo cargar tu progreso: " + error.message); break; }
-    data.forEach(r => PROG.set(r.codigo, { a: r.aciertos, f: r.fallos, p: r.pendiente }));
-    if (data.length < 1000) break;
-  }
+async function cargarProgreso(aviso) {
+  PROG.clear(); progresoCargado = false;
+  try {
+    for (let desde = 0; ; desde += 1000) {  // Supabase devuelve como mucho 1000 filas por consulta
+      const { data, error } = await sb.rpc("mi_progreso", { p_clave: clave() }).range(desde, desde + 999);
+      if (error) {
+        if (/Clave incorrecta/.test(error.message)) { desvincular(); return toast("El enlace no es válido. Vuelve a abrir tu enlace personal."); }
+        toast("No se pudo cargar tu progreso: " + error.message); break;
+      }
+      data.forEach(r => PROG.set(r.codigo, { a: r.aciertos, f: r.fallos, p: r.pendiente }));
+      if (data.length < 1000) break;
+    }
+  } catch { toast("Sin conexión: tus respuestas se guardarán cuando vuelva internet."); }
   leerCola().forEach(r => aplicar(r.codigo, r.ok));  // respuestas hechas sin conexión que aún no se subieron
   progresoCargado = true; marcarCuenta(); refrescar();
+  if (aviso) toast(aviso);
   subirCola();
 }
+
+function desvincular() { escribirLS(CLAVE, null); conectado = false; PROG.clear(); progresoCargado = false; marcarCuenta(); refrescar(); }
 
 function aplicar(codigo, ok) {
   const r = PROG.get(codigo) || { a: 0, f: 0, p: false };
@@ -73,19 +83,19 @@ function aplicar(codigo, ok) {
 }
 
 function registrar(codigo, ok) {
-  if (!usuario) return;
+  if (!conectado) return;
   aplicar(codigo, ok);
   guardarCola([...leerCola(), { codigo, ok }]);
   subirCola();
 }
 
 async function subirCola() {
-  if (!usuario || subiendo) return;
+  if (!conectado || subiendo) return;
   subiendo = true;
   try {
     let cola = leerCola();
     while (cola.length) {
-      const { error } = await sb.rpc("registrar_respuesta", { p_codigo: cola[0].codigo, p_ok: cola[0].ok });
+      const { error } = await sb.rpc("registrar", { p_clave: clave(), p_codigo: cola[0].codigo, p_ok: cola[0].ok });
       if (error) { if (navigator.onLine) toast("No se pudo guardar una respuesta: " + error.message); break; }
       cola = leerCola().slice(1); guardarCola(cola);
     }
@@ -95,7 +105,7 @@ async function subirCola() {
 
 // Repinta la vista actual salvo en mitad de un test
 function refrescar() { if (location.hash !== "#test") router(); }
-function marcarCuenta() { document.querySelector(".nav-cuenta")?.classList.toggle("conectado", !!usuario); }
+function marcarCuenta() { document.querySelector(".nav-cuenta")?.classList.toggle("conectado", conectado); }
 
 let toastT;
 function toast(msg) {
@@ -104,24 +114,17 @@ function toast(msg) {
   clearTimeout(toastT); toastT = setTimeout(() => t.classList.remove("ver"), 3500);
 }
 
-const ERRORES = {
-  "Invalid login credentials": "Correo o contraseña incorrectos.",
-  "User already registered": "Ese correo ya tiene cuenta. Pulsa «Entrar».",
-  "Email not confirmed": "Antes de entrar, confirma tu correo con el enlace que te enviamos.",
-};
-const traducir = e => ERRORES[e.message] || e.message;
-
 function vistaCuenta() {
   if (!sb) return pintar(`
-    <section class="hero"><div class="eyebrow">Cuenta</div><h1>Guardar tus fallos</h1>
+    <section class="hero"><div class="eyebrow">Progreso</div><h1>Guardar tus fallos</h1>
       <p class="sub">${window.supabase ? "La conexión con Supabase aún no está configurada (web/config.js)."
         : "No hay conexión a internet: puedes hacer tests, pero no se guardarán tus fallos."}</p></section>`);
-  if (usuario) {
+  if (conectado) {
     const vals = [...PROG.values()], a = vals.reduce((s, r) => s + r.a, 0), f = vals.reduce((s, r) => s + r.f, 0);
     const pend = pendientes().length;
     pintar(`
-      <section class="hero"><div class="eyebrow">Cuenta</div><h1>Tu progreso</h1>
-        <p class="sub">Has entrado como <b>${esc(usuario.email)}</b>. Tus respuestas se guardan y las verás en cualquier dispositivo.</p></section>
+      <section class="hero"><div class="eyebrow">Progreso</div><h1>Tu progreso</h1>
+        <p class="sub">Este dispositivo está vinculado: tus respuestas se guardan y las verás en todos tus dispositivos.</p></section>
       <div class="card">
         <div class="kpis kpis-4">
           <div class="kpi"><b>${miles(PROG.size)}</b><span>preguntas vistas</span></div>
@@ -131,46 +134,34 @@ function vistaCuenta() {
         </div>
         <div class="acciones">
           ${pend ? `<a class="btn primario" href="#fallos">${I.diana}Mis fallos</a>` : ""}
-          <button class="btn" id="salir-cuenta">Cerrar sesión</button>
+          <button class="btn fantasma" id="desvincular">Desvincular este dispositivo</button>
         </div>
       </div>`);
-    document.getElementById("salir-cuenta").onclick = () => sb.auth.signOut();
+    document.getElementById("desvincular").onclick = () => {
+      if (confirm("¿Desvincular este dispositivo? Tus fallos siguen guardados; para volver a vincularlo abre otra vez tu enlace personal.")) desvincular();
+    };
     return;
   }
   pintar(`
-    <section class="hero"><div class="eyebrow">Cuenta</div><h1>Guarda tus fallos</h1>
-      <p class="sub">Entra con tu correo para guardar las preguntas que falles y repasarlas desde cualquier dispositivo.</p></section>
-    <div class="card cuenta">
-      <form id="f-cuenta" class="form-cuenta">
-        <label class="campo">Correo<input type="email" id="c-email" autocomplete="email" required></label>
-        <label class="campo">Contraseña<input type="password" id="c-pass" autocomplete="current-password" minlength="6" required></label>
-        <p class="norma" id="c-msg" aria-live="polite"></p>
-        <div class="acciones">
-          <button class="btn primario" type="submit" data-accion="entrar">Entrar</button>
-          <button class="btn" type="submit" data-accion="crear">Crear cuenta</button>
-        </div>
+    <section class="hero"><div class="eyebrow">Progreso</div><h1>Vincula este dispositivo</h1>
+      <p class="sub">Abre tu <b>enlace personal</b> en este dispositivo (una sola vez) y tus fallos se guardarán aquí y en los demás.
+        También puedes pegar tu clave privada:</p></section>
+    <div class="card">
+      <form id="f-clave" class="form-cuenta">
+        <label class="campo">Clave privada<input type="password" id="c-clave" autocomplete="off" required></label>
+        <div class="acciones"><button class="btn primario" type="submit">Vincular</button></div>
       </form>
     </div>`);
-  const f = document.getElementById("f-cuenta"), msg = document.getElementById("c-msg");
-  f.onsubmit = async e => {
+  document.getElementById("f-clave").onsubmit = e => {
     e.preventDefault();
-    const accion = e.submitter?.dataset.accion || "entrar";
-    const email = document.getElementById("c-email").value.trim(), password = document.getElementById("c-pass").value;
-    f.querySelectorAll("button").forEach(b => b.disabled = true);
-    msg.textContent = accion === "crear" ? "Creando cuenta…" : "Entrando…";
-    const vuelta = /^https?:/.test(location.protocol) ? location.href.split("#")[0] : undefined;
-    const { data, error } = accion === "crear"
-      ? await sb.auth.signUp({ email, password, options: { emailRedirectTo: vuelta } })
-      : await sb.auth.signInWithPassword({ email, password });
-    f.querySelectorAll("button").forEach(b => b.disabled = false);
-    if (error) { msg.textContent = traducir(error); return; }
-    if (accion === "crear" && !data.session) { msg.textContent = "Te hemos enviado un correo: pulsa el enlace para confirmar la cuenta y luego entra aquí."; return; }
-    location.hash = "inicio";
+    escribirLS(CLAVE, document.getElementById("c-clave").value.trim().replace(/^.*#clave=/, ""));
+    conectado = true; marcarCuenta(); location.hash = "inicio";
+    cargarProgreso("Dispositivo vinculado: tus fallos se guardarán.");
   };
 }
 
 function vistaFallos() {
-  if (!usuario) { location.hash = "cuenta"; return; }
+  if (!conectado) { location.hash = "cuenta"; return; }
   const pend = pendientes().sort((x, y) => PROG.get(y[5]).f - PROG.get(x[5]).f);
   pintar(`
     <section class="hero"><div class="eyebrow">Mis fallos</div><h1>Preguntas por repasar</h1>
@@ -270,11 +261,11 @@ function vistaInicio() {
           <div class="segmento" role="radiogroup">${TAMANOS.map(n =>
             `<button role="radio" aria-checked="${n === tamano}" class="${n === tamano ? "on" : ""}" data-n="${n}">${n}</button>`).join("")}</div></div>
       </div>
-      ${usuario ? `<label class="interruptor"><input type="checkbox" id="f-fallos" ${soloFallos ? "checked" : ""}>
+      ${conectado ? `<label class="interruptor"><input type="checkbox" id="f-fallos" ${soloFallos ? "checked" : ""}>
         <span class="pista"></span>Sólo preguntas que he fallado <span class="norma" style="margin:0">(${miles(pend.length)})</span></label>` : ""}
       <div class="acciones"><button class="btn primario" id="empezar">${I.play}Empezar test</button></div>
     </div>
-    ${usuario ? `<div class="card fila-fallos">
+    ${conectado ? `<div class="card fila-fallos">
         <span class="fallos-ico">${I.diana}</span>
         <div><h2 style="margin:0">Mis fallos</h2>
           <div class="norma" style="margin:2px 0 0">${!progresoCargado ? "Cargando tu progreso…" : pend.length
@@ -283,8 +274,8 @@ function vistaInicio() {
       </div>` : sb ? `<div class="card fila-fallos">
         <span class="fallos-ico">${I.diana}</span>
         <div><h2 style="margin:0">Guarda tus fallos</h2>
-          <div class="norma" style="margin:2px 0 0">Entra con tu cuenta para repasar las preguntas que falles, desde cualquier dispositivo.</div></div>
-        <a class="btn" href="#cuenta">Entrar</a>
+          <div class="norma" style="margin:2px 0 0">Abre tu enlace personal en este dispositivo para guardar las preguntas que falles.</div></div>
+        <a class="btn" href="#cuenta">Vincular</a>
       </div>` : ""}
     <h2 style="margin-top:28px">Temas</h2>
     <div class="temas-grid">${TEMAS.map((_, i) => tarjetaTema(i)).join("")}</div>`);
@@ -347,7 +338,7 @@ function responder(k, porTeclado) {
   if (test.respuestas.length > test.i) return;  // ya respondida
   const q = test.preguntas[test.i];
   test.respuestas.push({ q, elegida: k, ok: k === q[3] });
-  registrar(q[5], k === q[3]);  // se guarda en la cuenta (si hay sesión)
+  registrar(q[5], k === q[3]);  // se guarda en Supabase (si el dispositivo está vinculado)
   app.classList.toggle("teclado", porTeclado);  // con teclado: sin animaciones
   mostrarCorreccion();
 }
@@ -394,7 +385,7 @@ function pintarResumen() {
   pintar(`
     <a class="volver" href="#inicio">${I.atras.replace("<svg", '<svg width="16" height="16"')}Inicio</a>
     <h1>Resultado</h1>
-    <p class="sub">${esc(nombreTest())} · ${frase}${usuario && mal.length ? " Tus fallos quedan guardados en «Mis fallos»." : ""}</p>
+    <p class="sub">${esc(nombreTest())} · ${frase}${conectado && mal.length ? " Tus fallos quedan guardados en «Mis fallos»." : ""}</p>
     <div class="card resumen">
       <div class="anillo" style="--p:${pct};--color:${color}"><div><div><b>${pct}%</b><span>acierto</span></div></div></div>
       <div>
