@@ -357,7 +357,9 @@ function mostrarCorreccion() {
   const ultima = test.i + 1 >= test.preguntas.length;
   document.getElementById("tras").innerHTML = `<div class="tras">
     <div class="resultado ${ok ? "ok" : "ko"}">${ok ? `${I.ok}¡Correcto!` : `${I.ko}Incorrecto · la correcta es la ${LETRAS[q[3]]}`}</div>
-    ${explicacion(q)}
+    ${ok  // si aciertas, la explicación queda plegada por si quieres verla
+      ? `<details class="ver-expl"><summary>${I.chev}Ver explicación</summary><div class="cuerpo">${explicacion(q)}</div></details>`
+      : explicacion(q)}
     <div class="siguiente-fila"><span class="atajo">Pulsa <kbd>Enter</kbd> para continuar</span>
       <button class="btn primario" id="sig">${ultima ? "Ver resultado" : "Siguiente"}</button></div></div>`;
   document.getElementById("sig").onclick = () => siguiente(false);

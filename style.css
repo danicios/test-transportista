@@ -140,6 +140,12 @@ select:focus, input[type=search]:focus { outline: none; border-color: var(--acce
 .pregunta-meta { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
 .etiqueta { display: inline-block; font-size: .78rem; font-weight: 600; padding: 3px 9px; border-radius: 99px;
   background: var(--accent-soft); color: var(--accent-text); }
+.ver-expl summary { display: inline-flex; align-items: center; gap: 6px; padding: 6px 12px 6px 8px; border-radius: 10px;
+  font-size: .9rem; font-weight: 550; color: var(--muted); border: 1px solid var(--line); background: var(--raise);
+  transition: color .15s, border-color .15s; }
+.ver-expl summary .chev { margin-left: 0; width: 16px; height: 16px; }
+.ver-expl[open] summary { color: var(--text); margin-bottom: 12px; }
+@media (hover: hover) and (pointer: fine) { .ver-expl summary:hover { color: var(--text); border-color: var(--line-strong); } }
 .sig-arriba { margin-left: auto; animation: fundido .2s var(--ease-out) both; }
 .sig-arriba[hidden] { display: none; }
 .teclado .sig-arriba { animation: none; }
