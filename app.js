@@ -318,7 +318,8 @@ function pintarPregunta(conAnimacion) {
     </div>
     <div class="progreso"><i style="transform:scaleX(${(conAnimacion === "clic" ? test.i - 1 : test.i) / n})"></i></div>
     <div class="card">
-      <div class="pregunta-meta"><span class="etiqueta">${TEMAS[q[0]]}</span><span class="codigo">${esc(q[5])}</span></div>
+      <div class="pregunta-meta"><span class="etiqueta">${TEMAS[q[0]]}</span><span class="codigo">${esc(q[5])}</span>
+        <button class="btn primario mini sig-arriba" id="sig-arriba" hidden></button></div>
       <div class="enunciado">${esc(q[1])}</div>
       <div class="opciones">${q[2].map((o, k) => `<button class="opcion" data-k="${k}">
         <span class="letra">${LETRAS[k]}</span><span>${esc(o)}</span></button>`).join("")}</div>
@@ -360,6 +361,11 @@ function mostrarCorreccion() {
     <div class="siguiente-fila"><span class="atajo">Pulsa <kbd>Enter</kbd> para continuar</span>
       <button class="btn primario" id="sig">${ultima ? "Ver resultado" : "Siguiente"}</button></div></div>`;
   document.getElementById("sig").onclick = () => siguiente(false);
+  // segundo botón, arriba a la derecha, para no tener que bajar hasta el final de la explicación
+  const arriba = document.getElementById("sig-arriba");
+  arriba.textContent = ultima ? "Ver resultado" : "Siguiente";
+  arriba.hidden = false;
+  arriba.onclick = () => siguiente(false);
   document.getElementById("sig").focus({ preventScroll: true });
 }
 
