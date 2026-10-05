@@ -490,6 +490,16 @@ function vistaTemario() {
     <div class="temas-grid">${TEMAS.map((_, i) => tarjetaTema(i, "temario")).join("")}</div>`);
 }
 
+// Cuántas preguntas del epígrafe has respondido (si hay progreso); así se ve qué epígrafes ya has trabajado
+function metaEpigrafe(e) {
+  if (!conectado || !progresoCargado) return `<span class="ep-meta">${e.preguntas} preg.</span>`;
+  const qs = PREG.filter(q => q[5].startsWith(e.id)), vistas = qs.filter(q => PROG.has(q[5])).length;
+  const pct = qs.length ? vistas / qs.length * 100 : 0;
+  return `<span class="ep-meta ep-prog${vistas ? " empezado" : ""}${vistas === qs.length ? " completo" : ""}"
+      title="${vistas} de ${qs.length} preguntas respondidas">
+      <span class="ep-barra"><i style="width:${pct}%"></i></span>${vistas === qs.length ? `${I.ok}` : ""}${vistas}/${qs.length}</span>`;
+}
+
 function vistaTemaTemario(tema) {
   const eps = TEMARIO.filter(e => e.tema === tema);
   pintar(`
@@ -503,7 +513,7 @@ function vistaTemaTemario(tema) {
     </div>
     ${eps.map(e => `
       <details class="epigrafe"><summary><span class="ep-num">${e.id.slice(2)}</span>
-          <span class="ep-tit">${esc(e.titulo)}</span><span class="ep-meta">${e.preguntas} preg.</span>${I.chev}</summary>
+          <span class="ep-tit">${esc(e.titulo)}</span>${metaEpigrafe(e)}${I.chev}</summary>
         <div class="apuntes-caja"><div class="apuntes">${markdown(e.md)}</div>
           <div class="acciones"><button class="btn mini" data-test="${e.id}">${I.play}Test de este epígrafe (10)</button></div></div>
       </details>`).join("") || `<p class="vacio">Este tema aún no tiene temario.</p>`}`);

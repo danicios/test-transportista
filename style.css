@@ -325,3 +325,13 @@ input[type=email]:focus, input[type=password]:focus { outline: none; border-colo
 #f-modo button { min-width: 0; padding: 0 12px; }
 .racha { margin-left: 6px; font-size: .82rem; font-weight: 600; color: var(--muted); background: var(--bg);
   border: 1px solid var(--line); border-radius: 99px; padding: 2px 9px; }
+
+/* ---------- Avance por epígrafe (temario) ---------- */
+.ep-prog { display: inline-flex; align-items: center; gap: 6px; font-variant-numeric: tabular-nums; }
+.ep-barra { width: 44px; height: 5px; border-radius: 99px; background: var(--line); overflow: hidden; }
+.ep-barra i { display: block; height: 100%; background: var(--accent); border-radius: 99px; }
+.ep-prog.empezado { color: var(--muted); font-weight: 600; }
+.ep-prog.completo { color: var(--ok); }
+.ep-prog.completo .ep-barra i { background: var(--ok); }
+.ep-prog svg { width: 14px; height: 14px; }
+@media (max-width: 600px) { .ep-barra { width: 28px; } }
