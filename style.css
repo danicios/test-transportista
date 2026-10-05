@@ -313,3 +313,15 @@ input[type=email]:focus, input[type=password]:focus { outline: none; border-colo
   .btn:active, button.opcion:active:not(:disabled), .segmento button:active { transform: none; }
   .progreso i, .chev { transition: none; }
 }
+
+/* ---------- Avance por tema y modos de test ---------- */
+.tema-avance { display: grid; gap: 5px; }
+.barra-avance { display: flex; gap: 2px; height: 6px; border-radius: 99px; background: var(--line); overflow: hidden; }
+.barra-avance i { display: block; height: 100%; }
+.barra-avance i:first-child { border-radius: 99px 0 0 99px; }
+.tema-meta b { color: var(--text); font-weight: 650; font-variant-numeric: tabular-nums; }
+.seg-n { font-weight: 500; font-size: .8rem; color: var(--faint); font-variant-numeric: tabular-nums; }
+.segmento button.on .seg-n { color: var(--muted); }
+#f-modo button { min-width: 0; padding: 0 12px; }
+.racha { margin-left: 6px; font-size: .82rem; font-weight: 600; color: var(--muted); background: var(--bg);
+  border: 1px solid var(--line); border-radius: 99px; padding: 2px 9px; }

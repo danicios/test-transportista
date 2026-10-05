@@ -9,7 +9,7 @@ const TEMAS = ["Derecho civil", "Derecho mercantil", "Derecho social", "Derecho 
 const LETRAS = "ABCD";
 const TAMANOS = [10, 25, 50, 100];
 
-let PREG = [], EXPL = {}, TEMARIO = [], test = null, tamano = 25, soloFallos = false;
+let PREG = [], EXPL = {}, TEMARIO = [], test = null, tamano = 25, modoTest = "todas";  // modoTest: "todas" | "nuevas" | "fallos"
 const app = document.getElementById("app");
 
 const esc = s => String(s).replace(/[&<>"']/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]));
@@ -34,7 +34,9 @@ const I = {
 /* ---------- Progreso (Supabase, un solo usuario con enlace privado) ---------- */
 // Sin usuario ni contraseña: una clave privada que llega en el enlace personal (#clave=...) y se guarda en el
 // navegador. En Supabase sólo hay funciones que exigen esa clave (ver supabase.sql).
-// PROG: codigo -> { a: aciertos, f: fallos, p: pendiente (fallada la última vez) }
+// PROG: codigo -> { a: aciertos, f: fallos, p: pendiente (por repasar), r: aciertos seguidos desde el último fallo }
+// Una pregunta fallada sale de "por repasar" al acertarla 2 veces seguidas (igual que la función registrar de supabase.sql).
+const ACIERTOS_PARA_SALIR = 2;
 let sb = null, conectado = false, PROG = new Map(), progresoCargado = false, subiendo = false;
 const CLAVE = "tt-clave", COLA = "tt-cola";  // clave privada y respuestas aún no subidas (p. ej. sin conexión)
 const leerLS = (k, def) => { try { return localStorage.getItem(k) ?? def; } catch { return def; } };
@@ -64,7 +66,7 @@ async function cargarProgreso(aviso) {
         if (/Clave incorrecta/.test(error.message)) { desvincular(); return toast("El enlace no es válido. Vuelve a abrir tu enlace personal."); }
         toast("No se pudo cargar tu progreso: " + error.message); break;
       }
-      data.forEach(r => PROG.set(r.codigo, { a: r.aciertos, f: r.fallos, p: r.pendiente }));
+      data.forEach(r => PROG.set(r.codigo, { a: r.aciertos, f: r.fallos, p: r.pendiente, r: r.racha ?? 0 }));
       if (data.length < 1000) break;
     }
   } catch { toast("Sin conexión: tus respuestas se guardarán cuando vuelva internet."); }
@@ -77,8 +79,9 @@ async function cargarProgreso(aviso) {
 function desvincular() { escribirLS(CLAVE, null); conectado = false; PROG.clear(); progresoCargado = false; marcarCuenta(); refrescar(); }
 
 function aplicar(codigo, ok) {
-  const r = PROG.get(codigo) || { a: 0, f: 0, p: false };
-  ok ? r.a++ : r.f++; r.p = !ok;
+  const r = PROG.get(codigo) || { a: 0, f: 0, p: false, r: 0 };
+  if (ok) { r.a++; r.r = (r.r || 0) + 1; r.p = r.p && r.r < ACIERTOS_PARA_SALIR; }
+  else { r.f++; r.r = 0; r.p = true; }
   PROG.set(codigo, r);
 }
 
@@ -165,7 +168,7 @@ function vistaFallos() {
   const pend = pendientes().sort((x, y) => PROG.get(y[5]).f - PROG.get(x[5]).f);
   pintar(`
     <section class="hero"><div class="eyebrow">Mis fallos</div><h1>Preguntas por repasar</h1>
-      <p class="sub">Las que fallaste la última vez que te salieron. Cuando aciertes una, sale de esta lista.</p></section>
+      <p class="sub">Las que has fallado. Para que una salga de esta lista tienes que acertarla ${ACIERTOS_PARA_SALIR} veces seguidas.</p></section>
     ${!progresoCargado ? `<p class="vacio">Cargando tu progreso…</p>` : !pend.length
       ? `<div class="card"><p class="vacio">No tienes fallos pendientes. ¡Bien hecho!</p></div>` : `
     <div class="card">
@@ -183,11 +186,11 @@ function vistaFallos() {
   const lista = () => {
     const tm = +sel.value, qs = pend.filter(q => tm < 0 || q[0] === tm);
     document.getElementById("fa-lista").innerHTML = `<h2>${qs.length} pregunta${qs.length === 1 ? "" : "s"}</h2>` +
-      qs.slice(0, 200).map(q => fichaPregunta(q, undefined, PROG.get(q[5]).f)).join("") +
+      qs.slice(0, 200).map(q => fichaPregunta(q, undefined, PROG.get(q[5]))).join("") +
       (qs.length > 200 ? `<p class="vacio">Mostrando las 200 más falladas.</p>` : "");
   };
   sel.onchange = lista; lista();
-  document.getElementById("fa-test").onclick = () => empezar(+sel.value, tamano, true);
+  document.getElementById("fa-test").onclick = () => empezar(+sel.value, tamano, "fallos");
 }
 
 function cargar() {
@@ -234,6 +237,7 @@ function tarjetaTema(i, modo) {
       <div class="tema-cab"><span class="num-tema">${i + 1}</span>
         <div><div class="tema-nombre">${TEMAS[i]}</div>
           <div class="tema-meta">${miles(n)} preguntas${eps ? ` · ${eps} epígrafes` : ""}</div></div></div>
+      ${avanceTema(i, n)}
       ${modo === "temario" && !eps ? `<div><span class="insignia gris">Pendiente</span></div>` : ""}
       <div class="acciones">${acciones}</div></div>`;
 }
@@ -261,8 +265,10 @@ function vistaInicio() {
           <div class="segmento" role="radiogroup">${TAMANOS.map(n =>
             `<button role="radio" aria-checked="${n === tamano}" class="${n === tamano ? "on" : ""}" data-n="${n}">${n}</button>`).join("")}</div></div>
       </div>
-      ${conectado ? `<label class="interruptor"><input type="checkbox" id="f-fallos" ${soloFallos ? "checked" : ""}>
-        <span class="pista"></span>Sólo preguntas que he fallado <span class="norma" style="margin:0">(${miles(pend.length)})</span></label>` : ""}
+      ${conectado ? `<div class="campo" style="margin-top:14px">Qué preguntas
+        <div class="segmento" id="f-modo" role="radiogroup">${[["todas", "Todas", ""], ["nuevas", "No vistas", PREG.length - PROG.size],
+          ["fallos", "Falladas", pend.length]].map(([m, txt, n]) => `<button role="radio" aria-checked="${m === modoTest}"
+            class="${m === modoTest ? "on" : ""}" data-modo="${m}">${txt}${n !== "" ? ` <span class="seg-n">${miles(n)}</span>` : ""}</button>`).join("")}</div></div>` : ""}
       <div class="acciones"><button class="btn primario" id="empezar">${I.play}Empezar test</button></div>
     </div>
     ${conectado ? graficoAvance(pend.length) : sb ? `<div class="card fila-fallos">
@@ -273,14 +279,28 @@ function vistaInicio() {
       </div>` : ""}
     <h2 style="margin-top:28px">Temas</h2>
     <div class="temas-grid">${TEMAS.map((_, i) => tarjetaTema(i)).join("")}</div>`);
-  app.querySelectorAll(".segmento button").forEach(b => b.onclick = () => {
-    tamano = +b.dataset.n;
-    app.querySelectorAll(".segmento button").forEach(x => { x.classList.toggle("on", x === b); x.setAttribute("aria-checked", x === b); });
+  // segmentos: número de preguntas y (con progreso) qué preguntas
+  const segmento = (sel, alElegir) => app.querySelectorAll(sel).forEach(b => b.onclick = () => {
+    alElegir(b);
+    b.parentNode.querySelectorAll("button").forEach(x => { x.classList.toggle("on", x === b); x.setAttribute("aria-checked", x === b); });
   });
-  const chk = document.getElementById("f-fallos");
-  if (chk) chk.onchange = () => soloFallos = chk.checked;
-  document.getElementById("empezar").onclick = () => empezar(+document.getElementById("f-tema").value, tamano, !!chk?.checked);
-  app.querySelectorAll("[data-tema]").forEach(b => b.onclick = () => empezar(+b.dataset.tema, tamano));
+  segmento("[data-n]", b => tamano = +b.dataset.n);
+  segmento("[data-modo]", b => modoTest = b.dataset.modo);
+  const modo = () => conectado ? modoTest : "todas";
+  document.getElementById("empezar").onclick = () => empezar(+document.getElementById("f-tema").value, tamano, modo());
+  app.querySelectorAll("[data-tema]").forEach(b => b.onclick = () => empezar(+b.dataset.tema, tamano, modo()));
+}
+
+// Barra de avance de un tema: acertadas / por repasar / sin responder + % respondido y % de acierto
+function avanceTema(i, n) {
+  if (!conectado || !progresoCargado) return "";
+  const qs = PREG.filter(q => q[0] === i), vistas = qs.filter(q => PROG.has(q[5])).length;
+  const mal = qs.filter(q => PROG.get(q[5])?.p).length, bien = vistas - mal;
+  const pc = x => x / n * 100, acierto = vistas ? Math.round(bien / vistas * 100) : 0;
+  return `<div class="tema-avance" title="Acertadas ${bien} · Por repasar ${mal} · Sin responder ${n - vistas}">
+      <div class="barra-avance"><i style="width:${pc(bien)}%;background:var(--ok)"></i><i style="width:${pc(mal)}%;background:var(--ko)"></i></div>
+      <div class="tema-meta">${vistas ? `<b>${Math.round(pc(vistas))}%</b> respondido · <b>${acierto}%</b> acierto` : "Sin empezar"}</div>
+    </div>`;
 }
 
 // Tarjeta "Tu avance": anillo con acertadas / por repasar / sin responder + leyenda con cifras
@@ -318,12 +338,13 @@ function graficoAvance(nPend) {
 }
 
 // tema: -1 = todos, 0-7 = un tema, o un código de epígrafe ("1E03") para preguntas de ese epígrafe
-// fallos: sólo preguntas pendientes (falladas la última vez)
-function empezar(tema, num, fallos = false) {
+// modo: "todas", "nuevas" (nunca respondidas) o "fallos" (por repasar)
+function empezar(tema, num, modo = "todas") {
   const pool = barajar(PREG.filter(q => (typeof tema === "string" ? q[5].startsWith(tema) : tema < 0 || q[0] === tema)
-    && (!fallos || PROG.get(q[5])?.p)));
-  if (!pool.length) return toast(fallos ? "No tienes fallos pendientes en ese tema." : "No hay preguntas.");
-  test = { tema, num, fallos, preguntas: pool.slice(0, num), i: 0, respuestas: [] };
+    && (modo === "fallos" ? PROG.get(q[5])?.p : modo === "nuevas" ? !PROG.has(q[5]) : true)));
+  if (!pool.length) return toast(modo === "fallos" ? "No tienes fallos pendientes en ese tema."
+    : modo === "nuevas" ? "¡Ya has respondido todas las preguntas de ese tema!" : "No hay preguntas.");
+  test = { tema, num, modo, preguntas: pool.slice(0, num), i: 0, respuestas: [] };
   if (location.hash === "#test") pintarPregunta(true);
   else location.hash = "test";  // el router la pinta
 }
@@ -331,7 +352,7 @@ function empezar(tema, num, fallos = false) {
 /* ---------- Test ---------- */
 function nombreTest() {
   const t = typeof test.tema === "string" ? `Epígrafe ${test.tema.slice(2)}` : test.tema < 0 ? "Todos los temas" : TEMAS[test.tema];
-  return test.fallos ? `Mis fallos · ${t}` : t;
+  return test.modo === "fallos" ? `Mis fallos · ${t}` : test.modo === "nuevas" ? `No vistas · ${t}` : t;
 }
 
 // conAnimacion: true al entrar en el test; "clic" al pasar con el ratón (sólo avanza la barra); false con teclado (nada animado)
@@ -384,7 +405,8 @@ function mostrarCorreccion() {
   app.querySelector(".m-ko").innerHTML = I.ko + (test.respuestas.length - aciertos);
   const ultima = test.i + 1 >= test.preguntas.length;
   document.getElementById("tras").innerHTML = `<div class="tras">
-    <div class="resultado ${ok ? "ok" : "ko"}">${ok ? `${I.ok}¡Correcto!` : `${I.ko}Incorrecto · la correcta es la ${LETRAS[q[3]]}`}</div>
+    <div class="resultado ${ok ? "ok" : "ko"}">${ok ? `${I.ok}¡Correcto!` : `${I.ko}Incorrecto · la correcta es la ${LETRAS[q[3]]}`}
+      ${ok && PROG.get(q[5])?.p ? `<span class="racha">${PROG.get(q[5]).r} de ${ACIERTOS_PARA_SALIR} para quitarla de tus fallos</span>` : ""}</div>
     ${ok  // si aciertas, la explicación queda plegada por si quieres verla
       ? `<details class="ver-expl"><summary>${I.chev}Ver explicación</summary><div class="cuerpo">${explicacion(q)}</div></details>`
       : explicacion(q)}
@@ -437,17 +459,17 @@ function pintarResumen() {
       </div>
     </div>
     ${mal.length ? `<div class="card"><h2>Preguntas falladas</h2>${mal.map(x => fichaPregunta(x.q, x.elegida)).join("")}</div>` : ""}`);
-  document.getElementById("otra").onclick = () => empezar(test.tema, test.num, test.fallos);
+  document.getElementById("otra").onclick = () => empezar(test.tema, test.num, test.modo);
   if (mal.length) document.getElementById("repetir").onclick = () => {
-    test = { tema: test.tema, num: test.num, fallos: test.fallos, preguntas: barajar(mal.map(x => x.q)), i: 0, respuestas: [] };
+    test = { tema: test.tema, num: test.num, modo: test.modo, preguntas: barajar(mal.map(x => x.q)), i: 0, respuestas: [] };
     pintarPregunta(true);
   };
 }
 
-// Pregunta desplegable con la correcta (y la elegida, si se pasa) + explicación; veces = nº de veces fallada
+// Pregunta desplegable con la correcta (y la elegida, si se pasa) + explicación; veces = registro de PROG (fallos y racha)
 function fichaPregunta(q, elegida, veces) {
   const marca = elegida !== undefined ? `<span class="veces">Marcaste ${LETRAS[elegida]}</span>`
-    : veces ? `<span class="veces">Fallada ${veces}×</span>` : `<span class="codigo">${esc(q[5])}</span>`;
+    : veces ? `<span class="veces">Fallada ${veces.f}×${veces.r ? ` · ${veces.r}/${ACIERTOS_PARA_SALIR} ✓` : ""}</span>` : `<span class="codigo">${esc(q[5])}</span>`;
   return `<details class="fallo"><summary>
       ${marca}
       <span class="texto">${esc(q[1])}</span>${I.chev}</summary>
