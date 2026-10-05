@@ -246,6 +246,17 @@ details[open] > .cuerpo, details[open] > .apuntes-caja { animation: entrar .22s 
   transition: opacity .2s var(--ease-out), transform .2s var(--ease-out); }
 .nav-cuenta.conectado .punto { opacity: 1; transform: none; }
 
+.avance { display: flex; align-items: center; gap: 24px; }
+.donut { flex: none; width: 132px; height: 132px; }
+.donut circle { transition: stroke-dasharray .4s var(--ease-out), stroke-dashoffset .4s var(--ease-out); }
+.donut-num { font: 700 19px system-ui, sans-serif; fill: var(--text); text-anchor: middle; letter-spacing: -.02em; }
+.donut-txt { font: 500 8px system-ui, sans-serif; fill: var(--muted); text-anchor: middle; }
+.avance-info { flex: 1; min-width: 0; }
+.leyenda { list-style: none; margin: 0; padding: 0; display: grid; gap: 6px; max-width: 280px; }
+.leyenda li { display: flex; align-items: center; gap: 8px; font-size: .92rem; color: var(--muted); }
+.leyenda i { flex: none; width: 10px; height: 10px; border-radius: 3px; }
+.leyenda b { margin-left: auto; color: var(--text); font-variant-numeric: tabular-nums; font-weight: 650; }
+.avance .acciones:empty { display: none; }
 .fila-fallos { display: flex; align-items: center; gap: 14px; }
 .fila-fallos > div { flex: 1; min-width: 0; }
 .fallos-ico { flex: none; width: 40px; height: 40px; border-radius: 12px; display: grid; place-items: center;
@@ -278,6 +289,9 @@ input[type=email]:focus, input[type=password]:focus { outline: none; border-colo
 @media (max-width: 600px) {
   .kpis.kpis-4 { grid-template-columns: repeat(2, 1fr); }
   .fila-fallos { flex-wrap: wrap; }
+  .avance { gap: 16px; }
+  .donut { width: 112px; height: 112px; }
+  .avance .btn { width: 100%; }
   .fila-fallos .btn { width: 100%; }
   main { padding-top: 20px; }
   .logo-txt { display: none; }

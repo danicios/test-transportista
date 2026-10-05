@@ -265,13 +265,7 @@ function vistaInicio() {
         <span class="pista"></span>Sólo preguntas que he fallado <span class="norma" style="margin:0">(${miles(pend.length)})</span></label>` : ""}
       <div class="acciones"><button class="btn primario" id="empezar">${I.play}Empezar test</button></div>
     </div>
-    ${conectado ? `<div class="card fila-fallos">
-        <span class="fallos-ico">${I.diana}</span>
-        <div><h2 style="margin:0">Mis fallos</h2>
-          <div class="norma" style="margin:2px 0 0">${!progresoCargado ? "Cargando tu progreso…" : pend.length
-            ? `${miles(pend.length)} pregunta${pend.length === 1 ? "" : "s"} por repasar` : "Ninguna pendiente. ¡Bien!"}</div></div>
-        ${pend.length ? `<a class="btn" href="#fallos">Ver y practicar</a>` : ""}
-      </div>` : sb ? `<div class="card fila-fallos">
+    ${conectado ? graficoAvance(pend.length) : sb ? `<div class="card fila-fallos">
         <span class="fallos-ico">${I.diana}</span>
         <div><h2 style="margin:0">Guarda tus fallos</h2>
           <div class="norma" style="margin:2px 0 0">Abre tu enlace personal en este dispositivo para guardar las preguntas que falles.</div></div>
@@ -287,6 +281,40 @@ function vistaInicio() {
   if (chk) chk.onchange = () => soloFallos = chk.checked;
   document.getElementById("empezar").onclick = () => empezar(+document.getElementById("f-tema").value, tamano, !!chk?.checked);
   app.querySelectorAll("[data-tema]").forEach(b => b.onclick = () => empezar(+b.dataset.tema, tamano));
+}
+
+// Tarjeta "Tu avance": anillo con acertadas / por repasar / sin responder + leyenda con cifras
+function graficoAvance(nPend) {
+  if (!progresoCargado) return `<div class="card"><h2 style="margin:0">Tu avance</h2><p class="norma">Cargando tu progreso…</p></div>`;
+  const total = PREG.length, vistas = PREG.filter(q => PROG.has(q[5])).length, sin = total - vistas, bien = vistas - nPend;
+  const segs = [
+    { n: bien, color: "var(--ok)", txt: "Acertadas" },
+    { n: nPend, color: "var(--ko)", txt: "Por repasar" },
+    { n: sin, color: "var(--line-strong)", txt: "Sin responder" },
+  ];
+  // anillo SVG: cada porción es un arco (stroke-dasharray) con 2px de separación entre porciones
+  const R = 42, C = 2 * Math.PI * R, hueco = segs.filter(s => s.n).length > 1 ? 2 : 0;
+  let acum = 0;
+  const arcos = segs.map(s => {
+    const largo = s.n / total * C, d = Math.max(largo - hueco, 0);
+    const arco = s.n ? `<circle r="${R}" cx="50" cy="50" fill="none" stroke="${s.color}" stroke-width="12"
+      stroke-dasharray="${d} ${C - d}" stroke-dashoffset="${-acum}"><title>${s.txt}: ${miles(s.n)} (${Math.round(s.n / total * 100)}%)</title></circle>` : "";
+    acum += largo; return arco;
+  }).join("");
+  const pct = Math.round(vistas / total * 100);
+  return `<div class="card avance">
+      <svg class="donut" viewBox="0 0 100 100" role="img" aria-label="Respondidas ${miles(vistas)} de ${miles(total)}">
+        <g transform="rotate(-90 50 50)">${arcos}</g>
+        <text x="50" y="49" class="donut-num">${pct}%</text><text x="50" y="62" class="donut-txt">respondidas</text>
+      </svg>
+      <div class="avance-info">
+        <h2 style="margin:0 0 10px">Tu avance</h2>
+        <ul class="leyenda">${segs.map(s => `<li><i style="background:${s.color}"></i>${s.txt}<b>${miles(s.n)}</b></li>`).join("")}</ul>
+        <div class="acciones" style="margin-top:14px">
+          ${nPend ? `<a class="btn" href="#fallos">${I.diana}Repasar fallos (${miles(nPend)})</a>` : ""}
+        </div>
+      </div>
+    </div>`;
 }
 
 // tema: -1 = todos, 0-7 = un tema, o un código de epígrafe ("1E03") para preguntas de ese epígrafe
