@@ -122,29 +122,7 @@ function vistaCuenta() {
     <section class="hero"><div class="eyebrow">Progreso</div><h1>Guardar tus fallos</h1>
       <p class="sub">${window.supabase ? "La conexión con Supabase aún no está configurada (web/config.js)."
         : "No hay conexión a internet: puedes hacer tests, pero no se guardarán tus fallos."}</p></section>`);
-  if (conectado) {
-    const vals = [...PROG.values()], a = vals.reduce((s, r) => s + r.a, 0), f = vals.reduce((s, r) => s + r.f, 0);
-    const pend = pendientes().length;
-    pintar(`
-      <section class="hero"><div class="eyebrow">Progreso</div><h1>Tu progreso</h1>
-        <p class="sub">Este dispositivo está vinculado: tus respuestas se guardan y las verás en todos tus dispositivos.</p></section>
-      <div class="card">
-        <div class="kpis kpis-4">
-          <div class="kpi"><b>${miles(PROG.size)}</b><span>preguntas vistas</span></div>
-          <div class="kpi"><b style="color:var(--ok)">${miles(a)}</b><span>aciertos</span></div>
-          <div class="kpi"><b style="color:var(--ko)">${miles(f)}</b><span>fallos</span></div>
-          <div class="kpi"><b>${miles(pend)}</b><span>por repasar</span></div>
-        </div>
-        <div class="acciones">
-          ${pend ? `<a class="btn primario" href="#fallos">${I.diana}Mis fallos</a>` : ""}
-          <button class="btn fantasma" id="desvincular">Desvincular este dispositivo</button>
-        </div>
-      </div>`);
-    document.getElementById("desvincular").onclick = () => {
-      if (confirm("¿Desvincular este dispositivo? Tus fallos siguen guardados; para volver a vincularlo abre otra vez tu enlace personal.")) desvincular();
-    };
-    return;
-  }
+  if (conectado) return vistaProgreso();
   pintar(`
     <section class="hero"><div class="eyebrow">Progreso</div><h1>Vincula este dispositivo</h1>
       <p class="sub">Abre tu <b>enlace personal</b> en este dispositivo (una sola vez) y tus fallos se guardarán aquí y en los demás.
@@ -164,7 +142,7 @@ function vistaCuenta() {
 }
 
 function vistaFallos() {
-  if (!conectado) { location.hash = "cuenta"; return; }
+  if (!conectado) { location.hash = "progreso"; return; }
   const pend = pendientes().sort((x, y) => PROG.get(y[5]).f - PROG.get(x[5]).f);
   pintar(`
     <section class="hero"><div class="eyebrow">Mis fallos</div><h1>Preguntas por repasar</h1>
@@ -209,6 +187,7 @@ function cargar() {
 // Pinta una vista con una entrada suave (sólo al navegar, no en acciones repetitivas)
 function pintar(html) {
   app.classList.remove("entrar", "teclado");
+  tooltipProg?.classList.remove("ver");
   app.innerHTML = html;
   void app.offsetWidth;  // reinicia la animación
   app.classList.add("entrar");
@@ -220,11 +199,183 @@ function router() {
   document.querySelectorAll("[data-nav]").forEach(a => a.classList.toggle("activo", a.dataset.nav === vista));
   if (vista === "test" && test) return pintarPregunta(true);
   if (vista === "buscar") return vistaBuscar();
-  if (vista === "cuenta") return vistaCuenta();
+  if (vista === "progreso" || vista === "cuenta") return vistaCuenta();
   if (vista === "fallos") return vistaFallos();
   if (vista === "temario") return arg === undefined ? vistaTemario() : vistaTemaTemario(+arg);
   vistaInicio();
 }
+
+/* ---------- Progreso: gráficas por día y por tema ---------- */
+// HIST: filas de mi_historial { dia: "AAAA-MM-DD", tema: "1A".."1H", aciertos, fallos } (agregadas en Supabase)
+let HIST = null, rangoProg = 30, tooltipProg = null;
+const RANGOS = [[7, "7 días"], [30, "30 días"], [0, "Todo"]];
+const fechaISO = d => `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, "0")}-${String(d.getDate()).padStart(2, "0")}`;
+const fechaCorta = iso => new Date(iso + "T12:00").toLocaleDateString("es-ES", { day: "numeric", month: "short" });
+
+async function cargarHistorial() {
+  await subirCola();  // que entren las últimas respuestas antes de leer
+  const filas = [];
+  for (let desde = 0; ; desde += 1000) {
+    const { data, error } = await sb.rpc("mi_historial", { p_clave: clave() }).range(desde, desde + 999);
+    if (error) throw error;
+    filas.push(...data);
+    if (data.length < 1000) break;
+  }
+  return filas;
+}
+
+function vistaProgreso() {
+  const vals = [...PROG.values()], a = vals.reduce((s, r) => s + r.a, 0), f = vals.reduce((s, r) => s + r.f, 0);
+  const pend = pendientes().length;
+  pintar(`
+    <section class="hero"><div class="eyebrow">Progreso</div><h1>Tu evolución</h1>
+      <p class="sub">Cómo te va día a día y en qué temas fallas más.</p></section>
+    <div class="card">
+      <div class="kpis kpis-4">
+        <div class="kpi"><b>${miles(PROG.size)}</b><span>preguntas vistas</span></div>
+        <div class="kpi"><b style="color:var(--ok)">${miles(a)}</b><span>aciertos</span></div>
+        <div class="kpi"><b style="color:var(--ko)">${miles(f)}</b><span>fallos</span></div>
+        <div class="kpi"><b>${miles(pend)}</b><span>por repasar</span></div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="prog-cab"><h2 style="margin:0">Por día</h2>
+        <div class="segmento" role="radiogroup">${RANGOS.map(([n, t]) =>
+          `<button role="radio" aria-checked="${n === rangoProg}" class="${n === rangoProg ? "on" : ""}" data-rango="${n}">${t}</button>`).join("")}</div></div>
+      <div class="graf-titulo">% de acierto</div>
+      <div class="grafico" id="g-acierto"><p class="vacio">Cargando…</p></div>
+      <div class="graf-titulo">Respuestas <span class="ley"><i style="background:var(--ok)"></i>Aciertos <i style="background:var(--ko)"></i>Fallos</span></div>
+      <div class="grafico" id="g-volumen"></div>
+    </div>
+    <div class="card"><h2>Por tema <span class="norma" style="font-weight:400" id="prog-rango"></span></h2><div id="prog-temas"></div></div>
+    <div class="acciones" style="justify-content:center">
+      ${pend ? `<a class="btn" href="#fallos">${I.diana}Mis fallos</a>` : ""}
+      <button class="btn fantasma" id="desvincular">Desvincular este dispositivo</button>
+    </div>`);
+  document.getElementById("desvincular").onclick = () => {
+    if (confirm("¿Desvincular este dispositivo? Tus fallos siguen guardados; para volver a vincularlo abre otra vez tu enlace personal.")) desvincular();
+  };
+  app.querySelectorAll("[data-rango]").forEach(b => b.onclick = () => {
+    rangoProg = +b.dataset.rango;
+    app.querySelectorAll("[data-rango]").forEach(x => { x.classList.toggle("on", x === b); x.setAttribute("aria-checked", x === b); });
+    pintarGraficas();
+  });
+  if (HIST) pintarGraficas();
+  cargarHistorial().then(h => { HIST = h; if (document.getElementById("g-acierto")) pintarGraficas(); })
+    .catch(e => { const g = document.getElementById("g-acierto"); if (g && !HIST) g.innerHTML = `<p class="vacio">No se pudo cargar el historial (${esc(e.message || e)}).</p>`; });
+}
+
+// Días del periodo elegido, con aciertos/fallos totales y por tema
+function datosPeriodo() {
+  const hoy = new Date(), porDia = new Map();
+  HIST.forEach(r => {
+    const d = porDia.get(r.dia) || { a: 0, f: 0 };
+    d.a += +r.aciertos; d.f += +r.fallos; porDia.set(r.dia, d);
+  });
+  let inicio = new Date(hoy); inicio.setDate(hoy.getDate() - ((rangoProg || 1) - 1));
+  if (!rangoProg) { const primero = HIST.map(r => r.dia).sort()[0]; inicio = primero ? new Date(primero + "T12:00") : hoy; }
+  const dias = [];
+  for (const d = new Date(inicio); fechaISO(d) <= fechaISO(hoy); d.setDate(d.getDate() + 1)) {
+    const iso = fechaISO(d); dias.push({ iso, ...(porDia.get(iso) || { a: 0, f: 0 }) });
+  }
+  const desde = dias[0]?.iso || fechaISO(hoy);
+  const temas = TEMAS.map((nombre, i) => ({ i, nombre, a: 0, f: 0 }));
+  HIST.filter(r => r.dia >= desde).forEach(r => {
+    const t = temas["ABCDEFGH".indexOf(r.tema[1])]; if (t) { t.a += +r.aciertos; t.f += +r.fallos; }
+  });
+  return { dias, temas };
+}
+
+function pintarGraficas() {
+  const gA = document.getElementById("g-acierto"), gV = document.getElementById("g-volumen");
+  if (!gA || !HIST) return;
+  const { dias, temas } = datosPeriodo();
+  document.getElementById("prog-rango").textContent = rangoProg ? `· últimos ${rangoProg} días` : "· desde el principio";
+  if (!dias.some(d => d.a + d.f)) {
+    gA.innerHTML = `<p class="vacio">Aún no hay respuestas en este periodo.</p>`; gV.innerHTML = "";
+  } else {
+    gA.innerHTML = graficoLinea(dias, gA.clientWidth);
+    gV.innerHTML = graficoBarras(dias, gV.clientWidth);
+    [gA, gV].forEach(g => activarTooltip(g, dias));
+  }
+  pintarTemasProgreso(temas);
+}
+
+// Geometría común: margen izquierdo para el eje, una columna por día
+function ejeX(n, W) { const l = 34, r = 8, paso = (W - l - r) / n; return { l, r, paso, x: i => l + (i + .5) * paso }; }
+function etiquetasX(dias, ex, H) {
+  const idx = dias.length <= 7 ? dias.map((_, i) => i) : [0, Math.floor((dias.length - 1) / 2), dias.length - 1];
+  return [...new Set(idx)].map(i => `<text x="${ex.x(i)}" y="${H - 6}" class="g-eje" text-anchor="middle">${fechaCorta(dias[i].iso)}</text>`).join("");
+}
+
+function graficoLinea(dias, W) {
+  const H = 170, t = 10, b = 24, ex = ejeX(dias.length, W), y = v => t + (1 - v / 100) * (H - t - b);
+  const grid = [0, 50, 100].map(v => `<line x1="${ex.l}" x2="${W - ex.r}" y1="${y(v)}" y2="${y(v)}" class="g-grid"/>
+    <text x="${ex.l - 6}" y="${y(v) + 4}" class="g-eje" text-anchor="end">${v}%</text>`).join("");
+  const pts = dias.map((d, i) => d.a + d.f ? [ex.x(i), y(d.a / (d.a + d.f) * 100)] : null).filter(Boolean);
+  const linea = pts.length > 1 ? `<polyline points="${pts.map(p => p.join(",")).join(" ")}" class="g-linea"/>` : "";
+  const puntos = pts.map(([px, py]) => `<circle cx="${px}" cy="${py}" r="4" class="g-punto"/>`).join("");
+  return `<svg width="${W}" height="${H}" role="img" aria-label="Porcentaje de acierto por día">${grid}${linea}${puntos}
+    ${etiquetasX(dias, ex, H)}<line class="g-cruz" y1="${t}" y2="${H - b}" x1="0" x2="0"/></svg>`;
+}
+
+function graficoBarras(dias, W) {
+  const H = 150, t = 10, b = 24, ex = ejeX(dias.length, W);
+  const max = Math.max(...dias.map(d => d.a + d.f)), tope = Math.max(4, Math.ceil(max / 4) * 4);
+  const y = v => t + (1 - v / tope) * (H - t - b), ancho = Math.max(2, Math.min(26, ex.paso * .62));
+  const grid = [0, tope / 2, tope].map(v => `<line x1="${ex.l}" x2="${W - ex.r}" y1="${y(v)}" y2="${y(v)}" class="g-grid"/>
+    <text x="${ex.l - 6}" y="${y(v) + 4}" class="g-eje" text-anchor="end">${v}</text>`).join("");
+  const barras = dias.map((d, i) => {
+    if (!(d.a + d.f)) return "";
+    const x0 = ex.x(i) - ancho / 2, hA = y(0) - y(d.a), hF = y(0) - y(d.f), sep = d.a && d.f ? 2 : 0;
+    return `${d.a ? `<rect x="${x0}" y="${y(d.a)}" width="${ancho}" height="${hA}" rx="2" fill="var(--ok)"/>` : ""}
+      ${d.f ? `<rect x="${x0}" y="${y(d.a) - hF - sep}" width="${ancho}" height="${Math.max(hF, 1)}" rx="2" fill="var(--ko)"/>` : ""}`;
+  }).join("");
+  return `<svg width="${W}" height="${H}" role="img" aria-label="Aciertos y fallos por día">${grid}${barras}
+    ${etiquetasX(dias, ex, H)}<line class="g-cruz" y1="${t}" y2="${H - b}" x1="0" x2="0"/></svg>`;
+}
+
+// Tooltip compartido: al pasar por un día muestra fecha, % de acierto, aciertos y fallos
+function activarTooltip(g, dias) {
+  const svg = g.querySelector("svg"), cruz = svg.querySelector(".g-cruz"), ex = ejeX(dias.length, svg.width.baseVal.value);
+  if (!tooltipProg) { tooltipProg = document.createElement("div"); tooltipProg.className = "g-tooltip"; document.body.appendChild(tooltipProg); }
+  const ocultar = () => { tooltipProg.classList.remove("ver"); cruz.style.opacity = 0; };
+  const mover = e => {
+    const r = svg.getBoundingClientRect(), i = Math.floor((e.clientX - r.left - ex.l) / ex.paso);
+    if (i < 0 || i >= dias.length) return ocultar();
+    const d = dias[i], tot = d.a + d.f;
+    cruz.setAttribute("x1", ex.x(i)); cruz.setAttribute("x2", ex.x(i)); cruz.style.opacity = 1;
+    tooltipProg.innerHTML = `<b>${fechaCorta(d.iso)}</b>${tot ? `${Math.round(d.a / tot * 100)}% de acierto<br>
+      <span class="t-ok">✓ ${d.a}</span> · <span class="t-ko">✗ ${d.f}</span>` : "Sin respuestas"}`;
+    tooltipProg.style.left = Math.min(Math.max(r.left + ex.x(i), 80), innerWidth - 80) + "px";
+    tooltipProg.style.top = (r.top + scrollY - 8) + "px";
+    tooltipProg.classList.add("ver");
+  };
+  svg.addEventListener("pointermove", mover);
+  svg.addEventListener("pointerdown", mover);
+  svg.addEventListener("pointerleave", ocultar);
+}
+
+function pintarTemasProgreso(temas) {
+  const con = temas.filter(t => t.a + t.f).sort((x, y) => x.a / (x.a + x.f) - y.a / (y.a + y.f));
+  const sin = temas.filter(t => !(t.a + t.f));
+  document.getElementById("prog-temas").innerHTML = (con.map(t => {
+    const tot = t.a + t.f, pct = Math.round(t.a / tot * 100);
+    return `<div class="pt-fila">
+        <div class="pt-cab"><span class="num-tema">${t.i + 1}</span><span class="pt-nombre">${t.nombre}</span>
+          <span class="pt-pct">${pct}% acierto</span></div>
+        <div class="barra-avance"><i style="width:${pct}%;background:var(--ok)"></i><i style="width:${100 - pct}%;background:var(--ko)"></i></div>
+        <div class="tema-meta">${miles(t.f)} fallo${t.f === 1 ? "" : "s"} de ${miles(tot)} respuestas</div>
+      </div>`;
+  }).join("") || `<p class="vacio">Aún no hay respuestas en este periodo.</p>`) +
+    (sin.length && con.length ? `<p class="norma">Sin respuestas en este periodo: ${sin.map(t => t.nombre).join(", ")}.</p>` : "");
+}
+
+let redimT;
+window.addEventListener("resize", () => {
+  clearTimeout(redimT);
+  redimT = setTimeout(() => { if (/^#(progreso|cuenta)/.test(location.hash)) pintarGraficas(); }, 150);
+});
 
 /* ---------- Inicio ---------- */
 function tarjetaTema(i, modo) {
@@ -275,7 +426,7 @@ function vistaInicio() {
         <span class="fallos-ico">${I.diana}</span>
         <div><h2 style="margin:0">Guarda tus fallos</h2>
           <div class="norma" style="margin:2px 0 0">Abre tu enlace personal en este dispositivo para guardar las preguntas que falles.</div></div>
-        <a class="btn" href="#cuenta">Vincular</a>
+        <a class="btn" href="#progreso">Vincular</a>
       </div>` : ""}
     <h2 style="margin-top:28px">Temas</h2>
     <div class="temas-grid">${TEMAS.map((_, i) => tarjetaTema(i)).join("")}</div>`);
