@@ -1,0 +1,31 @@
+# Despertador: hace una consulta pequeña a Supabase cada 3 días para que el proyecto gratuito
+# no se pause por inactividad (se pausa tras 1 semana sin uso). No lee ni modifica tus datos:
+# usa la clave pública de la web y la consulta devuelve una lista vacía por la seguridad de las tablas.
+name: Despertador Supabase
+
+on:
+  schedule:
+    - cron: "17 6 */3 * *"   # cada 3 días a las 06:17 UTC
+  workflow_dispatch:          # permite lanzarlo a mano desde la pestaña Actions
+
+permissions:
+  actions: write              # para volver a activar este workflow (ver último paso)
+
+jobs:
+  despertar:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Consultar Supabase
+        run: |
+          estado=$(curl -s -o respuesta.txt -w "%{http_code}" \
+            "https://naozdjyazkukqhoabjtd.supabase.co/rest/v1/progreso?select=codigo&limit=1" \
+            -H "apikey: sb_publishable_L_fkB7Tq8ySk49ghXlGPrQ_lD9wPtjd")
+          echo "Respuesta HTTP: $estado"; cat respuesta.txt; echo
+          test "$estado" -ge 200 -a "$estado" -lt 300
+
+      # GitHub desactiva los workflows programados de repos públicos tras 60 días sin actividad en el repo;
+      # reactivarlo en cada ejecución evita que el despertador se apague solo.
+      - name: Mantener activo el despertador
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: gh api -X PUT "repos/${{ github.repository }}/actions/workflows/despertador.yml/enable" || true
