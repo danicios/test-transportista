@@ -664,14 +664,18 @@ function vistaTemaTemario(tema) {
     </div>
     ${eps.map(e => `
       <details class="epigrafe"><summary><span class="ep-num">${e.id.slice(2)}</span>
-          <span class="ep-tit">${esc(e.titulo)}</span>${metaEpigrafe(e)}${I.chev}</summary>
-        <div class="apuntes-caja"><div class="apuntes">${markdown(e.md)}</div>
+          <span class="ep-tit">${esc(e.titulo)}</span>${e.video ? `<span class="ep-video" title="Tiene vídeo">${I.play}Vídeo</span>` : ""}${metaEpigrafe(e)}${I.chev}</summary>
+        <div class="apuntes-caja">${e.video ? `<video class="ep-vid" controls preload="none" playsinline poster="${e.poster}" src="${e.video}"></video>` : ""}<div class="apuntes">${markdown(e.md)}</div>
           <div class="acciones"><button class="btn mini" data-test="${e.id}">${I.play}Test de este epígrafe (10)</button></div></div>
       </details>`).join("") || `<p class="vacio">Este tema aún no tiene temario.</p>`}`);
   app.querySelectorAll("[data-test]").forEach(b => b.onclick = () => {
     const t = b.dataset.test;
     /^\d$/.test(t) ? empezar(+t, tamano) : empezar(t, 10);
   });
+  // Al plegar un epígrafe, pausa su vídeo
+  app.querySelectorAll("details.epigrafe").forEach(d => d.addEventListener("toggle", () => {
+    const v = d.querySelector("video"); if (v && !d.open) v.pause();
+  }));
   const abrir = document.getElementById("abrir-todo");
   abrir.onclick = () => {
     const todos = [...app.querySelectorAll("details.epigrafe")], abiertos = todos.every(d => d.open);
