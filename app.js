@@ -378,12 +378,23 @@ window.addEventListener("resize", () => {
 });
 
 /* ---------- Inicio ---------- */
+// Botones para empezar un test de un tema: no contestadas, mezcladas o solo falladas (con su número de preguntas).
+// Sin progreso vinculado solo se puede hacer el test mezclado.
+function botonesModo(tema, primario) {
+  const qs = PREG.filter(q => q[0] === tema);
+  if (!conectado) return `<button class="btn mini${primario ? " primario" : ""}" data-tema="${tema}" data-modo="todas">${I.play}Practicar</button>`;
+  const nuevas = qs.filter(q => !PROG.has(q[5])).length, fallos = qs.filter(q => PROG.get(q[5])?.p).length;
+  return `<div class="modos" role="group" aria-label="Qué preguntas">${[["nuevas", "No contestadas", nuevas], ["todas", "Mezcladas", qs.length], ["fallos", "Falladas", fallos]]
+    .map(([m, txt, n]) => `<button class="modo${primario && m === "todas" ? " primario" : ""}" data-tema="${tema}" data-modo="${m}"
+      ${n ? "" : "disabled"} title="${txt}: ${miles(n)} preguntas"><b>${txt}</b><span>${miles(n)}</span></button>`).join("")}</div>`;
+}
+
 function tarjetaTema(i, modo) {
   const n = PREG.filter(q => q[0] === i).length, eps = TEMARIO.filter(e => e.tema === i).length;
   const estudiar = eps ? `<a class="btn mini" href="#temario/${i}">${I.libro}Temario</a>` : "";
   const acciones = modo === "temario"
     ? (eps ? `<a class="btn mini primario" href="#temario/${i}">${I.libro}Estudiar</a>` : "")
-    : `<button class="btn mini" data-tema="${i}">${I.play}Practicar</button>${estudiar}`;
+    : `${botonesModo(i)}${estudiar}`;
   return `<div class="tema">
       <div class="tema-cab"><span class="num-tema">${i + 1}</span>
         <div><div class="tema-nombre">${TEMAS[i]}</div>
@@ -417,7 +428,7 @@ function vistaInicio() {
             `<button role="radio" aria-checked="${n === tamano}" class="${n === tamano ? "on" : ""}" data-n="${n}">${n}</button>`).join("")}</div></div>
       </div>
       ${conectado ? `<div class="campo" style="margin-top:14px">Qué preguntas
-        <div class="segmento" id="f-modo" role="radiogroup">${[["todas", "Todas", ""], ["nuevas", "No vistas", PREG.length - PROG.size],
+        <div class="segmento" id="f-modo" role="radiogroup">${[["nuevas", "No contestadas", PREG.length - PROG.size], ["todas", "Mezcladas", ""],
           ["fallos", "Falladas", pend.length]].map(([m, txt, n]) => `<button role="radio" aria-checked="${m === modoTest}"
             class="${m === modoTest ? "on" : ""}" data-modo="${m}">${txt}${n !== "" ? ` <span class="seg-n">${miles(n)}</span>` : ""}</button>`).join("")}</div></div>` : ""}
       <div class="acciones"><button class="btn primario" id="empezar">${I.play}Empezar test</button></div>
@@ -439,7 +450,7 @@ function vistaInicio() {
   segmento("[data-modo]", b => modoTest = b.dataset.modo);
   const modo = () => conectado ? modoTest : "todas";
   document.getElementById("empezar").onclick = () => empezar(+document.getElementById("f-tema").value, tamano, modo());
-  app.querySelectorAll("[data-tema]").forEach(b => b.onclick = () => empezar(+b.dataset.tema, tamano, modo()));
+  app.querySelectorAll("[data-tema]").forEach(b => b.onclick = () => empezar(+b.dataset.tema, tamano, b.dataset.modo));
 }
 
 // Barra de avance de un tema: acertadas / por repasar / sin responder + % respondido y % de acierto
@@ -503,7 +514,7 @@ function empezar(tema, num, modo = "todas") {
 /* ---------- Test ---------- */
 function nombreTest() {
   const t = typeof test.tema === "string" ? `Epígrafe ${test.tema.slice(2)}` : test.tema < 0 ? "Todos los temas" : TEMAS[test.tema];
-  return test.modo === "fallos" ? `Mis fallos · ${t}` : test.modo === "nuevas" ? `No vistas · ${t}` : t;
+  return test.modo === "fallos" ? `Falladas · ${t}` : test.modo === "nuevas" ? `No contestadas · ${t}` : t;
 }
 
 // conAnimacion: true al entrar en el test; "clic" al pasar con el ratón (sólo avanza la barra); false con teclado (nada animado)
@@ -585,24 +596,33 @@ function explicacion(q) {
     <div class="norma">Norma: ${esc(q[4])}</div>`;
 }
 
+// Corrección como en el examen oficial: cada acierto suma 1, cada fallo resta 1/3 y se aprueba con el 60 % de los puntos
+const PENALIZACION = 1 / 3, NOTA_APROBADO = 0.6;
+const decimal = (x, d = 2) => x.toLocaleString("es-ES", { maximumFractionDigits: d });
+
 function pintarResumen() {
   const r = test.respuestas, ok = r.filter(x => x.ok).length, mal = r.filter(x => !x.ok);
-  const pct = r.length ? Math.round(ok / r.length * 100) : 0;
-  const color = pct >= 80 ? "var(--ok)" : pct >= 50 ? "var(--accent)" : "var(--ko)";
-  const frase = !r.length ? "No has respondido ninguna pregunta." : pct >= 80 ? "¡Muy bien! Vas preparado." :
-    pct >= 50 ? "Buen camino. Repasa las falladas." : "Toca repasar el temario.";
+  const total = r.length, puntos = Math.max(ok - mal.length * PENALIZACION, 0), necesarios = total * NOTA_APROBADO;
+  const nota = total ? puntos / total * 100 : 0, pct = Math.round(nota), aprobado = total > 0 && puntos >= necesarios - 1e-9;
+  const color = aprobado ? "var(--ok)" : "var(--ko)";
+  const frase = !total ? "No has respondido ninguna pregunta." : aprobado
+    ? (nota >= 80 ? "¡Muy bien! Vas preparado." : "Aprobado, pero repasa las falladas.")
+    : `Te faltan ${decimal(necesarios - puntos)} puntos para aprobar. Toca repasar.`;
   pintar(`
     <a class="volver" href="#inicio">${I.atras.replace("<svg", '<svg width="16" height="16"')}Inicio</a>
     <h1>Resultado</h1>
     <p class="sub">${esc(nombreTest())} · ${frase}${conectado && mal.length ? " Tus fallos quedan guardados en «Mis fallos»." : ""}</p>
     <div class="card resumen">
-      <div class="anillo" style="--p:${pct};--color:${color}"><div><div><b>${pct}%</b><span>acierto</span></div></div></div>
+      <div class="anillo" style="--p:${pct};--color:${color}"><div><div><b>${pct}%</b><span>de los puntos</span></div></div></div>
       <div>
+        ${total ? `<div class="veredicto ${aprobado ? "ok" : "ko"}">${aprobado ? `${I.ok}APROBADO` : `${I.ko}SUSPENDIDO`}
+          <span>${decimal(puntos)} de ${total} puntos · necesitas ${decimal(necesarios)} (60 %)</span></div>` : ""}
         <div class="kpis">
-          <div class="kpi"><b style="color:var(--ok)">${ok}</b><span>correctas</span></div>
-          <div class="kpi"><b style="color:var(--ko)">${mal.length}</b><span>falladas</span></div>
-          <div class="kpi"><b>${r.length}</b><span>respondidas</span></div>
+          <div class="kpi"><b style="color:var(--ok)">${ok}</b><span>correctas (+1)</span></div>
+          <div class="kpi"><b style="color:var(--ko)">${mal.length}</b><span>falladas (−⅓)</span></div>
+          <div class="kpi"><b>${total}</b><span>respondidas</span></div>
         </div>
+        <p class="norma" style="margin:10px 0 0">Como en el examen oficial: cada fallo resta ⅓ de punto y se aprueba con el 60 % de los puntos.</p>
         <div class="acciones">
           <button class="btn primario" id="otra">${I.play}Otro test igual</button>
           ${mal.length ? `<button class="btn" id="repetir">Repetir las falladas (${mal.length})</button>` : ""}
@@ -659,8 +679,8 @@ function vistaTemaTemario(tema) {
     <h1>${TEMAS[tema] || "Tema"}</h1>
     <p class="sub">${eps.length} epígrafes · ${miles(eps.reduce((s, e) => s + e.preguntas, 0))} preguntas cubiertas</p>
     <div class="acciones" style="margin:0 0 20px">
-      <button class="btn primario" data-test="${tema}">${I.play}Test del tema (${tamano})</button>
-      <button class="btn" id="abrir-todo">Desplegar todo</button>
+      ${botonesModo(tema, true)}
+      <button class="btn mini" id="abrir-todo">Desplegar todo</button>
     </div>
     ${eps.map(e => `
       <details class="epigrafe"><summary><span class="ep-num">${e.id.slice(2)}</span>
@@ -668,10 +688,8 @@ function vistaTemaTemario(tema) {
         <div class="apuntes-caja">${e.video ? `<video class="ep-vid" controls preload="none" playsinline poster="${e.poster}" src="${e.video}"></video>` : ""}<div class="apuntes">${markdown(e.md)}</div>
           <div class="acciones"><button class="btn mini" data-test="${e.id}">${I.play}Test de este epígrafe (10)</button></div></div>
       </details>`).join("") || `<p class="vacio">Este tema aún no tiene temario.</p>`}`);
-  app.querySelectorAll("[data-test]").forEach(b => b.onclick = () => {
-    const t = b.dataset.test;
-    /^\d$/.test(t) ? empezar(+t, tamano) : empezar(t, 10);
-  });
+  app.querySelectorAll("[data-test]").forEach(b => b.onclick = () => empezar(b.dataset.test, 10));
+  app.querySelectorAll("[data-tema]").forEach(b => b.onclick = () => empezar(+b.dataset.tema, tamano, b.dataset.modo));
   // Al plegar un epígrafe, pausa su vídeo
   app.querySelectorAll("details.epigrafe").forEach(d => d.addEventListener("toggle", () => {
     const v = d.querySelector("video"); if (v && !d.open) v.pause();

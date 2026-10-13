@@ -367,3 +367,26 @@ input[type=email]:focus, input[type=password]:focus { outline: none; border-colo
 .pt-cab .num-tema { width: 24px; height: 24px; font-size: .75rem; border-radius: 7px; }
 .pt-nombre { flex: 1; min-width: 0; font-weight: 600; }
 .pt-pct { font-weight: 650; font-variant-numeric: tabular-nums; white-space: nowrap; }
+/* Veredicto del test (corrección oficial) */
+.veredicto { display: flex; flex-wrap: wrap; align-items: center; gap: 6px 10px; margin-bottom: 14px; padding: 10px 14px;
+  border-radius: 12px; font-weight: 800; font-size: 1.1rem; letter-spacing: .02em; }
+.veredicto svg { width: 20px; height: 20px; flex: none; }
+.veredicto span { font-weight: 500; font-size: .86rem; letter-spacing: 0; color: var(--muted); }
+.veredicto.ok { background: color-mix(in srgb, var(--ok) 12%, transparent); color: var(--ok); }
+.veredicto.ko { background: color-mix(in srgb, var(--ko) 12%, transparent); color: var(--ko); }
+.btn[disabled] { opacity: .45; cursor: not-allowed; }
+.btn .seg-n { margin-left: 2px; }
+
+/* Elegir qué preguntas del tema: no contestadas / mezcladas / falladas */
+.modos { display: grid; grid-template-columns: repeat(3, 1fr); gap: 6px; width: 100%; }
+.modo { display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 1px; min-height: 48px;
+  padding: 6px 4px; border: 1px solid var(--line); border-radius: 10px; background: var(--card); color: var(--text);
+  font: inherit; cursor: pointer; transition: border-color .15s, background .15s; }
+.modo b { font-size: .78rem; font-weight: 600; line-height: 1.15; text-align: center; }
+.modo span { font-size: .78rem; color: var(--faint); font-variant-numeric: tabular-nums; }
+.modo:hover:not([disabled]) { border-color: var(--accent); }
+.modo.primario { border-color: var(--accent); background: var(--accent-soft); }
+.modo.primario b { color: var(--accent-text); }
+.modo[disabled] { opacity: .45; cursor: not-allowed; }
+.acciones .modos { flex: 1 1 100%; }
+.tema .acciones { flex-wrap: wrap; }
