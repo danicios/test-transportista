@@ -248,10 +248,15 @@ function vistaProgreso() {
       <div class="grafico" id="g-volumen"></div>
     </div>
     <div class="card"><h2>Por tema <span class="norma" style="font-weight:400" id="prog-rango"></span></h2><div id="prog-temas"></div></div>
+    <div class="card"><h2>Practicar por tema</h2>
+      <p class="norma" style="margin:0 0 12px">Elige el tema y qué preguntas quieres: las que aún no has contestado, mezcladas o solo las falladas.</p>
+      ${TEMAS.map((t, i) => `<div class="fila-practica"><div class="fp-tema"><span class="num-tema">${i + 1}</span><b>${t}</b></div>
+        ${botonesModo(i)}</div>`).join("")}</div>
     <div class="acciones" style="justify-content:center">
       ${pend ? `<a class="btn" href="#fallos">${I.diana}Mis fallos</a>` : ""}
       <button class="btn fantasma" id="desvincular">Desvincular este dispositivo</button>
     </div>`);
+  app.querySelectorAll("[data-tema]").forEach(b => b.onclick = () => empezar(+b.dataset.tema, tamano, b.dataset.modo));
   document.getElementById("desvincular").onclick = () => {
     if (confirm("¿Desvincular este dispositivo? Tus fallos siguen guardados; para volver a vincularlo abre otra vez tu enlace personal.")) desvincular();
   };
@@ -427,10 +432,11 @@ function vistaInicio() {
           <div class="segmento" role="radiogroup">${TAMANOS.map(n =>
             `<button role="radio" aria-checked="${n === tamano}" class="${n === tamano ? "on" : ""}" data-n="${n}">${n}</button>`).join("")}</div></div>
       </div>
-      ${conectado ? `<div class="campo" style="margin-top:14px">Qué preguntas
-        <div class="segmento" id="f-modo" role="radiogroup">${[["nuevas", "No contestadas", PREG.length - PROG.size], ["todas", "Mezcladas", ""],
-          ["fallos", "Falladas", pend.length]].map(([m, txt, n]) => `<button role="radio" aria-checked="${m === modoTest}"
-            class="${m === modoTest ? "on" : ""}" data-modo="${m}">${txt}${n !== "" ? ` <span class="seg-n">${miles(n)}</span>` : ""}</button>`).join("")}</div></div>` : ""}
+      <div class="campo" style="margin-top:14px">Qué preguntas
+        <div class="segmento" id="f-modo" role="radiogroup">${[["nuevas", "No contestadas"], ["todas", "Mezcladas"], ["fallos", "Falladas"]]
+          .map(([m, txt]) => `<button role="radio" aria-checked="${m === modoTest}" class="${m === modoTest ? "on" : ""}" data-modo="${m}"
+            ${!conectado && m !== "todas" ? "disabled" : ""}>${txt} <span class="seg-n" data-n-modo="${m}"></span></button>`).join("")}</div>
+        ${conectado ? "" : `<span class="norma" style="margin:6px 0 0">Para elegir «No contestadas» o «Falladas», vincula este dispositivo con tu enlace personal (en Progreso).</span>`}</div>
       <div class="acciones"><button class="btn primario" id="empezar">${I.play}Empezar test</button></div>
     </div>
     ${conectado ? graficoAvance(pend.length) : sb ? `<div class="card fila-fallos">
@@ -447,8 +453,16 @@ function vistaInicio() {
     b.parentNode.querySelectorAll("button").forEach(x => { x.classList.toggle("on", x === b); x.setAttribute("aria-checked", x === b); });
   });
   segmento("[data-n]", b => tamano = +b.dataset.n);
-  segmento("[data-modo]", b => modoTest = b.dataset.modo);
+  segmento("#f-modo [data-modo]", b => modoTest = b.dataset.modo);
   const modo = () => conectado ? modoTest : "todas";
+  // números de cada opción según el tema elegido en el desplegable
+  const fTema = document.getElementById("f-tema");
+  const contar = () => {
+    const t = +fTema.value, qs = PREG.filter(q => t < 0 || q[0] === t);
+    const n = { todas: qs.length, nuevas: qs.filter(q => !PROG.has(q[5])).length, fallos: qs.filter(q => PROG.get(q[5])?.p).length };
+    app.querySelectorAll("[data-n-modo]").forEach(e => e.textContent = conectado || e.dataset.nModo === "todas" ? miles(n[e.dataset.nModo]) : "");
+  };
+  fTema.onchange = contar; contar();
   document.getElementById("empezar").onclick = () => empezar(+document.getElementById("f-tema").value, tamano, modo());
   app.querySelectorAll("[data-tema]").forEach(b => b.onclick = () => empezar(+b.dataset.tema, tamano, b.dataset.modo));
 }
@@ -761,3 +775,17 @@ document.addEventListener("keydown", e => {
 });
 
 cargar();
+
+/* ---------- Actualización automática ----------
+   Si se publica una versión nueva, la página se recarga sola (al abrirla o al volver a ella),
+   salvo en mitad de un test para no perder las respuestas. */
+const VERSION = (document.querySelector('script[src*="app.js?v="]')?.src.match(/v=(\d+)/) || [])[1];
+async function comprobarVersion() {
+  if (!VERSION || (test && test.i < test.preguntas.length && location.hash === "#test")) return;
+  try {
+    const v = (await (await fetch("version.txt?t=" + Date.now(), { cache: "no-store" })).text()).trim();
+    if (/^\d+$/.test(v) && v !== VERSION) location.reload();
+  } catch { /* sin conexión: seguimos con la versión actual */ }
+}
+document.addEventListener("visibilitychange", () => { if (document.visibilityState === "visible") comprobarVersion(); });
+comprobarVersion();

@@ -390,3 +390,12 @@ input[type=email]:focus, input[type=password]:focus { outline: none; border-colo
 .modo[disabled] { opacity: .45; cursor: not-allowed; }
 .acciones .modos { flex: 1 1 100%; }
 .tema .acciones { flex-wrap: wrap; }
+
+/* Progreso: practicar por tema */
+.fila-practica { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.3fr); gap: 10px 16px; align-items: center;
+  padding: 10px 0; border-top: 1px solid var(--line); }
+.fila-practica:first-of-type { border-top: 0; }
+.fp-tema { display: flex; align-items: center; gap: 10px; min-width: 0; }
+.fp-tema b { font-weight: 600; font-size: .92rem; }
+@media (max-width: 640px) { .fila-practica { grid-template-columns: 1fr; } }
+.segmento button[disabled] { opacity: .45; cursor: not-allowed; }
