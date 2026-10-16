@@ -399,3 +399,8 @@ input[type=email]:focus, input[type=password]:focus { outline: none; border-colo
 .fp-tema b { font-weight: 600; font-size: .92rem; }
 @media (max-width: 640px) { .fila-practica { grid-template-columns: 1fr; } }
 .segmento button[disabled] { opacity: .45; cursor: not-allowed; }
+
+.g-linea.nota { stroke: var(--warn); }
+.g-punto.nota { fill: var(--warn); }
+.g-aprobado { stroke: var(--muted); stroke-width: 1.5; stroke-dasharray: 5 4; opacity: .7; }
+.graf-titulo .ley i.ley-raya { width: 14px; height: 0; border-radius: 0; border-top: 2px dashed var(--muted); background: none; }

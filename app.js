@@ -16,6 +16,9 @@ const esc = s => String(s).replace(/[&<>"']/g, c => ({ "&": "&amp;", "<": "&lt;"
 const barajar = a => { for (let i = a.length - 1; i > 0; i--) { const j = Math.random() * (i + 1) | 0; [a[i], a[j]] = [a[j], a[i]]; } return a; };
 const sinTildes = s => s.normalize("NFD").replace(/[̀-ͯ]/g, "").toLowerCase();
 const miles = n => n.toLocaleString("es-ES", { useGrouping: true });
+// % de puntos como en el examen oficial: cada acierto +1, cada fallo −⅓; se aprueba con el 60 %
+const notaPct = (a, f) => a + f ? Math.max(a - f / 3, 0) / (a + f) * 100 : 0;
+const claseNota = p => p >= 60 ? "ok" : "ko";
 
 // Iconos (trazo, heredan color)
 const ico = d => `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">${d}</svg>`;
@@ -237,12 +240,16 @@ function vistaProgreso() {
         <div class="kpi"><b style="color:var(--ko)">${miles(f)}</b><span>fallos</span></div>
         <div class="kpi"><b>${miles(pend)}</b><span>por repasar</span></div>
       </div>
+      ${a + f ? `<div class="kpis" style="grid-template-columns:repeat(2,1fr);margin-top:10px">
+        <div class="kpi"><b>${Math.round(a / (a + f) * 100)}%</b><span>de acierto</span></div>
+        <div class="kpi"><b style="color:var(--${claseNota(notaPct(a, f))})">${Math.round(notaPct(a, f))}%</b><span>de puntos · ${notaPct(a, f) >= 60 ? "aprobarías" : "suspenderías"} (60 %)</span></div>
+      </div>` : ""}
     </div>
     <div class="card">
       <div class="prog-cab"><h2 style="margin:0">Por día</h2>
         <div class="segmento" role="radiogroup">${RANGOS.map(([n, t]) =>
           `<button role="radio" aria-checked="${n === rangoProg}" class="${n === rangoProg ? "on" : ""}" data-rango="${n}">${t}</button>`).join("")}</div></div>
-      <div class="graf-titulo">% de acierto</div>
+      <div class="graf-titulo">% de acierto y de puntos <span class="ley"><i style="background:var(--accent)"></i>Acierto <i style="background:var(--warn)"></i>Puntos <i class="ley-raya"></i>Aprobado (60 %)</span></div>
       <div class="grafico" id="g-acierto"><p class="vacio">Cargando…</p></div>
       <div class="graf-titulo">Respuestas <span class="ley"><i style="background:var(--ok)"></i>Aciertos <i style="background:var(--ko)"></i>Fallos</span></div>
       <div class="grafico" id="g-volumen"></div>
@@ -317,10 +324,14 @@ function graficoLinea(dias, W) {
   const H = 170, t = 10, b = 24, ex = ejeX(dias.length, W), y = v => t + (1 - v / 100) * (H - t - b);
   const grid = [0, 50, 100].map(v => `<line x1="${ex.l}" x2="${W - ex.r}" y1="${y(v)}" y2="${y(v)}" class="g-grid"/>
     <text x="${ex.l - 6}" y="${y(v) + 4}" class="g-eje" text-anchor="end">${v}%</text>`).join("");
-  const pts = dias.map((d, i) => d.a + d.f ? [ex.x(i), y(d.a / (d.a + d.f) * 100)] : null).filter(Boolean);
-  const linea = pts.length > 1 ? `<polyline points="${pts.map(p => p.join(",")).join(" ")}" class="g-linea"/>` : "";
-  const puntos = pts.map(([px, py]) => `<circle cx="${px}" cy="${py}" r="4" class="g-punto"/>`).join("");
-  return `<svg width="${W}" height="${H}" role="img" aria-label="Porcentaje de acierto por día">${grid}${linea}${puntos}
+  const serie = (fn, cl) => {
+    const pts = dias.map((d, i) => d.a + d.f ? [ex.x(i), y(fn(d))] : null).filter(Boolean);
+    return (pts.length > 1 ? `<polyline points="${pts.map(p => p.join(",")).join(" ")}" class="g-linea ${cl}"/>` : "") +
+      pts.map(([px, py]) => `<circle cx="${px}" cy="${py}" r="4" class="g-punto ${cl}"/>`).join("");
+  };
+  const aprobado = `<line x1="${ex.l}" x2="${W - ex.r}" y1="${y(60)}" y2="${y(60)}" class="g-aprobado"/>`;
+  return `<svg width="${W}" height="${H}" role="img" aria-label="Porcentaje de acierto y de puntos por día">${grid}${aprobado}
+    ${serie(d => notaPct(d.a, d.f), "nota")}${serie(d => d.a / (d.a + d.f) * 100, "")}
     ${etiquetasX(dias, ex, H)}<line class="g-cruz" y1="${t}" y2="${H - b}" x1="0" x2="0"/></svg>`;
 }
 
@@ -350,7 +361,7 @@ function activarTooltip(g, dias) {
     if (i < 0 || i >= dias.length) return ocultar();
     const d = dias[i], tot = d.a + d.f;
     cruz.setAttribute("x1", ex.x(i)); cruz.setAttribute("x2", ex.x(i)); cruz.style.opacity = 1;
-    tooltipProg.innerHTML = `<b>${fechaCorta(d.iso)}</b>${tot ? `${Math.round(d.a / tot * 100)}% de acierto<br>
+    tooltipProg.innerHTML = `<b>${fechaCorta(d.iso)}</b>${tot ? `${Math.round(d.a / tot * 100)}% de acierto · ${Math.round(notaPct(d.a, d.f))}% de puntos<br>
       <span class="t-ok">✓ ${d.a}</span> · <span class="t-ko">✗ ${d.f}</span>` : "Sin respuestas"}`;
     tooltipProg.style.left = Math.min(Math.max(r.left + ex.x(i), 80), innerWidth - 80) + "px";
     tooltipProg.style.top = (r.top + scrollY - 8) + "px";
@@ -362,15 +373,15 @@ function activarTooltip(g, dias) {
 }
 
 function pintarTemasProgreso(temas) {
-  const con = temas.filter(t => t.a + t.f).sort((x, y) => x.a / (x.a + x.f) - y.a / (y.a + y.f));
+  const con = temas.filter(t => t.a + t.f).sort((x, y) => notaPct(x.a, x.f) - notaPct(y.a, y.f));
   const sin = temas.filter(t => !(t.a + t.f));
   document.getElementById("prog-temas").innerHTML = (con.map(t => {
-    const tot = t.a + t.f, pct = Math.round(t.a / tot * 100);
+    const tot = t.a + t.f, pct = Math.round(t.a / tot * 100), nota = Math.round(notaPct(t.a, t.f));
     return `<div class="pt-fila">
         <div class="pt-cab"><span class="num-tema">${t.i + 1}</span><span class="pt-nombre">${t.nombre}</span>
-          <span class="pt-pct">${pct}% acierto</span></div>
+          <span class="pt-pct" style="color:var(--${claseNota(nota)})">${nota}% puntos</span></div>
         <div class="barra-avance"><i style="width:${pct}%;background:var(--ok)"></i><i style="width:${100 - pct}%;background:var(--ko)"></i></div>
-        <div class="tema-meta">${miles(t.f)} fallo${t.f === 1 ? "" : "s"} de ${miles(tot)} respuestas</div>
+        <div class="tema-meta"><b>${pct}%</b> acierto · ${miles(t.f)} fallo${t.f === 1 ? "" : "s"} de ${miles(tot)} respuestas · ${nota >= 60 ? "aprobarías" : "suspenderías"}</div>
       </div>`;
   }).join("") || `<p class="vacio">Aún no hay respuestas en este periodo.</p>`) +
     (sin.length && con.length ? `<p class="norma">Sin respuestas en este periodo: ${sin.map(t => t.nombre).join(", ")}.</p>` : "");
@@ -475,7 +486,7 @@ function avanceTema(i, n) {
   const pc = x => x / n * 100, acierto = vistas ? Math.round(bien / vistas * 100) : 0;
   return `<div class="tema-avance" title="Acertadas ${bien} · Por repasar ${mal} · Sin responder ${n - vistas}">
       <div class="barra-avance"><i style="width:${pc(bien)}%;background:var(--ok)"></i><i style="width:${pc(mal)}%;background:var(--ko)"></i></div>
-      <div class="tema-meta">${vistas ? `<b>${Math.round(pc(vistas))}%</b> respondido · <b>${acierto}%</b> acierto` : "Sin empezar"}</div>
+      <div class="tema-meta">${vistas ? `<b>${Math.round(pc(vistas))}%</b> respondido · <b>${acierto}%</b> acierto · <b style="color:var(--${claseNota(notaPct(bien, mal))})">${Math.round(notaPct(bien, mal))}%</b> puntos` : "Sin empezar"}</div>
     </div>`;
 }
 
