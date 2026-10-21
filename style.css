@@ -225,6 +225,8 @@ details[open] > .cuerpo, details[open] > .apuntes-caja { animation: entrar .22s 
 .epigrafe .ep-video { flex: none; display: inline-flex; align-items: center; gap: 4px; font-size: .75rem; font-weight: 600;
   color: var(--accent-text); background: var(--accent-soft); padding: 3px 8px 3px 6px; border-radius: 999px; }
 .epigrafe .ep-video svg { width: 12px; height: 12px; }
+.ep-extra { display: flex; align-items: center; gap: 6px; margin: 18px 0 -6px; font-size: .85rem; font-weight: 600; color: var(--accent-text); }
+.ep-extra svg { width: 14px; height: 14px; }
 .apuntes { max-width: 68ch; font-size: .97rem; }
 .apuntes h3 { font-size: .8rem; font-weight: 700; letter-spacing: .06em; text-transform: uppercase; color: var(--muted);
   margin: 22px 0 8px; }

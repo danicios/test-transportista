@@ -709,15 +709,16 @@ function vistaTemaTemario(tema) {
     </div>
     ${eps.map(e => `
       <details class="epigrafe"><summary><span class="ep-num">${e.id.slice(2)}</span>
-          <span class="ep-tit">${esc(e.titulo)}</span>${e.video ? `<span class="ep-video" title="Tiene vídeo">${I.play}Vídeo</span>` : ""}${metaEpigrafe(e)}${I.chev}</summary>
-        <div class="apuntes-caja">${e.video ? `<video class="ep-vid" controls preload="none" playsinline poster="${e.poster}" src="${e.video}"></video>` : ""}<div class="apuntes">${markdown(e.md)}</div>
+          <span class="ep-tit">${esc(e.titulo)}</span>${e.video || e.extras ? `<span class="ep-video" title="Tiene vídeo">${I.play}${(e.video ? 1 : 0) + (e.extras || []).length > 1 ? "Vídeos" : "Vídeo"}</span>` : ""}${metaEpigrafe(e)}${I.chev}</summary>
+        <div class="apuntes-caja">${e.video ? `<video class="ep-vid" controls preload="none" playsinline poster="${e.poster}" src="${e.video}"></video>` : ""}${(e.extras || []).map(x => `
+          <div class="ep-extra">${I.play}${esc(x.titulo)}</div><video class="ep-vid" controls preload="none" playsinline poster="${x.poster}" src="${x.video}"></video>`).join("")}<div class="apuntes">${markdown(e.md)}</div>
           <div class="acciones"><button class="btn mini" data-test="${e.id}">${I.play}Test de este epígrafe (10)</button></div></div>
       </details>`).join("") || `<p class="vacio">Este tema aún no tiene temario.</p>`}`);
   app.querySelectorAll("[data-test]").forEach(b => b.onclick = () => empezar(b.dataset.test, 10));
   app.querySelectorAll("[data-tema]").forEach(b => b.onclick = () => empezar(+b.dataset.tema, tamano, b.dataset.modo));
   // Al plegar un epígrafe, pausa su vídeo
   app.querySelectorAll("details.epigrafe").forEach(d => d.addEventListener("toggle", () => {
-    const v = d.querySelector("video"); if (v && !d.open) v.pause();
+    if (!d.open) d.querySelectorAll("video").forEach(v => v.pause());
   }));
   const abrir = document.getElementById("abrir-todo");
   abrir.onclick = () => {
