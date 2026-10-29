@@ -2,6 +2,7 @@
 // preguntas: [tema, enunciado, [A,B,C,D], correcta(0-3), norma, codigo]
 // explicaciones: { codigo: { p, c, e, a? } }
 // temario: [{ id: "1E03", tema, titulo, md, preguntas }]
+// extra: [{ id, tema, titulo, md }] — temario Extra: lo de las preguntas falladas, explicado (extra/*.md)
 // Progreso: con sesión iniciada, cada respuesta se guarda en Supabase (tabla respuestas, ver supabase.sql).
 
 const TEMAS = ["Derecho civil", "Derecho mercantil", "Derecho social", "Derecho fiscal",
@@ -9,7 +10,7 @@ const TEMAS = ["Derecho civil", "Derecho mercantil", "Derecho social", "Derecho 
 const LETRAS = "ABCD";
 const TAMANOS = [10, 25, 50, 100];
 
-let PREG = [], EXPL = {}, TEMARIO = [], test = null, tamano = 25, modoTest = "todas";  // modoTest: "todas" | "nuevas" | "fallos"
+let PREG = [], EXPL = {}, TEMARIO = [], EXTRA = [], test = null, tamano = 25, modoTest = "todas";  // modoTest: "todas" | "nuevas" | "fallos"
 const app = document.getElementById("app");
 
 const esc = s => String(s).replace(/[&<>"']/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]));
@@ -181,7 +182,7 @@ function cargar() {
       <p>Falta <code>data/datos.js</code>. Ejecuta <code>python preparar_web.py</code> en la carpeta del proyecto.</p></div>`;
     return;
   }
-  PREG = DATOS.preguntas; EXPL = DATOS.explicaciones; TEMARIO = DATOS.temario || [];
+  PREG = DATOS.preguntas; EXPL = DATOS.explicaciones; TEMARIO = DATOS.temario || []; EXTRA = DATOS.extra || [];
   iniciarCuenta();
   window.addEventListener("hashchange", router);
   router();
@@ -205,6 +206,7 @@ function router() {
   if (vista === "progreso" || vista === "cuenta") return vistaCuenta();
   if (vista === "fallos") return vistaFallos();
   if (vista === "temario") return arg === undefined ? vistaTemario() : vistaTemaTemario(+arg);
+  if (vista === "extra") return arg === undefined ? vistaTemario(true) : vistaTemaTemario(+arg, true);
   vistaInicio();
 }
 
@@ -406,17 +408,18 @@ function botonesModo(tema, primario) {
 }
 
 function tarjetaTema(i, modo) {
-  const n = PREG.filter(q => q[0] === i).length, eps = TEMARIO.filter(e => e.tema === i).length;
+  const n = PREG.filter(q => q[0] === i).length, eps = (modo === "extra" ? EXTRA : TEMARIO).filter(e => e.tema === i).length;
+  const nFall = modo === "extra" ? EXTRA.filter(e => e.tema === i).reduce((s, e) => s + falladasExtra(e).length, 0) : 0;
   const estudiar = eps ? `<a class="btn mini" href="#temario/${i}">${I.libro}Temario</a>` : "";
-  const acciones = modo === "temario"
-    ? (eps ? `<a class="btn mini primario" href="#temario/${i}">${I.libro}Estudiar</a>` : "")
+  const acciones = modo === "temario" || modo === "extra"
+    ? (eps ? `<a class="btn mini primario" href="#${modo}/${i}">${I.libro}Estudiar</a>` : "")
     : `${botonesModo(i)}${estudiar}`;
   return `<div class="tema">
       <div class="tema-cab"><span class="num-tema">${i + 1}</span>
         <div><div class="tema-nombre">${TEMAS[i]}</div>
-          <div class="tema-meta">${miles(n)} preguntas${eps ? ` · ${eps} epígrafes` : ""}</div></div></div>
+          <div class="tema-meta">${modo === "extra" ? `${miles(nFall)} preguntas falladas` : `${miles(n)} preguntas`}${eps ? ` · ${eps} epígrafes` : ""}</div></div></div>
       ${avanceTema(i, n)}
-      ${modo === "temario" && !eps ? `<div><span class="insignia gris">Pendiente</span></div>` : ""}
+      ${(modo === "temario" || modo === "extra") && !eps ? `<div><span class="insignia gris">Pendiente</span></div>` : ""}
       <div class="acciones">${acciones}</div></div>`;
 }
 
@@ -676,8 +679,32 @@ function fichaPregunta(q, elegida, veces) {
 }
 
 /* ---------- Temario ---------- */
-function vistaTemario() {
-  pintar(`
+// Preguntas falladas de un epígrafe de Extra: las de la copia guardada al crear el temario + las que falles después
+function falladasExtra(e) {
+  const cods = new Set(e.fallos || []);
+  PROG.forEach((r, c) => { if (r.f > 0 && c.startsWith(e.id)) cods.add(c); });
+  return PREG.filter(q => cods.has(q[5]));
+}
+
+// Lista de las preguntas falladas con su respuesta correcta, al final de cada epígrafe de Extra
+// Respuestas como «Todas son correctas» no se entienden solas: entonces se muestran las cuatro opciones
+const REMITE = /respuestas|anteriores|todas|todos|ninguna|ninguno|apartados|son correctas|son válidas/i;
+function listaFalladas(qs) {
+  if (!qs.length) return "";
+  return `<details class="falladas"><summary>${I.chev}Las ${qs.length} preguntas que fallaste de este epígrafe</summary>
+    <ol>${qs.map(q => `<li><span class="fq">${esc(q[1])}</span>${REMITE.test(q[2][q[3]])
+      ? `<span class="fo">${q[2].map((o, k) => `<span${k === q[3] ? ' class="fr"' : ""}>${k === q[3] ? I.ok : ""}${LETRAS[k]}) ${esc(o)}</span>`).join("")}</span>`
+      : `<span class="fr">${I.ok}${esc(q[2][q[3]])}</span>`}</li>`).join("")}</ol></details>`;
+}
+
+function vistaTemario(extra) {
+  pintar(extra ? `
+    <section class="hero">
+      <div class="eyebrow">Temario Extra</div>
+      <h1>Tu temario de fallos</h1>
+      <p class="sub">Un temario distinto al oficial, escrito a partir de las ${miles(EXTRA.reduce((s, e) => s + falladasExtra(e).length, 0))} preguntas que has fallado: solo lo que se te resiste, explicado con palabras sencillas. Debajo de cada epígrafe tienes las preguntas falladas con su respuesta correcta.</p>
+    </section>
+    <div class="temas-grid">${TEMAS.map((_, i) => tarjetaTema(i, "extra")).join("")}</div>` : `
     <section class="hero">
       <div class="eyebrow">Temario</div>
       <h1>Lo que tienes que saber</h1>
@@ -696,22 +723,22 @@ function metaEpigrafe(e) {
       <span class="ep-barra"><i style="width:${pct}%"></i></span>${vistas === qs.length ? `${I.ok}` : ""}${vistas}/${qs.length}</span>`;
 }
 
-function vistaTemaTemario(tema) {
-  const eps = TEMARIO.filter(e => e.tema === tema);
+function vistaTemaTemario(tema, extra) {
+  const eps = (extra ? EXTRA : TEMARIO).filter(e => e.tema === tema);
   pintar(`
-    <a class="volver" href="#temario">${I.atras.replace("<svg", '<svg width="16" height="16"')}Temario</a>
-    <div class="eyebrow">Tema ${tema + 1}</div>
+    <a class="volver" href="#${extra ? "extra" : "temario"}">${I.atras.replace("<svg", '<svg width="16" height="16"')}${extra ? "Temario Extra" : "Temario"}</a>
+    <div class="eyebrow">${extra ? "Extra · " : ""}Tema ${tema + 1}</div>
     <h1>${TEMAS[tema] || "Tema"}</h1>
-    <p class="sub">${eps.length} epígrafes · ${miles(eps.reduce((s, e) => s + e.preguntas, 0))} preguntas cubiertas</p>
+    <p class="sub">${extra ? `${eps.length} epígrafes · ${miles(eps.reduce((s, e) => s + falladasExtra(e).length, 0))} preguntas falladas` : `${eps.length} epígrafes · ${miles(eps.reduce((s, e) => s + e.preguntas, 0))} preguntas cubiertas`}</p>
     <div class="acciones" style="margin:0 0 20px">
       ${botonesModo(tema, true)}
       <button class="btn mini" id="abrir-todo">Desplegar todo</button>
     </div>
     ${eps.map(e => `
       <details class="epigrafe"><summary><span class="ep-num">${e.id.slice(2)}</span>
-          <span class="ep-tit">${esc(e.titulo)}</span>${e.video || e.extras ? `<span class="ep-video" title="Tiene vídeo">${I.play}${(e.video ? 1 : 0) + (e.extras || []).length > 1 ? "Vídeos" : "Vídeo"}</span>` : ""}${metaEpigrafe(e)}${I.chev}</summary>
-        <div class="apuntes-caja">${e.video ? `<video class="ep-vid" controls preload="none" playsinline poster="${e.poster}" src="${e.video}"></video>` : ""}${(e.extras || []).map(x => `
-          <div class="ep-extra">${I.play}${esc(x.titulo)}</div><video class="ep-vid" controls preload="none" playsinline poster="${x.poster}" src="${x.video}"></video>`).join("")}<div class="apuntes">${markdown(e.md)}</div>
+          <span class="ep-tit">${esc(e.titulo)}</span>${!extra && (e.video || e.extras) ? `<span class="ep-video" title="Tiene vídeo">${I.play}${(e.video ? 1 : 0) + (e.extras || []).length > 1 ? "Vídeos" : "Vídeo"}</span>` : ""}${extra ? `<span class="ep-meta">${falladasExtra(e).length} fallos</span>` : metaEpigrafe(e)}${I.chev}</summary>
+        <div class="apuntes-caja">${!extra && e.video ? `<video class="ep-vid" controls preload="none" playsinline poster="${e.poster}" src="${e.video}"></video>` : ""}${(extra ? [] : e.extras || []).map(x => `
+          <div class="ep-extra">${I.play}${esc(x.titulo)}</div><video class="ep-vid" controls preload="none" playsinline poster="${x.poster}" src="${x.video}"></video>`).join("")}<div class="apuntes">${markdown(e.md)}</div>${extra ? listaFalladas(falladasExtra(e)) : ""}
           <div class="acciones"><button class="btn mini" data-test="${e.id}">${I.play}Test de este epígrafe (10)</button></div></div>
       </details>`).join("") || `<p class="vacio">Este tema aún no tiene temario.</p>`}`);
   app.querySelectorAll("[data-test]").forEach(b => b.onclick = () => empezar(b.dataset.test, 10));

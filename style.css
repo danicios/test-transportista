@@ -66,6 +66,8 @@ button, select, input { font: inherit; color: inherit; }
   .logo-txt { display: none; }
 }
 @media (max-width: 380px) { .logo { display: none; } }
+/* Cinco pestañas en el menú: en móviles estrechos la letra baja un poco para que quepan */
+@media (max-width: 420px) { .top nav a { font-size: .9rem; } }
 .top nav a.activo { background: var(--bg); color: var(--text); box-shadow: var(--shadow-sm); }
 
 main { max-width: 860px; margin: 0 auto; padding: 28px 16px 80px; }
@@ -421,3 +423,18 @@ input[type=email]:focus, input[type=password]:focus { outline: none; border-colo
 .g-punto.nota { fill: var(--warn); }
 .g-aprobado { stroke: var(--muted); stroke-width: 1.5; stroke-dasharray: 5 4; opacity: .7; }
 .graf-titulo .ley i.ley-raya { width: 14px; height: 0; border-radius: 0; border-top: 2px dashed var(--muted); background: none; }
+
+/* Extra: preguntas falladas de cada epígrafe, con su respuesta correcta */
+.falladas { max-width: 68ch; margin: 18px 0 6px; border: 1px solid var(--line); border-radius: 12px; background: var(--bg); }
+.falladas > summary { list-style: none; cursor: pointer; display: flex; align-items: center; gap: 8px; padding: 12px 14px;
+  font-weight: 600; font-size: .92rem; }
+.falladas > summary::-webkit-details-marker { display: none; }
+.falladas > summary svg { width: 16px; height: 16px; flex: none; transition: transform .2s; }
+.falladas[open] > summary svg { transform: rotate(90deg); }
+.falladas ol { margin: 0; padding: 0 14px 12px 34px; font-size: .93rem; }
+.falladas li { padding: 8px 0; border-top: 1px solid var(--line); }
+.falladas .fq { display: block; }
+.falladas .fr { display: flex; gap: 6px; align-items: flex-start; margin-top: 4px; font-weight: 600; }
+.falladas .fr svg { width: 15px; height: 15px; flex: none; margin-top: 3px; color: var(--ok, #16a34a); }
+.falladas .fo { display: flex; flex-direction: column; gap: 2px; margin-top: 4px; color: var(--muted); }
+.falladas .fo .fr { color: var(--text); margin-top: 0; }
