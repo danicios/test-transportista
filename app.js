@@ -3,6 +3,7 @@
 // explicaciones: { codigo: { p, c, e, a? } }
 // temario: [{ id: "1E03", tema, titulo, md, preguntas }]
 // extra: [{ id, tema, titulo, md }] — temario Extra: lo de las preguntas falladas, explicado (extra/*.md)
+// casos (data/casos.js, se carga al entrar en Práctico): [tema, enunciado, [8 opciones], correcta(0-7), norma, codigo]
 // Progreso: con sesión iniciada, cada respuesta se guarda en Supabase (tabla respuestas, ver supabase.sql).
 
 const TEMAS = ["Derecho civil", "Derecho mercantil", "Derecho social", "Derecho fiscal",
@@ -41,7 +42,9 @@ const I = {
 // PROG: codigo -> { a: aciertos, f: fallos, p: pendiente (por repasar), r: aciertos seguidos desde el último fallo }
 // Una pregunta fallada sale de "por repasar" al acertarla 2 veces seguidas (igual que la función registrar de supabase.sql).
 const ACIERTOS_PARA_SALIR = 2;
-let sb = null, conectado = false, PROG = new Map(), progresoCargado = false, subiendo = false;
+// CPROG: lo mismo para los casos prácticos, con códigos "C1A02001" (van a las mismas tablas, pero no cuentan en las gráficas del test)
+let sb = null, conectado = false, PROG = new Map(), CPROG = new Map(), progresoCargado = false, subiendo = false;
+const esCaso = c => c[0] === "C";
 const CLAVE = "tt-clave", COLA = "tt-cola";  // clave privada y respuestas aún no subidas (p. ej. sin conexión)
 const leerLS = (k, def) => { try { return localStorage.getItem(k) ?? def; } catch { return def; } };
 const escribirLS = (k, v) => { try { v === null ? localStorage.removeItem(k) : localStorage.setItem(k, v); } catch {} };
@@ -62,7 +65,7 @@ function iniciarCuenta() {
 }
 
 async function cargarProgreso(aviso) {
-  PROG.clear(); progresoCargado = false;
+  PROG.clear(); CPROG.clear(); progresoCargado = false;
   try {
     for (let desde = 0; ; desde += 1000) {  // Supabase devuelve como mucho 1000 filas por consulta
       const { data, error } = await sb.rpc("mi_progreso", { p_clave: clave() }).range(desde, desde + 999);
@@ -70,7 +73,7 @@ async function cargarProgreso(aviso) {
         if (/Clave incorrecta/.test(error.message)) { desvincular(); return toast("El enlace no es válido. Vuelve a abrir tu enlace personal."); }
         toast("No se pudo cargar tu progreso: " + error.message); break;
       }
-      data.forEach(r => PROG.set(r.codigo, { a: r.aciertos, f: r.fallos, p: r.pendiente, r: r.racha ?? 0 }));
+      data.forEach(r => (esCaso(r.codigo) ? CPROG : PROG).set(r.codigo, { a: r.aciertos, f: r.fallos, p: r.pendiente, r: r.racha ?? 0 }));
       if (data.length < 1000) break;
     }
   } catch { toast("Sin conexión: tus respuestas se guardarán cuando vuelva internet."); }
@@ -80,13 +83,13 @@ async function cargarProgreso(aviso) {
   subirCola();
 }
 
-function desvincular() { escribirLS(CLAVE, null); conectado = false; PROG.clear(); progresoCargado = false; marcarCuenta(); refrescar(); }
+function desvincular() { escribirLS(CLAVE, null); conectado = false; PROG.clear(); CPROG.clear(); progresoCargado = false; marcarCuenta(); refrescar(); }
 
 function aplicar(codigo, ok) {
-  const r = PROG.get(codigo) || { a: 0, f: 0, p: false, r: 0 };
+  const mapa = esCaso(codigo) ? CPROG : PROG, r = mapa.get(codigo) || { a: 0, f: 0, p: false, r: 0 };
   if (ok) { r.a++; r.r = (r.r || 0) + 1; r.p = r.p && r.r < ACIERTOS_PARA_SALIR; }
   else { r.f++; r.r = 0; r.p = true; }
-  PROG.set(codigo, r);
+  mapa.set(codigo, r);
 }
 
 function registrar(codigo, ok) {
@@ -111,7 +114,7 @@ async function subirCola() {
 }
 
 // Repinta la vista actual salvo en mitad de un test
-function refrescar() { if (location.hash !== "#test") router(); }
+function refrescar() { if (location.hash !== "#test" && location.hash !== "#practico/caso") router(); }
 function marcarCuenta() { document.querySelector(".nav-cuenta")?.classList.toggle("conectado", conectado); }
 
 let toastT;
@@ -207,6 +210,7 @@ function router() {
   if (vista === "fallos") return vistaFallos();
   if (vista === "temario") return arg === undefined ? vistaTemario() : vistaTemaTemario(+arg);
   if (vista === "extra") return arg === undefined ? vistaTemario(true) : vistaTemaTemario(+arg, true);
+  if (vista === "practico") return vistaPractico(arg);
   vistaInicio();
 }
 
@@ -223,7 +227,7 @@ async function cargarHistorial() {
   for (let desde = 0; ; desde += 1000) {
     const { data, error } = await sb.rpc("mi_historial", { p_clave: clave() }).range(desde, desde + 999);
     if (error) throw error;
-    filas.push(...data);
+    filas.push(...data.filter(r => !esCaso(r.tema)));
     if (data.length < 1000) break;
   }
   return filas;
@@ -805,6 +809,284 @@ function vistaBuscar() {
   tema.onchange = filtrar; filtrar();
 }
 
+/* ---------- Práctico: casos oficiales del Ministerio, como la 2.ª prueba del examen en Cataluña ---------- */
+// Resolució VPD/990/2022: 4 supuestos al azar con 8 respuestas, 2 horas, +50 por acierto y −⅓ de 50 por error.
+// Para aprobar: 50 % en cada prueba y 240 de 400 en total. La norma solo penaliza los errores: en blanco no resta.
+const LETRAS_CASO = "ABCDEFGH", SIM_CASOS = 4, SIM_SEGUNDOS = 2 * 3600, CASOS_SESION = 10;
+const PUNTOS_CASO = 50, PENALIZA_CASO = PUNTOS_CASO / 3, MIN_PRUEBA = 100, MIN_TOTAL = 240;
+const DOGC_EXAMEN = "https://dogc.gencat.cat/ca/document-del-dogc/?documentId=925284";
+const DOGC_SEDES = "https://dogc.gencat.cat/ca/document-del-dogc/?documentId=1035545";
+const BANCO_CASOS = "https://www.transportes.gob.es/transporte-terrestre/examenes-y-formacion/competencia-profesional/casos-practicos-mercancias";
+// pract: { modo: "practica" | "simulacro", tema, filtro, casos, i, resp: [opción elegida], fin, finReloj }
+let CASOS = null, pract = null, relojT = null;
+const enCurso = () => pract && !pract.fin;
+const progCaso = c => CPROG.get("C" + c[5]);
+
+function vistaPractico(arg) {
+  if (CASOS) return arg === "caso" && pract ? (pract.fin ? pintarResumenCasos() : pintarCaso(true)) : pintarPractico();
+  if (window.CASOS) { CASOS = window.CASOS; return vistaPractico(arg); }
+  pintar(`<p class="cargando">Cargando casos prácticos…</p>`);
+  const s = document.createElement("script");
+  s.src = "data/casos.js?" + (document.querySelector('script[src*="app.js?"]')?.src.split("?")[1] || "");
+  s.onload = () => { if (location.hash.startsWith("#practico")) vistaPractico(arg); };
+  s.onerror = () => pintar(`<div class="card"><h2>No se pudieron cargar los casos</h2><p>Comprueba la conexión y vuelve a intentarlo.</p></div>`);
+  document.head.appendChild(s);
+}
+
+function pintarPractico() {
+  const hechos = CASOS.filter(progCaso).length, pend = CASOS.filter(c => progCaso(c)?.p).length;
+  const continuar = enCurso() ? `<a class="btn primario" href="#practico/caso">${I.play}Continuar ${pract.modo === "simulacro" ? "el simulacro" : "la práctica"}</a>` : "";
+  pintar(`
+    <section class="hero">
+      <div class="eyebrow">Práctico · Examen en Barcelona</div>
+      <h1>Supuestos prácticos</h1>
+      <p class="sub">La segunda prueba del examen, con los casos del banco oficial del Ministerio y su solución oficial.</p>
+      <div class="stats">
+        <span class="chip"><b>${miles(CASOS.length)}</b> casos de mercancías</span>
+        <span class="chip">Banco actualizado el <b>08-04-2026</b></span>
+        ${conectado ? `<span class="chip"><b>${miles(hechos)}</b> hechos · <b>${miles(pend)}</b> por repasar</span>` : ""}
+      </div>
+    </section>
+    <div class="card">
+      <h2>Simulacro de la prueba</h2>
+      <p class="norma" style="margin:0 0 14px">${SIM_CASOS} casos al azar de todo el banco y 2 horas. Puedes cambiar tus respuestas hasta terminar y solo entonces ves la nota.</p>
+      <div class="acciones" style="margin:0">${continuar}${enCurso() && pract.modo === "simulacro" ? "" : `<button class="btn${continuar ? "" : " primario"}" id="simulacro">${I.diana}Empezar simulacro</button>`}</div>
+    </div>
+    <div class="card">
+      <h2>Cómo es en Cataluña</h2>
+      <div class="kpis">
+        <div class="kpi"><b>${SIM_CASOS}</b><span>casos, con 8 respuestas cada uno</span></div>
+        <div class="kpi"><b>2 h</b><span>como máximo</span></div>
+        <div class="kpi"><b>200</b><span>puntos en total</span></div>
+      </div>
+      <div class="kpis" style="margin-top:10px">
+        <div class="kpi"><b style="color:var(--ok)">+50</b><span>por acierto</span></div>
+        <div class="kpi"><b style="color:var(--ko)">−16,67</b><span>por fallo</span></div>
+        <div class="kpi"><b>0</b><span>en blanco</span></div>
+      </div>
+      <ul class="cp-datos">
+        <li><b>Para aprobar:</b> al menos ${MIN_PRUEBA} de 200 aquí, ${MIN_PRUEBA} de 200 en el test y ${MIN_TOTAL} de 400 entre las dos pruebas.</li>
+        <li><b>Si dudas:</b> responder al azar entre las 8 opciones resta de media. Compensa si descartas hasta quedarte con 3; con 4 queda en empate.</li>
+        <li><b>Cómo es:</b> por ordenador, y la aplicación elige los casos al azar de su banco. Debes llegar 30 minutos antes.</li>
+        <li><b>Dónde, en 2026:</b> av. Josep Tarradellas, 2-6, Barcelona.</li>
+        <li><b>Calculadora:</b> la resolución no la menciona. Pregunta si la facilitan o si puedes llevar la tuya.</li>
+      </ul>
+      <p class="norma">Fuentes: <a href="${DOGC_EXAMEN}" target="_blank" rel="noopener">Resolució VPD/990/2022</a>, <a href="${DOGC_SEDES}" target="_blank" rel="noopener">Resolució TER/96/2026</a> y <a href="${BANCO_CASOS}" target="_blank" rel="noopener">banco del Ministerio</a>. El Ministerio avisa de que sus casos son informativos y pueden cambiar.</p>
+    </div>
+    <h2 style="margin-top:28px">Practicar por temas</h2>
+    <p class="norma" style="margin:-8px 0 14px">Sesiones de hasta ${CASOS_SESION} casos, con la corrección después de cada uno.</p>
+    <div class="temas-grid">${TEMAS.map((_, i) => tarjetaCasos(i)).join("")}</div>`);
+  const b = document.getElementById("simulacro");
+  if (b) b.onclick = empezarSimulacro;
+  app.querySelectorAll("[data-casos]").forEach(x => x.onclick = () => empezarCasos(+x.dataset.casos, x.dataset.modo));
+}
+
+function tarjetaCasos(i) {
+  const qs = CASOS.filter(c => c[0] === i), nuevos = qs.filter(c => !progCaso(c)).length, fallos = qs.filter(c => progCaso(c)?.p).length;
+  return `<div class="tema">
+      <div class="tema-cab"><span class="num-tema">${i + 1}</span>
+        <div><div class="tema-nombre">${TEMAS[i]}</div><div class="tema-meta">${miles(qs.length)} caso${qs.length === 1 ? "" : "s"}</div></div></div>
+      <div class="acciones">${conectado
+        ? `<div class="modos" role="group" aria-label="Qué casos">${[["nuevas", "Sin hacer", nuevos], ["todas", "Mezclados", qs.length], ["fallos", "Fallados", fallos]]
+          .map(([m, txt, n]) => `<button class="modo" data-casos="${i}" data-modo="${m}" ${n ? "" : "disabled"} title="${txt}: ${miles(n)} casos"><b>${txt}</b><span>${miles(n)}</span></button>`).join("")}</div>`
+        : `<button class="btn mini" data-casos="${i}" data-modo="todas">${I.play}Practicar</button>`}</div></div>`;
+}
+
+function abandonarSimulacro() {
+  if (!(enCurso() && pract.modo === "simulacro")) return true;
+  if (!confirm("Tienes un simulacro en marcha y se perderá. ¿Quieres seguir?")) return false;
+  clearInterval(relojT);
+  return true;
+}
+
+function irACaso() { if (location.hash === "#practico/caso") pintarCaso(true); else location.hash = "practico/caso"; }
+
+function empezarCasos(tema, filtro = "todas") {
+  const pool = barajar(CASOS.filter(c => c[0] === tema
+    && (filtro === "fallos" ? progCaso(c)?.p : filtro === "nuevas" ? !progCaso(c) : true)));
+  if (!pool.length) return toast(filtro === "fallos" ? "No tienes casos fallados en ese tema." : "Ya has hecho todos los casos de ese tema.");
+  if (!abandonarSimulacro()) return;
+  pract = { modo: "practica", tema, filtro, casos: pool.slice(0, CASOS_SESION), i: 0, resp: [], fin: false };
+  irACaso();
+}
+
+function empezarSimulacro() {
+  if (!abandonarSimulacro()) return;
+  pract = { modo: "simulacro", casos: barajar([...CASOS]).slice(0, SIM_CASOS), i: 0, resp: [], fin: false, finReloj: Date.now() + SIM_SEGUNDOS * 1000 };
+  clearInterval(relojT);
+  relojT = setInterval(tickReloj, 1000);
+  irACaso();
+}
+
+const segundosRestantes = () => Math.max(0, Math.ceil((pract.finReloj - Date.now()) / 1000));
+function textoReloj() {
+  const s = segundosRestantes(), dos = n => String(n).padStart(2, "0");
+  return `${Math.floor(s / 3600)}:${dos(Math.floor(s / 60) % 60)}:${dos(s % 60)}`;
+}
+function tickReloj() {
+  if (!enCurso() || pract.modo !== "simulacro") return clearInterval(relojT);
+  const r = document.getElementById("cp-reloj");
+  if (r) { r.textContent = textoReloj(); r.classList.toggle("poco", segundosRestantes() <= 600); }
+  if (segundosRestantes() <= 0) { toast("Se ha acabado el tiempo: el simulacro se ha corregido solo."); terminarSimulacro(); }
+}
+
+function terminarSimulacro() {
+  clearInterval(relojT);
+  pract.fin = true;
+  pract.casos.forEach((c, i) => { if (pract.resp[i] !== undefined) registrar("C" + c[5], pract.resp[i] === c[3]); });
+  if (location.hash === "#practico/caso") pintarResumenCasos();
+}
+
+// Enunciado por líneas: tablas (concepto\timporte), listas ("- ") y párrafos; las cuestiones finales, resaltadas
+function textoCaso(txt) {
+  let html = "", grupo = "", cuestiones = false;
+  const abrir = g => {
+    if (g === grupo) return;
+    html += ({ tabla: "</div>", lista: "</ul>" }[grupo] || "") + ({ tabla: '<div class="cp-tabla">', lista: "<ul>" }[g] || "");
+    grupo = g;
+  };
+  for (const l of txt.split("\n")) {
+    if (l.includes("\t")) { const [a, ...b] = l.split("\t"); abrir("tabla"); html += `<div><span>${esc(a)}</span><b>${esc(b.join(" "))}</b></div>`; }
+    else if (l.startsWith("- ")) { abrir("lista"); html += `<li>${esc(l.slice(2))}</li>`; }
+    else { abrir(""); if (/^responda a las siguientes/i.test(l)) cuestiones = true; html += `<p${cuestiones ? ' class="cp-q"' : ""}>${esc(l)}</p>`; }
+  }
+  abrir("");
+  return html;
+}
+
+// Las partes de cada opción (A), B)...) en minúscula, para no confundirlas con la letra de la opción
+const textoOpcion = o => o.split("\n").map(l => `<span class="cp-parte">${esc(l.replace(/^([A-H])\)\s*/, (_, x) => x.toLowerCase() + ") "))}</span>`).join("");
+
+function pintarCaso(conAnimacion) {
+  const { casos, i, resp, modo } = pract, c = casos[i], sim = modo === "simulacro", n = casos.length;
+  const hechas = resp.slice(0, n).filter((r, k) => r !== undefined), ok = casos.filter((x, k) => !sim && resp[k] === x[3]).length;
+  const html = `
+    <div class="test-cab">
+      <span class="contador"><b>${i + 1}</b> / ${n} · ${sim ? "Simulacro" : esc(TEMAS[pract.tema])}</span>
+      ${sim ? `<span class="cp-reloj" id="cp-reloj" role="timer" aria-label="Tiempo restante">${textoReloj()}</span>`
+        : `<div class="marcador"><span class="m-ok">${I.ok}${ok}</span><span class="m-ko">${I.ko}${hechas.length - ok}</span></div>`}
+    </div>
+    <div class="progreso"><i style="transform:scaleX(${(sim ? hechas.length : i) / n})"></i></div>
+    ${sim ? `<div class="cp-pasos" role="group" aria-label="Casos">${casos.map((_, k) =>
+      `<button class="${k === i ? "on " : ""}${resp[k] !== undefined ? "hecho" : ""}" data-ir="${k}" aria-label="Caso ${k + 1}${resp[k] !== undefined ? ", respondido" : ""}">${k + 1}</button>`).join("")}</div>` : ""}
+    <div class="card">
+      <div class="pregunta-meta"><span class="etiqueta">${TEMAS[c[0]]}</span><span class="codigo">${esc(c[5])}</span></div>
+      <div class="cp-texto">${textoCaso(c[1])}</div>
+      <div class="opciones">${c[2].map((o, k) => `<button class="opcion${sim && resp[i] === k ? " elegida" : ""}" data-k="${k}" aria-pressed="${resp[i] === k}">
+        <span class="letra">${LETRAS_CASO[k]}</span><span class="cp-partes">${textoOpcion(o)}</span></button>`).join("")}</div>
+      <div id="tras"></div>
+      ${sim ? `<div class="siguiente-fila">
+        <button class="btn" id="anterior" ${i ? "" : "disabled"}>Anterior</button>
+        <button class="btn primario" id="sig-sim">${i + 1 < n ? "Siguiente" : "Terminar y corregir"}</button></div>` : ""}
+    </div>
+    <div class="acciones" style="justify-content:center"><button class="btn fantasma mini" id="salir">${sim ? "Terminar simulacro" : "Terminar práctica"}</button></div>`;
+  if (conAnimacion) pintar(html);
+  else { app.classList.remove("entrar"); app.innerHTML = html; window.scrollTo(0, 0); }
+  app.querySelectorAll(".opcion").forEach(b => b.onclick = () => elegirCaso(+b.dataset.k));
+  document.getElementById("salir").onclick = salirCasos;
+  if (sim) {
+    app.querySelectorAll("[data-ir]").forEach(b => b.onclick = () => { pract.i = +b.dataset.ir; pintarCaso(); });
+    document.getElementById("anterior").onclick = () => { pract.i--; pintarCaso(); };
+    document.getElementById("sig-sim").onclick = () => { if (pract.i + 1 < n) { pract.i++; pintarCaso(); } else salirCasos(); };
+  } else if (resp[i] !== undefined) corregirCaso();
+}
+
+function elegirCaso(k) {
+  const { i, casos, modo, resp } = pract;
+  if (modo === "simulacro") {  // se puede cambiar, o dejar en blanco pulsando otra vez la misma
+    resp[i] = resp[i] === k ? undefined : k;
+    app.querySelectorAll(".opcion").forEach((b, j) => { b.classList.toggle("elegida", resp[i] === j); b.setAttribute("aria-pressed", resp[i] === j); });
+    const paso = app.querySelector(`[data-ir="${i}"]`);
+    paso.classList.toggle("hecho", resp[i] !== undefined);
+    app.querySelector(".progreso i").style.transform = `scaleX(${resp.slice(0, casos.length).filter(r => r !== undefined).length / casos.length})`;
+    return;
+  }
+  if (resp[i] !== undefined) return;
+  resp[i] = k;
+  registrar("C" + casos[i][5], k === casos[i][3]);
+  pintarCaso();
+}
+
+function corregirCaso() {
+  const { i, casos, resp } = pract, c = casos[i], k = resp[i], bien = k === c[3], ultima = i + 1 >= casos.length;
+  app.querySelectorAll(".opcion").forEach((b, j) => {
+    b.disabled = true;
+    if (j === c[3]) b.classList.add("correcta");
+    else if (j === k) b.classList.add("elegida-mal");
+  });
+  document.getElementById("tras").innerHTML = `<div class="tras">
+    <div class="resultado ${bien ? "ok" : "ko"}">${bien ? `${I.ok}¡Correcto! +${PUNTOS_CASO}` : `${I.ko}Incorrecto · la solución oficial es la ${LETRAS_CASO[c[3]]}`}</div>
+    <div class="norma">Norma: ${esc(c[4])}</div>
+    <div class="siguiente-fila"><a class="btn mini" href="#temario/${c[0]}">${I.libro}Repasar el temario</a>
+      <button class="btn primario" id="sig">${ultima ? "Ver resultado" : "Siguiente"}</button></div></div>`;
+  document.getElementById("sig").onclick = siguienteCaso;
+  document.getElementById("sig").focus({ preventScroll: true });
+}
+
+function siguienteCaso() {
+  if (pract.i + 1 < pract.casos.length) { pract.i++; pintarCaso(); }
+  else { pract.fin = true; pintarResumenCasos(); }
+}
+
+function salirCasos() {
+  if (pract.modo === "simulacro") {
+    const blancos = pract.casos.filter((_, k) => pract.resp[k] === undefined).length;
+    if (blancos && !confirm(`Te ${blancos === 1 ? "queda 1 caso" : `quedan ${blancos} casos`} sin responder. ¿Terminar el simulacro?`)) return;
+    return terminarSimulacro();
+  }
+  const hechos = pract.resp.filter(r => r !== undefined).length;
+  if (!hechos) { pract = null; location.hash = "practico"; return; }
+  pract.casos = pract.casos.slice(0, hechos); pract.fin = true;
+  pintarResumenCasos();
+}
+
+function pintarResumenCasos() {
+  const { casos, resp, modo } = pract, sim = modo === "simulacro";
+  const ok = casos.filter((c, k) => resp[k] === c[3]).length, blancos = casos.filter((_, k) => resp[k] === undefined).length, mal = casos.length - ok - blancos;
+  const puntos = Math.max(ok * PUNTOS_CASO - mal * PENALIZA_CASO, 0), maximo = casos.length * PUNTOS_CASO;
+  const pct = Math.round(puntos / maximo * 100), supera = sim ? puntos >= MIN_PRUEBA - 1e-9 : puntos >= maximo / 2 - 1e-9;
+  const color = supera ? "var(--ok)" : "var(--ko)", enTest = Math.ceil(Math.max(MIN_PRUEBA, MIN_TOTAL - puntos) - 1e-9);
+  const frase = sim
+    ? (supera ? `Para aprobar el examen, en el test necesitarías al menos ${enTest} de 200 puntos.` : `Te faltan ${decimal(MIN_PRUEBA - puntos)} puntos para llegar al mínimo de ${MIN_PRUEBA}.`)
+    : `Con la misma puntuación que el examen: +${PUNTOS_CASO} por acierto y −16,67 por fallo.`;
+  pintar(`
+    <a class="volver" href="#practico">${I.atras.replace("<svg", '<svg width="16" height="16"')}Práctico</a>
+    <h1>Resultado</h1>
+    <p class="sub">${sim ? "Simulacro" : esc(TEMAS[pract.tema])} · ${frase}</p>
+    <div class="card resumen">
+      <div class="anillo" style="--p:${pct};--color:${color}"><div><div><b>${pct}%</b><span>de los puntos</span></div></div></div>
+      <div>
+        <div class="veredicto ${supera ? "ok" : "ko"}">${supera ? `${I.ok}${sim ? "SUPERAS EL MÍNIMO" : "VAS BIEN"}` : `${I.ko}${sim ? "NO LLEGAS AL MÍNIMO" : "A REPASAR"}`}
+          <span>${decimal(puntos)} de ${maximo} puntos${sim ? ` · mínimo ${MIN_PRUEBA}` : ""}</span></div>
+        <div class="kpis">
+          <div class="kpi"><b style="color:var(--ok)">${ok}</b><span>aciertos (+50)</span></div>
+          <div class="kpi"><b style="color:var(--ko)">${mal}</b><span>fallos (−16,67)</span></div>
+          <div class="kpi"><b>${blancos}</b><span>en blanco</span></div>
+        </div>
+        <div class="acciones"><button class="btn primario" id="otra">${I.play}${sim ? "Otro simulacro" : "Otra sesión"}</button></div>
+      </div>
+    </div>
+    <div class="card"><h2>Revisa los casos</h2>${casos.map((c, k) => fichaCaso(c, resp[k])).join("")}</div>`);
+  document.getElementById("otra").onclick = () => sim ? empezarSimulacro() : empezarCasos(pract.tema, pract.filtro);
+}
+
+function fichaCaso(c, k) {
+  const marca = k === undefined ? `<span class="veces cp-blanco">En blanco</span>` : k === c[3] ? `<span class="veces cp-bien">Correcto</span>` : `<span class="veces">Marcaste ${LETRAS_CASO[k]}</span>`;
+  return `<details class="fallo"><summary>${marca}<span class="texto">${esc(c[1].split("\n")[0])}</span>${I.chev}</summary>
+    <div class="cuerpo"><div class="cp-texto">${textoCaso(c[1])}</div>
+      <div class="opciones">${c[2].map((o, j) => `<div class="opcion ${j === c[3] ? "correcta" : j === k ? "elegida-mal" : ""}">
+        <span class="letra">${LETRAS_CASO[j]}</span><span class="cp-partes">${textoOpcion(o)}</span></div>`).join("")}</div>
+      <div class="norma">${esc(c[5])} · Norma: ${esc(c[4])}</div></div></details>`;
+}
+
+// Teclado en Práctico: A-H para responder, Enter para seguir
+document.addEventListener("keydown", e => {
+  if (location.hash !== "#practico/caso" || !enCurso() || e.ctrlKey || e.metaKey || e.altKey) return;
+  const k = LETRAS_CASO.toLowerCase().indexOf(e.key.toLowerCase());
+  if (k >= 0 && e.key.length === 1) elegirCaso(k);
+  else if (e.key === "Enter" && document.activeElement?.id === "sig") { e.preventDefault(); siguienteCaso(); }
+});
+
 /* ---------- Teclado: A-D / 1-4 para responder, Enter para seguir (sin animaciones) ---------- */
 document.addEventListener("keydown", e => {
   if (location.hash !== "#test" || !test || e.target.tagName === "INPUT" || e.ctrlKey || e.metaKey || e.altKey) return;
@@ -817,10 +1099,10 @@ cargar();
 
 /* ---------- Actualización automática ----------
    Si se publica una versión nueva, la página se recarga sola (al abrirla o al volver a ella),
-   salvo en mitad de un test para no perder las respuestas. */
+   salvo en mitad de un test o de los casos prácticos para no perder las respuestas. */
 const VERSION = (document.querySelector('script[src*="app.js?v="]')?.src.match(/v=(\d+)/) || [])[1];
 async function comprobarVersion() {
-  if (!VERSION || (test && test.i < test.preguntas.length && location.hash === "#test")) return;
+  if (!VERSION || enCurso() || (test && test.i < test.preguntas.length && location.hash === "#test")) return;
   try {
     const v = (await (await fetch("version.txt?t=" + Date.now(), { cache: "no-store" })).text()).trim();
     if (/^\d+$/.test(v) && v !== VERSION) location.reload();

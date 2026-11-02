@@ -66,8 +66,13 @@ button, select, input { font: inherit; color: inherit; }
   .logo-txt { display: none; }
 }
 @media (max-width: 380px) { .logo { display: none; } }
-/* Cinco pestañas en el menú: en móviles estrechos la letra baja un poco para que quepan */
-@media (max-width: 420px) { .top nav a { font-size: .9rem; } }
+/* Seis pestañas en el menú: en móviles estrechos no hay logo y la letra baja para que quepan */
+@media (max-width: 460px) {
+  .logo { display: none; }
+  .top nav { gap: 0; padding: 3px; }
+  .top nav a { font-size: .8rem; padding-left: 2px; padding-right: 2px; }
+}
+@media (max-width: 350px) { .top nav a { font-size: .72rem; } }
 .top nav a.activo { background: var(--bg); color: var(--text); box-shadow: var(--shadow-sm); }
 
 main { max-width: 860px; margin: 0 auto; padding: 28px 16px 80px; }
@@ -438,3 +443,29 @@ input[type=email]:focus, input[type=password]:focus { outline: none; border-colo
 .falladas .fr svg { width: 15px; height: 15px; flex: none; margin-top: 3px; color: var(--ok, #16a34a); }
 .falladas .fo { display: flex; flex-direction: column; gap: 2px; margin-top: 4px; color: var(--muted); }
 .falladas .fo .fr { color: var(--text); margin-top: 0; }
+
+/* ---------- Práctico: casos oficiales ---------- */
+.cp-texto { margin: 14px 0 18px; max-width: 70ch; line-height: 1.55; }
+.cp-texto p { margin: 0 0 10px; }
+.cp-texto ul { margin: 0 0 10px; padding-left: 20px; }
+.cp-texto .cp-q { font-weight: 600; margin-bottom: 6px; }
+.cp-tabla { margin: 0 0 12px; border: 1px solid var(--line); border-radius: 10px; overflow: hidden; font-size: .93rem; }
+.cp-tabla > div { display: flex; justify-content: space-between; gap: 16px; padding: 6px 12px; }
+.cp-tabla > div + div { border-top: 1px solid var(--line); }
+.cp-tabla b { font-weight: 600; white-space: nowrap; font-variant-numeric: tabular-nums; }
+.cp-partes { display: grid; gap: 4px; min-width: 0; }
+.cp-datos { margin: 14px 0 0; padding-left: 18px; display: grid; gap: 6px; font-size: .95rem; }
+.cp-reloj { font-weight: 650; font-size: .95rem; font-variant-numeric: tabular-nums; padding: 3px 10px; border-radius: 99px;
+  background: var(--card); border: 1px solid var(--line-strong); }
+.cp-reloj.poco { color: var(--ko); background: var(--ko-soft); border-color: var(--ko-line); }
+.cp-pasos { display: flex; gap: 8px; margin-bottom: 14px; }
+.cp-pasos button { flex: 1; min-height: 40px; border: 1px solid var(--line-strong); border-radius: var(--radius-sm); background: var(--card);
+  color: var(--muted); font-weight: 650; cursor: pointer; transition: border-color .15s, background-color .15s, color .15s; }
+.cp-pasos button.hecho { background: var(--accent-soft); border-color: var(--accent-soft); color: var(--accent-text); }
+.cp-pasos button.on { border-color: var(--accent); color: var(--text); box-shadow: 0 0 0 1px var(--accent); }
+.opcion.elegida { border-color: var(--accent); background: var(--accent-soft); box-shadow: 0 0 0 1px var(--accent); }
+.opcion.elegida .letra { background: var(--accent); border-color: var(--accent); color: #fff; }
+div.opcion { cursor: default; }
+.fallo .veces.cp-bien { color: var(--ok); background: var(--ok-soft); }
+.fallo .veces.cp-blanco { color: var(--muted); background: var(--bg); }
+.btn:disabled { opacity: .45; cursor: not-allowed; }
