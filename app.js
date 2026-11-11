@@ -4,6 +4,7 @@
 // temario: [{ id: "1E03", tema, titulo, md, preguntas }]
 // extra: [{ id, tema, titulo, md }] — temario Extra: lo de las preguntas falladas, explicado (extra/*.md)
 // casos (data/casos.js, se carga al entrar en Práctico): [tema, enunciado, [8 opciones], correcta(0-7), norma, codigo]
+// explicaciones de los casos: { codigo: { p: qué se pregunta, r: razonamiento, o: [8 notas], c: clave, a?: aviso } }
 // Progreso: con sesión iniciada, cada respuesta se guarda en Supabase (tabla respuestas, ver supabase.sql).
 
 const TEMAS = ["Derecho civil", "Derecho mercantil", "Derecho social", "Derecho fiscal",
@@ -727,6 +728,21 @@ function metaEpigrafe(e) {
       <span class="ep-barra"><i style="width:${pct}%"></i></span>${vistas === qs.length ? `${I.ok}` : ""}${vistas}/${qs.length}</span>`;
 }
 
+// Esquema visual del tema (PDF de repaso), aparte de los epígrafes
+function tarjetaEsquema(tema) {
+  const x = (DATOS.esquemas || []).find(e => e.tema === tema);
+  if (!x) return "";
+  return `<div class="esquema-tema">
+      <div class="esq-ico">${I.libro}</div>
+      <div class="esq-txt"><b>Esquema visual del tema</b>
+        <span>Todo lo que cae en los test en gráficos, tablas y diagramas: comparativa nacional vs CMR, todos los números y las trampas típicas.</span></div>
+      <div class="esq-acc">
+        ${x.html ? `<a class="btn mini primario" href="${x.html}" target="_blank" rel="noopener">Ver esquema</a>` : ""}
+        <a class="btn mini" href="${x.pdf}" download>Descargar PDF (${String(x.mb).replace(".", ",")} MB)</a>
+      </div>
+    </div>`;
+}
+
 function vistaTemaTemario(tema, extra) {
   const eps = (extra ? EXTRA : TEMARIO).filter(e => e.tema === tema);
   pintar(`
@@ -738,6 +754,7 @@ function vistaTemaTemario(tema, extra) {
       ${botonesModo(tema, true)}
       <button class="btn mini" id="abrir-todo">Desplegar todo</button>
     </div>
+    ${extra ? "" : tarjetaEsquema(tema)}
     ${eps.map(e => `
       <details class="epigrafe"><summary><span class="ep-num">${e.id.slice(2)}</span>
           <span class="ep-tit">${esc(e.titulo)}</span>${!extra && (e.video || e.extras) ? `<span class="ep-video" title="Tiene vídeo">${I.play}${(e.video ? 1 : 0) + (e.extras || []).length > 1 ? "Vídeos" : "Vídeo"}</span>` : ""}${extra ? `<span class="ep-meta">${falladasExtra(e).length} fallos</span>` : metaEpigrafe(e)}${I.chev}</summary>
@@ -821,6 +838,8 @@ const BANCO_CASOS = "https://www.transportes.gob.es/transporte-terrestre/examene
 let CASOS = null, pract = null, relojT = null;
 const enCurso = () => pract && !pract.fin;
 const progCaso = c => CPROG.get("C" + c[5]);
+const explCaso = c => window.CASOS_EXPL?.[c[5]];
+const nombreSesion = () => pract.modo === "simulacro" ? "Simulacro" : pract.tema < 0 ? "Todos los temas" : TEMAS[pract.tema];
 
 function vistaPractico(arg) {
   if (CASOS) return arg === "caso" && pract ? (pract.fin ? pintarResumenCasos() : pintarCaso(true)) : pintarPractico();
@@ -840,7 +859,7 @@ function pintarPractico() {
     <section class="hero">
       <div class="eyebrow">Práctico · Examen en Barcelona</div>
       <h1>Supuestos prácticos</h1>
-      <p class="sub">La segunda prueba del examen, con los casos del banco oficial del Ministerio y su solución oficial.</p>
+      <p class="sub">Estudia la segunda prueba con los casos del banco oficial del Ministerio: al responder ves al momento la solución y por qué cada respuesta es correcta o no.</p>
       <div class="stats">
         <span class="chip"><b>${miles(CASOS.length)}</b> casos de mercancías</span>
         <span class="chip">Banco actualizado el <b>08-04-2026</b></span>
@@ -848,13 +867,14 @@ function pintarPractico() {
       </div>
     </section>
     <div class="card">
-      <h2>Simulacro de la prueba</h2>
-      <p class="norma" style="margin:0 0 14px">${SIM_CASOS} casos al azar de todo el banco y 2 horas. Puedes cambiar tus respuestas hasta terminar y solo entonces ves la nota.</p>
-      <div class="acciones" style="margin:0">${continuar}${enCurso() && pract.modo === "simulacro" ? "" : `<button class="btn${continuar ? "" : " primario"}" id="simulacro">${I.diana}Empezar simulacro</button>`}</div>
+      <h2>Modo estudio</h2>
+      <p class="norma" style="margin:0 0 14px">Sesiones de hasta ${CASOS_SESION} casos de todos los temas, sin límite de tiempo y con la corrección después de cada uno.</p>
+      <div class="acciones" style="margin:0">${continuar}<button class="btn${continuar ? "" : " primario"}" id="estudiar">${I.libro}Empezar a estudiar</button></div>
     </div>
-    <div class="card">
-      <h2>Cómo es en Cataluña</h2>
-      <div class="kpis">
+    <h2 style="margin-top:28px">Estudiar por temas</h2>
+    <div class="temas-grid">${TEMAS.map((_, i) => tarjetaCasos(i)).join("")}</div>
+    <details class="card cp-plegable"><summary>Cómo es la prueba en Cataluña${I.chev}</summary>
+      <div class="kpis" style="margin-top:14px">
         <div class="kpi"><b>${SIM_CASOS}</b><span>casos, con 8 respuestas cada uno</span></div>
         <div class="kpi"><b>2 h</b><span>como máximo</span></div>
         <div class="kpi"><b>200</b><span>puntos en total</span></div>
@@ -872,12 +892,13 @@ function pintarPractico() {
         <li><b>Calculadora:</b> la resolución no la menciona. Pregunta si la facilitan o si puedes llevar la tuya.</li>
       </ul>
       <p class="norma">Fuentes: <a href="${DOGC_EXAMEN}" target="_blank" rel="noopener">Resolució VPD/990/2022</a>, <a href="${DOGC_SEDES}" target="_blank" rel="noopener">Resolució TER/96/2026</a> y <a href="${BANCO_CASOS}" target="_blank" rel="noopener">banco del Ministerio</a>. El Ministerio avisa de que sus casos son informativos y pueden cambiar.</p>
-    </div>
-    <h2 style="margin-top:28px">Practicar por temas</h2>
-    <p class="norma" style="margin:-8px 0 14px">Sesiones de hasta ${CASOS_SESION} casos, con la corrección después de cada uno.</p>
-    <div class="temas-grid">${TEMAS.map((_, i) => tarjetaCasos(i)).join("")}</div>`);
+      <h3 class="cp-sim">¿Quieres probarte en condiciones de examen?</h3>
+      <p class="norma" style="margin:0 0 12px">${SIM_CASOS} casos al azar y 2 horas, y la nota solo al terminar.</p>
+      ${enCurso() && pract.modo === "simulacro" ? "" : `<button class="btn mini" id="simulacro">${I.diana}Hacer un simulacro</button>`}
+    </details>`);
   const b = document.getElementById("simulacro");
   if (b) b.onclick = empezarSimulacro;
+  document.getElementById("estudiar").onclick = () => empezarCasos(-1, conectado && CASOS.some(c => !progCaso(c)) ? "nuevas" : "todas");
   app.querySelectorAll("[data-casos]").forEach(x => x.onclick = () => empezarCasos(+x.dataset.casos, x.dataset.modo));
 }
 
@@ -902,7 +923,7 @@ function abandonarSimulacro() {
 function irACaso() { if (location.hash === "#practico/caso") pintarCaso(true); else location.hash = "practico/caso"; }
 
 function empezarCasos(tema, filtro = "todas") {
-  const pool = barajar(CASOS.filter(c => c[0] === tema
+  const pool = barajar(CASOS.filter(c => (tema < 0 || c[0] === tema)
     && (filtro === "fallos" ? progCaso(c)?.p : filtro === "nuevas" ? !progCaso(c) : true)));
   if (!pool.length) return toast(filtro === "fallos" ? "No tienes casos fallados en ese tema." : "Ya has hecho todos los casos de ese tema.");
   if (!abandonarSimulacro()) return;
@@ -962,7 +983,7 @@ function pintarCaso(conAnimacion) {
   const hechas = resp.slice(0, n).filter((r, k) => r !== undefined), ok = casos.filter((x, k) => !sim && resp[k] === x[3]).length;
   const html = `
     <div class="test-cab">
-      <span class="contador"><b>${i + 1}</b> / ${n} · ${sim ? "Simulacro" : esc(TEMAS[pract.tema])}</span>
+      <span class="contador"><b>${i + 1}</b> / ${n} · ${esc(nombreSesion())}</span>
       ${sim ? `<span class="cp-reloj" id="cp-reloj" role="timer" aria-label="Tiempo restante">${textoReloj()}</span>`
         : `<div class="marcador"><span class="m-ok">${I.ok}${ok}</span><span class="m-ko">${I.ko}${hechas.length - ok}</span></div>`}
     </div>
@@ -1013,14 +1034,28 @@ function corregirCaso() {
     b.disabled = true;
     if (j === c[3]) b.classList.add("correcta");
     else if (j === k) b.classList.add("elegida-mal");
+    if (explCaso(c)) b.querySelector(".cp-partes").insertAdjacentHTML("beforeend", notaOpcion(c, j));
   });
   document.getElementById("tras").innerHTML = `<div class="tras">
     <div class="resultado ${bien ? "ok" : "ko"}">${bien ? `${I.ok}¡Correcto! +${PUNTOS_CASO}` : `${I.ko}Incorrecto · la solución oficial es la ${LETRAS_CASO[c[3]]}`}</div>
-    <div class="norma">Norma: ${esc(c[4])}</div>
+    ${explicacionCaso(c)}
     <div class="siguiente-fila"><a class="btn mini" href="#temario/${c[0]}">${I.libro}Repasar el temario</a>
       <button class="btn primario" id="sig">${ultima ? "Ver resultado" : "Siguiente"}</button></div></div>`;
   document.getElementById("sig").onclick = siguienteCaso;
   document.getElementById("sig").focus({ preventScroll: true });
+}
+
+const notaOpcion = (c, j) => `<span class="cp-nota">${esc(explCaso(c).o[j])}</span>`;
+
+function explicacionCaso(c) {
+  const x = explCaso(c);
+  if (!x) return `<div class="norma">Norma: ${esc(c[4])}</div>`;
+  return `<div class="expl">
+      <p><b>QUÉ SE PREGUNTA</b>${esc(x.p)}</p>
+      <div><b>CÓMO SE RESUELVE</b>${x.r.split("\n").filter(l => l.trim()).map(l => `<p class="cp-paso">${esc(l)}</p>`).join("")}</div>
+      <p><b>LO QUE HAY QUE RECORDAR</b>${esc(x.c)}</p></div>
+    ${x.a ? `<div class="aviso">${I.aviso.replace("<svg", '<svg width="18" height="18" style="flex:none;margin-top:2px"')}<span>${esc(x.a)}</span></div>` : ""}
+    <div class="norma">Norma: ${esc(c[4])}</div>`;
 }
 
 function siguienteCaso() {
@@ -1052,7 +1087,7 @@ function pintarResumenCasos() {
   pintar(`
     <a class="volver" href="#practico">${I.atras.replace("<svg", '<svg width="16" height="16"')}Práctico</a>
     <h1>Resultado</h1>
-    <p class="sub">${sim ? "Simulacro" : esc(TEMAS[pract.tema])} · ${frase}</p>
+    <p class="sub">${esc(nombreSesion())} · ${frase}</p>
     <div class="card resumen">
       <div class="anillo" style="--p:${pct};--color:${color}"><div><div><b>${pct}%</b><span>de los puntos</span></div></div></div>
       <div>
@@ -1075,8 +1110,8 @@ function fichaCaso(c, k) {
   return `<details class="fallo"><summary>${marca}<span class="texto">${esc(c[1].split("\n")[0])}</span>${I.chev}</summary>
     <div class="cuerpo"><div class="cp-texto">${textoCaso(c[1])}</div>
       <div class="opciones">${c[2].map((o, j) => `<div class="opcion ${j === c[3] ? "correcta" : j === k ? "elegida-mal" : ""}">
-        <span class="letra">${LETRAS_CASO[j]}</span><span class="cp-partes">${textoOpcion(o)}</span></div>`).join("")}</div>
-      <div class="norma">${esc(c[5])} · Norma: ${esc(c[4])}</div></div></details>`;
+        <span class="letra">${LETRAS_CASO[j]}</span><span class="cp-partes">${textoOpcion(o)}${explCaso(c) ? notaOpcion(c, j) : ""}</span></div>`).join("")}</div>
+      <div style="margin-top:14px">${explicacionCaso(c)}</div></div></details>`;
 }
 
 // Teclado en Práctico: A-H para responder, Enter para seguir

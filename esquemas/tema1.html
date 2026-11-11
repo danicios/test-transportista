@@ -1,0 +1,1089 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<title>Esquema Tema 1 · Derecho civil</title>
+<style>
+@page { size: A4; margin: 11mm 11mm 12mm; }
+:root{
+  --ink:#1c2333; --mute:#5b6478; --line:#dde2ec; --bg:#f5f7fb;
+  --c1:#6d4bd8; --c1s:#efeafe;   /* contratos */
+  --c2:#1f6feb; --c2s:#e7f0ff;   /* contrato transporte */
+  --c3:#e8590c; --c3s:#fff0e6;   /* responsabilidad */
+  --c4:#0f9d58; --c4s:#e5f7ee;   /* CMR */
+  --red:#d6336c; --reds:#ffe8ef; --yel:#f5b301; --yels:#fff7dc;
+}
+*{box-sizing:border-box}
+html,body{margin:0;background:#fff;color:var(--ink);font-family:"Segoe UI",Roboto,Arial,sans-serif;font-size:9.4pt;line-height:1.34;-webkit-print-color-adjust:exact;print-color-adjust:exact}
+body{max-width:188mm;margin:0 auto}
+h1,h2,h3,h4{margin:0;line-height:1.15}
+b,strong{font-weight:700}
+.page{break-before:page}
+.sec{display:flex;align-items:center;gap:10px;border-radius:12px;padding:9px 14px;color:#fff;margin:0 0 9px}
+.sec .badge{background:#fff;border-radius:9px;font-weight:800;font-size:15pt;padding:3px 10px}
+.sec h2{font-size:15pt;font-weight:800}
+.sec p{margin:2px 0 0;font-size:9pt;opacity:.92}
+.s1{background:var(--c1)} .s1 .badge{color:var(--c1)}
+.s2{background:var(--c2)} .s2 .badge{color:var(--c2)}
+.s3{background:var(--c3)} .s3 .badge{color:var(--c3)}
+.s4{background:var(--c4)} .s4 .badge{color:var(--c4)}
+.s0{background:var(--ink)} .s0 .badge{color:var(--ink)}
+.card{border:1.3px solid var(--line);border-radius:11px;padding:8px 10px;margin:0 0 7px;break-inside:avoid;background:#fff}
+.card h3{font-size:10.6pt;font-weight:800;margin-bottom:4px;display:flex;align-items:center;gap:6px}
+.card h3 svg{width:20px;height:20px;flex:none}
+.k1 h3{color:var(--c1)} .k2 h3{color:var(--c2)} .k3 h3{color:var(--c3)} .k4 h3{color:var(--c4)}
+.k1{border-top:4px solid var(--c1)} .k2{border-top:4px solid var(--c2)} .k3{border-top:4px solid var(--c3)} .k4{border-top:4px solid var(--c4)}
+.g2{display:grid;grid-template-columns:1fr 1fr;gap:7px}
+.g3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:7px}
+.g4{display:grid;grid-template-columns:repeat(4,1fr);gap:6px}
+.g2>.card,.g3>.card,.g4>.card{margin:0}
+.mb{margin-bottom:7px}
+ul{margin:2px 0 0;padding-left:15px} li{margin:1.5px 0}
+li::marker{color:var(--mute)}
+.trap{background:var(--reds);border:1.3px solid #f5a3bd;border-left:5px solid var(--red);border-radius:9px;padding:5px 9px;margin:5px 0 0;break-inside:avoid;font-size:9pt}
+.trap::before{content:"⚠ TRAMPA  ";font-weight:800;color:var(--red);font-size:8.3pt;letter-spacing:.3px}
+.tip{background:var(--yels);border:1.3px solid #f1d27a;border-radius:9px;padding:5px 9px;margin:5px 0 0;break-inside:avoid;font-size:9pt}
+.tip::before{content:"💡 TRUCO  ";font-weight:800;color:#a77900;font-size:8.3pt}
+.n{display:inline-block;font-weight:800;border-radius:6px;padding:0 5px;white-space:nowrap}
+.n1{background:var(--c1s);color:var(--c1)} .n2{background:var(--c2s);color:var(--c2)} .n3{background:var(--c3s);color:var(--c3)} .n4{background:var(--c4s);color:var(--c4)} .nr{background:var(--reds);color:var(--red)}
+.tile{border-radius:10px;padding:6px 7px;text-align:center;break-inside:avoid}
+.tile .big{font-size:17pt;font-weight:900;line-height:1.05;display:block}
+.tile .lbl{font-size:8.2pt;color:var(--ink);display:block;margin-top:2px}
+.t1{background:var(--c1s)} .t1 .big{color:var(--c1)}
+.t2{background:var(--c2s)} .t2 .big{color:var(--c2)}
+.t3{background:var(--c3s)} .t3 .big{color:var(--c3)}
+.t4{background:var(--c4s)} .t4 .big{color:var(--c4)}
+.yes,.no{position:relative;padding-left:16px;margin:2px 0}
+.yes::before{content:"✔";color:#0f9d58;font-weight:900;position:absolute;left:0;top:0}
+.no::before{content:"✘";color:var(--red);font-weight:900;position:absolute;left:0;top:0}
+.diag{width:100%;height:auto;display:block}
+.svgtxt{font-family:"Segoe UI",Arial,sans-serif}
+table{width:100%;border-collapse:separate;border-spacing:0;font-size:8.8pt;break-inside:auto}
+th,td{padding:4px 6px;border-bottom:1px solid var(--line);vertical-align:top;text-align:left}
+thead th{color:#fff;font-size:9.2pt}
+tr{break-inside:avoid}
+.ref{font-size:7.6pt;color:var(--mute);font-weight:600}
+.mini{font-size:8.5pt;color:var(--mute)}
+.pill{display:inline-block;border-radius:20px;padding:1px 8px;font-size:8.3pt;font-weight:700;margin:1px 2px 1px 0}
+.flow{display:flex;align-items:stretch;gap:0}
+.flow .st{flex:1;border-radius:9px;padding:5px 6px;font-size:8.6pt;position:relative;text-align:center}
+.flow .ar{width:16px;display:flex;align-items:center;justify-content:center;color:var(--mute);font-weight:900;font-size:13pt}
+.flow .st>b:first-child{display:block;font-size:9pt;margin-bottom:1px}
+/* portada */
+.cover{height:272mm;display:flex;flex-direction:column}
+.hero{background:linear-gradient(135deg,#1c2333 0%,#27335a 60%,#1f6feb 130%);color:#fff;border-radius:18px;padding:22px 24px 18px;position:relative;overflow:hidden}
+.hero h1{font-size:30pt;font-weight:900;letter-spacing:-.5px}
+.hero .sub{font-size:12pt;opacity:.9;margin-top:4px}
+.hero .chips{margin-top:12px}
+.hero .chips span{display:inline-block;background:rgba(255,255,255,.15);border-radius:20px;padding:3px 10px;margin:0 5px 5px 0;font-size:9pt}
+.idx{display:grid;grid-template-columns:1fr 1fr;gap:9px;margin-top:12px}
+.idx .it{border-radius:14px;padding:11px 13px;color:#fff;break-inside:avoid}
+.idx .it h3{font-size:13pt;font-weight:800}
+.idx .it .code{font-size:9pt;font-weight:700;opacity:.85}
+.idx .it ul{padding-left:15px;font-size:9pt;margin-top:4px}
+.idx .it li::marker{color:#fff}
+.legend{display:flex;gap:10px;flex-wrap:wrap;margin-top:10px;font-size:9pt}
+</style>
+</head>
+<body>
+
+<!-- ============ ICONOS ============ -->
+<svg width="0" height="0" style="position:absolute">
+ <defs>
+  <symbol id="i-truck" viewBox="0 0 64 64"><rect x="3" y="16" width="35" height="26" rx="3" fill="currentColor"/><path d="M38 24h12.5l9 10.5V42H38z" fill="currentColor" opacity=".72"/><path d="M42 27.5h7.5l5 6H42z" fill="#fff" opacity=".9"/><circle cx="14" cy="45" r="6.5" fill="#1c2333"/><circle cx="14" cy="45" r="2.6" fill="#fff"/><circle cx="50" cy="45" r="6.5" fill="#1c2333"/><circle cx="50" cy="45" r="2.6" fill="#fff"/></symbol>
+  <symbol id="i-doc" viewBox="0 0 64 64"><path d="M13 5h27l12 12v42H13z" fill="#fff" stroke="currentColor" stroke-width="3.5" stroke-linejoin="round"/><path d="M40 5v12h12" fill="none" stroke="currentColor" stroke-width="3.5" stroke-linejoin="round"/><path d="M20 28h24M20 36h24M20 44h15" stroke="currentColor" stroke-width="3.5" stroke-linecap="round"/></symbol>
+  <symbol id="i-clock" viewBox="0 0 64 64"><circle cx="32" cy="32" r="26" fill="#fff" stroke="currentColor" stroke-width="4"/><path d="M32 16v17l11 7" fill="none" stroke="currentColor" stroke-width="4.5" stroke-linecap="round"/></symbol>
+  <symbol id="i-box" viewBox="0 0 64 64"><path d="M32 6l24 12v28L32 58 8 46V18z" fill="currentColor" opacity=".25"/><path d="M32 6l24 12-24 12L8 18z" fill="currentColor" opacity=".55"/><path d="M32 30v28M8 18v28l24 12 24-12V18" fill="none" stroke="currentColor" stroke-width="3" stroke-linejoin="round"/></symbol>
+  <symbol id="i-person" viewBox="0 0 64 64"><circle cx="32" cy="20" r="11" fill="currentColor"/><path d="M11 58c0-13 9-21 21-21s21 8 21 21z" fill="currentColor"/></symbol>
+  <symbol id="i-scale" viewBox="0 0 64 64"><path d="M32 8v46M18 56h28M12 18h40" stroke="currentColor" stroke-width="4" stroke-linecap="round"/><path d="M12 18L4 36h16zM52 18l-8 18h16z" fill="currentColor" opacity=".35" stroke="currentColor" stroke-width="2.5" stroke-linejoin="round"/><circle cx="32" cy="10" r="4" fill="currentColor"/></symbol>
+  <symbol id="i-gavel" viewBox="0 0 64 64"><rect x="20" y="8" width="26" height="13" rx="3" transform="rotate(35 33 14)" fill="currentColor"/><path d="M27 27L10 51" stroke="currentColor" stroke-width="6" stroke-linecap="round"/><rect x="30" y="50" width="28" height="7" rx="2" fill="currentColor" opacity=".6"/></symbol>
+  <symbol id="i-house" viewBox="0 0 64 64"><path d="M6 30L32 8l26 22" fill="none" stroke="currentColor" stroke-width="4.5" stroke-linecap="round" stroke-linejoin="round"/><path d="M13 27v29h38V27L32 11z" fill="currentColor" opacity=".85"/><rect x="27" y="38" width="10" height="18" fill="#fff"/></symbol>
+  <symbol id="i-key" viewBox="0 0 64 64"><circle cx="20" cy="32" r="12" fill="none" stroke="currentColor" stroke-width="5"/><path d="M32 32h26M48 32v9M56 32v7" stroke="currentColor" stroke-width="5" stroke-linecap="round"/></symbol>
+  <symbol id="i-euro" viewBox="0 0 64 64"><circle cx="32" cy="32" r="27" fill="currentColor"/><path d="M42 21a13 13 0 1 0 0 22M16 29h20M16 36h18" fill="none" stroke="#fff" stroke-width="4.5" stroke-linecap="round"/></symbol>
+  <symbol id="i-cal" viewBox="0 0 64 64"><rect x="6" y="11" width="52" height="46" rx="6" fill="#fff" stroke="currentColor" stroke-width="4"/><path d="M6 24h52" stroke="currentColor" stroke-width="4"/><path d="M19 5v12M45 5v12" stroke="currentColor" stroke-width="4.5" stroke-linecap="round"/><rect x="15" y="31" width="9" height="8" rx="1.5" fill="currentColor"/><rect x="28" y="31" width="9" height="8" rx="1.5" fill="currentColor" opacity=".4"/><rect x="41" y="31" width="9" height="8" rx="1.5" fill="currentColor" opacity=".4"/><rect x="15" y="43" width="9" height="8" rx="1.5" fill="currentColor" opacity=".4"/></symbol>
+  <symbol id="i-warn" viewBox="0 0 64 64"><path d="M32 5l29 52H3z" fill="currentColor" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/><path d="M32 23v16" stroke="#fff" stroke-width="5.5" stroke-linecap="round"/><circle cx="32" cy="48" r="3.5" fill="#fff"/></symbol>
+  <symbol id="i-globe" viewBox="0 0 64 64"><circle cx="32" cy="32" r="27" fill="#fff" stroke="currentColor" stroke-width="4"/><ellipse cx="32" cy="32" rx="12" ry="27" fill="none" stroke="currentColor" stroke-width="3"/><path d="M5 32h54M9 19h46M9 45h46" stroke="currentColor" stroke-width="3"/></symbol>
+  <symbol id="i-ware" viewBox="0 0 64 64"><path d="M4 24L32 8l28 16v32H4z" fill="currentColor" opacity=".85"/><rect x="14" y="32" width="36" height="24" fill="#fff"/><path d="M14 40h36M14 48h36" stroke="currentColor" stroke-width="2.5"/></symbol>
+  <symbol id="i-ship" viewBox="0 0 64 64"><path d="M6 38h52l-8 16H14z" fill="currentColor"/><rect x="18" y="22" width="12" height="16" fill="currentColor" opacity=".55"/><rect x="32" y="16" width="14" height="22" fill="currentColor" opacity=".75"/><path d="M2 60c5-3 10-3 15 0s10 3 15 0 10-3 15 0 10 3 15 0" fill="none" stroke="currentColor" stroke-width="2.5"/></symbol>
+  <symbol id="i-train" viewBox="0 0 64 64"><rect x="12" y="6" width="40" height="42" rx="9" fill="currentColor"/><rect x="18" y="13" width="28" height="14" rx="2" fill="#fff"/><circle cx="22" cy="38" r="3.5" fill="#fff"/><circle cx="42" cy="38" r="3.5" fill="#fff"/><path d="M20 48l-7 11M44 48l7 11M16 55h32" stroke="currentColor" stroke-width="4" stroke-linecap="round"/></symbol>
+  <symbol id="i-sofa" viewBox="0 0 64 64"><rect x="10" y="18" width="44" height="18" rx="5" fill="currentColor" opacity=".55"/><rect x="4" y="30" width="56" height="16" rx="5" fill="currentColor"/><path d="M10 46v8M54 46v8" stroke="currentColor" stroke-width="5" stroke-linecap="round"/></symbol>
+  <symbol id="i-shop" viewBox="0 0 64 64"><path d="M6 10h52l4 16H2z" fill="currentColor"/><rect x="8" y="26" width="48" height="30" fill="currentColor" opacity=".55"/><rect x="16" y="34" width="13" height="22" fill="#fff"/><rect x="35" y="34" width="14" height="11" fill="#fff"/></symbol>
+  <symbol id="i-hand" viewBox="0 0 64 64"><path d="M4 30l14-12 12 6 10-6 20 12-14 16-8-6-6 6-6-4-6 4z" fill="currentColor" opacity=".8"/><path d="M22 38l6-6 8 8M28 44l6-6" fill="none" stroke="#fff" stroke-width="3" stroke-linecap="round"/></symbol>
+  <symbol id="i-web" viewBox="0 0 64 64"><rect x="4" y="9" width="56" height="38" rx="5" fill="currentColor"/><rect x="9" y="14" width="46" height="28" rx="2" fill="#fff"/><path d="M24 56h16M32 47v9" stroke="currentColor" stroke-width="4.5" stroke-linecap="round"/><path d="M17 28l6 6 12-13" fill="none" stroke="currentColor" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+  <symbol id="i-hour" viewBox="0 0 64 64"><path d="M16 5h32M16 59h32" stroke="currentColor" stroke-width="4.5" stroke-linecap="round"/><path d="M19 6c0 16 26 16 26 26S19 42 19 58h26c0-16-26-16-26-26S45 22 45 6z" fill="none" stroke="currentColor" stroke-width="3.5" stroke-linejoin="round"/><path d="M24 54c3-6 13-6 16 0z" fill="currentColor"/></symbol>
+  <symbol id="i-check" viewBox="0 0 64 64"><circle cx="32" cy="32" r="27" fill="currentColor"/><path d="M19 33l9 9 18-20" fill="none" stroke="#fff" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+  <symbol id="i-snow" viewBox="0 0 64 64"><path d="M32 4v56M8 18l48 28M8 46l48-28" stroke="currentColor" stroke-width="4.5" stroke-linecap="round"/></symbol>
+  <symbol id="i-plane" viewBox="0 0 64 64"><path d="M30 4c3 0 4 4 4 8v14l24 14v6l-24-7v12l7 6v4l-11-3-11 3v-4l7-6V39L2 46v-6l24-14V12c0-4 1-8 4-8z" fill="currentColor"/></symbol>
+ </defs>
+</svg>
+
+<!-- ============ PORTADA ============ -->
+<div class="cover">
+ <div class="hero">
+  <div style="font-size:10pt;font-weight:700;letter-spacing:2px;opacity:.75">COMPETENCIA PROFESIONAL · TRANSPORTE DE MERCANCÍAS</div>
+  <h1>TEMA 1 · Derecho civil</h1>
+  <div class="sub">Esquema visual con <b>todos los datos</b> que caen en los test (1A01 – 1A04 · 453 preguntas del banco)</div>
+  <div class="chips"><span>📜 Contratos</span><span>🚚 Ley 15/2009</span><span>⚖️ Responsabilidad y Juntas Arbitrales</span><span>🌍 Convenio CMR</span></div>
+  <svg viewBox="0 0 600 120" class="diag" style="margin-top:6px">
+   <path d="M0 104 H600" stroke="rgba(255,255,255,.35)" stroke-width="2" stroke-dasharray="10 8"/>
+   <use href="#i-house" x="10" y="38" width="62" height="62" style="color:#b9a6ff"/>
+   <use href="#i-doc" x="120" y="42" width="56" height="56" style="color:#8fb8ff"/>
+   <use href="#i-truck" x="230" y="20" width="110" height="110" style="color:#5aa0ff"/>
+   <use href="#i-scale" x="390" y="38" width="62" height="62" style="color:#ffb27a"/>
+   <use href="#i-globe" x="510" y="38" width="62" height="62" style="color:#6fe0a6"/>
+  </svg>
+ </div>
+
+ <div class="idx">
+  <div class="it" style="background:var(--c1)"><div class="code">1A01 · 82 preguntas</div><h3>Contratos civiles y mercantiles</h3>
+   <ul><li>Arrendamiento, locales (LAU) y renting</li><li>Comisión mercantil</li><li>Compraventa y venta a plazos</li><li>Depósito mercantil · contratación electrónica</li></ul></div>
+  <div class="it" style="background:var(--c2)"><div class="code">1A02 · 176 preguntas (el que más cae)</div><h3>Contrato de transporte nacional</h3>
+   <ul><li>Partes, envío, bulto y modalidades</li><li>Carta de porte · carga y descarga</li><li>Plazos, paralización, itinerario</li><li>Disposición, entrega, precio, reembolso</li></ul></div>
+  <div class="it" style="background:var(--c3)"><div class="code">1A03 · 116 preguntas</div><h3>Responsabilidad y Juntas Arbitrales</h3>
+   <ul><li>De qué responde y cuándo se libra</li><li>Topes de indemnización y reservas</li><li>Prescripción · depósito y subastas</li><li>Juntas Arbitrales y procedimiento</li></ul></div>
+  <div class="it" style="background:var(--c4)"><div class="code">1A04 · 79 preguntas</div><h3>Convenio CMR (internacional)</h3>
+   <ul><li>Ámbito: a qué se aplica y a qué no</li><li>Carta de porte CMR y reservas</li><li>Disposición, impedimentos, responsabilidad</li><li>Indemnización, prescripción, sucesivos</li></ul></div>
+ </div>
+
+ <div class="card" style="margin-top:10px">
+  <h3 style="color:var(--ink)">Cómo usar este esquema</h3>
+  <div class="legend">
+   <span><span class="n n2">20 km/h</span> = dato que te preguntan tal cual</span>
+   <span class="trap" style="margin:0;padding:2px 8px">la respuesta «lógica» no es la buena</span>
+   <span class="tip" style="margin:0;padding:2px 8px">regla para acordarte</span>
+  </div>
+  <p class="mini" style="margin:6px 0 0">Al final tienes 3 páginas para repasar justo antes del examen: <b>Nacional vs CMR</b> (lo que más se confunde), <b>todos los números</b> en una hoja y <b>las trampas</b> más típicas.</p>
+ </div>
+</div>
+
+<!-- ============ 1A01 · ARRENDAMIENTO ============ -->
+<div class="page">
+ <div class="sec s1"><span class="badge">1A01</span><div><h2>Contratos civiles y mercantiles (I)</h2><p>Arrendamiento · Locales (LAU 29/1994) · Renting</p></div></div>
+
+ <div class="card k1">
+  <h3><svg><use href="#i-key"/></svg>Arrendamiento = alquiler <span class="ref">CC 1542-1554</span></h3>
+  <svg viewBox="0 0 700 162" class="diag svgtxt">
+   <rect x="10" y="20" width="190" height="110" rx="14" fill="#efeafe"/>
+   <use href="#i-house" x="72" y="28" width="62" height="58" style="color:#6d4bd8"/>
+   <text x="105" y="104" text-anchor="middle" font-size="18" font-weight="800" fill="#6d4bd8">ARRENDADOR</text>
+   <text x="105" y="122" text-anchor="middle" font-size="12.5" fill="#1c2333">el dueño que CEDE la cosa</text>
+   <rect x="500" y="20" width="190" height="110" rx="14" fill="#efeafe"/>
+   <use href="#i-person" x="566" y="28" width="58" height="58" style="color:#6d4bd8"/>
+   <text x="595" y="104" text-anchor="middle" font-size="18" font-weight="800" fill="#6d4bd8">ARRENDATARIO</text>
+   <text x="595" y="122" text-anchor="middle" font-size="12.5" fill="#1c2333">quien USA y PAGA</text>
+   <path d="M210 58 H488" stroke="#6d4bd8" stroke-width="5" marker-end="url(#a1)"/>
+   <path d="M490 100 H215" stroke="#1c2333" stroke-width="5" marker-end="url(#a0)"/>
+   <defs><marker id="a1" markerUnits="userSpaceOnUse" markerWidth="14" markerHeight="14" refX="10" refY="7" orient="auto"><path d="M0 0L14 7 0 14z" fill="#6d4bd8"/></marker><marker id="a0" markerUnits="userSpaceOnUse" markerWidth="14" markerHeight="14" refX="10" refY="7" orient="auto"><path d="M0 0L14 7 0 14z" fill="#1c2333"/></marker></defs>
+   <text x="350" y="44" text-anchor="middle" font-size="14" font-weight="700" fill="#6d4bd8">goce o USO · por TIEMPO DETERMINADO</text>
+   <text x="350" y="92" text-anchor="middle" font-size="14" font-weight="700" fill="#1c2333">PRECIO CIERTO</text>
+   <text x="350" y="153" text-anchor="middle" font-size="14" fill="#d6336c" font-weight="700">✘ nunca la propiedad · ✘ nunca indefinido ni perpetuo</text>
+  </svg>
+  <div class="g3" style="margin-top:4px">
+   <div><b>Qué se arrienda</b><br><span class="pill" style="background:var(--c1s)">cosas</span><span class="pill" style="background:var(--c1s)">obras</span><span class="pill" style="background:var(--c1s)">servicios</span><br><span class="mini">No solo inmuebles. Contrato <b>bilateral</b> (ambos se obligan).</span></div>
+   <div><b>Arrendador debe</b><ul><li><b>Entregar</b> la cosa</li><li><b>Conservarla en estado de servir</b></li><li>No está obligado a mejoras</li></ul></div>
+   <div><b>Arrendatario debe</b><ul><li><b>Pagar</b> el precio</li><li>Usarla <b>con diligencia</b></li><li>Responder del deterioro que cause (no del natural)</li><li><b>Devolverla</b> como la recibió</li></ul></div>
+  </div>
+  <div class="trap">Definición sin «tiempo determinado y precio cierto» = verdadera pero <b>incompleta</b>. Rentas impagadas de unas naves → <b>Tribunales de Justicia</b>, NO la Junta Arbitral (solo ve contratos de transporte).</div>
+ </div>
+
+ <div class="card k1">
+  <h3><svg><use href="#i-shop"/></svg>Alquiler de locales, oficinas, garajes (uso distinto de vivienda) <span class="ref">LAU 29/1994</span></h3>
+  <div class="g4 mb">
+   <div class="tile t1"><span class="big">2 meses</span><span class="lbl">de renta = <b>fianza</b> obligatoria (también si es sociedad)</span></div>
+   <div class="tile t1"><span class="big">&gt; 5 años</span><span class="lbl">abierto al público → <b>indemnización</b> al vencer</span></div>
+   <div class="tile t1"><span class="big">4 meses</span><span class="lbl">antes: avisar de que quiere <b>renovar</b></span></div>
+   <div class="tile t1"><span class="big">7 años</span><span class="lbl">S.L.: la fianza <b>no se actualiza</b> hasta pasados</span></div>
+  </div>
+  <div class="g3">
+   <div><b>🔧 Obras de conservación</b><br>Las paga el <b>arrendador</b> y <b>no puede subir la renta</b>. Si duran mucho (ej. <span class="n n1">45 días</span>) → <b>reducción proporcional</b> de la renta.</div>
+   <div><b>🔁 Subarriendo</b><br>El arrendatario de un local <b>puede subarrendar SIN consentimiento</b> del arrendador.</div>
+   <div><b>🏷️ Venta del local</b><br>Debe <b>notificarse</b> y el arrendatario tiene <b>derecho de adquisición preferente</b>.</div>
+  </div>
+ </div>
+
+ <div class="card k1">
+  <h3><svg><use href="#i-truck"/></svg>Renting = arrendamiento empresarial de bienes</h3>
+  <div class="g2">
+   <div>
+    <div class="yes">Finalidad: que el arrendatario <b>use</b> los bienes un tiempo</div>
+    <div class="yes">Incluye servicios: el <b>mantenimiento</b> lo paga el <b>arrendador</b></div>
+    <div class="no"><b>NO hay opción de compra</b> al final</div>
+   </div>
+   <svg viewBox="0 0 330 92" class="diag svgtxt">
+    <rect x="2" y="4" width="156" height="84" rx="10" fill="#efeafe"/><text x="80" y="26" text-anchor="middle" font-size="15" font-weight="800" fill="#6d4bd8">RENTING</text>
+    <text x="80" y="48" text-anchor="middle" font-size="12">✘ opción de compra</text><text x="80" y="68" text-anchor="middle" font-size="12">✔ mantenimiento incluido</text>
+    <rect x="172" y="4" width="156" height="84" rx="10" fill="#f1f3f8"/><text x="250" y="26" text-anchor="middle" font-size="15" font-weight="800" fill="#5b6478">LEASING</text>
+    <text x="250" y="48" text-anchor="middle" font-size="12">✔ opción de compra</text><text x="250" y="68" text-anchor="middle" font-size="12">es financiación</text>
+   </svg>
+  </div>
+ </div>
+</div>
+
+<!-- ============ 1A01 · COMISIÓN / COMPRAVENTA / DEPÓSITO ============ -->
+<div class="page">
+ <div class="sec s1"><span class="badge">1A01</span><div><h2>Contratos civiles y mercantiles (II)</h2><p>Comisión · Compraventa · Venta a plazos · Depósito · Contratación electrónica</p></div></div>
+
+ <div class="card k1">
+  <h3><svg><use href="#i-hand"/></svg>Comisión mercantil = encargo (mandato mercantil) <span class="ref">CCom 244-280</span></h3>
+  <svg viewBox="0 0 700 104" class="diag svgtxt">
+   <defs><marker id="a2" markerUnits="userSpaceOnUse" markerWidth="14" markerHeight="14" refX="10" refY="7" orient="auto"><path d="M0 0L14 7 0 14z" fill="#6d4bd8"/></marker></defs>
+   <rect x="10" y="10" width="200" height="72" rx="12" fill="#efeafe"/><use href="#i-person" x="20" y="22" width="44" height="44" style="color:#6d4bd8"/>
+   <text x="70" y="40" font-size="17" font-weight="800" fill="#6d4bd8">COMITENTE</text><text x="70" y="60" font-size="12.5">ENCARGA y PAGA</text>
+   <rect x="490" y="10" width="200" height="72" rx="12" fill="#efeafe"/><use href="#i-person" x="500" y="22" width="44" height="44" style="color:#1c2333"/>
+   <text x="550" y="40" font-size="17" font-weight="800" fill="#6d4bd8">COMISIONISTA</text><text x="550" y="60" font-size="12.5">EJECUTA el encargo</text>
+   <path d="M220 34 H480" stroke="#6d4bd8" stroke-width="4" marker-end="url(#a2)"/><text x="350" y="26" text-anchor="middle" font-size="13" font-weight="700">«hazme este acto de comercio»</text>
+   <text x="350" y="100" text-anchor="middle" font-size="12.5" fill="#5b6478" font-weight="700">mercantil si AL MENOS UNA de las partes es comerciante</text>
+  </svg>
+  <div class="g3">
+   <div><b>Comisionista</b><ul><li>Desempeñar el encargo <b>personalmente</b>; delegar solo si el comitente <b>lo autoriza</b></li><li>Seguir instrucciones y aplicar los fondos</li><li>Si contrata <b>en nombre propio</b> → obligado como si fuera suyo</li><li>Si <b>rehúsa</b>: avisar <b>lo antes posible</b> y aun así <b>custodiar</b> lo recibido</li></ul></div>
+   <div><b>Comitente</b><ul><li>Fundamental: <b>pagar la comisión</b></li><li><b>Resarcir los gastos</b></li><li>Asumir los efectos de los contratos</li></ul>
+   <b>Provisión de fondos</b>: dinero que el <b>comitente</b> da para gastos. Si el comisionista la pide y no se la dan → <b>no está obligado</b> a cumplir.</div>
+   <div><b>Se extingue por</b><div class="yes">Revocación del <b>comitente</b></div><div class="yes">Muerte del <b>comisionista</b></div><div class="no">Muerte del comitente NO la extingue</div></div>
+  </div>
+  <div class="trap">«¿Qué NO es obligación del comitente?» → <b>desempeñar la comisión</b> (eso lo hace el comisionista).</div>
+ </div>
+
+ <div class="g2 mb">
+  <div class="card k1">
+   <h3><svg><use href="#i-euro"/></svg>Compraventa <span class="ref">CC 1445-1500</span></h3>
+   <ul>
+    <li>Vendedor entrega <b>cosa determinada</b>; comprador paga <b>precio cierto en dinero</b> o signo que lo represente. Cosa por cosa = <b>permuta</b> (otro contrato).</li>
+    <li>Precio fijado por el valor en <b>bolsa</b> de un día concreto (ej. Tokio) → <b>válido</b>, es cierto.</li>
+    <li><b>Vendedor</b>: conservar y custodiar, entregar, <b>saneamiento y vicios ocultos</b> (responde <b>aunque no los conociera</b>, salvo pacto).</li>
+    <li>Firmar <b>escritura pública = entrega</b>.</li>
+    <li><b>Comprador</b>: pagar en lugar y tiempo fijados; si no se fijó → <b>al entregar</b>.</li>
+    <li>Gastos de <b>transporte</b> para entregar: el <b>comprador</b> (salvo pacto).</li>
+   </ul>
+  </div>
+  <div>
+   <div class="card k1">
+    <h3><svg><use href="#i-cal"/></svg>Venta a plazos <span class="ref">Ley 28/1998</span></h3>
+    <div class="yes"><b>Siempre por escrito</b> (da igual importe y nº de plazos)</div>
+    <div class="yes">Debe constar el <b>precio al contado</b></div>
+    <div class="yes">Impago → vendedor puede <b>resolver</b> si faltan <span class="n n1">2 plazos</span> o <span class="n n1">el último</span></div>
+    <div class="no"><b>Nula</b>: pagar todo al contado si no se obtiene la financiación</div>
+   </div>
+   <div class="card k1">
+    <h3><svg><use href="#i-web"/></svg>Contratación electrónica <span class="ref">Ley 34/2002</span></h3>
+    <ul><li><b>No</b> hace falta acuerdo previo para contratar online</li>
+    <li>Entre empresarios sin pacto: se celebra <b>donde está establecido el prestador</b></li>
+    <li>Antes (todo obligatorio): <b>trámites</b>, si se <b>archiva</b> el contrato, <b>medios para corregir errores</b></li>
+    <li>Después: <b>acuse de recibo por correo electrónico</b></li></ul>
+   </div>
+  </div>
+ </div>
+
+ <div class="card k1">
+  <h3><svg><use href="#i-ware"/></svg>Depósito mercantil = guardar y devolver <span class="ref">CCom 303-310 · CC 1780</span></h3>
+  <div class="g3">
+   <div>
+    <svg viewBox="0 0 250 92" class="diag svgtxt">
+     <defs><marker id="a3" markerUnits="userSpaceOnUse" markerWidth="14" markerHeight="14" refX="10" refY="7" orient="auto"><path d="M0 0L14 7 0 14z" fill="#6d4bd8"/></marker></defs>
+     <use href="#i-person" x="22" y="6" width="42" height="42" style="color:#1c2333"/><text x="43" y="66" text-anchor="middle" font-size="12" font-weight="800">DEPOSITANTE</text><text x="43" y="82" text-anchor="middle" font-size="10.5">entrega la cosa</text>
+     <use href="#i-box" x="106" y="6" width="36" height="36" style="color:#6d4bd8"/><path d="M90 50 H162" stroke="#6d4bd8" stroke-width="3" marker-end="url(#a3)"/>
+     <use href="#i-ware" x="183" y="4" width="44" height="44" style="color:#6d4bd8"/><text x="205" y="66" text-anchor="middle" font-size="12" font-weight="800" fill="#6d4bd8">DEPOSITARIO</text><text x="205" y="82" text-anchor="middle" font-size="10.5">la guarda</text>
+    </svg>
+    <b>Mercantil si (todos):</b><ul><li><b>depositario</b> comerciante (basta él)</li><li>cosas <b>objeto de comercio</b></li><li>operación mercantil</li></ul>
+   </div>
+   <div><ul>
+    <li>Se <b>perfecciona con la ENTREGA</b> de la cosa (no basta el acuerdo)</li>
+    <li><b>Retribuido salvo pacto en contrario</b>; sin cuantía → <b>usos de la plaza</b></li>
+    <li>Debe <b>recibir, conservar</b> (tal como la recibió) y <b>devolver cuando se la pidan</b></li>
+    <li>Responde por <b>dolo o negligencia</b> y por <b>naturaleza o vicio</b> de la cosa si <b>no tomó medidas</b></li>
+   </ul></div>
+   <div><ul>
+    <li>Derecho a <b>reembolso de gastos</b>; si no le pagan → <b>derecho de retención</b> (prenda)</li>
+    <li><b>No puede usar</b> la cosa sin consentimiento</li>
+    <li>Si le autorizan a <b>usar/disponer</b> → deja de ser depósito: <b>préstamo mercantil</b></li>
+    <li>Depositante <b>incapaz</b> → devolver a petición del <b>tutor</b></li>
+   </ul></div>
+  </div>
+ </div>
+</div>
+
+<!-- ============ 1A02 · PARTES Y CARTA DE PORTE ============ -->
+<div class="page">
+ <div class="sec s2"><span class="badge">1A02</span><div><h2>Contrato de transporte nacional (I)</h2><p>Ley 15/2009 + Condiciones generales (OM FOM/1882/2012) · Partes · Modalidades · Carta de porte</p></div></div>
+
+ <div class="g2 mb">
+  <div class="card k2">
+   <h3><svg><use href="#i-doc"/></svg>Qué ley se aplica</h3>
+   <ul>
+    <li>Transporte <b>nacional</b> → <b>Ley 15/2009</b> (ni LOTT, ni CC, ni CCom). Internacional → <b>CMR</b>.</li>
+    <li>Regula <b>carretera y ferrocarril</b>; también <b>mudanzas</b>, encargos en autobuses de viajeros y <b>bicicleta</b>.</li>
+    <li><b>Condiciones generales</b>: las aprueba el <b>Ministerio de Transportes</b>. Son <b>supletorias</b>: si el contrato dice algo, <b>manda el contrato</b>. Sin carta de porte → se aplican ellas.</li>
+   </ul>
+  </div>
+  <div class="card k2">
+   <h3><svg><use href="#i-hand"/></svg>Qué es el contrato</h3>
+   <ul>
+    <li>Entre <b>cargador y porteador</b>: llevar la mercancía y <b>entregarla en buen estado y en plazo</b>.</li>
+    <li>El <b>precio es esencial</b> → transporte <b>gratuito no es</b> contrato de transporte.</li>
+    <li><b>Válido aunque el porteador no tenga autorización</b> LOTT.</li>
+    <li>Se presume celebrado <b>en nombre propio</b>. <b>Verbal = válido</b> (salvo el continuado).</li>
+   </ul>
+  </div>
+ </div>
+
+ <div class="card k2">
+  <h3><svg><use href="#i-person"/></svg>Quién es quién (y sus sinónimos)</h3>
+  <svg viewBox="0 0 700 158" class="diag svgtxt">
+   <defs><marker id="b1" markerUnits="userSpaceOnUse" markerWidth="14" markerHeight="14" refX="10" refY="7" orient="auto"><path d="M0 0L14 7 0 14z" fill="#1f6feb"/></marker></defs>
+   <!-- cargador -->
+   <rect x="4" y="6" width="160" height="146" rx="12" fill="#e7f0ff"/><use href="#i-person" x="60" y="12" width="48" height="48" style="color:#1f6feb"/>
+   <text x="84" y="78" text-anchor="middle" font-size="16" font-weight="800" fill="#1f6feb">CARGADOR</text>
+   <text x="84" y="96" text-anchor="middle" font-size="12" font-weight="700">= REMITENTE</text>
+   <text x="84" y="116" text-anchor="middle" font-size="11">contrata en</text><text x="84" y="130" text-anchor="middle" font-size="11">nombre propio</text>
+   <!-- expedidor -->
+   <rect x="182" y="6" width="160" height="146" rx="12" fill="#f1f3f8"/><use href="#i-box" x="238" y="12" width="48" height="48" style="color:#1f6feb"/>
+   <text x="262" y="78" text-anchor="middle" font-size="16" font-weight="800" fill="#1f6feb">EXPEDIDOR</text>
+   <text x="262" y="100" text-anchor="middle" font-size="11">entrega físicamente</text><text x="262" y="114" text-anchor="middle" font-size="11">la mercancía por</text><text x="262" y="128" text-anchor="middle" font-size="11">cuenta del cargador</text>
+   <!-- porteador -->
+   <rect x="360" y="6" width="160" height="146" rx="12" fill="#e7f0ff"/><use href="#i-truck" x="406" y="8" width="68" height="58" style="color:#1f6feb"/>
+   <text x="440" y="78" text-anchor="middle" font-size="16" font-weight="800" fill="#1f6feb">PORTEADOR</text>
+   <text x="440" y="96" text-anchor="middle" font-size="12" font-weight="700">= TRANSPORTISTA</text>
+   <text x="440" y="116" text-anchor="middle" font-size="11">asume en nombre propio</text><text x="440" y="130" text-anchor="middle" font-size="11">hacer el transporte</text><text x="440" y="144" text-anchor="middle" font-size="11">(aunque no conduzca)</text>
+   <!-- destinatario -->
+   <rect x="538" y="6" width="158" height="146" rx="12" fill="#f1f3f8"/><use href="#i-ware" x="592" y="12" width="50" height="48" style="color:#1f6feb"/>
+   <text x="617" y="78" text-anchor="middle" font-size="16" font-weight="800" fill="#1f6feb">DESTINATARIO</text>
+   <text x="617" y="96" text-anchor="middle" font-size="12" font-weight="700">= CONSIGNATARIO</text>
+   <text x="617" y="116" text-anchor="middle" font-size="11">recibe la mercancía</text><text x="617" y="132" text-anchor="middle" font-size="10.5" fill="#5b6478">puede ser el mismo</text><text x="617" y="145" text-anchor="middle" font-size="10.5" fill="#5b6478">que el cargador</text>
+   <path d="M164 70 h16" stroke="#1f6feb" stroke-width="3" marker-end="url(#b1)"/><path d="M342 70 h16" stroke="#1f6feb" stroke-width="3" marker-end="url(#b1)"/><path d="M520 70 h16" stroke="#1f6feb" stroke-width="3" marker-end="url(#b1)"/>
+  </svg>
+  <div class="g2" style="margin-top:4px">
+   <div><b>📦 Envío</b>: lo que el cargador entrega <b>en un único acto</b>, para <b>un único destinatario</b>, de un lugar de carga a un lugar de destino.</div>
+   <div><b>🧱 Bulto</b>: cada unidad material de carga diferenciada, <b>sea cual sea su volumen</b> (una caja pequeña o un palé enorme).</div>
+  </div>
+ </div>
+
+ <div class="card k2">
+  <h3><svg><use href="#i-truck"/></svg>Modalidades de transporte</h3>
+  <svg viewBox="0 0 700 120" class="diag svgtxt">
+   <rect x="2" y="2" width="226" height="116" rx="12" fill="#e7f0ff"/>
+   <text x="115" y="22" text-anchor="middle" font-size="15" font-weight="800" fill="#1f6feb">CONTINUADO</text>
+   <use href="#i-truck" x="14" y="28" width="46" height="40" style="color:#1f6feb"/><use href="#i-truck" x="64" y="28" width="46" height="40" style="color:#1f6feb" opacity=".75"/><use href="#i-truck" x="114" y="28" width="46" height="40" style="color:#1f6feb" opacity=".5"/><use href="#i-truck" x="164" y="28" width="46" height="40" style="color:#1f6feb" opacity=".3"/>
+   <text x="115" y="84" text-anchor="middle" font-size="11.5">1 cargador · VARIOS envíos</text><text x="115" y="98" text-anchor="middle" font-size="11.5">sucesivos en el tiempo</text><text x="115" y="113" text-anchor="middle" font-size="11.5" font-weight="800" fill="#d6336c">debe constar POR ESCRITO</text>
+   <rect x="237" y="2" width="226" height="116" rx="12" fill="#e7f0ff"/>
+   <text x="350" y="22" text-anchor="middle" font-size="15" font-weight="800" fill="#1f6feb">SUCESIVO</text>
+   <use href="#i-truck" x="252" y="28" width="46" height="40" style="color:#1f6feb"/><text x="305" y="56" font-size="16" fill="#1f6feb">→</text><use href="#i-truck" x="322" y="28" width="46" height="40" style="color:#e8590c"/><text x="375" y="56" font-size="16" fill="#1f6feb">→</text><use href="#i-truck" x="392" y="28" width="46" height="40" style="color:#0f9d58"/>
+   <text x="350" y="84" text-anchor="middle" font-size="11.5">1 contrato · 1 carta de porte</text><text x="350" y="98" text-anchor="middle" font-size="11.5">VARIOS porteadores por tramos</text><text x="350" y="113" text-anchor="middle" font-size="11.5" font-weight="800" fill="#d6336c">responden TODOS de todo</text>
+   <rect x="472" y="2" width="226" height="116" rx="12" fill="#e7f0ff"/>
+   <text x="585" y="22" text-anchor="middle" font-size="15" font-weight="800" fill="#1f6feb">MULTIMODAL</text>
+   <use href="#i-truck" x="488" y="28" width="46" height="40" style="color:#1f6feb"/><use href="#i-ship" x="544" y="28" width="40" height="40" style="color:#1f6feb"/><use href="#i-train" x="596" y="28" width="36" height="40" style="color:#1f6feb"/><use href="#i-plane" x="642" y="28" width="38" height="40" style="color:#1f6feb"/>
+   <text x="585" y="84" text-anchor="middle" font-size="11.5">más de un MODO de transporte</text><text x="585" y="98" text-anchor="middle" font-size="11.5">y UNO de ellos TERRESTRE</text><text x="585" y="113" text-anchor="middle" font-size="11.5">da igual nº de porteadores</text>
+  </svg>
+ </div>
+
+ <div class="card k2">
+  <h3><svg><use href="#i-sofa"/></svg>Contrato de mudanza</h3>
+  <div class="g2">
+   <div><ul><li>Carga, transporte y descarga de <b>mobiliario</b> de/a <b>viviendas, locales o centros de trabajo</b>, hasta <b>dejarlo colocado</b> donde se indique.</li><li>Antes de empezar: <b>presupuesto escrito</b> del porteador.</li></ul></div>
+   <div><ul><li><b>Inventario: no obligatorio</b>, pero <b>cualquiera de las partes puede exigirlo</b>.</li><li>Tope indemnización <span class="n n2">20 × IPREM/día por m³</span> · reservas <span class="n n2">7 días hábiles</span>.</li></ul></div>
+  </div>
+ </div>
+</div>
+
+<!-- ============ 1A02 · CARTA DE PORTE / CARGA ============ -->
+<div class="page">
+ <div class="sec s2"><span class="badge">1A02</span><div><h2>Contrato de transporte nacional (II)</h2><p>Carta de porte · Presentación del vehículo · Carga y descarga · Derechos del porteador</p></div></div>
+
+ <div class="card k2">
+  <h3><svg><use href="#i-doc"/></svg>La carta de porte</h3>
+  <div style="display:grid;grid-template-columns:61% 39%;gap:8px;align-items:center">
+  <svg viewBox="0 0 440 160" class="diag svgtxt">
+   <g transform="translate(6,4)">
+    <use href="#i-doc" x="0" y="0" width="80" height="80" style="color:#1f6feb"/><circle cx="60" cy="18" r="15" fill="#1f6feb"/><text x="60" y="24" text-anchor="middle" font-size="17" font-weight="900" fill="#fff">1</text>
+    <text x="40" y="100" text-anchor="middle" font-size="14" font-weight="800" fill="#1f6feb">1.º</text><text x="40" y="118" text-anchor="middle" font-size="13" font-weight="700">CARGADOR</text><text x="40" y="136" text-anchor="middle" font-size="10.5" fill="#5b6478">con él se ejerce</text><text x="40" y="150" text-anchor="middle" font-size="10.5" fill="#5b6478">la disposición</text>
+   </g>
+   <g transform="translate(118,4)">
+    <use href="#i-doc" x="20" y="0" width="80" height="80" style="color:#1f6feb"/><circle cx="80" cy="18" r="15" fill="#1f6feb"/><text x="80" y="24" text-anchor="middle" font-size="17" font-weight="900" fill="#fff">2</text>
+    <use href="#i-truck" x="92" y="22" width="58" height="54" style="color:#1f6feb"/>
+    <text x="80" y="100" text-anchor="middle" font-size="14" font-weight="800" fill="#1f6feb">2.º</text><text x="80" y="118" text-anchor="middle" font-size="13" font-weight="700">VIAJA CON LA MERCANCÍA</text><text x="80" y="136" text-anchor="middle" font-size="10.5" fill="#5b6478">al dárselo al destinatario</text><text x="80" y="150" text-anchor="middle" font-size="10.5" fill="#5b6478">se acaba la disposición</text>
+   </g>
+   <g transform="translate(340,4)">
+    <use href="#i-doc" x="0" y="0" width="80" height="80" style="color:#1f6feb"/><circle cx="60" cy="18" r="15" fill="#1f6feb"/><text x="60" y="24" text-anchor="middle" font-size="17" font-weight="900" fill="#fff">3</text>
+    <text x="40" y="100" text-anchor="middle" font-size="14" font-weight="800" fill="#1f6feb">3.º</text><text x="40" y="118" text-anchor="middle" font-size="13" font-weight="700">PORTEADOR</text>
+   </g>
+  </svg>
+  <div style="background:var(--c2s);border-radius:12px;padding:8px 10px">
+   <div style="font-weight:800;color:var(--c2);font-size:10.5pt;margin-bottom:3px">3 ORIGINALES · 1 POR ENVÍO</div>
+   <div class="yes"><b>No obligatoria</b>: se emite si la exige <b>cualquiera</b> de las partes</div>
+   <div class="yes">Su <b>pérdida o irregularidad NO afecta</b> a la validez del contrato</div>
+   <div class="yes"><b>Hace fe</b> del contrato · vale la <b>electrónica</b> (nacional y CMR)</div>
+  </div>
+  </div>
+  <div class="g3" style="margin-top:4px">
+   <div><b>Contenido</b><ul><li>Datos de <b>remitente, porteador y destinatario</b></li><li><b>Lugar de entrega</b> al porteador</li><li>Envío: <b>naturaleza, nº de bultos, signos y señales, cantidad, embalaje</b></li><li>Peligrosas: <b>peligro y denominación</b></li></ul></div>
+   <div><b>Si alguien no quiere</b><ul><li><b>Cargador</b> se niega → el porteador puede <b>negarse a transportar</b></li><li><b>Transportista</b> no firma → el cargador lo da por <b>desistido</b> y busca otro</li></ul></div>
+   <div><b>Valor</b><ul><li><b>Medio de prueba</b>; firmada por ambos, las dudas <b>se deciden por ella</b></li><li>Incompleta (ej. sin cantidad) → <b>válida en lo que contenga</b></li><li>Varios vehículos o envíos → <b>una por envío</b></li></ul></div>
+  </div>
+ </div>
+
+ <div class="g2 mb">
+  <div class="card k2">
+   <h3><svg><use href="#i-clock"/></svg>Presentar el camión / entregar la carga</h3>
+   <ul>
+    <li>Sin hora pactada → porteador se presenta <b>antes de las <span class="n n2">18 h</span></b> del día pactado.</li>
+    <li>No se presenta → el cargador busca <b>otro porteador inmediatamente</b>.</li>
+    <li>Cargador <b>no entrega</b> la mercancía → indemniza con <b>= precio del transporte</b> previsto, o ofrece otro transporte similar <b>inmediatamente disponible</b>.</li>
+    <li>Entrega <b>solo una parte</b> → paga esa parte <b>+ indemniza el precio de la parte no entregada</b>.</li>
+   </ul>
+  </div>
+  <div class="card k2">
+   <h3><svg><use href="#i-box"/></svg>Lo que debe hacer el cargador</h3>
+   <ul>
+    <li><b>Declarar el contenido</b> y <b>etiquetar los bultos</b> si hace falta identificar destino.</li>
+    <li><b>Soportes</b> (palés, contenedores): <b>no se puede exigir depósito ni garantía</b> al porteador.</li>
+    <li>Retorno de soportes vacíos = <b>envío distinto</b>; sin pacto, el porteador <b>no está obligado</b>.</li>
+   </ul>
+  </div>
+ </div>
+
+ <div class="card k2">
+  <h3><svg><use href="#i-ware"/></svg>¿Quién carga y quién descarga?</h3>
+  <svg viewBox="0 0 700 112" class="diag svgtxt">
+   <rect x="2" y="4" width="220" height="104" rx="12" fill="#e7f0ff"/>
+   <text x="112" y="26" text-anchor="middle" font-size="14" font-weight="800" fill="#1f6feb">REGLA GENERAL</text>
+   <text x="112" y="50" text-anchor="middle" font-size="13">CARGA + estiba → <tspan font-weight="800">CARGADOR</tspan></text>
+   <text x="112" y="72" text-anchor="middle" font-size="13">DESCARGA → <tspan font-weight="800">CONSIGNATARIO</tspan></text>
+   <text x="112" y="96" text-anchor="middle" font-size="11" fill="#5b6478">cada uno responde de sus daños</text>
+   <rect x="238" y="4" width="222" height="104" rx="12" fill="#fff0e6"/>
+   <text x="349" y="26" text-anchor="middle" font-size="14" font-weight="800" fill="#e8590c">LAS HACE EL PORTEADOR SI…</text>
+   <text x="349" y="48" text-anchor="middle" font-size="12">pacto POR ESCRITO con el cargador</text>
+   <text x="349" y="64" text-anchor="middle" font-size="12">ANTES de poner el camión a disposición</text>
+   <text x="349" y="82" text-anchor="middle" font-size="12">→ responde SIEMPRE de los daños</text>
+   <text x="349" y="98" text-anchor="middle" font-size="12">→ precio APARTE en la factura</text>
+   <rect x="476" y="4" width="222" height="104" rx="12" fill="#e7f0ff"/>
+   <text x="587" y="26" text-anchor="middle" font-size="14" font-weight="800" fill="#1f6feb">SIEMPRE DEL PORTEADOR</text>
+   <text x="587" y="48" text-anchor="middle" font-size="11.3">📦 Paquetería: colocar, estibar y desestibar</text>
+   <text x="587" y="66" text-anchor="middle" font-size="11.3">⛽ Combustible doméstico: la descarga</text>
+   <text x="587" y="84" text-anchor="middle" font-size="11.3">🚚 Entoldar/desentoldar y mover el</text>
+   <text x="587" y="100" text-anchor="middle" font-size="11.3">camión para facilitar la carga</text>
+  </svg>
+  <p class="mini" style="margin:4px 0 0">Si el porteador carga y estiba, recibe la mercancía <b>desde que empieza la carga</b>. El consignatario responde de la desestiba y descarga (ej. maquinaria pesada).</p>
+ </div>
+
+ <div class="card k2">
+  <h3><svg><use href="#i-warn"/></svg>Derechos de control del porteador</h3>
+  <div class="g3">
+   <div><b>Rechazar</b> bultos mal acondicionados, embalados, identificados o señalizados. Es un <b>derecho</b>, no una obligación.</div>
+   <div><b>Sospechas fundadas de falsedad</b> → registrar bultos y <b>verificar el peso</b>, ante <b>cargador, notario o presidente de la Junta Arbitral</b>. Si era verdad, paga el <b>cargador</b>.</div>
+   <div>No le dijeron que era <b>peligrosa</b> → puede <b>descargarla, neutralizar el peligro o devolverla</b> a origen.</div>
+  </div>
+ </div>
+</div>
+
+<!-- ============ 1A02 · PLAZOS / PARALIZACIÓN ============ -->
+<div class="page">
+ <div class="sec s2"><span class="badge">1A02</span><div><h2>Contrato de transporte nacional (III)</h2><p>Plazos de carga y descarga · Paralización · Itinerario · Plazos de entrega</p></div></div>
+
+ <div class="card k2">
+  <h3><svg><use href="#i-hour"/></svg>Plazo de carga / descarga y paralización</h3>
+  <svg viewBox="0 0 700 170" class="diag svgtxt">
+   <text x="10" y="18" font-size="12.5" fill="#5b6478">Llega el camión</text>
+   <path d="M40 24 v14" stroke="#1c2333" stroke-width="2"/>
+   <rect x="40" y="40" width="150" height="40" rx="8" fill="#0f9d58"/><text x="115" y="58" text-anchor="middle" font-size="14" font-weight="800" fill="#fff">1 HORA</text><text x="115" y="74" text-anchor="middle" font-size="11" fill="#fff">plazo para cargar/descargar</text>
+   <rect x="192" y="40" width="110" height="40" rx="8" fill="#f5b301"/><text x="247" y="58" text-anchor="middle" font-size="13" font-weight="800" fill="#1c2333">1.ª hora extra</text><text x="247" y="74" text-anchor="middle" font-size="11">NO se cobra</text>
+   <rect x="304" y="40" width="70" height="40" rx="8" fill="#e8590c"/><text x="339" y="65" text-anchor="middle" font-size="13" font-weight="800" fill="#fff">2×IPREM</text>
+   <rect x="376" y="40" width="70" height="40" rx="8" fill="#e8590c"/><text x="411" y="65" text-anchor="middle" font-size="13" font-weight="800" fill="#fff">2×IPREM</text>
+   <rect x="448" y="40" width="70" height="40" rx="8" fill="#e8590c" opacity=".8"/><text x="483" y="65" text-anchor="middle" font-size="13" font-weight="800" fill="#fff">…</text>
+   <rect x="520" y="40" width="172" height="40" rx="8" fill="#d6336c"/><text x="606" y="58" text-anchor="middle" font-size="13" font-weight="800" fill="#fff">máx. 10 h / día</text><text x="606" y="74" text-anchor="middle" font-size="11" fill="#fff">2.º día = 1.º + 25 %</text>
+   <path d="M192 92 H692" stroke="#e8590c" stroke-width="3"/><path d="M192 86 v12 M692 86 v12" stroke="#e8590c" stroke-width="3"/>
+   <text x="442" y="112" text-anchor="middle" font-size="12" font-weight="800" fill="#e8590c">PARALIZACIÓN = lo que EXCEDE el plazo · la reclama el PORTEADOR al CARGADOR</text>
+   <text x="442" y="130" text-anchor="middle" font-size="12">Sin pacto: <tspan font-weight="800">IPREM/día × 2</tspan> por cada hora o fracción, sin contar la primera</text>
+   <text x="442" y="148" text-anchor="middle" font-size="11.5" fill="#5b6478">Ej.: si IPREM/día ≈ 20 € → cada hora cobrable ≈ 40 € · no cuentan descansos del conductor ni averías</text>
+   <text x="10" y="166" font-size="11.5" fill="#5b6478">Hora de entrega pactada y descarga por el destinatario → <tspan font-weight="800" fill="#1c2333">2 horas desde la hora pactada</tspan>, empiece cuando empiece.</text>
+  </svg>
+ </div>
+
+ <div class="g2 mb">
+  <div class="card k2">
+   <h3><svg><use href="#i-clock"/></svg>Si el almacén cierra (sin horarios)</h3>
+   <svg viewBox="0 0 330 42" class="diag svgtxt">
+    <rect x="4" y="8" width="322" height="26" rx="13" fill="#e7f0ff"/>
+    <rect x="4" y="8" width="140" height="26" rx="13" fill="#1f6feb"/><text x="74" y="26" text-anchor="middle" font-size="12" font-weight="800" fill="#fff">plazo corriendo…</text>
+    <text x="150" y="26" font-size="12" font-weight="800" fill="#d6336c">⏸ 18 h</text>
+    <text x="206" y="26" font-size="12" fill="#5b6478">noche → sigue a las 8 h</text>
+   </svg>
+   <ul><li>Se <b>suspende a las 18 h</b> y sigue a las <b>8 h</b> del primer <b>día laborable</b> siguiente.</li><li>En la descarga: a las 8 h <b>o a la hora de apertura</b> si es antes.</li><li>Horas de <b>cierre de instalaciones</b> no cuentan como paralización.</li></ul>
+  </div>
+  <div class="card k2">
+   <h3><svg><use href="#i-globe"/></svg>Itinerario</h3>
+   <ul>
+    <li>Sin pacto → el <b>más corto</b> (salvo que otro sea más adecuado por carreteras, seguridad, vehículo o mercancía).</li>
+    <li>Discusión sobre la distancia → <b>medición oficial de la Administración</b>.</li>
+    <li>Ruta pactada solo cambia por <b>fuerza mayor</b> o <b>instrucciones del cargador</b>. Fuerza mayor que encarece → se le <b>abona el aumento</b>.</li>
+    <li>Cambia sin motivo → responde si se prueba que <b>aumentó el riesgo</b>.</li>
+   </ul>
+  </div>
+ </div>
+
+ <div class="card k2">
+  <h3><svg><use href="#i-cal"/></svg>Plazos de entrega</h3>
+  <div class="g4">
+   <div class="tile t2"><span class="big">0 h</span><span class="lbl">del día siguiente: si no consta la hora de recepción, el plazo empieza ahí</span></div>
+   <div class="tile t2"><span class="big">20 km/h</span><span class="lbl">velocidad media si no hay plazo pactado<br><b>Ej.: 400 km → 20 h</b></span></div>
+   <div class="tile t2"><span class="big">9 h</span><span class="lbl">si el plazo acaba después de las 18 h (ej. 21 h): hasta las 9 h del siguiente laborable</span></div>
+   <div class="tile t2"><span class="big">+24 h</span><span class="lbl">paquetería que acumula envíos para completar carga</span></div>
+  </div>
+ </div>
+
+ <div class="card k2">
+  <h3><svg><use href="#i-euro"/></svg>Precio y pago</h3>
+  <div class="g3">
+   <div><b>Cuánto</b><ul><li>Sin pacto: el <b>usual</b> en el <b>momento y lugar en que el porteador recibe</b> la mercancía</li><li>+ <b>gastos y suplidos</b></li><li><b>Gasóleo</b> sube → puede subir la factura; baja → el cargador exige rebaja</li></ul></div>
+   <div><b>Quién y cuándo</b><ul><li>Sin pacto paga el <b>cargador</b></li><li>Exigible al poner la mercancía <b>a disposición del destinatario</b></li><li><b>Mora a los <span class="n n2">30 días</span></b></li><li>En dinero o medio con poder liberatorio; <b>letra</b> solo si se pactó</li></ul></div>
+   <div><b>Si no pagan</b><ul><li>Puede <b>retener</b> la mercancía y pedir <b>depósito y venta</b> (juez o Junta)</li><li>Solo por deudas de <b>ese transporte</b></li><li><b>Portes debidos</b> impagados → el <b>cargador responde subsidiariamente</b></li></ul></div>
+  </div>
+ </div>
+</div>
+
+<!-- ============ 1A02 · DISPOSICIÓN / ENTREGA ============ -->
+<div class="page">
+ <div class="sec s2"><span class="badge">1A02</span><div><h2>Contrato de transporte nacional (IV)</h2><p>Derecho de disposición · Problemas en la entrega · Reservas · Reembolso</p></div></div>
+
+ <div class="card k2">
+  <h3><svg><use href="#i-truck"/></svg>Derecho de disposición: cambiar órdenes con el camión en ruta</h3>
+  <svg viewBox="0 0 700 140" class="diag svgtxt">
+   <defs><marker id="b2" markerUnits="userSpaceOnUse" markerWidth="14" markerHeight="14" refX="10" refY="7" orient="auto"><path d="M0 0L14 7 0 14z" fill="#1f6feb"/></marker><marker id="b3" markerUnits="userSpaceOnUse" markerWidth="14" markerHeight="14" refX="10" refY="7" orient="auto"><path d="M0 0L14 7 0 14z" fill="#d6336c"/></marker></defs>
+   <circle cx="30" cy="70" r="14" fill="#1f6feb"/><text x="30" y="100" text-anchor="middle" font-size="11.5" font-weight="700">origen</text>
+   <path d="M44 70 H200" stroke="#1f6feb" stroke-width="4" stroke-dasharray="9 6"/>
+   <use href="#i-truck" x="196" y="36" width="72" height="66" style="color:#1f6feb"/>
+   <path d="M275 70 C330 70 340 20 400 20" fill="none" stroke="#1f6feb" stroke-width="3" marker-end="url(#b2)"/><text x="410" y="25" font-size="12.5" font-weight="700">🛑 DETENER el transporte</text>
+   <path d="M275 70 H392" stroke="#1f6feb" stroke-width="3" marker-end="url(#b2)"/><text x="410" y="75" font-size="12.5" font-weight="700">📍 otro LUGAR u otro DESTINATARIO</text>
+   <path d="M275 74 C330 74 330 120 395 120" fill="none" stroke="#1f6feb" stroke-width="3" marker-end="url(#b2)"/><text x="410" y="125" font-size="12.5" font-weight="700">↩ DEVOLVER a origen</text>
+   <path d="M180 30 L160 8" stroke="#d6336c" stroke-width="0"/>
+  </svg>
+  <div class="g3">
+   <div><b>Quién</b>: el <b>cargador o el destinatario</b> (este con <b>las mismas limitaciones</b>). Gastos: <b>quien lo ejerza</b>.</div>
+   <div><b>Límites</b>: anotarlo en el <b>1.er ejemplar</b> de la carta de porte · <b>no perjudicar a otros cargadores</b> · <b>no dividir el envío</b>.</div>
+   <div><b>Se extingue</b> cuando el porteador entrega el <b>2.º ejemplar</b> al destinatario.</div>
+  </div>
+ </div>
+
+ <div class="card k2">
+  <h3><svg><use href="#i-warn"/></svg>Problemas en la entrega: qué hace el porteador</h3>
+  <div class="flow">
+   <div class="st" style="background:var(--c2s)"><b>1 · No puede entregar</b>Avisar al <b>cargador</b> lo antes posible y <b>pedir instrucciones</b> a quien tenga la disposición</div>
+   <div class="ar">›</div>
+   <div class="st" style="background:var(--c2s)"><b>2 · Esperar</b>Pasadas <span class="n n2">2 horas</span> sin respuesta → instrucciones <b>no dadas</b></div>
+   <div class="ar">›</div>
+   <div class="st" style="background:var(--c3s)"><b>3 · Sin instrucciones</b>Pedir el <b>depósito en la Junta Arbitral</b> (o juzgado). Con depósito el transporte <b>se da por terminado</b></div>
+   <div class="ar">›</div>
+   <div class="st" style="background:var(--reds)"><b>4 · Perecedera</b>Puede pedir la <b>venta sin esperar</b> instrucciones si es <b>perecedera</b> o su estado lo justifica</div>
+  </div>
+  <div class="g3" style="margin-top:6px">
+   <div><b>Destinatario rehúsa</b> → obedecer al cargador (incluso llevarla a otro municipio); si no da instrucciones en plazo → depósito en la Junta.</div>
+   <div><b>Destinatario no quiere descargar</b> y el cargador no dice nada → el porteador cobra <b>gastos y perjuicios al cargador</b>.</div>
+   <div><b>Paquetería sin declaración de valor</b> descargada → se considera <b>abandonada a los <span class="n n2">3 meses</span></b> del primer intento.</div>
+  </div>
+ </div>
+
+ <div class="card k2">
+  <h3><svg><use href="#i-cal"/></svg>Entrega y reservas (quejas por escrito del destinatario)</h3>
+  <svg viewBox="0 0 700 110" class="diag svgtxt">
+   <path d="M20 46 H690" stroke="#1c2333" stroke-width="3"/>
+   <circle cx="40" cy="46" r="12" fill="#1f6feb"/><text x="40" y="22" text-anchor="middle" font-size="13" font-weight="800" fill="#1f6feb">ENTREGA</text>
+   <text x="40" y="76" text-anchor="middle" font-size="11.5" font-weight="700">daño VISIBLE:</text><text x="40" y="92" text-anchor="middle" font-size="11.5">en el ACTO,</text><text x="40" y="106" text-anchor="middle" font-size="11.5">por escrito</text>
+   <circle cx="280" cy="46" r="12" fill="#e8590c"/><text x="280" y="22" text-anchor="middle" font-size="13" font-weight="800" fill="#e8590c">7 días NATURALES</text>
+   <text x="280" y="76" text-anchor="middle" font-size="11.5" font-weight="700">daños NO manifiestos</text><text x="280" y="92" text-anchor="middle" font-size="11.5">(mudanza: 7 días HÁBILES)</text>
+   <circle cx="560" cy="46" r="12" fill="#d6336c"/><text x="560" y="22" text-anchor="middle" font-size="13" font-weight="800" fill="#d6336c">21 días</text>
+   <text x="560" y="76" text-anchor="middle" font-size="11.5" font-weight="700">RETRASO</text><text x="560" y="92" text-anchor="middle" font-size="11.5">desde el día siguiente</text><text x="560" y="106" text-anchor="middle" font-size="11.5">a la entrega</text>
+  </svg>
+  <div class="g2" style="margin-top:2px">
+   <div><ul><li>Entregar <b>en el mismo estado</b>, en el <b>lugar y plazo</b> convenidos. El <b>retraso</b> es incumplimiento.</li><li>Responde desde la <b>recepción material</b> y de sus <b>auxiliares</b> (dependientes o independientes).</li></ul></div>
+   <div><ul><li>Desacuerdo sobre el estado → reconocimiento por la <b>Junta Arbitral, juez o perito</b> de las partes.</li><li>Lo hizo un colaborador → reservas al <b>porteador contratado o al que hizo el transporte</b>.</li></ul></div>
+  </div>
+ </div>
+
+ <div class="card k2">
+  <h3><svg><use href="#i-euro"/></svg>Entrega contra reembolso</h3>
+  <div class="g2">
+   <div><ul><li>Reembolso = el <b>destinatario paga al porteador ANTES de la entrega</b>; el porteador se lo da al <b>cargador</b> (o a quien diga).</li><li><b>Prima de reembolso</b>: la paga el <b>obligado a pagar el transporte</b> (a portes debidos, el <b>destinatario</b>).</li></ul></div>
+   <div><ul><li>No paga el reembolso o la prima → se entiende que <b>rehúsa el envío</b>.</li><li>Entrega sin cobrar → indemniza al cargador <b>hasta el total del reembolso</b>.</li></ul></div>
+  </div>
+ </div>
+</div>
+
+<!-- ============ 1A03 · RESPONSABILIDAD ============ -->
+<div class="page">
+ <div class="sec s3"><span class="badge">1A03</span><div><h2>Responsabilidad del porteador (I)</h2><p>De qué responde · Cuándo se libra · Retraso · Indemnizaciones</p></div></div>
+
+ <div class="g2 mb">
+  <div class="card k3">
+   <h3><svg><use href="#i-scale"/></svg>Responde de… <span class="ref">art. 47</span></h3>
+   <div class="yes"><b>Pérdida</b> total o parcial</div>
+   <div class="yes"><b>Averías</b> (daños)</div>
+   <div class="yes"><b>Retraso</b>, pero solo si causó un <b>perjuicio</b></div>
+   <div class="yes">Actos de sus <b>auxiliares</b></div>
+   <div class="yes">Daños por <b>sus instrucciones de estiba</b> (aunque cargara otro)</div>
+   <div class="yes"><b>Defecto del vehículo</b>: SIEMPRE, aunque no lo supiera y lo mantuviera bien</div>
+   <div class="yes">Ruta distinta sin fuerza mayor que agravó el riesgo: <b>todos los daños</b></div>
+   <div class="no">No tiene que asesorar sobre el vehículo adecuado</div>
+  </div>
+  <div class="card k3">
+   <h3><svg><use href="#i-check"/></svg>Se libra si PRUEBA… <span class="ref">art. 48-49</span></h3>
+   <p style="margin:0 0 3px"><b>Causas generales</b> (prueba él que <b>se debió</b> a):</p>
+   <ul><li><b>Culpa o instrucciones</b> del cargador o destinatario</li><li><b>Vicio propio</b> / naturaleza de la mercancía</li><li><b>Circunstancias inevitables</b> (y consecuencias imposibles de impedir)</li></ul>
+   <p style="margin:4px 0 3px"><b>Riesgos especiales</b> (basta probar que <b>pudo</b> deberse a):</p>
+   <ul><li><b>Vehículos abiertos</b>, solo si se <b>pactó expresamente</b></li><li><b>Falta o defecto del embalaje</b></li><li><b>Marcas</b> de los bultos insuficientes</li><li><b>Carga/estiba del cargador</b> o <b>descarga del destinatario</b></li></ul>
+  </div>
+ </div>
+ <div class="tip" style="margin:0 0 7px">La <b>carga de la prueba es SIEMPRE del porteador</b>. Si no prueba la causa, paga. Pérdida por circunstancias inevitables probadas → la soporta el <b>cargador</b>.</div>
+
+ <div class="card k3">
+  <h3><svg><use href="#i-cal"/></svg>Retraso, entrega parcial y rechazo <span class="ref">art. 54</span></h3>
+  <svg viewBox="0 0 700 92" class="diag svgtxt">
+   <path d="M20 40 H690" stroke="#1c2333" stroke-width="3"/>
+   <circle cx="40" cy="40" r="10" fill="#1c2333"/><text x="20" y="20" font-size="12" font-weight="700">fecha convenida</text>
+   <circle cx="300" cy="40" r="13" fill="#e8590c"/><text x="300" y="20" text-anchor="middle" font-size="14" font-weight="900" fill="#e8590c">+20 días</text>
+   <text x="300" y="66" text-anchor="middle" font-size="12" font-weight="700">sin entregar = PÉRDIDA TOTAL</text><text x="300" y="82" text-anchor="middle" font-size="11.5">puede rechazar y exigir el importe</text>
+   <circle cx="580" cy="40" r="13" fill="#d6336c"/><text x="580" y="20" text-anchor="middle" font-size="14" font-weight="900" fill="#d6336c">30 días</text>
+   <text x="580" y="66" text-anchor="middle" font-size="12" font-weight="700">desde que se hizo cargo,</text><text x="580" y="82" text-anchor="middle" font-size="11.5">si NO había plazo fijado</text>
+  </svg>
+  <p style="margin:2px 0 0">También puede <b>rechazar</b> si le entregan <b>solo una parte</b> y prueba que <b>no puede usarla sin la que falta</b>; si la avería de una parte impide usar el resto → <b>rechazo total</b>. Para cobrar por retraso: <b>reservas escritas en <span class="n n3">21 días</span></b>.</p>
+ </div>
+
+ <div class="card k3">
+  <h3><svg><use href="#i-euro"/></svg>¿Cuánto se indemniza? Topes <span class="ref">art. 52-62</span></h3>
+  <div class="g4 mb">
+   <div class="tile t3"><span class="big">⅓ IPREM</span><span class="lbl">por día y <b>por kg de peso bruto</b> · pérdida o avería</span></div>
+   <div class="tile t3"><span class="big">Precio</span><span class="lbl">del transporte = máximo por <b>retraso</b> con perjuicio</span></div>
+   <div class="tile t3"><span class="big">Pérdida total</span><span class="lbl">máximo si hay <b>avería + retraso</b></span></div>
+   <div class="tile t3"><span class="big">20 IPREM</span><span class="lbl">por día y <b>por m³</b> de carga · <b>mudanzas</b></span></div>
+  </div>
+  <div class="g3">
+   <div><b>Valor</b>: precio de <b>mercado</b> del <b>día y lugar en que el porteador recibió</b> la mercancía.</div>
+   <div><b>Declaración de valor</b>: cargador y porteador fijan el valor y se paga un <b>suplemento</b> → indemnización mayor que la legal.</div>
+   <div><b>Dolo</b> (intención) → indemniza <b>en todo caso y SIN límites</b>. Mercancía perdida que reaparece: aviso si se pide, en <b>1 año</b>.</div>
+  </div>
+ </div>
+</div>
+
+<!-- ============ 1A03 · RESERVAS / PRESCRIPCIÓN / DEPÓSITO ============ -->
+<div class="page">
+ <div class="sec s3"><span class="badge">1A03</span><div><h2>Responsabilidad del porteador (II)</h2><p>Reservas · Prescripción · Impago de portes · Depósito y subastas en la Junta</p></div></div>
+
+ <div class="g2 mb">
+  <div class="card k3">
+   <h3><svg><use href="#i-doc"/></svg>Reservas al recibir <span class="ref">art. 60</span></h3>
+   <ul>
+    <li>Siempre <b>por escrito</b>.</li>
+    <li>Daño visible → <b>en el mismo momento de la entrega</b> (también si va <b>sin embalaje</b>; el plazo es <b>idéntico</b> embalada o no).</li>
+    <li>Revisan juntos y <b>están de acuerdo</b> → <b>no hacen falta</b> reservas.</li>
+    <li>Revisan juntos y <b>no se ponen de acuerdo</b> → repetir <b>ante notario</b>.</li>
+    <li>Discrepancia sobre el estado → <b>perito</b> nombrado por ellos, la <b>Junta Arbitral</b> o el <b>juez</b>.</li>
+   </ul>
+  </div>
+  <div class="card k3">
+   <h3><svg><use href="#i-hour"/></svg>Prescripción (plazo para reclamar) <span class="ref">art. 79</span></h3>
+   <div class="g2 mb">
+    <div class="tile t3"><span class="big">1 año</span><span class="lbl">regla general: pérdidas, averías, retrasos y portes</span></div>
+    <div class="tile t3" style="background:var(--reds)"><span class="big" style="color:var(--red)">2 años</span><span class="lbl">con <b>dolo</b> o infracción consciente</span></div>
+   </div>
+   <b>¿Desde cuándo cuenta?</b>
+   <ul style="margin-top:1px">
+    <li>Portes y <b>paralización</b> → a los <span class="n n3">3 meses</span> de <b>celebrar el contrato</b></li>
+    <li><b>Pérdida total</b> → a los <span class="n n3">30 días</span> desde que se hizo cargo</li>
+    <li>Ante las Juntas: <b>los mismos plazos que en el juzgado</b></li>
+   </ul>
+  </div>
+ </div>
+
+ <div class="card k3">
+  <h3><svg><use href="#i-ware"/></svg>No me pagan los portes: retener, depositar y vender <span class="ref">art. 37-44 · OM FOM/3386/2010</span></h3>
+  <div class="flow mb">
+   <div class="st" style="background:var(--c3s)"><b>1 · Retener</b>la mercancía (solo por deudas de <b>ese</b> transporte)</div>
+   <div class="ar">›</div>
+   <div class="st" style="background:var(--c3s)"><b>2 · Pedir en <span class="n n3">10 días</span></b>desde la retención el <b>depósito y venta</b></div>
+   <div class="ar">›</div>
+   <div class="st" style="background:var(--c3s)"><b>3 · ¿Dónde?</b>Junta Arbitral <b>del lugar donde están las mercancías</b> (o juez)</div>
+   <div class="ar">›</div>
+   <div class="st" style="background:var(--c3s)"><b>4 · Venta</b>la hace la <b>autoridad judicial o la Junta</b>; lo que falte lo paga el <b>cargador</b></div>
+  </div>
+  <div class="g3">
+   <div><b>Solicitud</b>: descripción y naturaleza de la mercancía + <b>razones</b> del depósito y la venta. El presidente avisa a cargador y destinatario: <b>10 días</b> para alegar.</div>
+   <div><b>La Junta puede denegar</b> si <b>no tiene locales adecuados</b> o el estado/características de la mercancía lo desaconsejan.</div>
+   <div><b>Se vende</b> si: retención formalizada en 10 días naturales, custodia <b>excesiva</b> frente al valor, o riesgo de <b>perderse</b>. La Junta resuelve en <b>6 meses</b> máx.</div>
+  </div>
+ </div>
+
+ <div class="card k3">
+  <h3><svg><use href="#i-gavel"/></svg>Las subastas, en escalera</h3>
+  <svg viewBox="0 0 700 168" class="diag svgtxt">
+   <rect x="10" y="20" width="150" height="130" rx="10" fill="#e8590c"/><text x="85" y="50" text-anchor="middle" font-size="15" font-weight="900" fill="#fff">1.ª SUBASTA</text><text x="85" y="76" text-anchor="middle" font-size="12" fill="#fff">salida: la valoración</text><text x="85" y="128" text-anchor="middle" font-size="22" font-weight="900" fill="#fff">100 %</text>
+   <rect x="170" y="56" width="150" height="94" rx="10" fill="#f08a4b"/><text x="245" y="84" text-anchor="middle" font-size="15" font-weight="900" fill="#fff">2.ª SUBASTA</text><text x="245" y="106" text-anchor="middle" font-size="12" fill="#fff">salida</text><text x="245" y="136" text-anchor="middle" font-size="22" font-weight="900" fill="#fff">75 %</text>
+   <rect x="330" y="92" width="150" height="58" rx="10" fill="#f6b48a"/><text x="405" y="116" text-anchor="middle" font-size="15" font-weight="900" fill="#1c2333">3.ª SUBASTA</text><text x="405" y="138" text-anchor="middle" font-size="11.5" fill="#1c2333">basta cubrir DEUDA + GASTOS</text>
+   <rect x="500" y="10" width="192" height="148" rx="12" fill="#fff0e6"/>
+   <text x="512" y="32" font-size="12.5"><tspan font-weight="800">Fianza</tspan> de quien puja: máx. <tspan font-weight="800" fill="#e8590c">10 %</tspan></text>
+   <text x="512" y="56" font-size="12.5">No llega → el porteador puede</text><text x="512" y="72" font-size="12.5">venderla él: <tspan font-weight="800" fill="#e8590c">3 días</tspan> para decidir</text>
+   <text x="512" y="96" font-size="12.5">Entidad especializada:</text><text x="512" y="112" font-size="12.5">vende en <tspan font-weight="800" fill="#e8590c">3 meses</tspan> máximo</text>
+   <text x="512" y="136" font-size="12.5"><tspan font-weight="800">Orden de cobro</tspan>: 1.º Junta</text><text x="512" y="152" font-size="12.5">→ 2.º peritación</text>
+  </svg>
+ </div>
+</div>
+
+<!-- ============ 1A03 · JUNTAS ARBITRALES ============ -->
+<div class="page">
+ <div class="sec s3"><span class="badge">1A03</span><div><h2>Juntas Arbitrales del Transporte</h2><p>Qué son · Qué resuelven · Dónde · Procedimiento y plazos (LOTT 37 · RD 1211/1990 · Ley 60/2003 de Arbitraje)</p></div></div>
+
+ <div class="g2 mb">
+  <div class="card k3">
+   <h3><svg><use href="#i-person"/></svg>Composición</h3>
+   <svg viewBox="0 0 330 112" class="diag svgtxt">
+    <use href="#i-person" x="140" y="2" width="50" height="50" style="color:#e8590c"/><text x="165" y="64" text-anchor="middle" font-size="12.5" font-weight="800" fill="#e8590c">PRESIDENTE</text>
+    <use href="#i-person" x="30" y="40" width="36" height="36" style="color:#5b6478"/><use href="#i-person" x="78" y="40" width="36" height="36" style="color:#5b6478"/>
+    <use href="#i-person" x="216" y="40" width="36" height="36" style="color:#5b6478"/><use href="#i-person" x="264" y="40" width="36" height="36" style="color:#5b6478" opacity=".45"/>
+    <text x="165" y="86" text-anchor="middle" font-size="12.5" font-weight="800">+ entre 2 y 4 VOCALES</text>
+    <text x="165" y="104" text-anchor="middle" font-size="11">Administración · empresas de transporte · usuarios y cargadores</text>
+   </svg>
+   <p style="margin:3px 0 0">Materia <b>mercantil</b>. Sus decisiones = <b>laudos</b>. También emiten <b>informes o dictámenes</b> (ej. dudas sobre cuánto cobrar un porte).</p>
+  </div>
+  <div class="card k3">
+   <h3><svg><use href="#i-euro"/></svg>¿Qué conflictos van a la Junta?</h3>
+   <div class="g2 mb">
+    <div class="tile t3"><span class="big">≤ 15.000 €</span><span class="lbl">va si lo pide una parte y <b>nadie se opuso expresamente antes de empezar</b> el transporte</span></div>
+    <div class="tile t3"><span class="big">Sin límite</span><span class="lbl">si las partes <b>pactan</b> someterse a la Junta</span></div>
+   </div>
+   <div class="yes">Portes impagados, daños, retrasos… (contrato de transporte)</div>
+   <div class="yes">Multimodal con <b>un único contrato</b> y un modo <b>terrestre</b></div>
+   <div class="no">Cuestiones <b>laborales</b> (nunca)</div>
+   <div class="no"><b>Competencia ilícita</b> entre transportistas</div>
+  </div>
+ </div>
+
+ <div class="card k3">
+  <h3><svg><use href="#i-globe"/></svg>¿Qué Junta?</h3>
+  <div class="g3">
+   <div>La del lugar de <b>origen o de destino</b> del transporte.</div>
+   <div>Salvo que se <b>pacte expresamente</b> otra Junta concreta (<b>se puede</b>).</div>
+   <div>Para el <b>depósito</b> de mercancías: la del lugar <b>donde están</b>.</div>
+  </div>
+  <p class="mini" style="margin:4px 0 0">La <b>Ley de Arbitraje</b> solo se aplica en <b>lo no previsto</b> por la LOTT; los laudos tienen los efectos de la legislación general de arbitraje.</p>
+ </div>
+
+ <div class="card k3">
+  <h3><svg><use href="#i-gavel"/></svg>El procedimiento paso a paso: <span style="color:var(--ink)">no formalista, simplificado y GRATUITO</span></h3>
+  <svg viewBox="0 0 700 232" class="diag svgtxt">
+   <defs><marker id="c1" markerUnits="userSpaceOnUse" markerWidth="14" markerHeight="14" refX="10" refY="7" orient="auto"><path d="M0 0L14 7 0 14z" fill="#e8590c"/></marker></defs>
+   <g>
+    <rect x="4" y="6" width="160" height="104" rx="12" fill="#fff0e6"/><circle cx="26" cy="28" r="14" fill="#e8590c"/><text x="26" y="33" text-anchor="middle" font-size="14" font-weight="900" fill="#fff">1</text>
+    <text x="46" y="33" font-size="13.5" font-weight="800" fill="#e8590c">RECLAMACIÓN</text>
+    <text x="14" y="56" font-size="11.5">• POR ESCRITO, con la</text><text x="14" y="71" font-size="11.5">  proposición de PRUEBAS</text><text x="14" y="88" font-size="11.5">• Sin abogado ni procurador</text><text x="14" y="103" font-size="11.5">• Cualquiera con interés legítimo</text>
+   </g>
+   <path d="M166 58 h16" stroke="#e8590c" stroke-width="3" marker-end="url(#c1)"/>
+   <g>
+    <rect x="186" y="6" width="160" height="104" rx="12" fill="#fff0e6"/><circle cx="208" cy="28" r="14" fill="#e8590c"/><text x="208" y="33" text-anchor="middle" font-size="14" font-weight="900" fill="#fff">2</text>
+    <text x="228" y="33" font-size="13.5" font-weight="800" fill="#e8590c">COPIA</text>
+    <text x="196" y="56" font-size="11.5">Lo PRIMERO: enviar copia</text><text x="196" y="71" font-size="11.5">de la reclamación al</text><text x="196" y="86" font-size="11.5">DEMANDADO con el</text><text x="196" y="101" font-size="11.5">DÍA DE LA VISTA</text>
+   </g>
+   <path d="M348 58 h16" stroke="#e8590c" stroke-width="3" marker-end="url(#c1)"/>
+   <g>
+    <rect x="368" y="6" width="160" height="104" rx="12" fill="#fff0e6"/><circle cx="390" cy="28" r="14" fill="#e8590c"/><text x="390" y="33" text-anchor="middle" font-size="14" font-weight="900" fill="#fff">3</text>
+    <text x="410" y="33" font-size="13.5" font-weight="800" fill="#e8590c">VISTA ORAL</text>
+    <text x="378" y="56" font-size="11.5">Siempre oral; se puede</text><text x="378" y="71" font-size="11.5">omitir si ≤ <tspan font-weight="800">100 €</tspan></text><text x="378" y="88" font-size="11.5">No va el RECLAMANTE →</text><text x="378" y="103" font-size="11.5">DESISTIDO</text>
+   </g>
+   <path d="M530 58 h16" stroke="#e8590c" stroke-width="3" marker-end="url(#c1)"/>
+   <g>
+    <rect x="550" y="6" width="146" height="104" rx="12" fill="#e8590c"/><circle cx="572" cy="28" r="14" fill="#fff"/><text x="572" y="33" text-anchor="middle" font-size="14" font-weight="900" fill="#e8590c">4</text>
+    <text x="592" y="33" font-size="13.5" font-weight="800" fill="#fff">LAUDO</text>
+    <text x="623" y="66" text-anchor="middle" font-size="22" font-weight="900" fill="#fff">6 + 2</text><text x="623" y="86" text-anchor="middle" font-size="11.5" fill="#fff">meses (prorrogables)</text><text x="623" y="102" text-anchor="middle" font-size="10.5" fill="#fff">desde la contestación</text>
+   </g>
+   <text x="448" y="126" text-anchor="middle" font-size="11" fill="#5b6478">No va el RECLAMADO → la vista se celebra igual</text>
+   <!-- after laudo -->
+   <rect x="4" y="140" width="220" height="86" rx="12" fill="#ffe8ef"/><text x="114" y="164" text-anchor="middle" font-size="13.5" font-weight="800" fill="#d6336c">ANULACIÓN del laudo</text>
+   <text x="114" y="194" text-anchor="middle" font-size="24" font-weight="900" fill="#d6336c">2 meses</text><text x="114" y="215" text-anchor="middle" font-size="11.5">desde la notificación</text>
+   <rect x="240" y="140" width="230" height="86" rx="12" fill="#fff0e6"/><text x="355" y="164" text-anchor="middle" font-size="13.5" font-weight="800" fill="#e8590c">EJECUCIÓN del laudo</text>
+   <text x="355" y="186" text-anchor="middle" font-size="12">ante el <tspan font-weight="800">Juez de 1.ª Instancia</tspan></text><text x="355" y="203" text-anchor="middle" font-size="12">del lugar donde se dictó</text><text x="355" y="220" text-anchor="middle" font-size="12">esperando <tspan font-weight="800">20 días</tspan> desde que se dicta</text>
+   <rect x="486" y="140" width="210" height="86" rx="12" fill="#f1f3f8"/><text x="591" y="164" text-anchor="middle" font-size="13.5" font-weight="800">Laudos EXTRANJEROS</text>
+   <text x="591" y="188" text-anchor="middle" font-size="12">Convenio de</text><text x="591" y="205" text-anchor="middle" font-size="12" font-weight="800">Nueva York</text><text x="591" y="221" text-anchor="middle" font-size="11.5">10 de junio de 1958</text>
+  </svg>
+ </div>
+</div>
+
+<!-- ============ 1A04 · CMR (I) ============ -->
+<div class="page">
+ <div class="sec s4"><span class="badge">1A04</span><div><h2>Convenio CMR (I)</h2><p>Transporte internacional de mercancías por carretera · Ámbito · Carta de porte · Reservas · Disposición</p></div></div>
+
+ <div class="card k4">
+  <h3><svg><use href="#i-globe"/></svg>¿Cuándo se aplica el CMR?</h3>
+  <svg viewBox="0 0 700 130" class="diag svgtxt">
+   <defs><marker id="d1" markerUnits="userSpaceOnUse" markerWidth="14" markerHeight="14" refX="10" refY="7" orient="auto"><path d="M0 0L14 7 0 14z" fill="#0f9d58"/></marker></defs>
+   <path d="M10 20 Q60 4 130 18 T200 30 L190 110 Q120 122 60 108 T14 100z" fill="#e5f7ee" stroke="#0f9d58" stroke-width="2.5"/>
+   <text x="105" y="58" text-anchor="middle" font-size="14" font-weight="800" fill="#0f9d58">PAÍS A</text><text x="105" y="78" text-anchor="middle" font-size="11.5">lugar de CARGA</text>
+   <path d="M300 22 Q370 6 430 22 T490 34 L480 112 Q420 124 360 110 T304 100z" fill="#f1f3f8" stroke="#5b6478" stroke-width="2.5"/>
+   <text x="395" y="58" text-anchor="middle" font-size="14" font-weight="800" fill="#5b6478">PAÍS B</text><text x="395" y="78" text-anchor="middle" font-size="11.5">lugar de DESCARGA</text>
+   <path d="M196 66 H300" stroke="#0f9d58" stroke-width="4" marker-end="url(#d1)"/>
+   <use href="#i-truck" x="220" y="20" width="56" height="48" style="color:#0f9d58"/>
+   <rect x="508" y="6" width="188" height="118" rx="12" fill="#e5f7ee"/>
+   <text x="602" y="28" text-anchor="middle" font-size="13" font-weight="800" fill="#0f9d58">3 CONDICIONES</text>
+   <text x="518" y="52" font-size="12">① a título ONEROSO (precio)</text>
+   <text x="518" y="70" font-size="12">② origen y destino en</text><text x="536" y="84" font-size="12">DOS PAÍSES distintos</text>
+   <text x="518" y="104" font-size="12">③ carga O descarga en</text><text x="536" y="118" font-size="12">un país FIRMANTE</text>
+  </svg>
+  <div class="g3" style="margin-top:4px">
+   <div><b style="color:var(--c4)">✔ SÍ se aplica a</b><ul><li>Vehículos de <b>hasta 3,5 t</b></li><li><b>Temperatura dirigida</b> (isotermos, refrigerados, frigoríficos, caloríficos: todos)</li><li>Transportes de <b>Estados u organismos</b> oficiales/internacionales</li></ul></div>
+   <div><b style="color:var(--red)">✘ NO se aplica a</b><ul><li>Convenios <b>postales</b></li><li>Transportes <b>funerarios</b></li><li><b>Mudanzas</b> (nunca, aunque todos sean firmantes)</li></ul></div>
+   <div><b>🚢 Camión sobre barco/tren sin descargar</b> (sin ruptura de carga) → CMR para <b>todo el recorrido</b>.<br><b>Los países no pueden alterarlo</b>, salvo pactar que no se aplique al <b>tráfico fronterizo</b>.</div>
+  </div>
+ </div>
+
+ <div class="g2 mb">
+  <div class="card k4">
+   <h3><svg><use href="#i-doc"/></svg>Carta de porte CMR</h3>
+   <ul>
+    <li><b>3 originales</b> firmados por <b>remitente y transportista</b>: 1.º <b>remitente</b> · 2.º <b>con la mercancía</b> · 3.º <b>transportista</b>.</li>
+    <li>Falta, se pierde o es irregular → el contrato <b>sigue existiendo y válido</b> (y sujeto al CMR).</li>
+    <li>Lotes distintos, mercancías diferentes o varios vehículos → remitente o transportista pueden exigir <b>una carta por lote/clase/vehículo</b>.</li>
+    <li>Obligatorio: <b>lugar y fecha</b>, <b>nombre y domicilio</b> de remitente y transportista… <b>La matrícula NO</b>.</li>
+    <li><b>Electrónica</b> (Protocolo Adicional): válida, con <b>firma electrónica</b>; carta e instrucciones. A petición del remitente, el transportista le da un <b>recibo</b>.</li>
+   </ul>
+  </div>
+  <div class="card k4">
+   <h3><svg><use href="#i-box"/></svg>Al cargar: qué revisa el transportista</h3>
+   <div class="yes"><b>Número de bultos</b></div>
+   <div class="yes"><b>Marcas y números</b> de los paquetes</div>
+   <div class="yes"><b>Estado aparente</b> de la mercancía y del embalaje</div>
+   <div class="no">Documentos <b>aduaneros</b>, lugar/fecha, gastos</div>
+   <ul style="margin-top:3px">
+    <li>Sin medios para comprobar → <b>reservas motivadas</b> en la carta de porte.</li>
+    <li>El remitente puede exigir que <b>verifique el contenido</b>; el transportista cobra esos gastos.</li>
+    <li><b>Sin reservas → se presume</b> buen estado aparente, embalaje bien y nº de bultos y marcas conformes.</li>
+    <li>El <b>remitente responde SIEMPRE</b> (portes pagados o debidos) de datos inexactos: <b>destinatario</b>, <b>naturaleza y embalaje</b>, <b>instrucciones de aduanas</b>.</li>
+   </ul>
+  </div>
+ </div>
+
+ <div class="card k4">
+  <h3><svg><use href="#i-truck"/></svg>Derecho de disposición e impedimentos</h3>
+  <div class="g3">
+   <div><b>Permite</b>: detener · cambiar lugar de entrega · cambiar destinatario.<br><b>Cómo</b>: presentando el <b>1.er ejemplar</b> con las <b>nuevas instrucciones escritas</b> (no vale fax ni llamada), <b>antes de entregar</b> al consignatario, <b>sin dividir</b> la consignación.</div>
+   <div><b>Límite</b>: si el <b>destinatario</b> lo ejerce y nombra a otro, <b>ese nuevo no puede nombrar a otro</b>.<br>No puede cumplirlo → <b>avisar inmediatamente</b> a quien dio la orden. Pudiendo, no lo cumple → <b>responde</b>.</div>
+   <div><b>¿A quién pide instrucciones?</b><ul><li>Antes de llegar → a quien tenga la <b>disposición</b></li><li>Tras llegar → al <b>remitente</b></li><li>Nuevo consignatario rechaza → al <b>que ejerció la disposición</b> (primer consignatario)</li></ul></div>
+  </div>
+  <div class="g2" style="margin-top:4px">
+   <div class="tip" style="margin:0"><b>Vender sin esperar instrucciones</b>: mercancía <b>perecedera</b> o su estado lo justifica, o <b>custodia excesiva</b> frente a su valor.</div>
+   <div class="trap" style="margin:0"><b>Peligrosa sin avisar</b> ni constar en la carta → puede <b>descargarla, destruirla o hacerla inofensiva</b>.</div>
+  </div>
+ </div>
+</div>
+
+<!-- ============ 1A04 · CMR (II) ============ -->
+<div class="page">
+ <div class="sec s4"><span class="badge">1A04</span><div><h2>Convenio CMR (II)</h2><p>Responsabilidad · Pérdida · Indemnizaciones · Reservas · Prescripción · Tribunales · Transportistas sucesivos</p></div></div>
+
+ <div class="g2 mb">
+  <div class="card k4">
+   <h3><svg><use href="#i-scale"/></svg>Responsabilidad del transportista</h3>
+   <ul>
+    <li>Responde de <b>sus actos</b>, de <b>sus empleados</b> y de <b>cualquiera a quien recurra</b>.</li>
+    <li>Pérdida o avería <b>entre recepción y entrega</b>, y <b>retraso</b>.</li>
+    <li>Exonerado por <b>vicio propio</b> o <b>circunstancias inevitables</b> → la <b>prueba es SIEMPRE suya</b>.</li>
+    <li><b>Nunca</b> puede alegar <b>defectos del vehículo</b>.</li>
+    <li>Tiene <b>límites de indemnización</b>, salvo <b>dolo</b>.</li>
+   </ul>
+  </div>
+  <div class="card k4">
+   <h3><svg><use href="#i-cal"/></svg>¿Cuándo se da por perdida?</h3>
+   <div class="g2">
+    <div class="tile t4"><span class="big">30 días</span><span class="lbl">tras vencer el <b>plazo convenido</b></span></div>
+    <div class="tile t4"><span class="big">60 días</span><span class="lbl">desde que <b>se hizo cargo</b>, si <b>no hay plazo</b></span></div>
+   </div>
+   <p class="mini" style="margin:5px 0 0">Comparar con nacional: <b>20 días</b> tras la fecha convenida / <b>30 días</b> sin plazo.</p>
+  </div>
+ </div>
+
+ <div class="card k4">
+  <h3><svg><use href="#i-euro"/></svg>Indemnizaciones CMR</h3>
+  <div class="g4 mb">
+   <div class="tile t4"><span class="big">8,33</span><span class="lbl"><b>unidades de cuenta (DEG) por kg</b> de peso bruto que falte, sin declaración de valor</span></div>
+   <div class="tile t4"><span class="big">Origen</span><span class="lbl">valor en el <b>lugar y momento</b> en que se hizo cargo</span></div>
+   <div class="tile t4"><span class="big">Precio</span><span class="lbl">del transporte = límite por <b>retraso</b> (si prueba el daño)</span></div>
+   <div class="tile t4"><span class="big">5 %</span><span class="lbl"><b>intereses anuales</b> si la indemnización se paga tarde</span></div>
+  </div>
+  <p style="margin:0"><b>Declaración de interés especial</b> en la entrega (anotada en la carta) → se reclama más por <b>pérdida, avería y retraso</b>. <b>Dolo → sin límites</b>.</p>
+ </div>
+
+ <div class="g2 mb">
+  <div class="card k4">
+   <h3><svg><use href="#i-doc"/></svg>Reservas del destinatario</h3>
+   <div class="g2">
+    <div class="tile t4"><span class="big">7 días</span><span class="lbl">daños <b>no manifiestos</b>, sin contar <b>domingos ni festivos</b></span></div>
+    <div class="tile t4"><span class="big">21 días</span><span class="lbl"><b>retraso</b>, desde que se puso a disposición, por escrito</span></div>
+   </div>
+  </div>
+  <div class="card k4">
+   <h3><svg><use href="#i-hour"/></svg>Prescripción CMR</h3>
+   <div class="g2 mb">
+    <div class="tile t4"><span class="big">1 año</span><span class="lbl">regla general</span></div>
+    <div class="tile t4" style="background:var(--reds)"><span class="big" style="color:var(--red)">3 años</span><span class="lbl">con <b>dolo</b></span></div>
+   </div>
+   <ul style="margin:0"><li>Pérdida parcial, avería, retraso → desde la <b>entrega</b></li><li>Pérdida total → día <b>30</b> tras el plazo o día <b>60</b> desde que se hizo cargo</li><li>Demás casos → <b>3 meses</b> desde la <b>conclusión</b> del contrato</li></ul>
+  </div>
+ </div>
+
+ <div class="g2 mb">
+  <div class="card k4">
+   <h3><svg><use href="#i-gavel"/></svg>¿Ante qué tribunales?</h3>
+   <div class="yes">El país firmante <b>pactado</b></div>
+   <div class="yes">Residencia del <b>demandado</b></div>
+   <div class="yes">Donde se <b>hizo cargo</b> de la mercancía</div>
+   <div class="yes">Lugar de <b>entrega</b></div>
+   <div class="no">Residencia del <b>demandante</b> por sí sola</div>
+   <p class="mini" style="margin:3px 0 0">Cabe <b>arbitraje</b> si el árbitro <b>aplica el CMR</b>.</p>
+  </div>
+  <div class="card k4">
+   <h3><svg><use href="#i-warn"/></svg>Cláusulas NULAS (aunque se firmen)</h3>
+   <div class="no">Las que <b>invierten la carga de la prueba</b></div>
+   <div class="no">Que el transportista <b>se haga ceder el seguro</b> de la mercancía</div>
+   <p class="mini" style="margin:4px 0 0">Nada que contradiga el CMR vale, aunque ambas partes lo acepten.</p>
+  </div>
+ </div>
+
+ <div class="card k4">
+  <h3><svg><use href="#i-truck"/></svg>Transportistas sucesivos (un contrato, varios tramos)</h3>
+  <svg viewBox="0 0 700 120" class="diag svgtxt">
+   <text x="20" y="18" font-size="12" fill="#5b6478">Ej.: Madrid → Lyon → Múnich → Varsovia</text>
+   <rect x="10" y="28" width="150" height="58" rx="10" fill="#0f9d58"/><use href="#i-truck" x="16" y="34" width="46" height="40" style="color:#fff"/><text x="110" y="54" text-anchor="middle" font-size="13" font-weight="800" fill="#fff">PRIMERO</text><text x="110" y="72" text-anchor="middle" font-size="11" fill="#fff">✔ demandable</text>
+   <rect x="180" y="28" width="150" height="58" rx="10" fill="#cfd5e2"/><use href="#i-truck" x="186" y="34" width="46" height="40" style="color:#5b6478"/><text x="280" y="54" text-anchor="middle" font-size="13" font-weight="800" fill="#5b6478">INTERMEDIO</text><text x="280" y="72" text-anchor="middle" font-size="11" fill="#d6336c">✘ si no causó el daño</text>
+   <rect x="350" y="28" width="150" height="58" rx="10" fill="#e8590c"/><use href="#i-truck" x="356" y="34" width="46" height="40" style="color:#fff"/><text x="450" y="54" text-anchor="middle" font-size="13" font-weight="800" fill="#fff">EL DEL DAÑO</text><text x="450" y="72" text-anchor="middle" font-size="11" fill="#fff">✔ demandable</text>
+   <rect x="520" y="28" width="170" height="58" rx="10" fill="#0f9d58"/><use href="#i-truck" x="526" y="34" width="46" height="40" style="color:#fff"/><text x="630" y="54" text-anchor="middle" font-size="13" font-weight="800" fill="#fff">ÚLTIMO</text><text x="630" y="72" text-anchor="middle" font-size="11" fill="#fff">✔ demandable</text>
+   <text x="350" y="108" text-anchor="middle" font-size="12.5">Cada uno, al aceptar mercancía y carta de porte, <tspan font-weight="800">responde de TODO el transporte</tspan> · luego <tspan font-weight="800">repite</tspan> contra el culpable</text>
+  </svg>
+  <div class="g3" style="margin-top:3px">
+   <div>No se sabe quién fue → pagan <b>en proporción a su remuneración</b> (no a partes iguales ni por km).</div>
+   <div>Uno es <b>insolvente</b> → su parte se reparte entre los demás <b>según su remuneración</b>.</div>
+   <div>No pueden discutir el pago fijado por un tribunal si <b>fueron informados y pudieron intervenir</b>.</div>
+  </div>
+ </div>
+</div>
+
+<!-- ============ COMPARATIVA ============ -->
+<div class="page">
+ <div class="sec s0"><span class="badge">VS</span><div><h2>Nacional (Ley 15/2009) vs Internacional (CMR)</h2><p>La tabla que más puntos da: aquí es donde se confunden los números</p></div></div>
+ <table>
+  <thead><tr><th style="background:var(--ink);border-radius:9px 0 0 0;width:24%">Concepto</th><th style="background:var(--c2);width:38%">🚚 Nacional · Ley 15/2009</th><th style="background:var(--c4);border-radius:0 9px 0 0">🌍 Internacional · CMR</th></tr></thead>
+  <tbody>
+   <tr><td><b>Carta de porte</b></td><td>3 originales: 1.º cargador · 2.º mercancía · 3.º porteador. No obligatoria; su pérdida no anula</td><td>3 originales firmados por remitente y transportista, mismo reparto. Su pérdida no anula. Matrícula no obligatoria</td></tr>
+   <tr><td><b>Mudanzas</b></td><td>✔ Sí (contrato especial, presupuesto escrito)</td><td>✘ <b>Nunca</b></td></tr>
+   <tr><td><b>Tope pérdida / avería</b></td><td><span class="n n2">⅓ IPREM/día por kg</span> de peso bruto</td><td><span class="n n4">8,33 unidades de cuenta por kg</span> de peso bruto</td></tr>
+   <tr><td><b>Valor de la mercancía</b></td><td>Precio de mercado, día y lugar en que se <b>recibió</b></td><td>Lugar y momento en que se <b>hizo cargo</b></td></tr>
+   <tr><td><b>Tope por retraso</b></td><td>Precio del transporte</td><td>Precio del transporte</td></tr>
+   <tr><td><b>Mercancía perdida</b></td><td><span class="n n2">20 días</span> tras fecha convenida · <span class="n n2">30 días</span> desde que se hizo cargo si no hay plazo</td><td><span class="n n4">30 días</span> tras el plazo convenido · <span class="n n4">60 días</span> desde que se hizo cargo si no hay plazo</td></tr>
+   <tr><td><b>Reservas daño visible</b></td><td>En el acto de la entrega, por escrito</td><td>En el acto de la entrega</td></tr>
+   <tr><td><b>Reservas daño oculto</b></td><td><span class="n n2">7 días naturales</span> (mudanza: 7 días hábiles)</td><td><span class="n n4">7 días</span> sin domingos ni festivos</td></tr>
+   <tr><td><b>Reservas por retraso</b></td><td><span class="n n2">21 días</span></td><td><span class="n n4">21 días</span></td></tr>
+   <tr><td><b>Prescripción</b></td><td><span class="n n2">1 año</span> · dolo <span class="n nr">2 años</span></td><td><span class="n n4">1 año</span> · dolo <span class="n nr">3 años</span></td></tr>
+   <tr><td><b>Inicio prescripción, pérdida total</b></td><td>30 días desde que se hizo cargo</td><td>Día 30 tras el plazo o día 60 desde que se hizo cargo</td></tr>
+   <tr><td><b>Inicio, resto de casos</b></td><td>Portes y paralización: 3 meses desde la <b>celebración</b></td><td>3 meses desde la <b>conclusión</b> del contrato</td></tr>
+   <tr><td><b>Dolo</b></td><td>Sin límites de indemnización</td><td>Sin límites de indemnización</td></tr>
+   <tr><td><b>Derecho de disposición</b></td><td>Cargador o destinatario; se anota en el 1.er ejemplar; se acaba al dar el 2.º ejemplar</td><td>Presentando el 1.er ejemplar, antes de la entrega; el nuevo destinatario no puede nombrar a otro</td></tr>
+   <tr><td><b>Vehículo defectuoso</b></td><td>No exonera nunca</td><td>No exonera nunca</td></tr>
+   <tr><td><b>Varios transportistas</b></td><td>Sucesivo: 1 contrato y 1 carta; responden todos</td><td>Cada uno responde de todo; se demanda al primero, al último o al del daño; reparto según remuneración</td></tr>
+   <tr><td><b>Conflictos</b></td><td>Juntas Arbitrales (≤ 15.000 € o sin límite si se pacta) o juzgado</td><td>Tribunales: pactado, demandado, lugar de carga o de entrega; o arbitraje que aplique el CMR</td></tr>
+  </tbody>
+ </table>
+</div>
+
+<!-- ============ CHULETA DE NÚMEROS ============ -->
+<div class="page">
+ <div class="sec s0"><span class="badge">#</span><div><h2>Todos los números del Tema 1 en una hoja</h2><p>Repaso relámpago: tapa la explicación y di de qué es cada número</p></div></div>
+
+ <div class="g4 mb">
+  <div class="tile t2"><span class="big">1 h</span><span class="lbl">para cargar o descargar</span></div>
+  <div class="tile t2"><span class="big">2 h</span><span class="lbl">descarga desde la hora pactada · esperar instrucciones</span></div>
+  <div class="tile t2"><span class="big">2×IPREM</span><span class="lbl">por hora de paralización (sin la 1.ª)</span></div>
+  <div class="tile t2"><span class="big">10 h</span><span class="lbl">máximo de paralización por día</span></div>
+  <div class="tile t2"><span class="big">+25 %</span><span class="lbl">2.º día de paralización</span></div>
+  <div class="tile t2"><span class="big">18 h</span><span class="lbl">presentarse antes · se suspende la carga</span></div>
+  <div class="tile t2"><span class="big">8 h</span><span class="lbl">se reanuda el día laborable siguiente</span></div>
+  <div class="tile t2"><span class="big">9 h</span><span class="lbl">entrega si el plazo acaba después de las 18 h</span></div>
+  <div class="tile t2"><span class="big">0 h</span><span class="lbl">del día siguiente: empieza el plazo si no consta la hora</span></div>
+  <div class="tile t2"><span class="big">20 km/h</span><span class="lbl">velocidad media sin plazo pactado</span></div>
+  <div class="tile t2"><span class="big">+24 h</span><span class="lbl">paquetería que acumula envíos</span></div>
+  <div class="tile t2"><span class="big">30 días</span><span class="lbl">mora en el pago del porte</span></div>
+  <div class="tile t2"><span class="big">3 meses</span><span class="lbl">paquetería abandonada</span></div>
+  <div class="tile t2"><span class="big">7 días nat.</span><span class="lbl">reservas daño oculto (nacional)</span></div>
+  <div class="tile t3"><span class="big">21 días</span><span class="lbl">reservas por retraso (nacional y CMR)</span></div>
+  <div class="tile t3"><span class="big">20 días</span><span class="lbl">retraso = pérdida total (nacional)</span></div>
+  <div class="tile t3"><span class="big">⅓ IPREM</span><span class="lbl">por día y por kg · tope nacional</span></div>
+  <div class="tile t3"><span class="big">20 IPREM</span><span class="lbl">por día y por m³ · tope mudanza</span></div>
+  <div class="tile t3"><span class="big">7 días háb.</span><span class="lbl">reservas en mudanza</span></div>
+  <div class="tile t3"><span class="big">1 / 2 años</span><span class="lbl">prescripción nacional / con dolo</span></div>
+  <div class="tile t3"><span class="big">3 meses</span><span class="lbl">desde el contrato: empieza la prescripción de portes y paralización</span></div>
+  <div class="tile t3"><span class="big">10 días</span><span class="lbl">pedir depósito tras retener · alegaciones</span></div>
+  <div class="tile t3"><span class="big">6 meses</span><span class="lbl">la Junta resuelve depósito/venta</span></div>
+  <div class="tile t3"><span class="big">10 % · 75 %</span><span class="lbl">fianza de subasta · salida de la 2.ª</span></div>
+  <div class="tile t3"><span class="big">3 días · 3 meses</span><span class="lbl">porteador acepta vender · venta por entidad</span></div>
+  <div class="tile t3"><span class="big">15.000 €</span><span class="lbl">límite de las Juntas sin pacto</span></div>
+  <div class="tile t3"><span class="big">2–4</span><span class="lbl">vocales + presidente en la Junta</span></div>
+  <div class="tile t3"><span class="big">100 €</span><span class="lbl">o menos: se puede omitir la vista</span></div>
+  <div class="tile t3"><span class="big">6 + 2 m</span><span class="lbl">para dictar el laudo</span></div>
+  <div class="tile t3"><span class="big">2 meses</span><span class="lbl">acción de anulación del laudo</span></div>
+  <div class="tile t3"><span class="big">20 días</span><span class="lbl">para ejecutar el laudo (Juez 1.ª Inst.)</span></div>
+  <div class="tile t3"><span class="big">1958</span><span class="lbl">Convenio de Nueva York (laudos extranjeros)</span></div>
+  <div class="tile t4"><span class="big">8,33 UC</span><span class="lbl">por kg · tope CMR</span></div>
+  <div class="tile t4"><span class="big">30 / 60 d</span><span class="lbl">perdida CMR: tras plazo / sin plazo</span></div>
+  <div class="tile t4"><span class="big">7 días</span><span class="lbl">reservas CMR sin domingos ni festivos</span></div>
+  <div class="tile t4"><span class="big">1 / 3 años</span><span class="lbl">prescripción CMR / con dolo</span></div>
+  <div class="tile t4"><span class="big">5 %</span><span class="lbl">intereses anuales CMR</span></div>
+  <div class="tile t4"><span class="big">3,5 t</span><span class="lbl">el CMR sí se aplica hasta esa MMA</span></div>
+  <div class="tile t1"><span class="big">2 meses</span><span class="lbl">fianza en local (LAU)</span></div>
+  <div class="tile t1"><span class="big">&gt;5 a · 4 m</span><span class="lbl">indemnización LAU · preaviso de renovar</span></div>
+  <div class="tile t1"><span class="big">7 años</span><span class="lbl">fianza de S.L. sin actualizar</span></div>
+  <div class="tile t1"><span class="big">2 plazos</span><span class="lbl">o el último: resolver venta a plazos</span></div>
+  <div class="tile t1"><span class="big">45 días</span><span class="lbl">obras largas → rebaja de renta</span></div>
+  <div class="tile" style="background:var(--bg)"><span class="big" style="color:var(--ink)">3</span><span class="lbl">originales de la carta de porte (nacional y CMR)</span></div>
+ </div>
+ <p class="mini" style="text-align:center;margin:2px 0 0">Colores: <span class="n n1">contratos</span> <span class="n n2">transporte nacional</span> <span class="n n3">responsabilidad y Juntas</span> <span class="n n4">CMR</span></p>
+</div>
+
+<!-- ============ TRAMPAS ============ -->
+<div class="page">
+ <div class="sec" style="background:var(--red)"><span class="badge" style="color:var(--red)">⚠</span><div><h2>Las trampas que más se fallan</h2><p>Sacadas de las preguntas del banco donde la respuesta «lógica» no es la correcta</p></div></div>
+ <div class="g2">
+  <div>
+   <div class="trap">Rentas impagadas de naves de una empresa de transportes → <b>Tribunales de Justicia</b>, no la Junta Arbitral.</div>
+   <div class="trap">«¿Qué no es obligación del comitente?» → <b>desempeñar la comisión</b>.</div>
+   <div class="trap">La muerte del <b>comitente NO</b> extingue la comisión; la del <b>comisionista sí</b>.</div>
+   <div class="trap">Renting: <b>sin opción de compra</b> y mantenimiento del <b>arrendador</b>.</div>
+   <div class="trap">El arrendatario de un local <b>puede subarrendar sin consentimiento</b>.</div>
+   <div class="trap">Depósito mercantil: <b>se cobra salvo pacto</b>; si te dejan usar la cosa ya es <b>préstamo</b>.</div>
+   <div class="trap">Vicios ocultos: el vendedor responde <b>aunque no los conociera</b>.</div>
+   <div class="trap">Compraventa: el transporte para entregar la cosa lo paga el <b>comprador</b>, salvo pacto.</div>
+   <div class="trap">Transporte <b>gratuito</b> = no es contrato de transporte. Sin autorización LOTT = <b>sí es válido</b>.</div>
+   <div class="trap"><b>Expedidor ≠ cargador</b>: el expedidor solo entrega la mercancía por cuenta del cargador.</div>
+   <div class="trap">Bulto: <b>da igual su volumen</b>.</div>
+   <div class="trap">Carta de porte <b>no obligatoria</b>; perderla <b>no anula</b> el contrato. Contrato verbal válido (salvo continuado).</div>
+  </div>
+  <div>
+   <div class="trap">Entoldar y mover el camión para cargar → <b>porteador</b>. Que el porteador descargue → <b>pacto por escrito</b>.</div>
+   <div class="trap">Rechazar bultos mal embalados es un <b>derecho</b>, no una obligación.</div>
+   <div class="trap">No se puede exigir al porteador <b>depósito por los palés</b>; devolverlos vacíos es <b>otro envío</b>.</div>
+   <div class="trap">Precio sin pacto: el usual en el lugar y momento de <b>recogida</b> (no de entrega).</div>
+   <div class="trap">Destinatario no paga el reembolso → <b>rehúsa el envío</b>.</div>
+   <div class="trap">Portes debidos impagados → el <b>cargador responde subsidiariamente</b>.</div>
+   <div class="trap"><b>Defecto del vehículo</b> nunca exonera (nacional ni CMR), aunque lo mantuviera bien.</div>
+   <div class="trap">Vehículo <b>abierto</b> solo exonera si se <b>pactó expresamente</b>.</div>
+   <div class="trap">Revisión conjunta <b>sin acuerdo</b> → repetirla <b>ante notario</b>.</div>
+   <div class="trap">Prescripción con dolo: <b>2 años</b> nacional, <b>3 años</b> CMR.</div>
+   <div class="trap">Juntas: <b>nunca laboral</b> ni competencia ilícita. Reclamante que no va → <b>desistido</b>.</div>
+   <div class="trap">CMR: <b>mudanzas nunca</b>; sí ≤ 3,5 t y temperatura dirigida. <b>Matrícula no obligatoria</b>.</div>
+   <div class="trap">CMR: no se sabe quién causó el daño → <b>según remuneración</b>, no a partes iguales ni por km.</div>
+   <div class="trap">CMR: el país del <b>demandante</b> por sí solo <b>no</b> es competente.</div>
+  </div>
+ </div>
+ <div class="card" style="margin-top:8px;background:var(--bg)">
+  <h3 style="color:var(--ink)">🧠 Las 5 reglas que resuelven medio examen</h3>
+  <ol style="margin:2px 0 0;padding-left:18px">
+   <li>La <b>prueba</b> siempre la carga el <b>porteador</b>.</li>
+   <li><b>Carga</b> = cargador · <b>descarga</b> = destinatario · <b>paquetería</b> = porteador.</li>
+   <li>Todo lo que es <b>cambiar órdenes</b> va con el <b>1.er ejemplar</b> de la carta de porte.</li>
+   <li>Si no sabe qué hacer con la mercancía → <b>Junta Arbitral del lugar donde está</b>.</li>
+   <li><b>Dolo</b> = sin límites de indemnización y más plazo de prescripción.</li>
+  </ol>
+ </div>
+</div>
+
+</body>
+</html>

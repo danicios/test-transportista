@@ -234,6 +234,17 @@ details[open] > .cuerpo, details[open] > .apuntes-caja { animation: entrar .22s 
   padding: 2px 8px; border-radius: 99px; }
 .fallo .cuerpo { padding: 2px 0 18px; }
 
+/* Esquema visual del tema: tarjeta aparte, encima de los epígrafes */
+.esquema-tema { display: flex; gap: 14px; align-items: center; flex-wrap: wrap; padding: 16px; margin: 0 0 18px;
+  border: 1px solid var(--line-strong); border-radius: 14px; background: var(--accent-soft); box-shadow: var(--shadow-sm); }
+.esquema-tema .esq-ico { flex: none; width: 42px; height: 42px; border-radius: 12px; display: grid; place-items: center;
+  background: var(--card); color: var(--accent-text); }
+.esquema-tema .esq-ico svg { width: 22px; height: 22px; }
+.esquema-tema .esq-txt { flex: 1 1 240px; min-width: 0; line-height: 1.4; }
+.esquema-tema .esq-txt b { display: block; margin-bottom: 2px; }
+.esquema-tema .esq-txt span { font-size: .88rem; color: var(--muted, inherit); }
+.esquema-tema .esq-acc { display: flex; gap: 8px; flex-wrap: wrap; }
+
 .epigrafe { border: 1px solid var(--line); border-radius: 14px; background: var(--card); margin-bottom: 10px;
   box-shadow: var(--shadow-sm); transition: border-color .15s; }
 .epigrafe[open] { border-color: var(--line-strong); }
@@ -469,3 +480,12 @@ div.opcion { cursor: default; }
 .fallo .veces.cp-bien { color: var(--ok); background: var(--ok-soft); }
 .fallo .veces.cp-blanco { color: var(--muted); background: var(--bg); }
 .btn:disabled { opacity: .45; cursor: not-allowed; }
+.cp-nota { display: block; margin-top: 6px; padding-top: 6px; border-top: 1px dashed var(--line-strong); font-size: .88rem; color: var(--muted); }
+.opcion:disabled:not(.correcta):not(.elegida-mal) { opacity: 1; }
+.opcion:disabled:not(.correcta):not(.elegida-mal) .cp-parte { color: var(--muted); }
+.opcion.correcta .cp-nota, .opcion.elegida-mal .cp-nota { color: var(--text); }
+.expl .cp-paso { margin: 0 0 8px; }
+.expl .cp-paso:last-child { margin-bottom: 0; }
+.cp-plegable { margin-top: 20px; }
+.cp-plegable summary { display: flex; align-items: center; gap: 8px; font-weight: 650; }
+.cp-sim { font-size: 1rem; margin: 20px 0 4px; }
