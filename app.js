@@ -735,7 +735,7 @@ function tarjetaEsquema(tema) {
   return `<div class="esquema-tema">
       <div class="esq-ico">${I.libro}</div>
       <div class="esq-txt"><b>Esquema visual del tema</b>
-        <span>Todo lo que cae en los test en gráficos, tablas y diagramas: comparativa nacional vs CMR, todos los números y las trampas típicas.</span></div>
+        <span>Todo lo que cae en los test en gráficos, tablas y diagramas, con todos los números en una hoja y las trampas típicas.</span></div>
       <div class="esq-acc">
         ${x.html ? `<a class="btn mini primario" href="${x.html}" target="_blank" rel="noopener">Ver esquema</a>` : ""}
         <a class="btn mini" href="${x.pdf}" download>Descargar PDF (${String(x.mb).replace(".", ",")} MB)</a>

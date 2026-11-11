@@ -1,0 +1,969 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<title>Esquema Tema 2 · Derecho mercantil</title>
+<style>
+@page { size: A4; margin: 11mm 11mm 12mm; }
+:root{
+  --ink:#1c2333; --mute:#5b6478; --line:#dde2ec; --bg:#f5f7fb;
+  --c1:#6d4bd8; --c1s:#efeafe;   /* contratos */
+  --c2:#1f6feb; --c2s:#e7f0ff;   /* contrato transporte */
+  --c3:#e8590c; --c3s:#fff0e6;   /* responsabilidad */
+  --c4:#0f9d58; --c4s:#e5f7ee;   /* CMR */
+  --red:#d6336c; --reds:#ffe8ef; --yel:#f5b301; --yels:#fff7dc;
+}
+*{box-sizing:border-box}
+html,body{margin:0;background:#fff;color:var(--ink);font-family:"Segoe UI",Roboto,Arial,sans-serif;font-size:9.4pt;line-height:1.34;-webkit-print-color-adjust:exact;print-color-adjust:exact}
+body{max-width:188mm;margin:0 auto}
+h1,h2,h3,h4{margin:0;line-height:1.15}
+b,strong{font-weight:700}
+.page{break-before:page}
+.sec{display:flex;align-items:center;gap:10px;border-radius:12px;padding:9px 14px;color:#fff;margin:0 0 9px}
+.sec .badge{background:#fff;border-radius:9px;font-weight:800;font-size:15pt;padding:3px 10px}
+.sec h2{font-size:15pt;font-weight:800}
+.sec p{margin:2px 0 0;font-size:9pt;opacity:.92}
+.s1{background:var(--c1)} .s1 .badge{color:var(--c1)}
+.s2{background:var(--c2)} .s2 .badge{color:var(--c2)}
+.s3{background:var(--c3)} .s3 .badge{color:var(--c3)}
+.s4{background:var(--c4)} .s4 .badge{color:var(--c4)}
+.s0{background:var(--ink)} .s0 .badge{color:var(--ink)}
+.card{border:1.3px solid var(--line);border-radius:11px;padding:8px 10px;margin:0 0 7px;break-inside:avoid;background:#fff}
+.card h3{font-size:10.6pt;font-weight:800;margin-bottom:4px;display:flex;align-items:center;gap:6px}
+.card h3 svg{width:20px;height:20px;flex:none}
+.k1 h3{color:var(--c1)} .k2 h3{color:var(--c2)} .k3 h3{color:var(--c3)} .k4 h3{color:var(--c4)}
+.k1{border-top:4px solid var(--c1)} .k2{border-top:4px solid var(--c2)} .k3{border-top:4px solid var(--c3)} .k4{border-top:4px solid var(--c4)}
+.g2{display:grid;grid-template-columns:1fr 1fr;gap:7px}
+.g3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:7px}
+.g4{display:grid;grid-template-columns:repeat(4,1fr);gap:6px}
+.g2>.card,.g3>.card,.g4>.card{margin:0}
+.mb{margin-bottom:7px}
+ul{margin:2px 0 0;padding-left:15px} li{margin:1.5px 0}
+li::marker{color:var(--mute)}
+.trap{background:var(--reds);border:1.3px solid #f5a3bd;border-left:5px solid var(--red);border-radius:9px;padding:5px 9px;margin:5px 0 0;break-inside:avoid;font-size:9pt}
+.trap::before{content:"⚠ TRAMPA  ";font-weight:800;color:var(--red);font-size:8.3pt;letter-spacing:.3px}
+.tip{background:var(--yels);border:1.3px solid #f1d27a;border-radius:9px;padding:5px 9px;margin:5px 0 0;break-inside:avoid;font-size:9pt}
+.tip::before{content:"💡 TRUCO  ";font-weight:800;color:#a77900;font-size:8.3pt}
+.n{display:inline-block;font-weight:800;border-radius:6px;padding:0 5px;white-space:nowrap}
+.n1{background:var(--c1s);color:var(--c1)} .n2{background:var(--c2s);color:var(--c2)} .n3{background:var(--c3s);color:var(--c3)} .n4{background:var(--c4s);color:var(--c4)} .nr{background:var(--reds);color:var(--red)}
+.tile{border-radius:10px;padding:6px 7px;text-align:center;break-inside:avoid}
+.tile .big{font-size:17pt;font-weight:900;line-height:1.05;display:block}
+.tile .lbl{font-size:8.2pt;color:var(--ink);display:block;margin-top:2px}
+.t1{background:var(--c1s)} .t1 .big{color:var(--c1)}
+.t2{background:var(--c2s)} .t2 .big{color:var(--c2)}
+.t3{background:var(--c3s)} .t3 .big{color:var(--c3)}
+.t4{background:var(--c4s)} .t4 .big{color:var(--c4)}
+.yes,.no{position:relative;padding-left:16px;margin:2px 0}
+.yes::before{content:"✔";color:#0f9d58;font-weight:900;position:absolute;left:0;top:0}
+.no::before{content:"✘";color:var(--red);font-weight:900;position:absolute;left:0;top:0}
+.diag{width:100%;height:auto;display:block}
+.svgtxt{font-family:"Segoe UI",Arial,sans-serif}
+table{width:100%;border-collapse:separate;border-spacing:0;font-size:8.8pt;break-inside:auto}
+th,td{padding:4px 6px;border-bottom:1px solid var(--line);vertical-align:top;text-align:left}
+thead th{color:#fff;font-size:9.2pt}
+tr{break-inside:avoid}
+.ref{font-size:7.6pt;color:var(--mute);font-weight:600}
+.mini{font-size:8.5pt;color:var(--mute)}
+.pill{display:inline-block;border-radius:20px;padding:1px 8px;font-size:8.3pt;font-weight:700;margin:1px 2px 1px 0}
+.flow{display:flex;align-items:stretch;gap:0}
+.flow .st{flex:1;border-radius:9px;padding:5px 6px;font-size:8.6pt;position:relative;text-align:center}
+.flow .ar{width:16px;display:flex;align-items:center;justify-content:center;color:var(--mute);font-weight:900;font-size:13pt}
+.flow .st>b:first-child{display:block;font-size:9pt;margin-bottom:1px}
+/* portada */
+.cover{height:272mm;display:flex;flex-direction:column}
+.hero{background:linear-gradient(135deg,#1c2333 0%,#27335a 60%,#1f6feb 130%);color:#fff;border-radius:18px;padding:22px 24px 18px;position:relative;overflow:hidden}
+.hero h1{font-size:30pt;font-weight:900;letter-spacing:-.5px}
+.hero .sub{font-size:12pt;opacity:.9;margin-top:4px}
+.hero .chips{margin-top:12px}
+.hero .chips span{display:inline-block;background:rgba(255,255,255,.15);border-radius:20px;padding:3px 10px;margin:0 5px 5px 0;font-size:9pt}
+.idx{display:grid;grid-template-columns:1fr 1fr;gap:9px;margin-top:12px}
+.idx .it{border-radius:14px;padding:11px 13px;color:#fff;break-inside:avoid}
+.idx .it h3{font-size:13pt;font-weight:800}
+.idx .it .code{font-size:9pt;font-weight:700;opacity:.85}
+.idx .it ul{padding-left:15px;font-size:9pt;margin-top:4px}
+.idx .it li::marker{color:#fff}
+.legend{display:flex;gap:10px;flex-wrap:wrap;margin-top:10px;font-size:9pt}
+</style>
+</head>
+<body>
+
+<!-- ============ ICONOS ============ -->
+<svg width="0" height="0" style="position:absolute">
+ <defs>
+  <symbol id="i-truck" viewBox="0 0 64 64"><rect x="3" y="16" width="35" height="26" rx="3" fill="currentColor"/><path d="M38 24h12.5l9 10.5V42H38z" fill="currentColor" opacity=".72"/><path d="M42 27.5h7.5l5 6H42z" fill="#fff" opacity=".9"/><circle cx="14" cy="45" r="6.5" fill="#1c2333"/><circle cx="14" cy="45" r="2.6" fill="#fff"/><circle cx="50" cy="45" r="6.5" fill="#1c2333"/><circle cx="50" cy="45" r="2.6" fill="#fff"/></symbol>
+  <symbol id="i-doc" viewBox="0 0 64 64"><path d="M13 5h27l12 12v42H13z" fill="#fff" stroke="currentColor" stroke-width="3.5" stroke-linejoin="round"/><path d="M40 5v12h12" fill="none" stroke="currentColor" stroke-width="3.5" stroke-linejoin="round"/><path d="M20 28h24M20 36h24M20 44h15" stroke="currentColor" stroke-width="3.5" stroke-linecap="round"/></symbol>
+  <symbol id="i-clock" viewBox="0 0 64 64"><circle cx="32" cy="32" r="26" fill="#fff" stroke="currentColor" stroke-width="4"/><path d="M32 16v17l11 7" fill="none" stroke="currentColor" stroke-width="4.5" stroke-linecap="round"/></symbol>
+  <symbol id="i-box" viewBox="0 0 64 64"><path d="M32 6l24 12v28L32 58 8 46V18z" fill="currentColor" opacity=".25"/><path d="M32 6l24 12-24 12L8 18z" fill="currentColor" opacity=".55"/><path d="M32 30v28M8 18v28l24 12 24-12V18" fill="none" stroke="currentColor" stroke-width="3" stroke-linejoin="round"/></symbol>
+  <symbol id="i-person" viewBox="0 0 64 64"><circle cx="32" cy="20" r="11" fill="currentColor"/><path d="M11 58c0-13 9-21 21-21s21 8 21 21z" fill="currentColor"/></symbol>
+  <symbol id="i-scale" viewBox="0 0 64 64"><path d="M32 8v46M18 56h28M12 18h40" stroke="currentColor" stroke-width="4" stroke-linecap="round"/><path d="M12 18L4 36h16zM52 18l-8 18h16z" fill="currentColor" opacity=".35" stroke="currentColor" stroke-width="2.5" stroke-linejoin="round"/><circle cx="32" cy="10" r="4" fill="currentColor"/></symbol>
+  <symbol id="i-gavel" viewBox="0 0 64 64"><rect x="20" y="8" width="26" height="13" rx="3" transform="rotate(35 33 14)" fill="currentColor"/><path d="M27 27L10 51" stroke="currentColor" stroke-width="6" stroke-linecap="round"/><rect x="30" y="50" width="28" height="7" rx="2" fill="currentColor" opacity=".6"/></symbol>
+  <symbol id="i-house" viewBox="0 0 64 64"><path d="M6 30L32 8l26 22" fill="none" stroke="currentColor" stroke-width="4.5" stroke-linecap="round" stroke-linejoin="round"/><path d="M13 27v29h38V27L32 11z" fill="currentColor" opacity=".85"/><rect x="27" y="38" width="10" height="18" fill="#fff"/></symbol>
+  <symbol id="i-key" viewBox="0 0 64 64"><circle cx="20" cy="32" r="12" fill="none" stroke="currentColor" stroke-width="5"/><path d="M32 32h26M48 32v9M56 32v7" stroke="currentColor" stroke-width="5" stroke-linecap="round"/></symbol>
+  <symbol id="i-euro" viewBox="0 0 64 64"><circle cx="32" cy="32" r="27" fill="currentColor"/><path d="M42 21a13 13 0 1 0 0 22M16 29h20M16 36h18" fill="none" stroke="#fff" stroke-width="4.5" stroke-linecap="round"/></symbol>
+  <symbol id="i-cal" viewBox="0 0 64 64"><rect x="6" y="11" width="52" height="46" rx="6" fill="#fff" stroke="currentColor" stroke-width="4"/><path d="M6 24h52" stroke="currentColor" stroke-width="4"/><path d="M19 5v12M45 5v12" stroke="currentColor" stroke-width="4.5" stroke-linecap="round"/><rect x="15" y="31" width="9" height="8" rx="1.5" fill="currentColor"/><rect x="28" y="31" width="9" height="8" rx="1.5" fill="currentColor" opacity=".4"/><rect x="41" y="31" width="9" height="8" rx="1.5" fill="currentColor" opacity=".4"/><rect x="15" y="43" width="9" height="8" rx="1.5" fill="currentColor" opacity=".4"/></symbol>
+  <symbol id="i-warn" viewBox="0 0 64 64"><path d="M32 5l29 52H3z" fill="currentColor" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/><path d="M32 23v16" stroke="#fff" stroke-width="5.5" stroke-linecap="round"/><circle cx="32" cy="48" r="3.5" fill="#fff"/></symbol>
+  <symbol id="i-globe" viewBox="0 0 64 64"><circle cx="32" cy="32" r="27" fill="#fff" stroke="currentColor" stroke-width="4"/><ellipse cx="32" cy="32" rx="12" ry="27" fill="none" stroke="currentColor" stroke-width="3"/><path d="M5 32h54M9 19h46M9 45h46" stroke="currentColor" stroke-width="3"/></symbol>
+  <symbol id="i-ware" viewBox="0 0 64 64"><path d="M4 24L32 8l28 16v32H4z" fill="currentColor" opacity=".85"/><rect x="14" y="32" width="36" height="24" fill="#fff"/><path d="M14 40h36M14 48h36" stroke="currentColor" stroke-width="2.5"/></symbol>
+  <symbol id="i-ship" viewBox="0 0 64 64"><path d="M6 38h52l-8 16H14z" fill="currentColor"/><rect x="18" y="22" width="12" height="16" fill="currentColor" opacity=".55"/><rect x="32" y="16" width="14" height="22" fill="currentColor" opacity=".75"/><path d="M2 60c5-3 10-3 15 0s10 3 15 0 10-3 15 0 10 3 15 0" fill="none" stroke="currentColor" stroke-width="2.5"/></symbol>
+  <symbol id="i-train" viewBox="0 0 64 64"><rect x="12" y="6" width="40" height="42" rx="9" fill="currentColor"/><rect x="18" y="13" width="28" height="14" rx="2" fill="#fff"/><circle cx="22" cy="38" r="3.5" fill="#fff"/><circle cx="42" cy="38" r="3.5" fill="#fff"/><path d="M20 48l-7 11M44 48l7 11M16 55h32" stroke="currentColor" stroke-width="4" stroke-linecap="round"/></symbol>
+  <symbol id="i-sofa" viewBox="0 0 64 64"><rect x="10" y="18" width="44" height="18" rx="5" fill="currentColor" opacity=".55"/><rect x="4" y="30" width="56" height="16" rx="5" fill="currentColor"/><path d="M10 46v8M54 46v8" stroke="currentColor" stroke-width="5" stroke-linecap="round"/></symbol>
+  <symbol id="i-shop" viewBox="0 0 64 64"><path d="M6 10h52l4 16H2z" fill="currentColor"/><rect x="8" y="26" width="48" height="30" fill="currentColor" opacity=".55"/><rect x="16" y="34" width="13" height="22" fill="#fff"/><rect x="35" y="34" width="14" height="11" fill="#fff"/></symbol>
+  <symbol id="i-hand" viewBox="0 0 64 64"><path d="M4 30l14-12 12 6 10-6 20 12-14 16-8-6-6 6-6-4-6 4z" fill="currentColor" opacity=".8"/><path d="M22 38l6-6 8 8M28 44l6-6" fill="none" stroke="#fff" stroke-width="3" stroke-linecap="round"/></symbol>
+  <symbol id="i-web" viewBox="0 0 64 64"><rect x="4" y="9" width="56" height="38" rx="5" fill="currentColor"/><rect x="9" y="14" width="46" height="28" rx="2" fill="#fff"/><path d="M24 56h16M32 47v9" stroke="currentColor" stroke-width="4.5" stroke-linecap="round"/><path d="M17 28l6 6 12-13" fill="none" stroke="currentColor" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+  <symbol id="i-hour" viewBox="0 0 64 64"><path d="M16 5h32M16 59h32" stroke="currentColor" stroke-width="4.5" stroke-linecap="round"/><path d="M19 6c0 16 26 16 26 26S19 42 19 58h26c0-16-26-16-26-26S45 22 45 6z" fill="none" stroke="currentColor" stroke-width="3.5" stroke-linejoin="round"/><path d="M24 54c3-6 13-6 16 0z" fill="currentColor"/></symbol>
+  <symbol id="i-check" viewBox="0 0 64 64"><circle cx="32" cy="32" r="27" fill="currentColor"/><path d="M19 33l9 9 18-20" fill="none" stroke="#fff" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+  <symbol id="i-snow" viewBox="0 0 64 64"><path d="M32 4v56M8 18l48 28M8 46l48-28" stroke="currentColor" stroke-width="4.5" stroke-linecap="round"/></symbol>
+  <symbol id="i-plane" viewBox="0 0 64 64"><path d="M30 4c3 0 4 4 4 8v14l24 14v6l-24-7v12l7 6v4l-11-3-11 3v-4l7-6V39L2 46v-6l24-14V12c0-4 1-8 4-8z" fill="currentColor"/></symbol>
+ </defs>
+</svg>
+
+<style>
+:root{ --c5:#0b7285; --c5s:#e3f4f7; }
+.s5{background:var(--c5)} .s5 .badge{color:var(--c5)}
+.k5{border-top:4px solid var(--c5)} .k5 h3{color:var(--c5)}
+.t5{background:var(--c5s)} .t5 .big{color:var(--c5)}
+.n5{background:var(--c5s);color:var(--c5)}
+.cmp th{color:#fff} .cmp td:first-child{font-weight:700}
+.meter{display:flex;gap:3px;margin-top:3px}.meter i{flex:1;height:8px;border-radius:4px;background:#e4e7ee}
+</style>
+<svg width="0" height="0" style="position:absolute"><defs>
+ <symbol id="i-book" viewBox="0 0 64 64"><path d="M8 10h20a6 6 0 016 6v40a5 5 0 00-5-5H8z" fill="currentColor"/><path d="M56 10H36a6 6 0 00-6 6v40a5 5 0 015-5h21z" fill="currentColor" opacity=".6"/></symbol>
+ <symbol id="i-build" viewBox="0 0 64 64"><rect x="10" y="8" width="30" height="50" rx="2" fill="currentColor"/><rect x="40" y="24" width="16" height="34" rx="2" fill="currentColor" opacity=".6"/><g fill="#fff"><rect x="16" y="14" width="6" height="6"/><rect x="28" y="14" width="6" height="6"/><rect x="16" y="26" width="6" height="6"/><rect x="28" y="26" width="6" height="6"/><rect x="16" y="38" width="6" height="6"/><rect x="28" y="38" width="6" height="6"/><rect x="21" y="48" width="8" height="10"/></g></symbol>
+ <symbol id="i-group" viewBox="0 0 64 64"><circle cx="20" cy="22" r="8" fill="currentColor" opacity=".6"/><circle cx="44" cy="22" r="8" fill="currentColor" opacity=".6"/><circle cx="32" cy="18" r="10" fill="currentColor"/><path d="M4 52c0-10 7-16 16-16 3 0 6 1 8 2-4 3-6 8-6 14z" fill="currentColor" opacity=".6"/><path d="M60 52c0-10-7-16-16-16-3 0-6 1-8 2 4 3 6 8 6 14z" fill="currentColor" opacity=".6"/><path d="M14 56c0-12 8-20 18-20s18 8 18 20z" fill="currentColor"/></symbol>
+ <symbol id="i-ring" viewBox="0 0 64 64"><circle cx="24" cy="36" r="16" fill="none" stroke="currentColor" stroke-width="5"/><circle cx="40" cy="36" r="16" fill="none" stroke="currentColor" stroke-width="5" opacity=".6"/><path d="M28 8l4-4 4 4-4 6z" fill="currentColor"/></symbol>
+ <symbol id="i-shield" viewBox="0 0 64 64"><path d="M32 4l24 9v16c0 15-10 27-24 31C18 56 8 44 8 29V13z" fill="currentColor"/><path d="M21 32l8 8 14-15" fill="none" stroke="#fff" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+ <symbol id="i-stamp" viewBox="0 0 64 64"><rect x="24" y="4" width="16" height="22" rx="7" fill="currentColor"/><path d="M14 30h36l4 12H10z" fill="currentColor"/><rect x="8" y="46" width="48" height="6" rx="2" fill="currentColor" opacity=".6"/></symbol>
+</defs></svg>
+
+<!-- ============ PORTADA ============ -->
+<div class="cover">
+ <div class="hero">
+  <div style="font-size:10pt;font-weight:700;letter-spacing:2px;opacity:.75">COMPETENCIA PROFESIONAL · TRANSPORTE DE MERCANCÍAS</div>
+  <h1>TEMA 2 · Derecho mercantil</h1>
+  <div class="sub">Esquema visual con <b>todos los datos</b> que caen en los test (1B01 – 1B02 · 542 preguntas del banco)</div>
+  <div class="chips"><span>👤 Empresario</span><span>📚 Registro y contabilidad</span><span>🏛️ Trámites y concurso</span><span>🏢 Sociedades</span><span>🤝 Cooperativas</span></div>
+  <svg viewBox="0 0 600 120" class="diag" style="margin-top:6px">
+   <path d="M0 104 H600" stroke="rgba(255,255,255,.35)" stroke-width="2" stroke-dasharray="10 8"/>
+   <use href="#i-person" x="10" y="38" width="62" height="62" style="color:#b9a6ff"/>
+   <use href="#i-book" x="120" y="38" width="62" height="62" style="color:#8fb8ff"/>
+   <use href="#i-gavel" x="240" y="38" width="62" height="62" style="color:#ffb27a"/>
+   <use href="#i-build" x="370" y="30" width="72" height="72" style="color:#6fe0a6"/>
+   <use href="#i-group" x="500" y="38" width="70" height="62" style="color:#7fd3e0"/>
+  </svg>
+ </div>
+ <div class="idx">
+  <div class="it" style="background:var(--c1)"><div class="code">1B01 · parte 1</div><h3>El empresario</h3><ul><li>Quién es, capacidad y prohibiciones</li><li>Responsabilidad y bienes del matrimonio</li><li>Emprendedor de Responsabilidad Limitada</li><li>Factor, establecimiento y sucursal</li></ul></div>
+  <div class="it" style="background:var(--c2)"><div class="code">1B01 · parte 2</div><h3>Registro y contabilidad</h3><ul><li>Registro Mercantil y BORME</li><li>Libros obligatorios y legalización</li><li>PGC y principios contables</li><li>Cuentas anuales</li></ul></div>
+  <div class="it" style="background:var(--c3)"><div class="code">1B01 · parte 3</div><h3>Trámites y concurso</h3><ul><li>Hacienda, Seguridad Social, ayuntamiento</li><li>PAE y DUE</li><li>Concurso de acreedores</li><li>Voluntario/necesario · fortuito/culpable</li></ul></div>
+  <div class="it" style="background:var(--c4)"><div class="code">1B02 · 307 preguntas (el que más cae)</div><h3>Sociedades mercantiles</h3><ul><li>Colectiva y comanditaria simple</li><li>SA, SL y comanditaria por acciones</li><li>Junta, administradores, cuentas</li><li>Obligaciones, disolución y liquidación</li></ul></div>
+ </div>
+ <div class="idx" style="grid-template-columns:1fr">
+  <div class="it" style="background:var(--c5)"><div class="code">1B02 · sociedades especiales</div><h3>Laborales, cooperativas y AIE</h3><ul><li>Sociedades laborales (Ley 44/2015) · Cooperativas (Ley 27/1999): socios, órganos, economía · Agrupación de interés económico (Ley 12/1991)</li></ul></div>
+ </div>
+ <div class="card" style="margin-top:10px">
+  <h3 style="color:var(--ink)">Cómo usar este esquema</h3>
+  <div class="legend">
+   <span><span class="n n4">60.000 €</span> = dato que te preguntan tal cual</span>
+   <span class="trap" style="margin:0;padding:2px 8px">la respuesta «lógica» no es la buena</span>
+   <span class="tip" style="margin:0;padding:2px 8px">regla para acordarte</span>
+  </div>
+  <p class="mini" style="margin:6px 0 0">Al final tienes 3 páginas de repaso: <b>la tabla de todas las sociedades</b>, <b>todos los números</b> en una hoja y <b>las trampas</b> más típicas.</p>
+ </div>
+</div>
+
+<!-- ============ EMPRESARIO ============ -->
+<div class="page">
+ <div class="sec s1"><span class="badge">1B01</span><div><h2>El empresario (I)</h2><p>Quién es · Capacidad · Prohibiciones · Responsabilidad · Bienes del matrimonio</p></div></div>
+
+ <div class="card k1">
+  <h3><svg><use href="#i-person"/></svg>¿Quién es empresario? <span class="ref">CCom 1-5</span></h3>
+  <svg viewBox="0 0 700 120" class="diag svgtxt">
+   <rect x="4" y="8" width="200" height="104" rx="12" fill="#efeafe"/><text x="104" y="34" text-anchor="middle" font-size="15" font-weight="800" fill="#6d4bd8">CAPACIDAD LEGAL</text>
+   <text x="104" y="60" text-anchor="middle" font-size="12.5">mayor de edad (18)</text><text x="104" y="78" text-anchor="middle" font-size="12.5" font-weight="800">+</text><text x="104" y="96" text-anchor="middle" font-size="12.5">libre disposición de bienes</text>
+   <text x="222" y="70" font-size="34" font-weight="900" fill="#6d4bd8">+</text>
+   <rect x="252" y="8" width="200" height="104" rx="12" fill="#efeafe"/><text x="352" y="34" text-anchor="middle" font-size="15" font-weight="800" fill="#6d4bd8">HABITUALIDAD</text>
+   <text x="352" y="60" text-anchor="middle" font-size="12.5">dedicarse al comercio</text><text x="352" y="78" text-anchor="middle" font-size="12.5">de forma habitual</text><text x="352" y="98" text-anchor="middle" font-size="11" fill="#5b6478">se presume si anuncia un establecimiento</text>
+   <text x="470" y="70" font-size="34" font-weight="900" fill="#6d4bd8">=</text>
+   <rect x="500" y="8" width="196" height="104" rx="12" fill="#6d4bd8"/><use href="#i-person" x="574" y="16" width="48" height="48" style="color:#fff"/><text x="598" y="84" text-anchor="middle" font-size="15" font-weight="800" fill="#fff">EMPRESARIO</text><text x="598" y="102" text-anchor="middle" font-size="11" fill="#fff">en nombre propio</text>
+  </svg>
+  <div class="g3" style="margin-top:4px">
+   <div><div class="no">No hace falta licencia fiscal ni establecimiento abierto</div><div class="no">No se exige nacionalidad española</div><div class="yes">Puede actuar por sí o por <b>representantes</b></div></div>
+   <div><b>Individual</b> = persona física. <b>Social</b> = la sociedad (persona jurídica). Los <b>socios no son empresarios</b>: el empresario es la sociedad.</div>
+   <div><b>Menores</b>: no pueden empezar (ni el <b>emancipado</b>). Sí pueden <b>continuar</b> el comercio de sus padres o causantes <b>por medio de sus guardadores</b>.</div>
+  </div>
+ </div>
+
+ <div class="g2 mb">
+  <div class="card k1">
+   <h3><svg><use href="#i-warn"/></svg>Prohibidos (cargo incompatible) <span class="ref">CCom 14</span></h3>
+   <div class="no"><b>Jueces</b></div>
+   <div class="no">Ciertos <b>militares</b> con mando</div>
+   <div class="no"><b>Corredores de comercio</b></div>
+   <div class="no"><b>Inhabilitados</b> por la Ley Concursal</div>
+   <div class="yes">Los habilitados para ser titulares de empresa de transporte <b>sí</b></div>
+  </div>
+  <div class="card k1">
+   <h3><svg><use href="#i-build"/></svg>Tamaño de empresa (UE)</h3>
+   <div class="g2">
+    <div class="tile t1"><span class="big">&lt; 250</span><span class="lbl">trabajadores = <b>PYME</b></span></div>
+    <div><ul style="margin:0"><li>PYME = <b>micro, pequeña y mediana</b></li><li>Además: <b>pequeñas de mediana capitalización</b> y <b>grandes</b></li></ul></div>
+   </div>
+  </div>
+ </div>
+
+ <div class="card k1">
+  <h3><svg><use href="#i-scale"/></svg>¿Con qué responde? <span class="ref">CC 1911 · 1903</span></h3>
+  <div class="g3">
+   <div><b>Empresario individual</b>: con <b>todos sus bienes presentes y futuros</b>, los del negocio y los personales.<br><b>Sociedad</b>: según su <b>clase</b>.</div>
+   <div>Responde de los actos de sus <b>empleados en el ejercicio de sus funciones</b>, aunque no diera una orden expresa.</div>
+   <div><b>Responsabilidad objetiva</b> (sin culpa), solo frente a <b>consumidores y usuarios</b>: <b>productos defectuosos</b> (muebles, gas, electricidad) y <b>servicios</b> con garantía de eficacia o seguridad.</div>
+  </div>
+ </div>
+
+ <div class="card k1">
+  <h3><svg><use href="#i-ring"/></svg>Empresario casado: ¿qué bienes responden? <span class="ref">CC 1365 · 1327</span></h3>
+  <svg viewBox="0 0 700 132" class="diag svgtxt">
+   <rect x="4" y="6" width="250" height="120" rx="12" fill="#6d4bd8"/><use href="#i-house" x="16" y="18" width="46" height="46" style="color:#fff"/>
+   <text x="72" y="36" font-size="16" font-weight="800" fill="#fff">GANANCIALES</text><text x="72" y="54" font-size="11.5" fill="#fff">(comunes del matrimonio)</text>
+   <text x="16" y="88" font-size="13" font-weight="800" fill="#fff">✔ Responden EN TODO CASO</text><text x="16" y="108" font-size="11.5" fill="#fff">sean o no del negocio · el otro</text><text x="16" y="122" font-size="11.5" fill="#fff">cónyuge no puede oponerse</text>
+   <rect x="270" y="6" width="250" height="120" rx="12" fill="#efeafe"/><use href="#i-key" x="282" y="18" width="46" height="46" style="color:#6d4bd8"/>
+   <text x="338" y="36" font-size="16" font-weight="800" fill="#6d4bd8">PRIVATIVOS</text><text x="338" y="54" font-size="11.5">(solo del otro cónyuge)</text>
+   <text x="282" y="88" font-size="13" font-weight="800" fill="#d6336c">✘ Solo con consentimiento</text><text x="282" y="106" font-size="13" font-weight="800" fill="#d6336c">EXPRESO</text><text x="282" y="122" font-size="11.5">(el tácito no vale)</text>
+   <rect x="536" y="6" width="160" height="120" rx="12" fill="#f1f3f8"/>
+   <text x="616" y="30" text-anchor="middle" font-size="12.5" font-weight="800">El consentimiento:</text>
+   <text x="616" y="52" text-anchor="middle" font-size="11.5">sin forma especial</text><text x="616" y="70" text-anchor="middle" font-size="11.5">revocable libremente</text>
+   <text x="616" y="94" text-anchor="middle" font-size="11.5">Capitulaciones →</text><text x="616" y="110" text-anchor="middle" font-size="11.5" font-weight="800">escritura pública</text>
+  </svg>
+ </div>
+</div>
+
+<!-- ============ ERL / COLABORADORES ============ -->
+<div class="page">
+ <div class="sec s1"><span class="badge">1B01</span><div><h2>El empresario (II)</h2><p>Emprendedor de Responsabilidad Limitada (Ley 14/2013) · Factor · Establecimiento y sucursal</p></div></div>
+
+ <div class="card k1">
+  <h3><svg><use href="#i-shield"/></svg>Emprendedor de Responsabilidad Limitada (ERL) · solo personas físicas</h3>
+  <svg viewBox="0 0 700 150" class="diag svgtxt">
+   <path d="M65 14l48 18v32c0 30-20 54-48 62C37 118 17 94 17 64V32z" fill="#6d4bd8"/>
+   <use href="#i-house" x="40" y="44" width="50" height="50" style="color:#fff"/>
+   <rect x="140" y="10" width="270" height="130" rx="12" fill="#efeafe"/>
+   <text x="275" y="34" text-anchor="middle" font-size="14.5" font-weight="800" fill="#6d4bd8">VIVIENDA HABITUAL protegida si vale…</text>
+   <rect x="156" y="48" width="114" height="80" rx="10" fill="#6d4bd8"/><text x="213" y="84" text-anchor="middle" font-size="22" font-weight="900" fill="#fff">300.000 €</text><text x="213" y="104" text-anchor="middle" font-size="10.5" fill="#fff">población ≤ 1 millón</text>
+   <rect x="280" y="48" width="114" height="80" rx="10" fill="#4b2fb0"/><text x="337" y="84" text-anchor="middle" font-size="22" font-weight="900" fill="#fff">450.000 €</text><text x="337" y="104" text-anchor="middle" font-size="10.5" fill="#fff">población &gt; 1 millón</text>
+   <rect x="426" y="10" width="270" height="130" rx="12" fill="#efeafe"/>
+   <text x="561" y="34" text-anchor="middle" font-size="14.5" font-weight="800" fill="#6d4bd8">BIENES DE EQUIPO del negocio</text>
+   <use href="#i-truck" x="440" y="44" width="70" height="66" style="color:#6d4bd8"/>
+   <text x="520" y="70" font-size="12">protegidos hasta la</text><text x="520" y="88" font-size="12" font-weight="800">facturación de los</text><text x="520" y="106" font-size="12" font-weight="800">2 últimos ejercicios</text>
+   <text x="561" y="130" text-anchor="middle" font-size="11" fill="#d6336c" font-weight="700">✘ viviendas de temporada ✘ el resto</text>
+  </svg>
+  <div class="g3" style="margin-top:4px">
+   <div><b>Trámites</b><ul><li>Inscribirse en el <b>Registro Mercantil</b> y anotar que es ERL y qué bienes no responden</li><li>Vivienda → siempre en el <b>Registro de la Propiedad</b></li><li>Bienes de equipo → <b>R. Mercantil + R. de Bienes Muebles</b> (el Registrador Mercantil envía certificación telemática)</li></ul></div>
+   <div><b>Documentación</b>: su nombre + «<b>Emprendedor de Responsabilidad Limitada</b>» o «<b>ERL</b>».<br><br><b>Cuentas</b>: como una <b>SL unipersonal</b> (salvo estimación objetiva); depositarlas en el Registro Mercantil en <span class="n n1">7 meses</span>.</div>
+   <div><b>Pierde la protección</b><div class="no">No deposita las cuentas en 7 meses</div><div class="no"><b>Negligencia grave</b> por <b>sentencia firme</b></div><div class="no"><b>Concurso culpable</b></div></div>
+  </div>
+ </div>
+
+ <div class="g2 mb">
+  <div class="card k1">
+   <h3><svg><use href="#i-person"/></svg>Colaboradores: el factor <span class="ref">CCom 282</span></h3>
+   <ul>
+    <li><b>Factor</b> = gerente o apoderado general; actúa <b>por cuenta del empresario</b>.</li>
+    <li>Necesita <b>capacidad legal para obligarse</b> + <b>poder</b> del empresario.</li>
+    <li>El empresario responde de sus actos <b>relacionados con la actividad</b>.</li>
+    <li>Hace negocios del mismo tipo sin permiso → <b>beneficios para la empresa</b>, <b>pérdidas para él</b>.</li>
+    <li><b>Dependientes y mandatarios singulares</b>: apoderamiento <b>limitado</b>.</li>
+   </ul>
+  </div>
+  <div class="card k1">
+   <h3><svg><use href="#i-shop"/></svg>Establecimiento y sucursal</h3>
+   <ul>
+    <li><b>Establecimiento mercantil</b>: <b>conjunto patrimonial unitario organizado</b> para el negocio.</li>
+    <li><b>Sucursal</b>: establecimiento secundario con <b>representación permanente</b> y <b>cierta autonomía de gestión</b>.</li>
+    <li>Se inscribe en el R. Mercantil de la provincia <b>del domicilio de la sucursal</b>.</li>
+    <li><b>Sociedades extranjeras</b>: deben inscribir obligatoriamente sus sucursales en España.</li>
+   </ul>
+  </div>
+ </div>
+ <div class="tip">ERL = el <b>individual</b> que se protege. Los dos números: <b>300.000 / 450.000 €</b> (corte en <b>1 millón de habitantes</b>) y <b>7 meses</b> para depositar cuentas.</div>
+</div>
+
+<!-- ============ REGISTRO Y CONTABILIDAD ============ -->
+<div class="page">
+ <div class="sec s2"><span class="badge">1B01</span><div><h2>Registro Mercantil y contabilidad</h2><p>Inscripción · BORME · Libros · Legalización · PGC · Cuentas anuales</p></div></div>
+
+ <div class="card k2">
+  <h3><svg><use href="#i-stamp"/></svg>Registro Mercantil <span class="ref">CCom 16-19</span></h3>
+  <div class="g3">
+   <div><b>¿Quién se inscribe?</b><div class="yes"><b>Obligatorio</b>: sociedades y <b>navieros</b></div><div class="yes"><b>Voluntario</b>: empresarios individuales</div><div class="no">El individual <b>no inscrito</b> no puede inscribir ningún documento</div></div>
+   <div><b>¿Qué consta?</b><ul><li>Se inscribe por <b>escritura pública o documento judicial</b></li><li>Sociedad: su <b>constitución</b></li><li>Individual: <b>nombre comercial</b> y <b>poderes generales</b></li><li>Datos de inscripción en <b>toda la documentación</b></li></ul></div>
+   <div><b>Efectos</b>: frente a terceros de buena fe <b>desde la publicación en el BORME</b>.<br><br>Además <b>legaliza los libros</b> de contabilidad (también de las empresas de transporte).</div>
+  </div>
+ </div>
+
+ <div class="card k2">
+  <h3><svg><use href="#i-book"/></svg>Libros de contabilidad <span class="ref">CCom 25-30</span></h3>
+  <svg viewBox="0 0 700 128" class="diag svgtxt">
+   <g><rect x="4" y="6" width="166" height="116" rx="12" fill="#1f6feb"/><use href="#i-book" x="16" y="16" width="40" height="40" style="color:#fff"/><text x="62" y="34" font-size="14" font-weight="800" fill="#fff">DIARIO</text><text x="62" y="50" font-size="11" fill="#fff">✔ todos</text>
+    <text x="16" y="76" font-size="11" fill="#fff">día a día todas las</text><text x="16" y="90" font-size="11" fill="#fff">operaciones (o totales</text><text x="16" y="104" font-size="11" fill="#fff">de periodos ≤ trimestre)</text></g>
+   <g><rect x="180" y="6" width="166" height="116" rx="12" fill="#1f6feb"/><use href="#i-book" x="192" y="16" width="40" height="40" style="color:#fff"/><text x="238" y="30" font-size="12.5" font-weight="800" fill="#fff">INVENTARIOS</text><text x="238" y="45" font-size="12.5" font-weight="800" fill="#fff">Y CUENTAS</text><text x="238" y="58" font-size="11" fill="#fff">✔ todos</text>
+    <text x="192" y="78" font-size="11" fill="#fff">balance inicial, balances</text><text x="192" y="92" font-size="11" fill="#fff">de comprobación (trim.),</text><text x="192" y="106" font-size="11" fill="#fff">inventario cierre y CCAA</text></g>
+   <g><rect x="356" y="6" width="166" height="116" rx="12" fill="#e7f0ff"/><use href="#i-book" x="368" y="16" width="40" height="40" style="color:#1f6feb"/><text x="414" y="34" font-size="14" font-weight="800" fill="#1f6feb">ACTAS</text><text x="414" y="50" font-size="11">✔ sociedades</text>
+    <text x="368" y="76" font-size="11">acuerdos de Juntas,</text><text x="368" y="90" font-size="11">consejo y administrador</text><text x="368" y="104" font-size="11" fill="#d6336c" font-weight="700">✘ el individual no lo lleva</text></g>
+   <g><rect x="532" y="6" width="164" height="116" rx="12" fill="#f1f3f8"/><use href="#i-book" x="544" y="16" width="40" height="40" style="color:#9aa3b5"/><text x="590" y="34" font-size="14" font-weight="800" fill="#5b6478">MAYOR</text><text x="590" y="50" font-size="11" fill="#d6336c" font-weight="700">✘ NO obligatorio</text>
+    <text x="544" y="76" font-size="11">recoge todas las cuentas</text><text x="544" y="90" font-size="11">se puede legalizar</text><text x="544" y="104" font-size="11">si el empresario quiere</text></g>
+  </svg>
+  <div class="g4" style="margin-top:5px">
+   <div class="tile t2"><span class="big">4 meses</span><span class="lbl">legalizar libros electrónicos tras el cierre</span></div>
+   <div class="tile t2"><span class="big">6 años</span><span class="lbl">conservar desde el <b>último asiento</b> (aunque cese)</span></div>
+   <div class="tile t2"><span class="big">Herederos</span><span class="lbl">los conservan si <b>fallece</b> · <b>liquidadores</b> si la sociedad se disuelve</span></div>
+   <div class="tile t2"><span class="big">€</span><span class="lbl">claridad, orden de fechas, sin blancos, abreviaturas generales</span></div>
+  </div>
+  <p class="mini" style="margin:4px 0 0">Los lleva el empresario <b>o personas autorizadas</b>. Legalizado = <b>diligenciado (sellado) por el Registro Mercantil</b>. Si terceros examinan los libros, lo hacen <b>en el establecimiento del empresario</b>. Balance de comprobación = verificar lo ya registrado.</p>
+ </div>
+
+ <div class="g2 mb">
+  <div class="card k2">
+   <h3><svg><use href="#i-doc"/></svg>Plan General de Contabilidad</h3>
+   <ul>
+    <li>Obligatorio para <b>todas las empresas</b> (también transporte). Nadie valora «a su gusto».</li>
+    <li><b>PGC de PYMEs</b> si no superan ciertos límites.</li>
+    <li><b>Principios</b>: <span class="pill" style="background:var(--c2s)">empresa en funcionamiento</span><span class="pill" style="background:var(--c2s)">devengo</span><span class="pill" style="background:var(--c2s)">prudencia</span><span class="pill" style="background:var(--c2s)">uniformidad</span></li>
+    <li>Valoración: <b>precio de adquisición, coste de producción o valor razonable</b>; moneda de su entorno.</li>
+    <li>Ejercicio <b>anual</b> = año natural, por regla general.</li>
+   </ul>
+  </div>
+  <div class="card k2">
+   <h3><svg><use href="#i-euro"/></svg><span>Cuentas anuales · en <span class="n n2">3 meses</span> desde el cierre</span></h3>
+   <div class="yes"><b>Balance</b> → activo y pasivo</div>
+   <div class="yes"><b>Pérdidas y ganancias</b> → ingresos y gastos (cada 12 meses)</div>
+   <div class="yes"><b>Cambios en el patrimonio neto</b></div>
+   <div class="yes"><b>Flujos de efectivo</b> → cobros y pagos</div>
+   <div class="yes"><b>Memoria</b> → amplía y comenta</div>
+   <p class="mini" style="margin:3px 0 0">Ejercicio actual + <b>anterior</b>, en euros, <b>imagen fiel</b>; las firman el empresario o los <b>administradores</b>; hay <b>modelos abreviados</b>.</p>
+  </div>
+ </div>
+ <div class="trap">Empresario <b>individual</b>: solo <b>balance, PyG y memoria</b> (abreviados). Su <b>auditoría</b> solo si la acuerda el <b>Secretario judicial o el Registrador mercantil</b>; el informe va a quien lo designó, al solicitante y al auditado.</div>
+</div>
+
+<!-- ============ TRÁMITES ============ -->
+<div class="page">
+ <div class="sec s3"><span class="badge">1B01</span><div><h2>Trámites para empezar la actividad</h2><p>Hacienda · Ayuntamiento · Seguridad Social · Autoridad laboral · PAE y DUE</p></div></div>
+
+ <div class="card k3">
+  <h3><svg><use href="#i-cal"/></svg>Línea de tiempo: antes y después de empezar</h3>
+  <svg viewBox="0 0 700 214" class="diag svgtxt">
+   <path d="M20 108 H690" stroke="#1c2333" stroke-width="4"/>
+   <rect x="300" y="88" width="104" height="40" rx="20" fill="#e8590c"/><text x="352" y="113" text-anchor="middle" font-size="13" font-weight="900" fill="#fff">INICIO</text>
+   <!-- antes -->
+   <rect x="10" y="8" width="270" height="78" rx="12" fill="#fff0e6"/>
+   <text x="145" y="30" text-anchor="middle" font-size="14" font-weight="800" fill="#e8590c">ANTES DE EMPEZAR</text>
+   <text x="22" y="52" font-size="12">🏛️ <tspan font-weight="800">Declaración censal de alta</tspan> (Hacienda)</text>
+   <text x="22" y="72" font-size="12">🏥 <tspan font-weight="800">Inscripción en la Seguridad Social</tspan></text>
+   <path d="M145 86 V104" stroke="#e8590c" stroke-width="3"/>
+   <!-- despues -->
+   <rect x="420" y="8" width="276" height="78" rx="12" fill="#fff0e6"/>
+   <text x="558" y="30" text-anchor="middle" font-size="14" font-weight="800" fill="#e8590c">DESPUÉS DE EMPEZAR</text>
+   <text x="432" y="52" font-size="12">🏭 Apertura centro de trabajo:</text><text x="432" y="70" font-size="12"><tspan font-weight="800">30 días</tspan> a la autoridad laboral</text>
+   <path d="M558 86 V104" stroke="#e8590c" stroke-width="3"/>
+   <!-- abajo -->
+   <rect x="10" y="132" width="220" height="76" rx="12" fill="#f1f3f8"/>
+   <text x="120" y="154" text-anchor="middle" font-size="13" font-weight="800">CAMBIOS EN HACIENDA</text>
+   <text x="120" y="176" text-anchor="middle" font-size="12">Modificación censal: <tspan font-weight="800">1 mes</tspan></text><text x="120" y="196" text-anchor="middle" font-size="12">Baja por cese: <tspan font-weight="800">1 mes</tspan></text>
+   <rect x="242" y="132" width="220" height="76" rx="12" fill="#ffe8ef"/>
+   <text x="352" y="154" text-anchor="middle" font-size="13" font-weight="800" fill="#d6336c">SEGURIDAD SOCIAL</text>
+   <text x="352" y="176" text-anchor="middle" font-size="12">Cese de la empresa y baja</text><text x="352" y="196" text-anchor="middle" font-size="12">de trabajador: <tspan font-weight="800">3 días naturales</tspan></text>
+   <rect x="474" y="132" width="222" height="76" rx="12" fill="#f1f3f8"/>
+   <text x="585" y="154" text-anchor="middle" font-size="13" font-weight="800">SERVICIO DE EMPLEO</text>
+   <text x="585" y="176" text-anchor="middle" font-size="12">se comunican TODOS los</text><text x="585" y="196" text-anchor="middle" font-size="12">contratos y sus prórrogas</text>
+  </svg>
+ </div>
+
+ <div class="g2 mb">
+  <div class="card k3">
+   <h3><svg><use href="#i-doc"/></svg>Hacienda</h3>
+   <ul>
+    <li><b>Declaración censal de alta</b>: toda persona física o jurídica, <b>antes del inicio</b>. Sirve para pedir el <b>NIF</b> y entrar en el <b>Censo de Empresarios, Profesionales y Retenedores</b>.</li>
+    <li>Comunica <b>régimen de IRPF, de IVA y domicilio</b>. NIF en la Administración del <b>domicilio fiscal</b>.</li>
+    <li>Censal <b>simplificada</b>: exige, entre otros, <b>residir en España</b>.</li>
+    <li><b>IAE</b>: declaran todos <b>salvo los exentos</b>.</li>
+    <li>Declaración anual de operaciones: entregas y adquisiciones <b>por separado</b>; no la presentan quienes no tienen sede/establecimiento/domicilio en España.</li>
+   </ul>
+  </div>
+  <div class="card k3">
+   <h3><svg><use href="#i-build"/></svg>Seguridad Social, ayuntamiento, laboral</h3>
+   <ul>
+    <li><b>Inscripción de la empresa</b>: obligatoria, <b>antes de empezar</b>, <b>única para toda España</b>; se elige quién cubre la <b>enfermedad profesional</b>.</li>
+    <li>Comunicar variaciones de datos, actividades distintas y trabajadores con especialidades de cotización.</li>
+    <li><b>Ayuntamiento</b>: licencia de <b>obras</b> si son importantes + <b>comunicación previa, declaración responsable o licencia de actividad</b>.</li>
+    <li>Centro de trabajo: se <b>comunica</b>, <b>no se pide autorización</b>. Reanudación tras reformas: antes o después.</li>
+   </ul>
+  </div>
+ </div>
+
+ <div class="card k3">
+  <h3><svg><use href="#i-web"/></svg>Puntos de Atención al Emprendedor (PAE) y DUE</h3>
+  <div class="g3">
+   <div>Son <b>oficinas físicas y servicios electrónicos</b> para <b>facilitar la creación de empresas</b>, informar y apoyar la financiación.</div>
+   <div>Allí se inicia el <b>Documento Único Electrónico (DUE)</b>, con la información que necesita cada organismo.</div>
+   <div>El DUE sirve para inscribir al <b>ERL en el Registro Mercantil</b> y las <b>obligaciones tributarias de inicio</b>.</div>
+  </div>
+ </div>
+</div>
+
+<!-- ============ CONCURSO ============ -->
+<div class="page">
+ <div class="sec s3"><span class="badge">1B01</span><div><h2>Concurso de acreedores</h2><p>Ley Concursal (RDLeg 1/2020) · Quién · Juez · Solicitud · Tipos · Masa y créditos · Calificación</p></div></div>
+
+ <div class="g3 mb">
+  <div class="card k3">
+   <h3><svg><use href="#i-person"/></svg>¿Quién puede ser concursado?</h3>
+   <div class="yes">Cualquier <b>deudor</b>, persona natural o jurídica</div>
+   <div class="no">Entidades territoriales, <b>organismos públicos</b> y entes de derecho público</div>
+   <p style="margin:4px 0 0"><b>Insolvencia</b> = no poder cumplir <b>regularmente</b> sus obligaciones exigibles (actual o <b>inminente</b>).</p>
+  </div>
+  <div class="card k3">
+   <h3><svg><use href="#i-gavel"/></svg>Juez competente</h3>
+   <ul style="margin:0"><li><b>Juez de lo Mercantil</b> del <b>centro de intereses principales</b> (sociedad: domicilio social)</li><li>Concurso conjunto → el del deudor con <b>mayor pasivo</b></li><li>Varias solicitudes → el de <b>la primera</b></li><li>La cuestión de competencia <b>no suspende</b> el proceso</li></ul>
+  </div>
+  <div class="card k3">
+   <h3><svg><use href="#i-hour"/></svg>Plazos clave</h3>
+   <div class="tile t3 mb"><span class="big">2 meses</span><span class="lbl">para pedirlo desde que conoce la <b>insolvencia actual</b></span></div>
+   <div class="tile t3"><span class="big">10 días</span><span class="lbl">vista si el deudor <b>se opone</b></span></div>
+  </div>
+ </div>
+
+ <div class="card k3">
+  <h3><svg><use href="#i-doc"/></svg>¿Quién lo pide y con qué?</h3>
+  <div class="g3">
+   <div><b>Pueden pedirlo</b><div class="yes">El <b>deudor</b></div><div class="yes">Cualquier <b>acreedor</b></div><div class="yes"><b>Socios personalmente responsables</b></div><div class="yes"><b>Ministerio Fiscal</b> (casos previstos)</div><div class="no">Acreedor que compró el crédito (inter vivos, título singular) en los <b>6 meses</b> anteriores</div></div>
+   <div><b>El acreedor se basa en…</b><ul><li><b>Título con ejecución o apremio sin bienes bastantes</b></li><li>Declaración judicial firme de insolvencia</li><li><b>Sobreseimiento general</b> de pagos · embargos generales · <b>alzamiento de bienes</b></li><li>Impago <b>3 meses</b> de tributos o Seguridad Social, o <b>3 mensualidades</b> de salarios</li></ul><span class="mini">Los testigos no bastan: hay que aportar el documento.</span></div>
+   <div><b>El deudor aporta…</b><ul><li><b>Memoria</b> económica y jurídica de los <b>últimos 3 años</b></li><li><b>Inventario</b> de bienes y derechos</li><li><b>Nº de trabajadores</b> y sus representantes</li></ul>Puede oponerse alegando <b>inexistencia del hecho</b> o <b>solvencia</b>.</div>
+  </div>
+ </div>
+
+ <div class="card k3">
+  <h3><svg><use href="#i-scale"/></svg>Voluntario o necesario</h3>
+  <svg viewBox="0 0 700 100" class="diag svgtxt">
+   <rect x="4" y="6" width="340" height="88" rx="12" fill="#0f9d58"/><text x="174" y="32" text-anchor="middle" font-size="16" font-weight="900" fill="#fff">VOLUNTARIO</text>
+   <text x="174" y="56" text-anchor="middle" font-size="12.5" fill="#fff">la 1.ª solicitud es del DEUDOR</text><text x="174" y="78" text-anchor="middle" font-size="12.5" fill="#fff" font-weight="800">CONSERVA la administración (intervenido)</text>
+   <rect x="356" y="6" width="340" height="88" rx="12" fill="#d6336c"/><text x="526" y="32" text-anchor="middle" font-size="16" font-weight="900" fill="#fff">NECESARIO</text>
+   <text x="526" y="56" text-anchor="middle" font-size="12.5" fill="#fff">la solicitud NO es del deudor</text><text x="526" y="78" text-anchor="middle" font-size="12.5" fill="#fff" font-weight="800">PIERDE la administración (le sustituyen)</text>
+  </svg>
+  <p class="mini" style="margin:3px 0 0">El juez puede cambiarlo <b>por auto</b>, oídos el administrador concursal y el concursado.</p>
+ </div>
+
+ <div class="g2 mb">
+  <div class="card k3">
+   <h3><svg><use href="#i-stamp"/></svg>Auto de declaración</h3>
+   <ul>
+    <li>El juez examina la solicitud <b>el mismo día del reparto</b> o el siguiente hábil.</li>
+    <li>Incluye: <b>voluntario/necesario</b>, <b>medidas cautelares</b>, <b>administración concursal</b> y <b>llamamiento a acreedores</b>.</li>
+    <li>Se publica en el <b>BOE</b>. Entidades de crédito → aviso al <b>Banco de España y CNMV</b>.</li>
+    <li>Administración concursal: <b>1 persona</b>, con <b>derecho a retribución</b>.</li>
+    <li>Concurso principal: <b>alcance universal</b> (bienes dentro y fuera de España).</li>
+   </ul>
+  </div>
+  <div class="card k3">
+   <h3><svg><use href="#i-euro"/></svg>Masa, créditos y calificación</h3>
+   <ul>
+    <li><b>Masa activa</b>: bienes a la fecha de declaración + los que <b>se reintegren</b>. Vender solo con <b>autorización del juez</b> hasta el convenio.</li>
+    <li>Créditos: <b>privilegiados → ordinarios → subordinados</b>. <b>Multas y sanciones = subordinados</b>.</li>
+    <li>Calificación: <b>fortuito</b> o <b>culpable</b> (dolo o culpa grave; la <b>doble contabilidad</b> lo hace culpable).</li>
+   </ul>
+   <div class="g2" style="margin-top:4px">
+    <div class="tile t3"><span class="big">≤ 15 años</span><span class="lbl">inhabilitación para administrar bienes ajenos</span></div>
+    <div class="tile t3"><span class="big">≥ 2 años</span><span class="lbl">inhabilitación para representar a nadie</span></div>
+   </div>
+  </div>
+ </div>
+</div>
+
+<!-- ============ MAPA SOCIEDADES ============ -->
+<div class="page">
+ <div class="sec s4"><span class="badge">1B02</span><div><h2>Sociedades mercantiles: el mapa</h2><p>Reglas generales · Personalistas vs capitalistas · Quién responde con su patrimonio</p></div></div>
+
+ <div class="card k4">
+  <h3><svg><use href="#i-build"/></svg>Toda sociedad mercantil <span class="ref">CCom 116-119</span></h3>
+  <svg viewBox="0 0 700 92" class="diag svgtxt">
+   <defs><marker id="e1" markerUnits="userSpaceOnUse" markerWidth="14" markerHeight="14" refX="10" refY="7" orient="auto"><path d="M0 0L14 7 0 14z" fill="#0f9d58"/></marker></defs>
+   <rect x="4" y="10" width="190" height="72" rx="12" fill="#e5f7ee"/><use href="#i-doc" x="14" y="20" width="44" height="50" style="color:#0f9d58"/><text x="64" y="42" font-size="14" font-weight="800" fill="#0f9d58">ESCRITURA</text><text x="64" y="60" font-size="12">PÚBLICA (notario)</text>
+   <path d="M196 46 H240" stroke="#0f9d58" stroke-width="4" marker-end="url(#e1)"/>
+   <rect x="246" y="10" width="200" height="72" rx="12" fill="#e5f7ee"/><use href="#i-stamp" x="256" y="22" width="44" height="46" style="color:#0f9d58"/><text x="306" y="42" font-size="14" font-weight="800" fill="#0f9d58">INSCRIPCIÓN</text><text x="306" y="60" font-size="12">Registro Mercantil</text>
+   <path d="M448 46 H492" stroke="#0f9d58" stroke-width="4" marker-end="url(#e1)"/>
+   <rect x="498" y="10" width="198" height="72" rx="12" fill="#0f9d58"/><text x="597" y="40" text-anchor="middle" font-size="14" font-weight="800" fill="#fff">PERSONALIDAD</text><text x="597" y="58" text-anchor="middle" font-size="14" font-weight="800" fill="#fff">JURÍDICA</text><text x="597" y="75" text-anchor="middle" font-size="11" fill="#fff">sociedad ≠ socios</text>
+  </svg>
+  <p style="margin:3px 0 0">Es mercantil si se constituye <b>conforme al Código de Comercio</b> (la SCA sí; la <b>comunidad de bienes no</b>). La separación de responsabilidades existe en <b>todas</b>, también colectiva y comanditaria. Pactos posteriores: <b>escritura + inscripción</b>.</p>
+ </div>
+
+ <div class="card k4">
+  <h3><svg><use href="#i-scale"/></svg>¿Responden los socios con su patrimonio personal?</h3>
+  <svg viewBox="0 0 700 300" class="diag svgtxt">
+   <text x="10" y="18" font-size="12.5" font-weight="800" fill="#5b6478">PERSONALISTAS (importa la persona · Código de Comercio)</text>
+   <rect x="4" y="26" width="340" height="104" rx="12" fill="#d6336c"/><text x="20" y="52" font-size="16" font-weight="900" fill="#fff">COLECTIVA</text>
+   <text x="20" y="76" font-size="12.5" fill="#fff">Todos los socios: <tspan font-weight="800">personal, solidaria</tspan></text><text x="20" y="94" font-size="12.5" fill="#fff" font-weight="800">e ilimitada</text><text x="20" y="116" font-size="11.5" fill="#fff">(subsidiaria: primero paga la sociedad)</text>
+   <rect x="356" y="26" width="340" height="104" rx="12" fill="#f08a4b"/><text x="372" y="52" font-size="16" font-weight="900" fill="#fff">COMANDITARIA SIMPLE</text>
+   <text x="372" y="76" font-size="12.5" fill="#fff"><tspan font-weight="800">Colectivos</tspan>: ilimitada</text><text x="372" y="96" font-size="12.5" fill="#fff"><tspan font-weight="800">Comanditarios</tspan>: solo lo aportado</text><text x="372" y="116" font-size="11.5" fill="#fff">o lo que se obligaron a aportar</text>
+   <text x="10" y="156" font-size="12.5" font-weight="800" fill="#5b6478">DE CAPITAL (importa el dinero · Ley de Sociedades de Capital, RDLeg 1/2010)</text>
+   <rect x="4" y="164" width="222" height="104" rx="12" fill="#0f9d58"/><text x="115" y="192" text-anchor="middle" font-size="16" font-weight="900" fill="#fff">S.A.</text>
+   <text x="115" y="216" text-anchor="middle" font-size="12" fill="#fff">nadie responde</text><text x="115" y="234" text-anchor="middle" font-size="12" fill="#fff">personalmente: solo lo</text><text x="115" y="252" text-anchor="middle" font-size="12" fill="#fff">que se obligó a aportar</text>
+   <rect x="238" y="164" width="222" height="104" rx="12" fill="#0f9d58"/><text x="349" y="192" text-anchor="middle" font-size="16" font-weight="900" fill="#fff">S.L.</text>
+   <text x="349" y="216" text-anchor="middle" font-size="12" fill="#fff">responsabilidad limitada</text><text x="349" y="234" text-anchor="middle" font-size="12" fill="#fff">siempre mercantil</text><text x="349" y="252" text-anchor="middle" font-size="12" fill="#fff">(sea cual sea su actividad)</text>
+   <rect x="472" y="164" width="224" height="104" rx="12" fill="#f5b301"/><text x="584" y="192" text-anchor="middle" font-size="15" font-weight="900" fill="#1c2333">COMANDITARIA</text><text x="584" y="210" text-anchor="middle" font-size="15" font-weight="900" fill="#1c2333">POR ACCIONES</text>
+   <text x="584" y="234" text-anchor="middle" font-size="12" fill="#1c2333">limitada, SALVO los</text><text x="584" y="252" text-anchor="middle" font-size="12" font-weight="800" fill="#1c2333">socios colectivos</text>
+   <text x="350" y="292" text-anchor="middle" font-size="12" fill="#5b6478">🔴 ilimitada · 🟠 mixta · 🟢 limitada · 🟡 limitada con excepción</text>
+  </svg>
+ </div>
+ <div class="tip">Si te preguntan <b>«¿qué socios responden personalmente en una sociedad de capital?»</b> → solo los <b>socios colectivos de la comanditaria por acciones</b>.</div>
+</div>
+
+<!-- ============ COLECTIVA / COMANDITARIA ============ -->
+<div style="margin-top:10px">
+ <div class="sec s4"><span class="badge">1B02</span><div><h2>Sociedades personalistas</h2><p>Colectiva y comanditaria simple (Código de Comercio)</p></div></div>
+
+ <div class="card k4">
+  <h3><svg><use href="#i-group"/></svg>Sociedad colectiva <span class="ref">CCom 125-144</span></h3>
+  <div class="g3">
+   <div><b>Socios</b> (mínimo <span class="n n4">2</span>)<ul><li><b>Capitalistas</b>: aportan dinero o bienes</li><li><b>Industriales</b>: aportan <b>trabajo</b></li></ul><b>Razón social</b>: nombre de <b>alguno</b> de los socios (no hace falta todos).<br><b>Escritura</b>: nombre y domicilio de los socios, duración…</div>
+   <div><b>Reparto (si el contrato calla)</b><ul><li>Capitalista: <b>en proporción a lo aportado</b></li><li>Industrial: como el <b>capitalista de menor participación</b></li><li>Industrial: <b>no participa en pérdidas</b> (salvo pacto)</li></ul></div>
+   <div><b>Administración</b><ul><li>Uno o varios socios</li><li>Dada en el <b>contrato de constitución</b> → <b>no se puede revocar</b></li><li>Socio no administrador que se compromete contra los administradores → <b>el compromiso vale</b>; el perjuicio lo asume él</li></ul></div>
+  </div>
+ </div>
+
+ <div class="g2 mb">
+  <div class="card k4">
+   <h3><svg><use href="#i-warn"/></svg>Deberes de los socios</h3>
+   <ul>
+    <li>No puede <b>transmitir su interés</b> sin el <b>consentimiento de los demás</b>.</li>
+    <li>Usa la firma social para lo suyo → <b>ganancias a la sociedad</b>, <b>pérdidas para él</b> y puede ser <b>excluido</b>.</li>
+    <li>Puede operar por su cuenta <b>sin permiso</b> si la sociedad tiene <b>objeto determinado</b> y el negocio <b>no es del mismo tipo</b>.</li>
+   </ul>
+  </div>
+  <div class="card k4">
+   <h3><svg><use href="#i-hour"/></svg>Disolución de la colectiva</h3>
+   <div class="yes"><b>Muerte</b> de un socio</div>
+   <div class="yes"><b>Cumplimiento del plazo</b> (para seguir: <b>nuevo contrato</b>; no hace falta anotarlo para afectar a terceros)</div>
+   <div class="yes">Pérdida <b>completa</b> del capital (no basta ⅔)</div>
+   <div class="yes">Fase de <b>liquidación del concurso</b> de un socio</div>
+   <div class="yes">Tiempo <b>indefinido</b> → la pide <b>un solo socio</b></div>
+   <div class="no">Falta puntual de beneficios</div>
+   <p class="mini" style="margin:2px 0 0">Cabe la <b>rescisión parcial</b>: se rompe solo con un socio y la sociedad sigue.</p>
+  </div>
+ </div>
+
+ <div class="card k4">
+  <h3><svg><use href="#i-group"/></svg>Comanditaria simple</h3>
+  <svg viewBox="0 0 700 110" class="diag svgtxt">
+   <rect x="4" y="6" width="340" height="98" rx="12" fill="#d6336c"/><use href="#i-person" x="16" y="18" width="44" height="44" style="color:#fff"/>
+   <text x="70" y="34" font-size="15" font-weight="900" fill="#fff">SOCIOS COLECTIVOS</text>
+   <text x="70" y="54" font-size="12" fill="#fff">responden con TODOS sus bienes</text><text x="16" y="80" font-size="12" fill="#fff">✔ administran y representan</text><text x="16" y="98" font-size="12" fill="#fff">✔ su nombre va en la razón social</text>
+   <rect x="356" y="6" width="340" height="98" rx="12" fill="#e5f7ee"/><use href="#i-person" x="368" y="18" width="44" height="44" style="color:#0f9d58"/>
+   <text x="422" y="34" font-size="15" font-weight="900" fill="#0f9d58">SOCIOS COMANDITARIOS</text>
+   <text x="422" y="54" font-size="12">solo arriesgan lo aportado</text><text x="368" y="80" font-size="12" fill="#d6336c" font-weight="700">✘ no administran ni representan</text><text x="368" y="98" font-size="12">examinan cuentas si lo prevé el contrato</text>
+  </svg>
+  <div class="trap">Si un <b>comanditario pone su nombre</b> en la razón social → <b>cambia su responsabilidad</b> y responde como colectivo.</div>
+ </div>
+</div>
+
+<!-- ============ SA vs SL ============ -->
+<div class="page">
+ <div class="sec s4"><span class="badge">1B02</span><div><h2>Sociedades de capital: SA vs SL</h2><p>Capital · Constitución · Acciones y participaciones · Unipersonalidad</p></div></div>
+
+ <div class="g3 mb">
+  <div class="tile t4"><span class="big">60.000 €</span><span class="lbl"><b>SA</b> (y SCA): capital mínimo · <b>suscrito entero</b> y <b>desembolsado ¼</b></span></div>
+  <div class="tile t4"><span class="big">1 €</span><span class="lbl"><b>SL</b>: capital mínimo, <b>sin máximo</b> · <b>desembolsado al 100 %</b> desde el origen</span></div>
+  <div class="tile t4" style="background:var(--yels)"><span class="big" style="color:#a77900">&lt; 3.000 €</span><span class="lbl">SL «barata»: reserva legal <b>20 %</b> del beneficio · en liquidación los socios responden de lo que falte <b>hasta 3.000 €</b></span></div>
+ </div>
+
+ <table class="cmp mb">
+  <thead><tr><th style="background:var(--ink);border-radius:9px 0 0 0;width:24%"></th><th style="background:var(--c4);width:38%">Sociedad Anónima (S.A.)</th><th style="background:var(--c2);border-radius:0 9px 0 0">Sociedad Limitada (S.L. / S.R.L.)</th></tr></thead>
+  <tbody>
+   <tr><td>El capital se divide en</td><td><b>Acciones</b>: valor mobiliario; títulos o anotaciones en cuenta; nominativas o al portador</td><td><b>Participaciones</b>: <b>no</b> son títulos valores, <b>no</b> pueden llamarse acciones; siempre <b>nominativas</b></td></tr>
+   <tr><td>Divisibles</td><td>No: <b>indivisibles</b></td><td>No: <b>indivisibles</b></td></tr>
+   <tr><td>Registro</td><td>Libro registro de acciones <b>nominativas</b></td><td><b>Libro registro de socios</b> (todas las participaciones)</td></tr>
+   <tr><td>Formas de constituirse</td><td>Contrato, acto unilateral o <b>sucesiva</b> (suscripción pública: <b>solo la SA</b>)</td><td>Contrato entre 2 o más o acto unilateral</td></tr>
+   <tr><td>Fundadores</td><td>Responden <b>solidariamente</b> de las aportaciones no dinerarias; derechos especiales <b>máx. 10 años</b> (solo SA)</td><td>Aportaciones no dinerarias descritas en la <b>escritura</b></td></tr>
+   <tr><td>Asistencia a la junta</td><td>Todos, salvo que los estatutos exijan un mínimo de acciones</td><td><b>Todos</b> los socios</td></tr>
+   <tr><td>Acuerdos ordinarios</td><td><b>Mayoría simple</b> de los presentes o representados</td><td>Mayoría de votos válidos que sean <b>≥ ⅓</b> de las participaciones</td></tr>
+   <tr><td>Votos</td><td>Puede haber acciones <b>sin voto</b> (dividendo mínimo preferente) y límite de votos</td><td><b>Un voto por participación</b> (salvo estatutos)</td></tr>
+   <tr><td>Plazo de los administradores</td><td>El que fijen los <b>estatutos</b></td><td><b>Indefinido</b> (salvo estatutos); cobran solo si lo dicen los estatutos</td></tr>
+   <tr><td>Consejo de administración</td><td>Más de 2 personas</td><td><b>3 a 12</b> miembros, se reúne al menos <b>1 vez al trimestre</b></td></tr>
+   <tr><td>Obligaciones</td><td>Sí, también <b>convertibles</b></td><td>Sí, pero <b>no convertibles</b>; máx. <b>el doble de recursos propios</b> (salvo garantía)</td></tr>
+   <tr><td>Acciones propias</td><td>Si las suscribe al emitirlas: <b>venderlas en 1 año</b></td><td>Adquisición <b>derivativa</b> en ciertos supuestos</td></tr>
+  </tbody>
+ </table>
+
+ <div class="g2 mb">
+  <div class="card k4">
+   <h3><svg><use href="#i-person"/></svg>Unipersonalidad (solo SA y SL)</h3>
+   <ul>
+    <li><b>Originaria</b> (nace con 1 socio) o <b>sobrevenida</b> (todo el capital pasa a uno).</li>
+    <li>En <b>escritura</b> + <b>inscripción</b> con la <b>identidad del socio único</b>.</li>
+    <li>No inscrita en <span class="n n4">6 meses</span> → el socio responde <b>personal, ilimitada y solidariamente</b> de las deudas de ese periodo.</li>
+    <li>La <b>SCA no</b> puede ser unipersonal.</li>
+   </ul>
+  </div>
+  <div class="card k4">
+   <h3><svg><use href="#i-euro"/></svg>Aportaciones</h3>
+   <ul>
+    <li><b>Suscribir</b> = comprometerse; <b>desembolsar</b> = pagar.</li>
+    <li>Solo <b>bienes o derechos valorables</b>. <b>Nunca trabajo ni servicios</b>.</li>
+    <li>Acciones sin aportación efectiva → <b>nulas</b>. Dinero → <b>certificado de depósito</b> a nombre de la sociedad.</li>
+    <li>Accionista <b>moroso</b>: <b>no vota</b> y <b>no cobra dividendos</b>.</li>
+   </ul>
+  </div>
+ </div>
+</div>
+
+<!-- ============ CONSTITUCION / JUNTA / ADMIN ============ -->
+<div class="page">
+ <div class="sec s4"><span class="badge">1B02</span><div><h2>Sociedades de capital: vida de la sociedad</h2><p>Constitución · Denominación · Estatutos · Junta general · Administradores</p></div></div>
+
+ <div class="card k4">
+  <h3><svg><use href="#i-cal"/></svg>Constitución: los plazos</h3>
+  <svg viewBox="0 0 700 112" class="diag svgtxt">
+   <path d="M20 44 H690" stroke="#1c2333" stroke-width="3"/>
+   <circle cx="40" cy="44" r="12" fill="#0f9d58"/><text x="40" y="20" text-anchor="middle" font-size="12.5" font-weight="800" fill="#0f9d58">ESCRITURA</text>
+   <text x="40" y="74" text-anchor="middle" font-size="11.5">se otorga</text>
+   <circle cx="240" cy="44" r="12" fill="#e8590c"/><text x="240" y="20" text-anchor="middle" font-size="13" font-weight="900" fill="#e8590c">2 meses</text>
+   <text x="240" y="72" text-anchor="middle" font-size="11.5" font-weight="700">los fundadores la presentan</text><text x="240" y="88" text-anchor="middle" font-size="11.5">si no: responden solidariamente</text><text x="240" y="104" text-anchor="middle" font-size="11.5">de daños y perjuicios</text>
+   <circle cx="440" cy="44" r="12" fill="#1f6feb"/><text x="440" y="20" text-anchor="middle" font-size="13" font-weight="900" fill="#1f6feb">6 meses</text>
+   <text x="440" y="72" text-anchor="middle" font-size="11.5" font-weight="700">unipersonalidad sin inscribir</text><text x="440" y="88" text-anchor="middle" font-size="11.5">→ socio único responde</text><text x="440" y="104" text-anchor="middle" font-size="11.5">ilimitadamente</text>
+   <circle cx="640" cy="44" r="12" fill="#d6336c"/><text x="640" y="20" text-anchor="middle" font-size="13" font-weight="900" fill="#d6336c">1 año</text>
+   <text x="640" y="72" text-anchor="middle" font-size="11.5" font-weight="700">sin inscripción:</text><text x="640" y="88" text-anchor="middle" font-size="11.5">los socios pueden pedir</text><text x="640" y="104" text-anchor="middle" font-size="11.5">la disolución</text>
+  </svg>
+  <p class="mini" style="margin:2px 0 0">Sin inscripción <b>no hay personalidad jurídica</b>. Acciones y participaciones se transmiten <b>desde la inscripción</b>.</p>
+ </div>
+
+ <div class="g3 mb">
+  <div class="card k4">
+   <h3><svg><use href="#i-doc"/></svg>Denominación</h3>
+   <ul style="margin:0"><li><b>Una sola</b>, no idéntica a otra existente (aunque sea de otro tipo)</li><li>SA: «S.A.» · SL: «S.L.» o «S.R.L.»</li><li>Nada engañoso ni contrario a las buenas costumbres</li></ul>
+  </div>
+  <div class="card k4">
+   <h3><svg><use href="#i-globe"/></svg>Nacionalidad y web</h3>
+   <ul style="margin:0"><li>Española si tiene <b>domicilio en España</b> (da igual dónde se constituyó)</li><li>Domicilio: <b>administración efectiva</b> o <b>establecimiento principal</b></li><li>Sucursales <b>en cualquier lugar</b></li><li>Web obligatoria solo si <b>cotiza</b></li></ul>
+  </div>
+  <div class="card k4">
+   <h3><svg><use href="#i-book"/></svg>Estatutos</h3>
+   <ul style="margin:0"><li><b>Denominación, objeto, capital</b>, acciones y nominal, administración, cómo se adoptan acuerdos</li><li>SCA: socios colectivos</li><li>Identidad de los socios → en la <b>escritura</b>, no en estatutos</li><li>Duración <b>indefinida</b>; ejercicio acaba el <b>31-12</b></li></ul>
+  </div>
+ </div>
+
+ <div class="card k4">
+  <h3><svg><use href="#i-group"/></svg>Junta general (sus acuerdos obligan a todos, también ausentes y disidentes)</h3>
+  <div class="g3">
+   <div class="tile t4"><span class="big">ORDINARIA</span><span class="lbl">en los <b>6 primeros meses</b>: censurar la gestión, aprobar cuentas, aplicar el resultado</span></div>
+   <div class="tile t4"><span class="big">UNIVERSAL</span><span class="lbl">sin convocatoria: <b>todos los socios</b> presentes y <b>unanimidad</b> para celebrarla</span></div>
+   <div class="tile t4"><span class="big">5 %</span><span class="lbl">del capital puede <b>pedir que se convoque</b> (la convocan administradores o liquidadores)</span></div>
+  </div>
+  <p style="margin:5px 0 0">Compete a la junta: <b>aumentar capital</b>, <b>modificar estatutos</b> (ej. ampliar objeto), <b>nombrar administradores y auditor</b>. Cualquier otra = <b>extraordinaria</b>.</p>
+ </div>
+
+ <div class="card k4">
+  <h3><svg><use href="#i-person"/></svg>Administradores</h3>
+  <div class="g3">
+   <div><ul style="margin:0"><li>Los nombra la <b>junta</b> + inscripción</li><li>Personas <b>físicas o jurídicas</b>; <b>no</b> tienen que ser socios; un menor <b>emancipado</b> sí</li><li>La junta los <b>cesa en cualquier momento</b></li></ul></div>
+   <div><ul style="margin:0"><li>Responden frente a <b>sociedad, socios y acreedores</b></li><li><b>Lealtad</b>: evitar conflictos, secreto, abstenerse de votar</li><li><b>No</b> deben seguir al accionista mayoritario</li></ul></div>
+   <div><ul style="margin:0"><li><b>Consejo</b>: más de <b>2</b> administradores conjuntos</li><li><b>Consejero delegado</b>: lo designa el consejo; delegación permanente con <b>⅔</b> + inscripción</li><li>Impugnar acuerdos del consejo: socios con <b>1 %</b></li></ul></div>
+  </div>
+ </div>
+</div>
+
+<!-- ============ CUENTAS / CAPITAL / OBLIGACIONES / DISOLUCIÓN ============ -->
+<div class="page">
+ <div class="sec s4"><span class="badge">1B02</span><div><h2>Sociedades de capital: cuentas, cambios y final</h2><p>Cuentas y auditoría · Variaciones de capital · Obligaciones · Separación, disolución y liquidación · SCA</p></div></div>
+
+ <div class="card k4">
+  <h3><svg><use href="#i-doc"/></svg>Cuentas anuales, auditoría y depósito</h3>
+  <div class="flow mb">
+   <div class="st" style="background:var(--c4s)"><b>1 · Formular</b>los administradores, en <span class="n n4">3 meses</span>; las firman <b>todos</b></div>
+   <div class="ar">›</div>
+   <div class="st" style="background:var(--c4s)"><b>2 · Auditar</b>si supera <b>2 de 3</b>: activo, cifra de negocios, nº medio de trabajadores</div>
+   <div class="ar">›</div>
+   <div class="st" style="background:var(--c4s)"><b>3 · Aprobar</b>la junta ordinaria, en los <span class="n n4">6 meses</span> tras el cierre</div>
+   <div class="ar">›</div>
+   <div class="st" style="background:var(--c4s)"><b>4 · Depositar</b>en el Registro Mercantil; <b>cualquiera</b> puede consultarlas</div>
+  </div>
+  <div class="g3">
+   <div><b>Auditor</b>: lo nombra la <b>junta</b>; comprueba la <b>imagen fiel</b> y el informe de gestión; <b>no se puede revocar</b> en el periodo inicial.</div>
+   <div><b>Informe de gestión</b>: lo hacen las que <b>no pueden</b> formular balance y estado de cambios en el patrimonio neto <b>abreviados</b>.</div>
+   <div class="trap" style="margin:0">Sin depósito → <b>cierre registral</b>: no se admiten otras inscripciones.</div>
+  </div>
+ </div>
+
+ <div class="g2 mb">
+  <div class="card k4">
+   <h3><svg><use href="#i-euro"/></svg>Estatutos y capital</h3>
+   <ul>
+    <li><b>Modificar estatutos</b>: junta + <b>escritura</b> + <b>inscripción</b>.</li>
+    <li><b>Aumento en la SL</b>: <b>nuevas participaciones</b> o <b>subiendo el nominal</b>; con dinero nuevo, <b>beneficios</b> o <b>reservas</b>.</li>
+    <li><b>Reducción en la SA</b>: bajando el nominal; si es por pérdidas, para <b>equilibrar capital y patrimonio neto</b>.</li>
+    <li>Suscripción preferente: <b>nuevas acciones/participaciones</b> y <b>obligaciones convertibles</b>.</li>
+    <li>Dividendos en la SL: <b>en proporción a la participación</b>.</li>
+   </ul>
+  </div>
+  <div class="card k4">
+   <h3><svg><use href="#i-doc"/></svg>Obligaciones (títulos de deuda)</h3>
+   <ul>
+    <li>El obligacionista es <b>acreedor</b>, no socio; en la liquidación <b>cobra antes</b> que los accionistas.</li>
+    <li>Las acuerda: <b>no convertibles</b> → <b>órgano de administración</b>; <b>convertibles</b> → <b>junta general</b>.</li>
+    <li>Escritura de emisión: <b>representante de la sociedad + comisario</b>.</li>
+    <li>Títulos nominativos, al portador o anotaciones en cuenta.</li>
+   </ul>
+  </div>
+ </div>
+
+ <div class="card k4">
+  <h3><svg><use href="#i-hour"/></svg>Separación, disolución y liquidación</h3>
+  <div class="g3">
+   <div><b>Separación</b>: en la SL, el socio que <b>no votó a favor</b> de una <b>modificación sustancial del objeto</b>. Cobra <b>de la sociedad</b> el valor de sus acciones.</div>
+   <div><b>Disuelven</b><div class="yes"><b>Acuerdo</b> de la junta</div><div class="yes">Fin del <b>plazo</b> estatutario</div><div class="yes"><b>Imposibilidad manifiesta</b> del fin social</div><b>No disuelven por sí solos</b><div class="no">Concurso · 2 años sin beneficios · 3 meses sin actividad · patrimonio &lt; capital · petición de un % de socios</div></div>
+   <div><b>Efectos</b><ul style="margin:0"><li>Se abre la <b>liquidación</b></li><li>Los administradores <b>cesan</b>; representan los <b>liquidadores</b></li><li>La sociedad <b>conserva su personalidad</b> mientras se liquida</li><li>Libros → <b>Registro Mercantil</b></li></ul></div>
+  </div>
+ </div>
+
+ <div class="card k4">
+  <h3><svg><use href="#i-build"/></svg>Comanditaria por acciones (SCA)</h3>
+  <div class="g2">
+   <div><ul style="margin:0"><li>Capital mínimo <b>60.000 €</b>; en lo no previsto, normas de la <b>SA</b></li><li>Los estatutos identifican a los <b>socios colectivos</b>, que administran</li></ul></div>
+   <div><ul style="margin:0"><li>El administrador es <b>socio colectivo desde que acepta el cargo</b></li><li>Responde <b>ilimitadamente</b> de las deudas <b>de su mandato</b></li></ul></div>
+  </div>
+ </div>
+</div>
+
+<!-- ============ LABORALES Y AIE ============ -->
+<div class="page">
+ <div class="sec s5"><span class="badge">1B02</span><div><h2>Sociedades laborales y AIE</h2><p>Ley 44/2015 de sociedades laborales · Ley 12/1991 de agrupaciones de interés económico</p></div></div>
+
+ <div class="card k5">
+  <h3><svg><use href="#i-group"/></svg>Sociedad laboral (SAL / SLL): la mayoría del capital es de los trabajadores</h3>
+  <svg viewBox="0 0 700 170" class="diag svgtxt">
+   <circle cx="90" cy="86" r="72" fill="#e3f4f7"/>
+   <path d="M90 86 L90 14 A72 72 0 1 1 82 157.6 Z" fill="#0b7285"/>
+   <text x="132" y="96" text-anchor="middle" font-size="20" font-weight="900" fill="#fff">&gt;50 %</text>
+   <text x="44" y="140" text-anchor="middle" font-size="10" fill="#0b7285" font-weight="700">resto</text>
+   <text x="200" y="40" font-size="14" font-weight="800" fill="#0b7285">Más del 50 % del capital</text>
+   <text x="200" y="58" font-size="12">en manos de socios trabajadores con contrato INDEFINIDO</text>
+   <rect x="200" y="74" width="150" height="86" rx="12" fill="#e3f4f7"/><text x="275" y="104" text-anchor="middle" font-size="22" font-weight="900" fill="#0b7285">≤ ⅓</text><text x="275" y="124" text-anchor="middle" font-size="11">del capital por socio</text><text x="275" y="140" text-anchor="middle" font-size="11">(regla general)</text>
+   <rect x="362" y="74" width="150" height="86" rx="12" fill="#e3f4f7"/><text x="437" y="104" text-anchor="middle" font-size="22" font-weight="900" fill="#0b7285">3</text><text x="437" y="124" text-anchor="middle" font-size="11">socios como mínimo</text><text x="437" y="140" text-anchor="middle" font-size="11">(regla general)</text>
+   <rect x="524" y="74" width="172" height="86" rx="12" fill="#e3f4f7"/><text x="610" y="104" text-anchor="middle" font-size="22" font-weight="900" fill="#0b7285">≤ 49 %</text><text x="610" y="122" text-anchor="middle" font-size="10.5">horas de indefinidos NO socios</text><text x="610" y="137" text-anchor="middle" font-size="10.5">frente a las de los socios</text><text x="610" y="152" text-anchor="middle" font-size="10.5">(sin contar discapacidad ≥ 33 %)</text>
+  </svg>
+  <div class="g3" style="margin-top:4px">
+   <div>Acciones <b>nominativas</b>. Dos clases: <b>general</b> y <b>laboral</b>. En ampliaciones, preferencia <b>dentro de su clase</b>.</div>
+   <div>Venta <b>inter vivos</b>: preferencia de los <b>trabajadores indefinidos no socios</b>.</div>
+   <div>Personalidad al inscribirse en el <b>R. Mercantil</b>. Nombre: «Sociedad Limitada/Anónima <b>Laboral</b>». La <b>reserva especial</b> puede usarse para comprar sus propias acciones/participaciones.</div>
+  </div>
+ </div>
+
+ <div class="card k5">
+  <h3><svg><use href="#i-hand"/></svg>Agrupación de Interés Económico (AIE)</h3>
+  <div class="g2">
+   <div><ul>
+    <li>Para facilitar o mejorar la actividad de sus socios en algo <b>auxiliar</b>, <b>sin ánimo de lucro propio</b>.</li>
+    <li><b>Mercantil</b> y con <b>personalidad jurídica</b>. Inscripción en el R. Mercantil <b>obligatoria</b>.</li>
+    <li>Se rige por su ley y, en lo no previsto, por la <b>sociedad colectiva</b>.</li>
+   </ul></div>
+   <div><ul>
+    <li>Nombre con «Agrupación de Interés Económico» o <b>A.I.E.</b></li>
+    <li>Administrada por <b>una o varias personas</b>.</li>
+    <li>Socios: responden <b>personal y solidariamente entre sí</b>.</li>
+    <li>Los <b>beneficios son de los socios</b>.</li>
+   </ul></div>
+  </div>
+ </div>
+ <div class="tip">AIE = «colectiva sin ánimo de lucro»: por eso <b>supletoriamente la colectiva</b> y socios <b>solidarios</b>.</div>
+</div>
+
+<!-- ============ COOPERATIVAS ============ -->
+<div class="page">
+ <div class="sec s5"><span class="badge">1B02</span><div><h2>Cooperativas (Ley 27/1999)</h2><p>Clases · Constitución · Socios · Órganos · Economía · Trabajo asociado y transportistas</p></div></div>
+
+ <div class="g3 mb">
+  <div class="card k5">
+   <h3><svg><use href="#i-group"/></svg>Clases</h3>
+   <div class="tile t5 mb"><span class="big">3 socios</span><span class="lbl"><b>primer grado</b> · cada uno máx. <b>⅓</b> del capital</span></div>
+   <div class="tile t5"><span class="big">2 cooperativas</span><span class="lbl"><b>segundo grado</b> · cada socio máx. <b>30 %</b>; también individuales y entes públicos</span></div>
+  </div>
+  <div class="card k5">
+   <h3><svg><use href="#i-stamp"/></svg>Constitución</h3>
+   <ul style="margin:0"><li><b>Escritura</b> inscrita en el <b>Registro de Sociedades Cooperativas</b> → personalidad</li><li>Escritura: otorgantes, <b>aportación mínima suscrita</b>, <b>valor de las no dinerarias</b>, primer <b>Consejo Rector</b></li><li>«<b>Sociedad Cooperativa</b>»; cualquier actividad lícita</li><li>Domicilio donde <b>centraliza la gestión administrativa</b></li><li>Con terceros no socios <b>solo si lo prevén los estatutos</b></li></ul>
+  </div>
+  <div class="card k5">
+   <h3><svg><use href="#i-person"/></svg>Socios</h3>
+   <ul style="margin:0"><li>Personas <b>físicas y jurídicas</b></li><li><b>De trabajo</b>: físicas que aportan trabajo</li><li><b>Colaboradores</b>: desembolsan lo que diga la Asamblea</li><li>Responden hasta sus <b>aportaciones suscritas</b></li><li><b>No compiten</b> salvo permiso del Consejo Rector; aceptan cargos salvo causa justificada</li></ul>
+  </div>
+ </div>
+
+ <div class="card k5">
+  <h3><svg><use href="#i-build"/></svg>Órganos de la cooperativa</h3>
+  <svg viewBox="0 0 700 150" class="diag svgtxt">
+   <rect x="4" y="6" width="170" height="138" rx="12" fill="#0b7285"/><text x="89" y="30" text-anchor="middle" font-size="14" font-weight="900" fill="#fff">ASAMBLEA GENERAL</text>
+   <text x="14" y="52" font-size="11" fill="#fff">• aprueba cuentas (ordinaria)</text><text x="14" y="70" font-size="11" fill="#fff">• nombra interventores</text><text x="14" y="88" font-size="11" fill="#fff">• aportaciones adicionales</text><text x="14" y="106" font-size="11" fill="#fff">• acuerda la disolución</text><text x="14" y="128" font-size="11" fill="#fff" font-weight="800">Extraordinaria: 20 % votos</text>
+   <rect x="180" y="6" width="170" height="138" rx="12" fill="#e3f4f7"/><text x="265" y="30" text-anchor="middle" font-size="14" font-weight="900" fill="#0b7285">CONSEJO RECTOR</text>
+   <text x="190" y="52" font-size="11">• gobierno, gestión y</text><text x="198" y="66" font-size="11">representación; sanciona</text><text x="190" y="84" font-size="11">• Presidente, Vice y Secretario</text><text x="190" y="102" font-size="11">• mínimo <tspan font-weight="800">3</tspan> · mandato <tspan font-weight="800">3 a 6 años</tspan></text><text x="190" y="122" font-size="11">• &lt; 10 socios: puede haber</text><text x="198" y="136" font-size="11">administrador único</text>
+   <rect x="356" y="6" width="170" height="138" rx="12" fill="#e3f4f7"/><text x="441" y="30" text-anchor="middle" font-size="14" font-weight="900" fill="#0b7285">INTERVENCIÓN</text>
+   <text x="366" y="52" font-size="11">• nº ≤ consejeros</text><text x="366" y="72" font-size="11">• hasta ⅓ expertos</text><text x="374" y="86" font-size="11">independientes (no socios)</text><text x="366" y="106" font-size="11">• revisan TODA la</text><text x="374" y="120" font-size="11">documentación</text>
+   <rect x="532" y="6" width="164" height="138" rx="12" fill="#f1f3f8"/><text x="614" y="30" text-anchor="middle" font-size="13.5" font-weight="900" fill="#5b6478">COMITÉ DE RECURSOS</text>
+   <text x="542" y="54" font-size="11" font-weight="800" fill="#d6336c">POTESTATIVO</text><text x="542" y="76" font-size="11">resuelve los recursos</text><text x="542" y="92" font-size="11">contra las sanciones</text><text x="542" y="108" font-size="11">del Consejo Rector</text>
+  </svg>
+ </div>
+
+ <div class="g2 mb">
+  <div class="card k5">
+   <h3><svg><use href="#i-euro"/></svg>Economía y libros</h3>
+   <ul>
+    <li><b>Sin capital mínimo legal</b>: lo fijan los estatutos, <b>desembolsado entero</b>.</li>
+    <li>Recursos: aportaciones obligatorias y voluntarias, <b>cuotas</b> (no reembolsables), obligaciones.</li>
+    <li>Aportaciones remuneradas solo con <b>resultados positivos</b>; se transmiten a <b>otro socio</b>, a quien sea socio en <b>3 meses</b> o a <b>herederos</b>. Pérdidas → fondos de reserva voluntarios.</li>
+    <li>Libros: <b>registro de socios</b>, <b>aportaciones al capital</b>, <b>inventarios y cuentas</b> (no Mayor). Los legaliza el <b>Registro de Cooperativas</b>.</li>
+    <li>Auditoría: si lo dicen los <b>estatutos</b>, la <b>Asamblea</b> o el <b>5 %</b> de los socios.</li>
+   </ul>
+  </div>
+  <div class="card k5">
+   <h3><svg><use href="#i-warn"/></svg>Bajas y sanciones</h3>
+   <ul>
+    <li><b>Voluntaria</b>: con <b>preaviso</b> (salvo permanencia mínima). Pierde requisitos → <b>obligatoria</b>.</li>
+    <li>Le devuelven las aportaciones <b>descontando pérdidas</b>; el reembolso <b>puede rehusarse</b> si así se configuran.</li>
+    <li>Le exigen <b>aportaciones adicionales</b> y no está de acuerdo → puede <b>darse de baja</b>.</li>
+    <li>Faltas <b>leves, graves, muy graves</b> (en estatutos). <b>Expulsión solo por muy grave</b>.</li>
+   </ul>
+   <b>Trabajo asociado</b>: solo personas físicas, relación <b>societaria</b> (no laboral), <b>anticipos ≤ 1 mes</b>.<br><b>Transportistas</b>: socios titulares de empresas de transporte; objeto: servir a sus socios.
+  </div>
+ </div>
+</div>
+
+<!-- ============ TABLA RESUMEN ============ -->
+<div class="page">
+ <div class="sec s0"><span class="badge">VS</span><div><h2>Todas las sociedades de un vistazo</h2><p>La tabla para no confundir socios, capital y responsabilidad</p></div></div>
+ <table class="cmp">
+  <thead><tr>
+   <th style="background:var(--ink);border-radius:9px 0 0 0;width:13%">Tipo</th><th style="background:var(--ink);width:12%">Socios mínimos</th><th style="background:var(--ink);width:14%">Capital mínimo</th><th style="background:var(--ink);width:21%">Responsabilidad de los socios</th><th style="background:var(--ink);width:11%">Ley</th><th style="background:var(--ink);border-radius:0 9px 0 0">Dónde se inscribe / dato estrella</th>
+  </tr></thead>
+  <tbody>
+   <tr><td style="color:var(--red)">Colectiva</td><td>2</td><td>—</td><td>Personal, solidaria e ilimitada (subsidiaria)</td><td>Código de Comercio</td><td>R. Mercantil · razón social con algún socio · industrial sin pérdidas</td></tr>
+   <tr><td style="color:var(--c3)">Comanditaria simple</td><td>2 (1 colectivo + 1 comanditario)</td><td>—</td><td>Colectivos ilimitada · comanditarios lo aportado</td><td>Código de Comercio</td><td>Comanditario con su nombre en la razón → responde como colectivo</td></tr>
+   <tr><td style="color:var(--c4)">S.A.</td><td>1 (unipersonal)</td><td><b>60.000 €</b>, ¼ desembolsado</td><td>Limitada a lo que se obligó a aportar</td><td>RDLeg 1/2010</td><td>Acciones · constitución sucesiva · obligaciones convertibles</td></tr>
+   <tr><td style="color:var(--c2)">S.L.</td><td>1 (unipersonal)</td><td><b>1 €</b>, 100 % desembolsado</td><td>Limitada</td><td>RDLeg 1/2010</td><td>Participaciones nominativas · siempre mercantil · &lt; 3.000 € reglas especiales</td></tr>
+   <tr><td style="color:#a77900">Comanditaria por acciones</td><td>— (no unipersonal)</td><td><b>60.000 €</b></td><td>Limitada salvo socios colectivos</td><td>RDLeg 1/2010 (+ SA)</td><td>Administrador = socio colectivo desde que acepta</td></tr>
+   <tr><td style="color:var(--c5)">Laboral (SAL/SLL)</td><td>3</td><td>El de SA o SL</td><td>Limitada</td><td>Ley 44/2015</td><td>&gt; 50 % trabajadores indefinidos · ≤ ⅓ por socio · ≤ 49 % horas</td></tr>
+   <tr><td style="color:var(--c5)">Cooperativa 1.er grado</td><td>3</td><td>Lo fijan los estatutos</td><td>Hasta las aportaciones suscritas</td><td>Ley 27/1999</td><td>Registro de Sociedades Cooperativas · ≤ ⅓ por socio</td></tr>
+   <tr><td style="color:var(--c5)">Cooperativa 2.º grado</td><td>2 cooperativas</td><td>Lo fijan los estatutos</td><td>Hasta las aportaciones suscritas</td><td>Ley 27/1999</td><td>≤ 30 % por socio</td></tr>
+   <tr><td style="color:var(--c5)">AIE</td><td>—</td><td>—</td><td>Personal y solidaria entre sí</td><td>Ley 12/1991</td><td>R. Mercantil obligatorio · sin ánimo de lucro · supletoria la colectiva</td></tr>
+   <tr><td style="color:var(--c1)">ERL (no es sociedad)</td><td>1 persona física</td><td>—</td><td>Ilimitada salvo vivienda (300/450 mil €) y bienes de equipo</td><td>Ley 14/2013</td><td>R. Mercantil + R. Propiedad · cuentas en 7 meses</td></tr>
+  </tbody>
+ </table>
+
+ <div class="card" style="margin-top:9px">
+  <h3 style="color:var(--ink)">📚 ¿Qué libros lleva cada uno?</h3>
+  <div class="g3">
+   <div><b>Empresario individual</b><div class="yes">Diario</div><div class="yes">Inventarios y Cuentas Anuales</div><div class="no">Actas</div></div>
+   <div><b>Sociedad mercantil</b><div class="yes">Diario</div><div class="yes">Inventarios y Cuentas Anuales</div><div class="yes">Actas</div></div>
+   <div><b>Cooperativa</b><div class="yes">Registro de socios</div><div class="yes">Aportaciones al capital</div><div class="yes">Inventarios y Cuentas Anuales</div></div>
+  </div>
+  <p class="mini" style="margin:4px 0 0">El <b>Libro Mayor</b> no es obligatorio para nadie. Libros legalizados por el <b>Registro Mercantil</b> (cooperativas: <b>Registro de Cooperativas</b>).</p>
+ </div>
+</div>
+
+<!-- ============ NÚMEROS ============ -->
+<div class="page">
+ <div class="sec s0"><span class="badge">#</span><div><h2>Todos los números del Tema 2 en una hoja</h2><p>Repaso relámpago: tapa la explicación y di de qué es cada número</p></div></div>
+ <div class="g4 mb">
+  <div class="tile t1"><span class="big">18 años</span><span class="lbl">+ libre disposición = capacidad</span></div>
+  <div class="tile t1"><span class="big">&lt; 250</span><span class="lbl">trabajadores = PYME</span></div>
+  <div class="tile t1"><span class="big">300.000 €</span><span class="lbl">vivienda protegida ERL</span></div>
+  <div class="tile t1"><span class="big">450.000 €</span><span class="lbl">ERL en población &gt; 1 millón</span></div>
+  <div class="tile t1"><span class="big">2 ejercicios</span><span class="lbl">facturación: tope bienes de equipo ERL</span></div>
+  <div class="tile t1"><span class="big">7 meses</span><span class="lbl">ERL deposita cuentas o pierde protección</span></div>
+  <div class="tile t2"><span class="big">≤ trimestre</span><span class="lbl">totales en el Diario</span></div>
+  <div class="tile t2"><span class="big">4 meses</span><span class="lbl">legalizar libros electrónicos</span></div>
+  <div class="tile t2"><span class="big">6 años</span><span class="lbl">conservar libros desde el último asiento</span></div>
+  <div class="tile t2"><span class="big">3 meses</span><span class="lbl">formular cuentas anuales</span></div>
+  <div class="tile t2"><span class="big">12 meses</span><span class="lbl">periodo de la cuenta de PyG</span></div>
+  <div class="tile t2"><span class="big">5</span><span class="lbl">documentos de las cuentas anuales (individual: 3)</span></div>
+  <div class="tile t3"><span class="big">Antes</span><span class="lbl">censal de alta e inscripción en la SS</span></div>
+  <div class="tile t3"><span class="big">1 mes</span><span class="lbl">modificación y baja censal</span></div>
+  <div class="tile t3"><span class="big">3 días nat.</span><span class="lbl">cese de empresa / baja de trabajador (SS)</span></div>
+  <div class="tile t3"><span class="big">30 días</span><span class="lbl">comunicar apertura del centro de trabajo</span></div>
+  <div class="tile t3"><span class="big">2 meses</span><span class="lbl">deudor pide el concurso</span></div>
+  <div class="tile t3"><span class="big">6 meses</span><span class="lbl">crédito comprado antes: no puede pedir concurso</span></div>
+  <div class="tile t3"><span class="big">3 meses</span><span class="lbl">impago de tributos o SS (o 3 salarios)</span></div>
+  <div class="tile t3"><span class="big">3 años</span><span class="lbl">memoria del deudor</span></div>
+  <div class="tile t3"><span class="big">10 días</span><span class="lbl">vista si el deudor se opone</span></div>
+  <div class="tile t3"><span class="big">1 persona</span><span class="lbl">administración concursal</span></div>
+  <div class="tile t3"><span class="big">15 / 2 años</span><span class="lbl">inhabilitación máx. / mín. (culpable)</span></div>
+  <div class="tile t4"><span class="big">2</span><span class="lbl">socios mínimos en la colectiva</span></div>
+  <div class="tile t4"><span class="big">60.000 €</span><span class="lbl">capital mínimo SA y SCA</span></div>
+  <div class="tile t4"><span class="big">¼</span><span class="lbl">desembolso mínimo SA</span></div>
+  <div class="tile t4"><span class="big">1 €</span><span class="lbl">capital mínimo SL (100 % pagado)</span></div>
+  <div class="tile t4"><span class="big">3.000 € · 20 %</span><span class="lbl">SL pequeña: reserva legal del beneficio</span></div>
+  <div class="tile t4"><span class="big">2 meses</span><span class="lbl">presentar la escritura a inscribir</span></div>
+  <div class="tile t4"><span class="big">6 meses</span><span class="lbl">inscribir la unipersonalidad</span></div>
+  <div class="tile t4"><span class="big">1 año</span><span class="lbl">sin inscribir → pedir disolución · vender acciones propias</span></div>
+  <div class="tile t4"><span class="big">10 años</span><span class="lbl">derechos especiales de fundadores (SA)</span></div>
+  <div class="tile t4"><span class="big">6 meses</span><span class="lbl">junta ordinaria tras el cierre</span></div>
+  <div class="tile t4"><span class="big">5 %</span><span class="lbl">del capital pide convocar la junta</span></div>
+  <div class="tile t4"><span class="big">⅓</span><span class="lbl">participaciones para acuerdos SL</span></div>
+  <div class="tile t4"><span class="big">1 %</span><span class="lbl">impugnar acuerdos del consejo</span></div>
+  <div class="tile t4"><span class="big">3 a 12</span><span class="lbl">consejeros SL · reunión trimestral</span></div>
+  <div class="tile t4"><span class="big">⅔</span><span class="lbl">delegar facultades permanentes</span></div>
+  <div class="tile t4"><span class="big">2 de 3</span><span class="lbl">parámetros para auditoría obligatoria</span></div>
+  <div class="tile t4"><span class="big">×2</span><span class="lbl">recursos propios: tope obligaciones SL</span></div>
+  <div class="tile t5"><span class="big">&gt; 50 % · ⅓</span><span class="lbl">laboral: capital trabajadores · máx. por socio</span></div>
+  <div class="tile t5"><span class="big">49 % · 33 %</span><span class="lbl">horas no socios · discapacidad excluida</span></div>
+  <div class="tile t5"><span class="big">3 · 2</span><span class="lbl">socios coop. 1.er grado · coops 2.º grado</span></div>
+  <div class="tile t5"><span class="big">30 %</span><span class="lbl">máx. por socio en coop. 2.º grado</span></div>
+  <div class="tile t5"><span class="big">3 a 6 años</span><span class="lbl">mandato del Consejo Rector (mín. 3)</span></div>
+  <div class="tile t5"><span class="big">20 % · 5 %</span><span class="lbl">votos: asamblea extra · socios: auditoría</span></div>
+  <div class="tile t5"><span class="big">&lt; 10</span><span class="lbl">socios: administrador único en coop.</span></div>
+  <div class="tile t5"><span class="big">1 mes</span><span class="lbl">máximo entre anticipos (trabajo asociado)</span></div>
+ </div>
+ <p class="mini" style="text-align:center;margin:2px 0 0">Colores: <span class="n n1">empresario</span> <span class="n n2">registro y contabilidad</span> <span class="n n3">trámites y concurso</span> <span class="n n4">sociedades</span> <span class="n n5">laborales, cooperativas, AIE</span></p>
+</div>
+
+<!-- ============ TRAMPAS ============ -->
+<div class="page">
+ <div class="sec" style="background:var(--red)"><span class="badge" style="color:var(--red)">⚠</span><div><h2>Las trampas que más se fallan</h2><p>Sacadas de las preguntas del banco donde la respuesta «lógica» no es la correcta</p></div></div>
+ <div class="g2">
+  <div>
+   <div class="trap">El <b>menor emancipado NO</b> puede ser empresario (no tiene libre disposición).</div>
+   <div class="trap">No hace falta <b>licencia fiscal</b> ni establecimiento para ser empresario: basta <b>capacidad + habitualidad</b>.</div>
+   <div class="trap">Los <b>socios no son empresarios</b>: el empresario es la sociedad.</div>
+   <div class="trap">Bienes <b>gananciales</b>: responden <b>siempre</b>. Privativos: solo con consentimiento <b>expreso</b> (revocable).</div>
+   <div class="trap">ERL es para <b>personas físicas</b>, no para sociedades. No protege la vivienda de temporada.</div>
+   <div class="trap">El <b>Libro Mayor no es obligatorio</b>. El individual <b>no lleva Actas</b>.</div>
+   <div class="trap">Libros: conservar <b>6 años desde el último asiento</b>, aunque cese. Los legaliza el <b>Registro Mercantil</b>.</div>
+   <div class="trap">Inscripción en el Registro Mercantil: <b>voluntaria</b> para el individual (obligatoria para sociedades y <b>navieros</b>).</div>
+   <div class="trap">Efectos frente a terceros: desde la publicación en el <b>BORME</b> (no desde la inscripción).</div>
+   <div class="trap">Centro de trabajo: se <b>comunica</b> en 30 días, <b>no</b> se pide autorización.</div>
+   <div class="trap">Concurso: <b>voluntario</b> conserva la administración; <b>necesario</b> la pierde. Lo publica el <b>BOE</b>.</div>
+   <div class="trap">Las <b>multas y sanciones</b> son créditos <b>subordinados</b>. La <b>doble contabilidad</b> = culpable.</div>
+  </div>
+  <div>
+   <div class="trap">La <b>comunidad de bienes</b> no es sociedad mercantil; la <b>SL</b> siempre lo es.</div>
+   <div class="trap">Colectiva: el socio <b>industrial no soporta pérdidas</b> y cobra como el capitalista que menos aportó.</div>
+   <div class="trap">Colectiva: disuelve la pérdida <b>completa</b> del capital (no ⅔) y la <b>muerte</b> de un socio.</div>
+   <div class="trap">Sociedad de capital: <b>nunca</b> se aporta <b>trabajo</b>. Acciones y participaciones son <b>indivisibles</b>.</div>
+   <div class="trap">Constitución <b>sucesiva</b> y obligaciones <b>convertibles</b>: <b>solo la SA</b>.</div>
+   <div class="trap">Unipersonal solo <b>SA y SL</b>; puede ser <b>sobrevenida</b>. No inscrita en 6 meses → responde ilimitadamente.</div>
+   <div class="trap">Es española la sociedad con <b>domicilio en España</b>, aunque se constituyera fuera.</div>
+   <div class="trap">Administradores: <b>no</b> tienen que ser socios; la junta los cesa <b>cuando quiera</b>; no obedecen al mayoritario.</div>
+   <div class="trap">La <b>declaración de concurso</b> o 2 años sin beneficios <b>no disuelven</b> por sí solos.</div>
+   <div class="trap">Disuelta la sociedad, <b>conserva su personalidad</b> mientras se liquida.</div>
+   <div class="trap">Cooperativa: se inscribe en el <b>Registro de Sociedades Cooperativas</b> (no el Mercantil) y <b>no hay capital mínimo legal</b>.</div>
+   <div class="trap">El <b>Comité de Recursos es potestativo</b>; la <b>expulsión</b> solo por falta <b>muy grave</b>.</div>
+  </div>
+ </div>
+ <div class="card" style="margin-top:8px;background:var(--bg)">
+  <h3 style="color:var(--ink)">🧠 Las 5 reglas que resuelven medio examen</h3>
+  <ol style="margin:2px 0 0;padding-left:18px">
+   <li><b>Escritura + Registro</b> = la sociedad existe (personalidad jurídica).</li>
+   <li>Personalista = socios <b>ilimitados</b> · de capital = socios <b>limitados</b> (salvo colectivos de la SCA).</li>
+   <li><b>SA</b>: 60.000 € y acciones · <b>SL</b>: 1 € y participaciones.</li>
+   <li>Plazos «3»: cuentas en <b>3 meses</b>, memoria del concurso de <b>3 años</b>, baja en la SS en <b>3 días</b>.</li>
+   <li>Lo que pide el <b>deudor</b> es voluntario; lo que piden <b>otros</b>, necesario.</li>
+  </ol>
+ </div>
+</div>
+
+</body>
+</html>
