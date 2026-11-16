@@ -740,6 +740,8 @@ function tarjetaEsquema(tema) {
         ${x.html ? `<a class="btn mini primario" href="${x.html}" target="_blank" rel="noopener">Ver esquema</a>` : ""}
         <a class="btn mini" href="${x.pdf}" download>Descargar PDF (${String(x.mb).replace(".", ",")} MB)</a>
       </div>
+      ${x.video ? `<div class="esq-video"><div class="ep-extra">${I.play}Vídeo resumen de todo el tema (con ejemplos)</div>
+        <video class="ep-vid" controls preload="none" playsinline poster="${x.poster}" src="${x.video}"></video></div>` : ""}
     </div>`;
 }
 

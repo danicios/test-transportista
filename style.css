@@ -244,6 +244,8 @@ details[open] > .cuerpo, details[open] > .apuntes-caja { animation: entrar .22s 
 .esquema-tema .esq-txt b { display: block; margin-bottom: 2px; }
 .esquema-tema .esq-txt span { font-size: .88rem; color: var(--muted, inherit); }
 .esquema-tema .esq-acc { display: flex; gap: 8px; flex-wrap: wrap; }
+.esquema-tema .esq-video { flex: 1 1 100%; min-width: 0; }
+.esquema-tema .esq-video .ep-vid { width: 100%; }
 
 .epigrafe { border: 1px solid var(--line); border-radius: 14px; background: var(--card); margin-bottom: 10px;
   box-shadow: var(--shadow-sm); transition: border-color .15s; }
