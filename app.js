@@ -742,7 +742,7 @@ function tarjetaEsquema(tema) {
       </div>
       ${x.video ? `<div class="esq-video"><div class="ep-extra">${I.play}Vídeo resumen de todo el tema (con ejemplos)</div>
         <video class="ep-vid" controls preload="none" playsinline poster="${x.poster}" src="${x.video}"></video></div>` : ""}
-      ${x.fallos ? `<div class="esq-video"><div class="ep-extra">${I.diana}Vídeo de tus fallos del tema, explicados y ordenados</div>
+      ${x.fallos ? `<div class="esq-video"><div class="ep-extra">${I.diana}Tus preguntas falladas, una a una (lo que no sale en el resumen)</div>
         <video class="ep-vid" controls preload="none" playsinline poster="${x.fallos_poster}" src="${x.fallos}"></video></div>` : ""}
     </div>`;
 }
