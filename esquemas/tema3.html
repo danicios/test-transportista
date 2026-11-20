@@ -1,0 +1,1120 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<title>Esquema Tema 3 · Derecho social</title>
+<style>
+@page { size: A4; margin: 11mm 11mm 12mm; }
+:root{
+  --ink:#1c2333; --mute:#5b6478; --line:#dde2ec; --bg:#f5f7fb;
+  --c1:#6d4bd8; --c1s:#efeafe;   /* sindical */
+  --c2:#1f6feb; --c2s:#e7f0ff;   /* seguridad social */
+  --c3:#e8590c; --c3s:#fff0e6;   /* contrato de trabajo */
+  --c4:#0f9d58; --c4s:#e5f7ee;   /* tacógrafo */
+  --red:#d6336c; --reds:#ffe8ef; --yel:#f5b301; --yels:#fff7dc;
+}
+*{box-sizing:border-box}
+html,body{margin:0;background:#fff;color:var(--ink);font-family:"Segoe UI",Roboto,Arial,sans-serif;font-size:9.4pt;line-height:1.34;-webkit-print-color-adjust:exact;print-color-adjust:exact}
+body{max-width:188mm;margin:0 auto}
+h1,h2,h3,h4{margin:0;line-height:1.15}
+b,strong{font-weight:700}
+.page{break-before:page}
+.sec{display:flex;align-items:center;gap:10px;border-radius:12px;padding:9px 14px;color:#fff;margin:0 0 9px}
+.sec .badge{background:#fff;border-radius:9px;font-weight:800;font-size:15pt;padding:3px 10px}
+.sec h2{font-size:15pt;font-weight:800}
+.sec p{margin:2px 0 0;font-size:9pt;opacity:.92}
+.s1{background:var(--c1)} .s1 .badge{color:var(--c1)}
+.s2{background:var(--c2)} .s2 .badge{color:var(--c2)}
+.s3{background:var(--c3)} .s3 .badge{color:var(--c3)}
+.s4{background:var(--c4)} .s4 .badge{color:var(--c4)}
+.s0{background:var(--ink)} .s0 .badge{color:var(--ink)}
+.card{border:1.3px solid var(--line);border-radius:11px;padding:8px 10px;margin:0 0 7px;break-inside:avoid;background:#fff}
+.card h3{font-size:10.6pt;font-weight:800;margin-bottom:4px;display:flex;align-items:center;gap:6px}
+.card h3 svg{width:20px;height:20px;flex:none}
+.k1 h3{color:var(--c1)} .k2 h3{color:var(--c2)} .k3 h3{color:var(--c3)} .k4 h3{color:var(--c4)}
+.k1{border-top:4px solid var(--c1)} .k2{border-top:4px solid var(--c2)} .k3{border-top:4px solid var(--c3)} .k4{border-top:4px solid var(--c4)}
+.g2{display:grid;grid-template-columns:1fr 1fr;gap:7px}
+.g3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:7px}
+.g4{display:grid;grid-template-columns:repeat(4,1fr);gap:6px}
+.g2>.card,.g3>.card,.g4>.card{margin:0}
+.mb{margin-bottom:7px}
+ul{margin:2px 0 0;padding-left:15px} li{margin:1.5px 0}
+li::marker{color:var(--mute)}
+.trap{background:var(--reds);border:1.3px solid #f5a3bd;border-left:5px solid var(--red);border-radius:9px;padding:5px 9px;margin:5px 0 0;break-inside:avoid;font-size:9pt}
+.trap::before{content:"⚠ TRAMPA  ";font-weight:800;color:var(--red);font-size:8.3pt;letter-spacing:.3px}
+.tip{background:var(--yels);border:1.3px solid #f1d27a;border-radius:9px;padding:5px 9px;margin:5px 0 0;break-inside:avoid;font-size:9pt}
+.tip::before{content:"💡 TRUCO  ";font-weight:800;color:#a77900;font-size:8.3pt}
+.n{display:inline-block;font-weight:800;border-radius:6px;padding:0 5px;white-space:nowrap}
+.n1{background:var(--c1s);color:var(--c1)} .n2{background:var(--c2s);color:var(--c2)} .n3{background:var(--c3s);color:var(--c3)} .n4{background:var(--c4s);color:var(--c4)} .nr{background:var(--reds);color:var(--red)}
+.tile{border-radius:10px;padding:6px 7px;text-align:center;break-inside:avoid}
+.tile .big{font-size:17pt;font-weight:900;line-height:1.05;display:block}
+.tile .lbl{font-size:8.2pt;color:var(--ink);display:block;margin-top:2px}
+.t1{background:var(--c1s)} .t1 .big{color:var(--c1)}
+.t2{background:var(--c2s)} .t2 .big{color:var(--c2)}
+.t3{background:var(--c3s)} .t3 .big{color:var(--c3)}
+.t4{background:var(--c4s)} .t4 .big{color:var(--c4)}
+.yes,.no{position:relative;padding-left:16px;margin:2px 0}
+.yes::before{content:"✔";color:#0f9d58;font-weight:900;position:absolute;left:0;top:0}
+.no::before{content:"✘";color:var(--red);font-weight:900;position:absolute;left:0;top:0}
+.diag{width:100%;height:auto;display:block}
+.svgtxt{font-family:"Segoe UI",Arial,sans-serif}
+table{width:100%;border-collapse:separate;border-spacing:0;font-size:8.8pt;break-inside:auto}
+th,td{padding:4px 6px;border-bottom:1px solid var(--line);vertical-align:top;text-align:left}
+thead th{color:#fff;font-size:9.2pt}
+tr{break-inside:avoid}
+.ref{font-size:7.6pt;color:var(--mute);font-weight:600}
+.mini{font-size:8.5pt;color:var(--mute)}
+.pill{display:inline-block;border-radius:20px;padding:1px 8px;font-size:8.3pt;font-weight:700;margin:1px 2px 1px 0}
+.flow{display:flex;align-items:stretch;gap:0}
+.flow .st{flex:1;border-radius:9px;padding:5px 6px;font-size:8.6pt;position:relative;text-align:center}
+.flow .ar{width:16px;display:flex;align-items:center;justify-content:center;color:var(--mute);font-weight:900;font-size:13pt}
+.flow .st>b:first-child{display:block;font-size:9pt;margin-bottom:1px}
+/* portada */
+.cover{height:272mm;display:flex;flex-direction:column}
+.hero{background:linear-gradient(135deg,#1c2333 0%,#27335a 60%,#1f6feb 130%);color:#fff;border-radius:18px;padding:22px 24px 18px;position:relative;overflow:hidden}
+.hero h1{font-size:30pt;font-weight:900;letter-spacing:-.5px}
+.hero .sub{font-size:12pt;opacity:.9;margin-top:4px}
+.hero .chips{margin-top:12px}
+.hero .chips span{display:inline-block;background:rgba(255,255,255,.15);border-radius:20px;padding:3px 10px;margin:0 5px 5px 0;font-size:9pt}
+.idx{display:grid;grid-template-columns:1fr 1fr;gap:9px;margin-top:12px}
+.idx .it{border-radius:14px;padding:11px 13px;color:#fff;break-inside:avoid}
+.idx .it h3{font-size:13pt;font-weight:800}
+.idx .it .code{font-size:9pt;font-weight:700;opacity:.85}
+.idx .it ul{padding-left:15px;font-size:9pt;margin-top:4px}
+.idx .it li::marker{color:#fff}
+.legend{display:flex;gap:10px;flex-wrap:wrap;margin-top:10px;font-size:9pt}
+</style>
+</head>
+<body>
+
+<!-- ============ ICONOS ============ -->
+<svg width="0" height="0" style="position:absolute">
+ <defs>
+  <symbol id="i-truck" viewBox="0 0 64 64"><rect x="3" y="16" width="35" height="26" rx="3" fill="currentColor"/><path d="M38 24h12.5l9 10.5V42H38z" fill="currentColor" opacity=".72"/><path d="M42 27.5h7.5l5 6H42z" fill="#fff" opacity=".9"/><circle cx="14" cy="45" r="6.5" fill="#1c2333"/><circle cx="14" cy="45" r="2.6" fill="#fff"/><circle cx="50" cy="45" r="6.5" fill="#1c2333"/><circle cx="50" cy="45" r="2.6" fill="#fff"/></symbol>
+  <symbol id="i-doc" viewBox="0 0 64 64"><path d="M13 5h27l12 12v42H13z" fill="#fff" stroke="currentColor" stroke-width="3.5" stroke-linejoin="round"/><path d="M40 5v12h12" fill="none" stroke="currentColor" stroke-width="3.5" stroke-linejoin="round"/><path d="M20 28h24M20 36h24M20 44h15" stroke="currentColor" stroke-width="3.5" stroke-linecap="round"/></symbol>
+  <symbol id="i-clock" viewBox="0 0 64 64"><circle cx="32" cy="32" r="26" fill="#fff" stroke="currentColor" stroke-width="4"/><path d="M32 16v17l11 7" fill="none" stroke="currentColor" stroke-width="4.5" stroke-linecap="round"/></symbol>
+  <symbol id="i-box" viewBox="0 0 64 64"><path d="M32 6l24 12v28L32 58 8 46V18z" fill="currentColor" opacity=".25"/><path d="M32 6l24 12-24 12L8 18z" fill="currentColor" opacity=".55"/><path d="M32 30v28M8 18v28l24 12 24-12V18" fill="none" stroke="currentColor" stroke-width="3" stroke-linejoin="round"/></symbol>
+  <symbol id="i-person" viewBox="0 0 64 64"><circle cx="32" cy="20" r="11" fill="currentColor"/><path d="M11 58c0-13 9-21 21-21s21 8 21 21z" fill="currentColor"/></symbol>
+  <symbol id="i-scale" viewBox="0 0 64 64"><path d="M32 8v46M18 56h28M12 18h40" stroke="currentColor" stroke-width="4" stroke-linecap="round"/><path d="M12 18L4 36h16zM52 18l-8 18h16z" fill="currentColor" opacity=".35" stroke="currentColor" stroke-width="2.5" stroke-linejoin="round"/><circle cx="32" cy="10" r="4" fill="currentColor"/></symbol>
+  <symbol id="i-gavel" viewBox="0 0 64 64"><rect x="20" y="8" width="26" height="13" rx="3" transform="rotate(35 33 14)" fill="currentColor"/><path d="M27 27L10 51" stroke="currentColor" stroke-width="6" stroke-linecap="round"/><rect x="30" y="50" width="28" height="7" rx="2" fill="currentColor" opacity=".6"/></symbol>
+  <symbol id="i-house" viewBox="0 0 64 64"><path d="M6 30L32 8l26 22" fill="none" stroke="currentColor" stroke-width="4.5" stroke-linecap="round" stroke-linejoin="round"/><path d="M13 27v29h38V27L32 11z" fill="currentColor" opacity=".85"/><rect x="27" y="38" width="10" height="18" fill="#fff"/></symbol>
+  <symbol id="i-key" viewBox="0 0 64 64"><circle cx="20" cy="32" r="12" fill="none" stroke="currentColor" stroke-width="5"/><path d="M32 32h26M48 32v9M56 32v7" stroke="currentColor" stroke-width="5" stroke-linecap="round"/></symbol>
+  <symbol id="i-euro" viewBox="0 0 64 64"><circle cx="32" cy="32" r="27" fill="currentColor"/><path d="M42 21a13 13 0 1 0 0 22M16 29h20M16 36h18" fill="none" stroke="#fff" stroke-width="4.5" stroke-linecap="round"/></symbol>
+  <symbol id="i-cal" viewBox="0 0 64 64"><rect x="6" y="11" width="52" height="46" rx="6" fill="#fff" stroke="currentColor" stroke-width="4"/><path d="M6 24h52" stroke="currentColor" stroke-width="4"/><path d="M19 5v12M45 5v12" stroke="currentColor" stroke-width="4.5" stroke-linecap="round"/><rect x="15" y="31" width="9" height="8" rx="1.5" fill="currentColor"/><rect x="28" y="31" width="9" height="8" rx="1.5" fill="currentColor" opacity=".4"/><rect x="41" y="31" width="9" height="8" rx="1.5" fill="currentColor" opacity=".4"/><rect x="15" y="43" width="9" height="8" rx="1.5" fill="currentColor" opacity=".4"/></symbol>
+  <symbol id="i-warn" viewBox="0 0 64 64"><path d="M32 5l29 52H3z" fill="currentColor" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/><path d="M32 23v16" stroke="#fff" stroke-width="5.5" stroke-linecap="round"/><circle cx="32" cy="48" r="3.5" fill="#fff"/></symbol>
+  <symbol id="i-globe" viewBox="0 0 64 64"><circle cx="32" cy="32" r="27" fill="#fff" stroke="currentColor" stroke-width="4"/><ellipse cx="32" cy="32" rx="12" ry="27" fill="none" stroke="currentColor" stroke-width="3"/><path d="M5 32h54M9 19h46M9 45h46" stroke="currentColor" stroke-width="3"/></symbol>
+  <symbol id="i-ware" viewBox="0 0 64 64"><path d="M4 24L32 8l28 16v32H4z" fill="currentColor" opacity=".85"/><rect x="14" y="32" width="36" height="24" fill="#fff"/><path d="M14 40h36M14 48h36" stroke="currentColor" stroke-width="2.5"/></symbol>
+  <symbol id="i-ship" viewBox="0 0 64 64"><path d="M6 38h52l-8 16H14z" fill="currentColor"/><rect x="18" y="22" width="12" height="16" fill="currentColor" opacity=".55"/><rect x="32" y="16" width="14" height="22" fill="currentColor" opacity=".75"/><path d="M2 60c5-3 10-3 15 0s10 3 15 0 10-3 15 0 10 3 15 0" fill="none" stroke="currentColor" stroke-width="2.5"/></symbol>
+  <symbol id="i-train" viewBox="0 0 64 64"><rect x="12" y="6" width="40" height="42" rx="9" fill="currentColor"/><rect x="18" y="13" width="28" height="14" rx="2" fill="#fff"/><circle cx="22" cy="38" r="3.5" fill="#fff"/><circle cx="42" cy="38" r="3.5" fill="#fff"/><path d="M20 48l-7 11M44 48l7 11M16 55h32" stroke="currentColor" stroke-width="4" stroke-linecap="round"/></symbol>
+  <symbol id="i-sofa" viewBox="0 0 64 64"><rect x="10" y="18" width="44" height="18" rx="5" fill="currentColor" opacity=".55"/><rect x="4" y="30" width="56" height="16" rx="5" fill="currentColor"/><path d="M10 46v8M54 46v8" stroke="currentColor" stroke-width="5" stroke-linecap="round"/></symbol>
+  <symbol id="i-shop" viewBox="0 0 64 64"><path d="M6 10h52l4 16H2z" fill="currentColor"/><rect x="8" y="26" width="48" height="30" fill="currentColor" opacity=".55"/><rect x="16" y="34" width="13" height="22" fill="#fff"/><rect x="35" y="34" width="14" height="11" fill="#fff"/></symbol>
+  <symbol id="i-hand" viewBox="0 0 64 64"><path d="M4 30l14-12 12 6 10-6 20 12-14 16-8-6-6 6-6-4-6 4z" fill="currentColor" opacity=".8"/><path d="M22 38l6-6 8 8M28 44l6-6" fill="none" stroke="#fff" stroke-width="3" stroke-linecap="round"/></symbol>
+  <symbol id="i-web" viewBox="0 0 64 64"><rect x="4" y="9" width="56" height="38" rx="5" fill="currentColor"/><rect x="9" y="14" width="46" height="28" rx="2" fill="#fff"/><path d="M24 56h16M32 47v9" stroke="currentColor" stroke-width="4.5" stroke-linecap="round"/><path d="M17 28l6 6 12-13" fill="none" stroke="currentColor" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+  <symbol id="i-hour" viewBox="0 0 64 64"><path d="M16 5h32M16 59h32" stroke="currentColor" stroke-width="4.5" stroke-linecap="round"/><path d="M19 6c0 16 26 16 26 26S19 42 19 58h26c0-16-26-16-26-26S45 22 45 6z" fill="none" stroke="currentColor" stroke-width="3.5" stroke-linejoin="round"/><path d="M24 54c3-6 13-6 16 0z" fill="currentColor"/></symbol>
+  <symbol id="i-check" viewBox="0 0 64 64"><circle cx="32" cy="32" r="27" fill="currentColor"/><path d="M19 33l9 9 18-20" fill="none" stroke="#fff" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+  <symbol id="i-snow" viewBox="0 0 64 64"><path d="M32 4v56M8 18l48 28M8 46l48-28" stroke="currentColor" stroke-width="4.5" stroke-linecap="round"/></symbol>
+  <symbol id="i-plane" viewBox="0 0 64 64"><path d="M30 4c3 0 4 4 4 8v14l24 14v6l-24-7v12l7 6v4l-11-3-11 3v-4l7-6V39L2 46v-6l24-14V12c0-4 1-8 4-8z" fill="currentColor"/></symbol>
+ </defs>
+</svg>
+
+<style>
+:root{ --c5:#0b7285; --c5s:#e3f4f7; }
+.s5{background:var(--c5)} .s5 .badge{color:var(--c5)}
+.k5{border-top:4px solid var(--c5)} .k5 h3{color:var(--c5)}
+.t5{background:var(--c5s)} .t5 .big{color:var(--c5)}
+.n5{background:var(--c5s);color:var(--c5)}
+.cmp th{color:#fff} .cmp td:first-child{font-weight:700}
+.nums .tile .big{font-size:13.5pt}.nums .tile{padding:5px 6px}
+.meter{display:flex;gap:3px;margin-top:3px}.meter i{flex:1;height:8px;border-radius:4px;background:#e4e7ee}
+</style>
+<svg width="0" height="0" style="position:absolute"><defs>
+ <symbol id="i-book" viewBox="0 0 64 64"><path d="M8 10h20a6 6 0 016 6v40a5 5 0 00-5-5H8z" fill="currentColor"/><path d="M56 10H36a6 6 0 00-6 6v40a5 5 0 015-5h21z" fill="currentColor" opacity=".6"/></symbol>
+ <symbol id="i-build" viewBox="0 0 64 64"><rect x="10" y="8" width="30" height="50" rx="2" fill="currentColor"/><rect x="40" y="24" width="16" height="34" rx="2" fill="currentColor" opacity=".6"/><g fill="#fff"><rect x="16" y="14" width="6" height="6"/><rect x="28" y="14" width="6" height="6"/><rect x="16" y="26" width="6" height="6"/><rect x="28" y="26" width="6" height="6"/><rect x="16" y="38" width="6" height="6"/><rect x="28" y="38" width="6" height="6"/><rect x="21" y="48" width="8" height="10"/></g></symbol>
+ <symbol id="i-group" viewBox="0 0 64 64"><circle cx="20" cy="22" r="8" fill="currentColor" opacity=".6"/><circle cx="44" cy="22" r="8" fill="currentColor" opacity=".6"/><circle cx="32" cy="18" r="10" fill="currentColor"/><path d="M4 52c0-10 7-16 16-16 3 0 6 1 8 2-4 3-6 8-6 14z" fill="currentColor" opacity=".6"/><path d="M60 52c0-10-7-16-16-16-3 0-6 1-8 2 4 3 6 8 6 14z" fill="currentColor" opacity=".6"/><path d="M14 56c0-12 8-20 18-20s18 8 18 20z" fill="currentColor"/></symbol>
+ <symbol id="i-ring" viewBox="0 0 64 64"><circle cx="24" cy="36" r="16" fill="none" stroke="currentColor" stroke-width="5"/><circle cx="40" cy="36" r="16" fill="none" stroke="currentColor" stroke-width="5" opacity=".6"/><path d="M28 8l4-4 4 4-4 6z" fill="currentColor"/></symbol>
+ <symbol id="i-shield" viewBox="0 0 64 64"><path d="M32 4l24 9v16c0 15-10 27-24 31C18 56 8 44 8 29V13z" fill="currentColor"/><path d="M21 32l8 8 14-15" fill="none" stroke="#fff" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+ <symbol id="i-stamp" viewBox="0 0 64 64"><rect x="24" y="4" width="16" height="22" rx="7" fill="currentColor"/><path d="M14 30h36l4 12H10z" fill="currentColor"/><rect x="8" y="46" width="48" height="6" rx="2" fill="currentColor" opacity=".6"/></symbol>
+</defs></svg>
+
+<svg width="0" height="0" style="position:absolute"><defs>
+ <symbol id="i-tacho" viewBox="0 0 64 64"><circle cx="32" cy="34" r="26" fill="#fff" stroke="currentColor" stroke-width="4.5"/><path d="M14 44a20 20 0 1 1 36 0" fill="none" stroke="currentColor" stroke-width="3" stroke-dasharray="3 4"/><path d="M32 36L46 22" stroke="currentColor" stroke-width="5" stroke-linecap="round"/><circle cx="32" cy="36" r="5" fill="currentColor"/><rect x="22" y="48" width="20" height="6" rx="2" fill="currentColor"/></symbol>
+ <symbol id="i-card" viewBox="0 0 64 64"><rect x="4" y="12" width="56" height="40" rx="6" fill="currentColor"/><rect x="10" y="20" width="12" height="10" rx="2" fill="#ffd66b"/><circle cx="44" cy="30" r="7" fill="#fff" opacity=".9"/><path d="M34 44c1-5 5-7 10-7s9 2 10 7z" fill="#fff" opacity=".9"/><path d="M10 38h18M10 44h14" stroke="#fff" stroke-width="3" stroke-linecap="round"/></symbol>
+ <symbol id="i-mega" viewBox="0 0 64 64"><path d="M6 26h10l28-14v40L16 38H6z" fill="currentColor"/><path d="M16 38l5 16h8l-4-16" fill="currentColor" opacity=".6"/><path d="M50 22c4 3 4 17 0 20M55 16c7 6 7 26 0 32" fill="none" stroke="currentColor" stroke-width="3.5" stroke-linecap="round"/></symbol>
+ <symbol id="i-wheel" viewBox="0 0 64 64"><circle cx="32" cy="32" r="26" fill="none" stroke="currentColor" stroke-width="6"/><circle cx="32" cy="32" r="7" fill="currentColor"/><path d="M8 28c8-4 16-5 24-5s16 1 24 5M32 39v19" stroke="currentColor" stroke-width="6" stroke-linecap="round"/></symbol>
+ <symbol id="i-bed" viewBox="0 0 64 64"><path d="M4 16v38M60 38v16M4 44h56" stroke="currentColor" stroke-width="5" stroke-linecap="round"/><circle cx="16" cy="32" r="6" fill="currentColor"/><rect x="26" y="26" width="34" height="14" rx="5" fill="currentColor" opacity=".75"/></symbol>
+ <symbol id="i-eye" viewBox="0 0 64 64"><path d="M2 32C12 16 22 10 32 10s20 6 30 22C52 48 42 54 32 54S12 48 2 32z" fill="currentColor"/><circle cx="32" cy="32" r="12" fill="#fff"/><circle cx="32" cy="32" r="6" fill="currentColor"/></symbol>
+ <symbol id="i-health" viewBox="0 0 64 64"><path d="M32 4l24 9v16c0 15-10 27-24 31C18 56 8 44 8 29V13z" fill="currentColor"/><path d="M32 20v22M21 31h22" stroke="#fff" stroke-width="6" stroke-linecap="round"/></symbol>
+</defs></svg>
+
+<!-- ============ PORTADA ============ -->
+<div class="cover">
+ <div class="hero">
+  <div style="font-size:10pt;font-weight:700;letter-spacing:2px;opacity:.75">COMPETENCIA PROFESIONAL · TRANSPORTE DE MERCANCÍAS</div>
+  <h1>TEMA 3 · Derecho social</h1>
+  <div class="sub">Esquema visual con <b>todos los datos</b> que caen en los test (1C01 – 1C05 · 421 preguntas del banco)</div>
+  <div class="chips"><span>🤝 Sindicatos y representantes</span><span>🛡️ Seguridad Social</span><span>📝 Contrato de trabajo</span><span>⏱️ Tiempos y tacógrafo</span><span>🎓 CAP</span></div>
+  <svg viewBox="0 0 600 120" class="diag" style="margin-top:6px">
+   <path d="M0 104 H600" stroke="rgba(255,255,255,.35)" stroke-width="2" stroke-dasharray="10 8"/>
+   <use href="#i-group" x="10" y="38" width="70" height="62" style="color:#b9a6ff"/>
+   <use href="#i-health" x="130" y="38" width="62" height="62" style="color:#8fb8ff"/>
+   <use href="#i-doc" x="250" y="38" width="62" height="62" style="color:#ffb27a"/>
+   <use href="#i-tacho" x="370" y="30" width="72" height="72" style="color:#6fe0a6"/>
+   <use href="#i-card" x="500" y="38" width="70" height="62" style="color:#7fd3e0"/>
+  </svg>
+ </div>
+ <div class="idx">
+  <div class="it" style="background:var(--c1)"><div class="code">1C01 · 46 preguntas</div><h3>Sindicatos y representantes</h3><ul><li>Libertad sindical (LOLS)</li><li>Secciones y delegados sindicales</li><li>Delegados de personal y comité</li><li>Inspección de Trabajo</li></ul></div>
+  <div class="it" style="background:var(--c2)"><div class="code">1C02 · 63 preguntas</div><h3>Seguridad Social</h3><ul><li>Régimen General y afiliación</li><li>Cotización: 28,30 % y horas extra</li><li>Recaudación, aplazamientos, prescripción</li><li>Autónomos e infracciones</li></ul></div>
+  <div class="it" style="background:var(--c3)"><div class="code">1C03 · 117 preguntas</div><h3>Contrato de trabajo</h3><ul><li>Relación laboral, forma y prueba</li><li>Modalidades, jornada y salario</li><li>Movilidad, suspensión y despido</li><li>TRADE, huelga y cierre patronal</li></ul></div>
+  <div class="it" style="background:var(--c4)"><div class="code">1C04 · 166 preguntas (el que más cae)</div><h3>Tiempos y tacógrafo</h3><ul><li>Reglamentos 561/2006 y 165/2014</li><li>Conducción, pausas y descansos</li><li>Excepciones y obligaciones de la empresa</li><li>Tacógrafo, tarjetas y avería</li></ul></div>
+ </div>
+ <div class="idx" style="grid-template-columns:1fr">
+  <div class="it" style="background:var(--c5)"><div class="code">1C05 · 29 preguntas</div><h3>CAP: cualificación inicial y formación continua</h3><ul><li>RD 284/2021 · A quién se exige · Cursos de 280 / 140 / 35 horas · Examen · Tarjeta de 5 años · Infracciones</li></ul></div>
+ </div>
+ <div class="card" style="margin-top:10px">
+  <h3 style="color:var(--ink)">Cómo usar este esquema</h3>
+  <div class="legend">
+   <span><span class="n n4">4 h 30</span> = dato que te preguntan tal cual</span>
+   <span class="trap" style="margin:0;padding:2px 8px">la respuesta «lógica» no es la buena</span>
+   <span class="tip" style="margin:0;padding:2px 8px">regla para acordarte</span>
+  </div>
+  <p class="mini" style="margin:6px 0 0">Al final tienes 3 páginas de repaso: <b>la tabla de tiempos y contratos</b>, <b>todos los números</b> en una hoja y <b>las trampas</b> más típicas.</p>
+ </div>
+</div>
+
+<!-- ============ 1C01 SINDICAL ============ -->
+<div class="page">
+ <div class="sec s1"><span class="badge">1C01</span><div><h2>Libertad sindical</h2><p>LOLS 11/1985 · Quién se afilia · Contenido · Secciones y delegados sindicales</p></div></div>
+
+ <div class="card k1">
+  <h3><svg><use href="#i-group"/></svg>¿Quién puede afiliarse a un sindicato? <span class="ref">LOLS 1</span></h3>
+  <svg viewBox="0 0 700 110" class="diag svgtxt">
+   <rect x="4" y="6" width="430" height="98" rx="12" fill="#efeafe"/>
+   <text x="20" y="30" font-size="15" font-weight="800" fill="#6d4bd8">✔ SÍ PUEDEN</text>
+   <use href="#i-person" x="20" y="40" width="40" height="40" style="color:#6d4bd8"/><text x="40" y="96" text-anchor="middle" font-size="11.5">asalariados</text>
+   <use href="#i-person" x="150" y="40" width="40" height="40" style="color:#6d4bd8" opacity=".6"/><text x="170" y="96" text-anchor="middle" font-size="11.5">en paro</text>
+   <use href="#i-person" x="280" y="40" width="40" height="40" style="color:#6d4bd8"/><text x="350" y="62" font-size="11.5" font-weight="800">autónomos</text><text x="350" y="80" font-size="11" fill="#d6336c" font-weight="700">solo SIN</text><text x="350" y="96" font-size="11" fill="#d6336c" font-weight="700">trabajadores</text>
+   <rect x="448" y="6" width="248" height="98" rx="12" fill="#ffe8ef"/>
+   <text x="464" y="30" font-size="15" font-weight="800" fill="#d6336c">✘ NO PUEDEN</text>
+   <use href="#i-gavel" x="464" y="42" width="40" height="40" style="color:#d6336c"/>
+   <text x="512" y="58" font-size="11.5" font-weight="700">Jueces, Magistrados y</text><text x="512" y="74" font-size="11.5" font-weight="700">Fiscales EN ACTIVO</text>
+   <text x="464" y="96" font-size="11">Sin actividad sindical dentro de recintos militares</text>
+  </svg>
+ </div>
+
+ <div class="g2 mb">
+  <div class="card k1">
+   <h3><svg><use href="#i-person"/></svg>Derechos del trabajador</h3>
+   <div class="yes"><b>Fundar</b> sindicatos <b>sin autorización previa</b> (y suspenderlos o extinguirlos)</div>
+   <div class="yes"><b>Afiliarse al que elija</b> respetando sus estatutos, y <b>separarse</b></div>
+   <div class="yes">Elegir libremente a sus representantes dentro del sindicato</div>
+   <div class="yes">Ejercer la actividad sindical</div>
+  </div>
+  <div class="card k1">
+   <h3><svg><use href="#i-build"/></svg>Derechos del sindicato</h3>
+   <div class="yes">Redactar sus <b>estatutos y reglamentos</b></div>
+   <div class="yes">Crear <b>federaciones, confederaciones</b> y organizaciones internacionales, afiliarse y retirarse</div>
+   <p class="mini" style="margin:4px 0 0"><b>Actividad sindical en la empresa</b>, en todo caso: <b>negociación colectiva</b> · <b>huelga</b> · <b>conflictos</b> individuales o colectivos · <b>candidaturas</b> a comité y delegados.</p>
+  </div>
+ </div>
+
+ <div class="card k1">
+  <h3><svg><use href="#i-mega"/></svg>Sección sindical y delegado sindical <span class="ref">LOLS 8-10</span></h3>
+  <svg viewBox="0 0 700 128" class="diag svgtxt">
+   <rect x="4" y="6" width="214" height="116" rx="12" fill="#efeafe"/>
+   <text x="111" y="30" text-anchor="middle" font-size="14" font-weight="800" fill="#6d4bd8">SECCIÓN SINDICAL</text>
+   <text x="111" y="52" text-anchor="middle" font-size="11.5">afiliados a un mismo sindicato</text><text x="111" y="68" text-anchor="middle" font-size="11.5">en la empresa o centro</text>
+   <text x="111" y="94" text-anchor="middle" font-size="11.5" font-weight="800">sin importar</text><text x="111" y="110" text-anchor="middle" font-size="11.5" font-weight="800">representatividad ni implantación</text>
+   <text x="236" y="72" font-size="28" font-weight="900" fill="#6d4bd8">→</text>
+   <rect x="266" y="6" width="210" height="116" rx="12" fill="#f1f3f8"/>
+   <text x="371" y="28" text-anchor="middle" font-size="12.5" font-weight="800">Si hay presencia en el comité:</text>
+   <text x="280" y="52" font-size="11.5">📌 <tspan font-weight="700">tablón de anuncios</tspan></text>
+   <text x="280" y="74" font-size="11.5">🤝 <tspan font-weight="700">negociación colectiva</tspan></text>
+   <text x="280" y="96" font-size="11.5">🏠 <tspan font-weight="700">local</tspan> si &gt; 250 trabajadores</text>
+   <text x="494" y="72" font-size="28" font-weight="900" fill="#6d4bd8">→</text>
+   <rect x="522" y="6" width="174" height="116" rx="12" fill="#6d4bd8"/>
+   <text x="609" y="30" text-anchor="middle" font-size="14" font-weight="800" fill="#fff">DELEGADO SINDICAL</text>
+   <text x="609" y="54" text-anchor="middle" font-size="22" font-weight="900" fill="#fff">&gt; 250</text>
+   <text x="609" y="72" text-anchor="middle" font-size="11" fill="#fff">trabajadores + presencia</text><text x="609" y="86" text-anchor="middle" font-size="11" fill="#fff">en el comité</text>
+   <text x="609" y="110" text-anchor="middle" font-size="11.5" font-weight="800" fill="#fff">lo eligen los AFILIADOS</text>
+  </svg>
+  <div class="g3" style="margin-top:4px">
+   <div>Si <b>no</b> es miembro del comité, tiene derecho a la <b>misma información y documentación</b> que el comité.</div>
+   <div>Asiste a reuniones del comité y de seguridad e higiene <b>con voz pero sin voto</b>.</div>
+   <div>Debe <b>ser oído</b> antes de medidas colectivas que afecten a los trabajadores.</div>
+  </div>
+ </div>
+ <div class="tip">Dos «250»: con <b>más de 250</b> trabajadores hay <b>delegado sindical</b> y <b>local</b> para la sección.</div>
+</div>
+
+<div class="page">
+ <div class="sec s1"><span class="badge">1C01</span><div><h2>Representación unitaria: delegados y comité</h2><p>ET 62-68 · Cuántos según la plantilla · Elecciones · Competencias · Garantías</p></div></div>
+
+ <div class="card k1">
+  <h3><svg><use href="#i-group"/></svg>¿Qué órgano toca según el número de trabajadores?</h3>
+  <svg viewBox="0 0 700 132" class="diag svgtxt">
+   <rect x="4" y="40" width="80" height="40" rx="8" fill="#f1f3f8"/><text x="44" y="58" text-anchor="middle" font-size="12" font-weight="800" fill="#5b6478">1 – 5</text><text x="44" y="73" text-anchor="middle" font-size="10.5" fill="#5b6478">nadie</text>
+   <rect x="88" y="40" width="170" height="40" rx="8" fill="#d9cffb"/><text x="173" y="58" text-anchor="middle" font-size="12" font-weight="800" fill="#6d4bd8">6 – 10</text><text x="173" y="73" text-anchor="middle" font-size="10">1 delegado si vota la mayoría</text>
+   <rect x="262" y="40" width="190" height="40" rx="8" fill="#b9a6ff"/><text x="357" y="58" text-anchor="middle" font-size="12" font-weight="800" fill="#3c2690">más de 10 y menos de 50</text><text x="357" y="73" text-anchor="middle" font-size="10.5">DELEGADOS DE PERSONAL</text>
+   <rect x="456" y="40" width="240" height="40" rx="8" fill="#6d4bd8"/><text x="576" y="58" text-anchor="middle" font-size="12" font-weight="800" fill="#fff">50 o más</text><text x="576" y="73" text-anchor="middle" font-size="10.5" fill="#fff">COMITÉ DE EMPRESA</text>
+   <text x="88" y="102" font-size="11">delegados: actúan <tspan font-weight="800">conjuntamente</tspan> · mismas competencias</text>
+   <text x="88" y="120" font-size="11" fill="#d6336c" font-weight="700">con 45 trabajadores NO hay comité</text>
+   <text x="462" y="102" font-size="11">comité: de 50 a 100 → <tspan font-weight="800">5 miembros</tspan></text>
+   <text x="462" y="120" font-size="11">elige presidente y secretario</text>
+   <text x="4" y="24" font-size="11" fill="#5b6478">trabajadores de la empresa o centro →</text>
+  </svg>
+  <div class="g2" style="margin-top:3px">
+   <div><b>Comité conjunto</b>: dos o más centros en la <b>misma provincia o municipios limítrofes</b> que por separado no llegan a 50 y juntos sí.</div>
+   <div><b>Comité intercentros</b>: solo si está <b>pactado en el convenio colectivo</b>. El comité hace <b>su propio reglamento</b> de funcionamiento.</div>
+  </div>
+ </div>
+
+ <div class="g2 mb">
+  <div class="card k1">
+   <h3><svg><use href="#i-check"/></svg>Elecciones <span class="ref">ET 67 · 69</span></h3>
+   <div class="g2">
+    <div class="tile t1"><span class="big">16 años · 1 mes</span><span class="lbl"><b>votar</b> (electores): edad · antigüedad</span></div>
+    <div class="tile t1"><span class="big">18 años · 6 meses</span><span class="lbl"><b>ser candidato</b> (elegibles)</span></div>
+   </div>
+   <ul><li>Las promueven los trabajadores <b>por acuerdo mayoritario</b>.</li><li>Mandato: <span class="n n1">4 años</span>.</li></ul>
+  </div>
+  <div class="card k1">
+   <h3><svg><use href="#i-shield"/></svg>Garantías de los representantes <span class="ref">ET 68</span></h3>
+   <ul>
+    <li><b>Expediente contradictorio</b> antes de sancionarle por falta grave o muy grave.</li>
+    <li><b>Prioridad de permanencia</b> en despidos o suspensiones económicas o tecnológicas.</li>
+    <li>No despido ni sanción <b>durante el mandato ni el año siguiente</b>.</li>
+    <li>Publicar sin perturbar el trabajo y <b>comunicándolo</b> a la empresa.</li>
+    <li>Crédito de <span class="n n1">15 h/mes</span> retribuidas hasta 100 trabajadores. <b>No</b> hay crédito ilimitado.</li>
+   </ul>
+  </div>
+ </div>
+
+ <div class="card k1">
+  <h3><svg><use href="#i-doc"/></svg>Competencias del comité (y de los delegados de personal) <span class="ref">ET 64-65</span></h3>
+  <div class="g3">
+   <div><b>Información</b><ul><li><b>Siempre</b>: situación económica y <b>cuentas anuales</b></li><li><b>Trimestral</b>: evolución del empleo y nuevos contratos</li><li>Sanciones por faltas <b>muy graves</b> (no todas)</li><li>Se le pueden negar <b>secretos industriales, financieros o comerciales</b></li></ul></div>
+   <div><b>Informe previo</b><ul><li>Reestructuraciones de plantilla</li><li>Fusión que afecte al empleo</li></ul><b>Vigilar</b><ul><li>Normas laborales y de Seguridad Social</li><li>Seguridad en el trabajo</li><li>Igualdad mujeres-hombres</li></ul></div>
+   <div><b>Actuar</b><ul><li>Acciones judiciales o administrativas: el comité <b>como órgano colegiado, por mayoría</b></li><li>Convocar asambleas, plantear <b>conflicto colectivo</b>, declarar <b>huelga</b></li></ul><div class="no">Demandas particulares de cada trabajador</div></div>
+  </div>
+  <div class="trap">No demanda ni el presidente solo ni cada miembro por separado: actúa <b>el comité entero por mayoría</b>.</div>
+ </div>
+</div>
+
+<div class="page">
+ <div class="sec s1"><span class="badge">1C01</span><div><h2>Inspección de Trabajo y Seguridad Social</h2><p>Ley 23/2015 · Quién la ejerce · Funciones · Facultades · Medidas</p></div></div>
+
+ <div class="card k1">
+  <h3><svg><use href="#i-eye"/></svg>Qué es y quién la ejerce</h3>
+  <div class="g3">
+   <div>Vigila las <b>normas de orden social</b> y <b>exige responsabilidades</b>. <b>No</b> es cosa de Hacienda, la Tesorería ni el INSS.</div>
+   <div>La ejercen <b>exclusivamente funcionarios del Cuerpo Superior de Inspectores de Trabajo y Seguridad Social</b> (habilitación nacional).</div>
+   <div>También vigila <b>movimientos migratorios y trabajo de extranjeros</b>.</div>
+  </div>
+ </div>
+
+ <div class="g2 mb">
+  <div class="card k1">
+   <h3><svg><use href="#i-check"/></svg>Funciones</h3>
+   <div class="yes">Vigilar leyes, reglamentos y convenios colectivos</div>
+   <div class="yes"><b>Asistencia técnica</b> a empresas, trabajadores y Administraciones</div>
+   <div class="yes"><b>Arbitraje, conciliación y mediación</b></div>
+   <div class="yes">Informes a los jueces cuando lo prevea la ley</div>
+   <div class="no"><b>Negociar</b> convenios colectivos</div>
+   <div class="no">Controlar las prestaciones por <b>incapacidad temporal</b></div>
+  </div>
+  <div class="card k1">
+   <h3><svg><use href="#i-key"/></svg>Facultades de los inspectores</h3>
+   <ul>
+    <li>Entrar <b>libremente, en cualquier momento y sin previo aviso</b> en todo centro sujeto a inspección.</li>
+    <li>Si el centro es el <b>domicilio</b> de un empresario persona física: <b>consentimiento o autorización judicial</b>.</li>
+    <li>Cualquier <b>diligencia de investigación</b>.</li>
+    <li><b>Medidas cautelares</b> proporcionadas en cualquier momento.</li>
+   </ul>
+  </div>
+ </div>
+
+ <div class="card k1">
+  <h3><svg><use href="#i-warn"/></svg>¿Qué puede hacer tras comprobar?</h3>
+  <svg viewBox="0 0 700 112" class="diag svgtxt">
+   <rect x="4" y="6" width="220" height="100" rx="12" fill="#efeafe"/><text x="114" y="32" text-anchor="middle" font-size="14" font-weight="800" fill="#6d4bd8">ADVERTIR Y REQUERIR</text><text x="114" y="56" text-anchor="middle" font-size="11.5">en vez de abrir expediente</text><text x="114" y="74" text-anchor="middle" font-size="11.5">sancionador, si conviene</text>
+   <rect x="240" y="6" width="220" height="100" rx="12" fill="#efeafe"/><text x="350" y="32" text-anchor="middle" font-size="14" font-weight="800" fill="#6d4bd8">PRESTACIONES</text><text x="350" y="56" text-anchor="middle" font-size="11.5">pedir la suspensión o</text><text x="350" y="74" text-anchor="middle" font-size="11.5">el cese de prestaciones</text>
+   <rect x="476" y="6" width="220" height="100" rx="12" fill="#d6336c"/><text x="586" y="32" text-anchor="middle" font-size="14" font-weight="800" fill="#fff">PARALIZAR TRABAJOS</text><text x="586" y="56" text-anchor="middle" font-size="11.5" fill="#fff">solo con riesgo</text><text x="586" y="76" text-anchor="middle" font-size="15" font-weight="900" fill="#fff">GRAVE E INMINENTE</text><text x="586" y="96" text-anchor="middle" font-size="11" fill="#fff">(nunca por un riesgo leve)</text>
+  </svg>
+ </div>
+ <div class="tip">Inspector = <b>entra sin avisar</b> (menos en casa del empresario) y <b>para la obra solo si el peligro es grave e inminente</b>.</div>
+</div>
+
+<!-- ============ 1C02 SEGURIDAD SOCIAL ============ -->
+<div class="page">
+ <div class="sec s2"><span class="badge">1C02</span><div><h2>Seguridad Social: sistema, Régimen General y afiliación</h2><p>Regímenes · Financiación · TGSS · Quién va al Régimen General · Afiliación y encuadramiento</p></div></div>
+
+ <div class="g2 mb">
+  <div class="card k2">
+   <h3><svg><use href="#i-health"/></svg>El sistema</h3>
+   <ul>
+    <li><b>Régimen General</b> + <b>Regímenes Especiales</b> (en plural).</li>
+    <li>Los <b>estudiantes sí</b> están protegidos.</li>
+    <li>El extranjero <b>no legal</b> en España <b>no</b> tiene prestaciones contributivas, <b>aunque trabaje</b>.</li>
+   </ul>
+   <b>Se financia con</b>: <span class="pill" style="background:var(--c2s);color:var(--c2)">cuotas</span><span class="pill" style="background:var(--c2s);color:var(--c2)">sanciones y recargos</span><span class="pill" style="background:var(--c2s);color:var(--c2)">recursos patrimoniales</span>
+  </div>
+  <div class="card k2">
+   <h3><svg><use href="#i-build"/></svg>Tesorería General (TGSS)</h3>
+   <div class="yes"><b>Inscribe a las empresas</b> y abre las <b>cuentas de cotización</b></div>
+   <div class="yes">Lleva la <b>recaudación</b> de las cuotas</div>
+   <div class="yes">Concede los <b>aplazamientos</b> de deudas</div>
+  </div>
+ </div>
+
+ <div class="card k2">
+  <h3><svg><use href="#i-truck"/></svg>¿Quién va al Régimen General?</h3>
+  <svg viewBox="0 0 700 112" class="diag svgtxt">
+   <rect x="4" y="6" width="480" height="100" rx="12" fill="#1f6feb"/>
+   <text x="20" y="30" font-size="15" font-weight="800" fill="#fff">RÉGIMEN GENERAL (obligatorio)</text>
+   <text x="20" y="52" font-size="11.5" fill="#fff">Todos los trabajadores <tspan font-weight="800">por cuenta ajena</tspan> o asimilados, con cualquier contrato:</text>
+   <text x="20" y="70" font-size="11.5" fill="#fff">fijos · eventuales · de temporada · discontinuos · a domicilio</text>
+   <text x="20" y="88" font-size="11.5" fill="#fff" font-weight="800">✔ Empleados de empresas de transporte ✔ Chóferes de particulares</text><text x="20" y="102" font-size="11.5" fill="#fff" font-weight="800">✔ Conductores habituales de mercancías peligrosas (ADR)</text>
+   <rect x="500" y="6" width="196" height="100" rx="12" fill="#ffe8ef"/>
+   <text x="598" y="40" text-anchor="middle" font-size="30" font-weight="900" fill="#d6336c">✘</text>
+   <text x="598" y="66" text-anchor="middle" font-size="12.5" font-weight="800" fill="#d6336c">NO existe un «Régimen</text><text x="598" y="84" text-anchor="middle" font-size="12.5" font-weight="800" fill="#d6336c">Especial de Transporte»</text>
+  </svg>
+ </div>
+
+ <div class="card k2">
+  <h3><svg><use href="#i-card"/></svg>Afiliación, alta y encuadramiento</h3>
+  <div class="g3">
+   <div><span class="n n2">Única para toda la vida</span> y obligatoria, por cuenta ajena o propia. No se repite ni se renueva; lo que cambia son las <b>altas y bajas</b> en cada régimen.</div>
+   <div>La pide el <b>empresario</b>; si no lo hace, <b>puede pedirla el propio trabajador</b>.</div>
+   <div><b>Socios de cooperativa</b>: por cuenta ajena o propia <b>según elija la cooperativa</b>. Si la de trabajo asociado los pone en Autónomos, <b>responde solidariamente</b> de sus cuotas.</div>
+  </div>
+  <svg viewBox="0 0 700 84" class="diag svgtxt" style="margin-top:6px">
+   <rect x="4" y="4" width="340" height="76" rx="12" fill="#e7f0ff"/><text x="174" y="28" text-anchor="middle" font-size="14" font-weight="800" fill="#1f6feb">PLURIACTIVIDAD</text><text x="174" y="50" text-anchor="middle" font-size="12">varias actividades en</text><text x="174" y="68" text-anchor="middle" font-size="12" font-weight="800">REGÍMENES DISTINTOS</text>
+   <rect x="356" y="4" width="340" height="76" rx="12" fill="#e7f0ff"/><text x="526" y="28" text-anchor="middle" font-size="14" font-weight="800" fill="#1f6feb">PLURIEMPLEO</text><text x="526" y="50" text-anchor="middle" font-size="12">varios empresarios</text><text x="526" y="68" text-anchor="middle" font-size="12" font-weight="800">en el MISMO régimen</text>
+  </svg>
+ </div>
+ <div class="tip">Plur<b>i-a</b>ctividad = otr<b>a</b> actividad, otro régimen. Plur<b>i-e</b>mpleo = otro <b>e</b>mpleo, mismo régimen.</div>
+</div>
+
+<div class="page">
+ <div class="sec s2"><span class="badge">1C02</span><div><h2>Cotización, recaudación, autónomos e infracciones</h2><p>Base × tipo · 28,30 % · Horas extra · Plazos · 4 años · 5 años · RETA</p></div></div>
+
+ <div class="card k2">
+  <h3><svg><use href="#i-euro"/></svg>Quién paga cada parte <span class="ref">cuota = base × tipo</span></h3>
+  <svg viewBox="0 0 700 150" class="diag svgtxt">
+   <text x="4" y="20" font-size="12.5" font-weight="800">Contingencias comunes · 28,30 %</text>
+   <rect x="4" y="28" width="560" height="30" rx="6" fill="#1f6feb"/><text x="284" y="48" text-anchor="middle" font-size="13" font-weight="800" fill="#fff">EMPRESA 23,60 %</text>
+   <rect x="566" y="28" width="130" height="30" rx="6" fill="#8fb8ff"/><text x="631" y="48" text-anchor="middle" font-size="13" font-weight="800" fill="#0b3a85">TRAB. 4,70 %</text>
+   <text x="4" y="82" font-size="12.5" font-weight="800">Horas extra por fuerza mayor · 14 %</text>
+   <rect x="4" y="90" width="236" height="26" rx="6" fill="#1f6feb"/><text x="122" y="108" text-anchor="middle" font-size="12" font-weight="800" fill="#fff">EMPRESA 12 %</text>
+   <rect x="242" y="90" width="58" height="26" rx="6" fill="#8fb8ff"/><text x="271" y="108" text-anchor="middle" font-size="12" font-weight="800" fill="#0b3a85">2 %</text>
+   <text x="330" y="82" font-size="12.5" font-weight="800">Horas extra normales · 28,30 % (23,60 + 4,70)</text>
+   <text x="330" y="108" font-size="12">las horas extra <tspan font-weight="800">SÍ cotizan</tspan> (cotización adicional)</text>
+   <rect x="4" y="124" width="692" height="24" rx="6" fill="#e7f0ff"/><text x="350" y="141" text-anchor="middle" font-size="12" font-weight="800" fill="#1f6feb">Accidentes de trabajo y enfermedades profesionales (AT/EP): 100 % EMPRESA</text>
+  </svg>
+  <div class="g3" style="margin-top:4px">
+   <div><b>Base</b> = remuneración total. Es <b>nulo</b> cualquier pacto sobre las bases.</div>
+   <div>Desempleo, <b>FOGASA</b> y FP usan la <b>misma base que AT/EP</b>.</div>
+   <div>Si no descuenta la parte del trabajador <b>al pagar el salario</b>, ya no puede: la paga el empresario.</div>
+  </div>
+ </div>
+
+ <div class="g2 mb">
+  <div class="card k2">
+   <h3><svg><use href="#i-cal"/></svg>Cuándo se cotiza y se paga</h3>
+   <ul>
+    <li>Siempre en <b>alta o trabajando</b>, también con servicios discontinuos y en el <b>permiso por nacimiento</b>.</li>
+    <li>Acaba con el cese <b>comunicado en tiempo y forma</b>; si no, hasta que la <b>TGSS lo sepa</b>.</li>
+    <li>Periodos: <b>voluntario</b> y <b>vía de apremio</b> (cobro forzoso).</li>
+    <li>Régimen General: <span class="n n2">el mes siguiente</span> · Autónomos: <span class="n n2">el mismo mes</span>.</li>
+    <li>Prescripción de cuotas: <span class="n n2">4 años</span> desde el fin del plazo de pago.</li>
+   </ul>
+  </div>
+  <div class="card k2">
+   <h3><svg><use href="#i-hour"/></svg>Aplazamientos (los concede la TGSS)</h3>
+   <div class="tile t2"><span class="big">5 años</span><span class="lbl">máximo, <b>nunca</b> se supera</span></div>
+   <div class="no" style="margin-top:5px">No se aplazan las cuotas de <b>AT/EP</b></div>
+   <div class="no">Ni la <b>aportación del trabajador</b></div>
+  </div>
+ </div>
+
+ <div class="g2 mb">
+  <div class="card k2">
+   <h3><svg><use href="#i-person"/></svg>Autónomos</h3>
+   <ul>
+    <li><b>Puede tener asalariados</b>. El administrador con <b>control efectivo</b> es autónomo.</li>
+    <li>Obligaciones: <b>afiliarse, comunicar altas y bajas, cotizar</b>.</li>
+    <li>Base: <b>rendimientos netos del año natural</b> (no la elige él).</li>
+    <li>Menor de <b>12 años</b> o familiar dependiente (también un <b>hermano</b>) + contrata a alguien → <b>100 %</b> de bonificación en comunes.</li>
+    <li>Primera alta: <b>60 €/mes 12 meses</b> con cotización mínima; si no, <b>−80 %</b>.</li>
+   </ul>
+  </div>
+  <div class="card k2">
+   <h3><svg><use href="#i-warn"/></svg>Infracciones (administrativas, no delitos)</h3>
+   <p class="mini" style="margin:0 0 3px">Prescriben a los <b>4 años</b> desde la infracción.</p>
+   <div><span class="pill" style="background:#fff7dc;color:#a77900">LEVE</span> no guardar <b>4 años</b> los justificantes de altas y bajas</div>
+   <div style="margin-top:3px"><span class="pill" style="background:var(--c3s);color:var(--c3)">GRAVE</span> empezar sin <b>inscribir la empresa</b> · no <b>afiliar</b> a un trabajador · no comprobar el <b>alta de los del subcontratista</b></div>
+   <div style="margin-top:3px"><span class="pill" style="background:var(--reds);color:var(--red)">MUY GRAVE</span> pactar que los trabajadores <b>paguen cuotas del empresario</b> · <b>simular</b> un contrato para cobrar prestaciones</div>
+  </div>
+ </div>
+ <div class="tip">En Seguridad Social casi todo es <b>4</b>: prescripción de cuotas, de infracciones y guardar justificantes. Solo el aplazamiento es <b>5</b>.</div>
+</div>
+
+<!-- ============ 1C03 LABORAL ============ -->
+<div class="page">
+ <div class="sec s3"><span class="badge">1C03</span><div><h2>La relación laboral y el contrato</h2><p>ET (RDLeg 2/2015) · Qué es laboral · Fuentes · Quién puede trabajar · Derechos y deberes · Forma</p></div></div>
+
+ <div class="card k3">
+  <h3><svg><use href="#i-doc"/></svg>¿Hay relación laboral? <span class="ref">ET 1</span></h3>
+  <svg viewBox="0 0 700 64" class="diag svgtxt">
+   <rect x="4" y="4" width="160" height="56" rx="10" fill="#fff0e6"/><text x="84" y="28" text-anchor="middle" font-size="13" font-weight="800" fill="#e8590c">VOLUNTARIO</text><text x="84" y="46" text-anchor="middle" font-size="11">trabaja porque quiere</text>
+   <text x="170" y="40" font-size="22" font-weight="900" fill="#e8590c">+</text>
+   <rect x="188" y="4" width="150" height="56" rx="10" fill="#fff0e6"/><text x="263" y="28" text-anchor="middle" font-size="13" font-weight="800" fill="#e8590c">SALARIO</text><text x="263" y="46" text-anchor="middle" font-size="11">a cambio de dinero</text>
+   <text x="344" y="40" font-size="22" font-weight="900" fill="#e8590c">+</text>
+   <rect x="362" y="4" width="150" height="56" rx="10" fill="#fff0e6"/><text x="437" y="28" text-anchor="middle" font-size="13" font-weight="800" fill="#e8590c">POR CUENTA AJENA</text><text x="437" y="46" text-anchor="middle" font-size="11">el resultado es de otro</text>
+   <text x="518" y="40" font-size="22" font-weight="900" fill="#e8590c">+</text>
+   <rect x="536" y="4" width="160" height="56" rx="10" fill="#e8590c"/><text x="616" y="28" text-anchor="middle" font-size="13" font-weight="800" fill="#fff">DEPENDENCIA</text><text x="616" y="46" text-anchor="middle" font-size="11" fill="#fff">organización y dirección</text>
+  </svg>
+  <div class="g3" style="margin-top:4px">
+   <div><div class="yes">Asalariado con su empresario</div><div class="yes">Contratado por una <b>ETT</b> para cederlo</div></div>
+   <div><div class="no">Prestaciones personales obligatorias</div><div class="no">Funcionarios públicos</div><div class="no">Familiares <b>sin salario</b></div><div class="no"><b>TRADE</b></div></div>
+   <div><div class="no"><b>Transportista con vehículo propio y autorización propia</b>, aunque trabaje en exclusiva para un solo cargador</div><p class="mini" style="margin:3px 0 0">Pleitos del contrato: <b>jurisdicción social</b>.</p></div>
+  </div>
+ </div>
+
+ <div class="g2 mb">
+  <div class="card k3">
+   <h3><svg><use href="#i-book"/></svg>Fuentes <span class="ref">ET 3</span></h3>
+   <ol style="margin:2px 0 0;padding-left:18px"><li>Leyes y reglamentos <b>del Estado</b> (no de las CC. AA.)</li><li><b>Convenios colectivos</b></li><li><b>Contrato</b> de trabajo</li><li><b>Usos y costumbres</b> locales y profesionales</li></ol>
+   <ul><li>La ley fija <b>mínimos</b>: convenio y contrato pueden <b>mejorar</b>.</li><li>Derechos de la ley: <b>irrenunciables</b>, ni a cambio de dinero.</li><li>Cláusula nula → el resto del contrato <b>sigue valiendo</b> (ET 9).</li></ul>
+  </div>
+  <div class="card k3">
+   <h3><svg><use href="#i-person"/></svg>Quién puede trabajar</h3>
+   <div class="no">16-17 años <b>no emancipados</b>…</div>
+   <div class="yes">…salvo que <b>vivan de forma independiente con consentimiento</b> de los padres</div>
+   <div class="yes">Extranjeros y mayores de 18</div>
+   <div class="no">Menores de 18: <b>nunca horas extra</b></div>
+   <p class="mini" style="margin:4px 0 0"><b>Plena dedicación</b>: el empresario puede impedir trabajar para otros <b>pactándolo con compensación económica</b> (ET 21).</p>
+  </div>
+ </div>
+
+ <div class="g2 mb">
+  <div class="card k3">
+   <h3><svg><use href="#i-check"/></svg>Deberes y derechos <span class="ref">ET 4 · 5</span></h3>
+   <b>Deberes</b>: mejorar la productividad · cumplir órdenes · <b>no competir</b> · <b>seguridad e higiene</b> (lo impone la ley, aunque el contrato no lo diga).<br>
+   <b>Derechos</b>: promoción y formación · no discriminación · protección frente al acoso · cobrar lo pactado.
+   <div class="no" style="margin-top:3px">Elegir centro al ser trasladado, fijar solo sus vacaciones o exigir el ascenso</div>
+  </div>
+  <div class="card k3">
+   <h3><svg><use href="#i-doc"/></svg>Forma del contrato <span class="ref">ET 8</span></h3>
+   <div><span class="pill" style="background:var(--c3s);color:var(--c3)">De palabra o escrito</span> <b>indefinido a jornada completa</b></div>
+   <div style="margin-top:3px"><span class="pill" style="background:var(--reds);color:var(--red)">Siempre escrito</span> tiempo parcial · fijo discontinuo · formativos · relevo · temporal de <b>más de 4 semanas</b></div>
+   <p class="mini" style="margin:4px 0 0">Para que sea temporal, <b>el plazo tiene que constar por escrito</b>.</p>
+  </div>
+ </div>
+</div>
+
+<div class="page">
+ <div class="sec s3"><span class="badge">1C03</span><div><h2>Prueba, modalidades y jornada</h2><p>Período de prueba · Temporal · Fijo discontinuo · Tiempo parcial · Formativos · Horas extra</p></div></div>
+
+ <div class="g2 mb">
+  <div class="card k3">
+   <h3><svg><use href="#i-hour"/></svg>Período de prueba <span class="ref">ET 14</span></h3>
+   <div class="g2">
+    <div class="tile t3"><span class="big">6 meses</span><span class="lbl">técnicos titulados</span></div>
+    <div class="tile t3"><span class="big">2 meses</span><span class="lbl">resto de trabajadores</span></div>
+   </div>
+   <p style="margin:4px 0 0">Durante la prueba pueden romper <b>las dos partes</b>, empresario y trabajador.</p>
+  </div>
+  <div class="card k3">
+   <h3><svg><use href="#i-cal"/></svg>Temporal y fijo discontinuo</h3>
+   <b>Temporal</b>: necesita <b>causa</b>, no basta la voluntad:
+   <ul><li><b>exceso ocasional e imprevisible</b> de trabajo, o</li><li><b>sustituir</b> a quien tiene reserva de puesto (p. ej. baja por maternidad)</li></ul>
+   <b>Fijo discontinuo</b>: trabajos <b>intermitentes</b> con periodos de ejecución <b>ciertos</b>. Siempre escrito.
+  </div>
+ </div>
+
+ <div class="card k3">
+  <h3><svg><use href="#i-clock"/></svg>Tiempo parcial</h3>
+  <div class="g3">
+   <div>Menos horas a la semana que un trabajador <b>a tiempo completo comparable</b>. Puede ser <b>indefinido</b>. Siempre <b>escrito</b>.</div>
+   <div>Horas <b>extra</b>: solo por <b>siniestros o daños extraordinarios urgentes</b>.</div>
+   <div><b>Horas complementarias</b> (se añaden a las ordinarias): <span class="n n3">30 %</span>, o <span class="n n3">60 %</span> si lo permite el convenio.</div>
+  </div>
+ </div>
+
+ <div class="card k3">
+  <h3><svg><use href="#i-book"/></svg>Contratos formativos</h3>
+  <table>
+   <thead><tr><th style="background:var(--c3);border-radius:9px 0 0 0;width:22%"></th><th style="background:var(--c3)">Formación en alternancia</th><th style="background:var(--c3);border-radius:0 9px 0 0">Práctica profesional</th></tr></thead>
+   <tbody>
+    <tr><td><b>Antes se llamaba</b></td><td>para la formación y el aprendizaje</td><td>en prácticas</td></tr>
+    <tr><td><b>Para quién</b></td><td><b>16 a 25 años</b> sin titulación para prácticas</td><td>Estudios terminados en los <b>3 años anteriores</b></td></tr>
+    <tr><td><b>Duración</b></td><td><b>3 meses a 2 años</b></td><td><b>6 meses a 1 año</b></td></tr>
+    <tr><td><b>Prueba</b></td><td style="color:var(--red);font-weight:700">No admite</td><td>Máximo <b>1 mes</b></td></tr>
+    <tr><td><b>Horas extra</b></td><td>Ni extra ni complementarias, salvo siniestro urgente</td><td>Solo por siniestros o daños urgentes</td></tr>
+   </tbody>
+  </table>
+ </div>
+
+ <div class="card k3">
+  <h3><svg><use href="#i-clock"/></svg>Jornada y horas extraordinarias</h3>
+  <div class="g4">
+   <div class="tile t3"><span class="big">9 h</span><span class="lbl">trabajo efectivo diario máximo</span></div>
+   <div class="tile t3"><span class="big">12 h</span><span class="lbl">entre una jornada y la siguiente</span></div>
+   <div class="tile t3"><span class="big">80</span><span class="lbl">horas extra al año</span></div>
+   <div class="tile t3"><span class="big">=</span><span class="lbl">sin pacto: descanso retribuido equivalente</span></div>
+  </div>
+  <p style="margin:5px 0 0">Las horas extra son voluntarias, <b>salvo que se pacten</b> en convenio o contrato.</p>
+ </div>
+</div>
+
+<div class="page">
+ <div class="sec s3"><span class="badge">1C03</span><div><h2>Salario, cambios y suspensión del contrato</h2><p>ET 26-45 · Qué es salario · Concurso y FOGASA · Desplazamiento y traslado · Modificación · Cambio de titular · Suspensión</p></div></div>
+
+ <div class="card k3">
+  <h3><svg><use href="#i-euro"/></svg>Salario <span class="ref">ET 26-33</span></h3>
+  <div class="g3">
+   <div><b>Todo</b> lo que recibe, en <b>dinero o en especie</b>, por su trabajo (incluidos los descansos computables).<br><b>Estructura</b>: salario base + complementos.</div>
+   <div><div class="yes">En especie (vivienda, vehículo)</div><div class="no">Suplidos (reembolso de gastos)</div><div class="no">Dietas</div><div class="no">Indemnizaciones por traslado, suspensión o despido</div></div>
+   <div><ul style="margin:0"><li>Mora: <span class="n n3">10 %</span> de lo adeudado</li><li>Pagas extra: pueden <b>prorratearse en 12</b> si lo prevé el convenio</li><li>Empresario <b>insolvente</b>: paga el <b>FOGASA</b></li></ul></div>
+  </div>
+  <svg viewBox="0 0 700 74" class="diag svgtxt" style="margin-top:5px">
+   <rect x="4" y="4" width="692" height="66" rx="10" fill="#fff0e6"/>
+   <use href="#i-gavel" x="14" y="10" width="38" height="38" style="color:#e8590c"/>
+   <text x="62" y="26" font-size="12.5" font-weight="800" fill="#e8590c">Empresa en concurso:</text>
+   <text x="62" y="44" font-size="12">salarios de los <tspan font-weight="800">últimos 30 días</tspan>, hasta el <tspan font-weight="800">doble del SMI</tspan> = créditos <tspan font-weight="800">singularmente privilegiados</tspan></text><text x="62" y="62" font-size="12">plazo para ejercer la preferencia: <tspan font-weight="800">1 año</tspan> desde que debió cobrar</text>
+  </svg>
+ </div>
+
+ <div class="card k3">
+  <h3><svg><use href="#i-globe"/></svg>Desplazamiento o traslado: la frontera de los 12 meses en 3 años</h3>
+  <svg viewBox="0 0 700 104" class="diag svgtxt">
+   <rect x="4" y="6" width="300" height="92" rx="12" fill="#fff0e6"/><text x="154" y="30" text-anchor="middle" font-size="14" font-weight="800" fill="#e8590c">DESPLAZAMIENTO</text><text x="154" y="56" text-anchor="middle" font-size="20" font-weight="900" fill="#e8590c">≤ 12 meses</text><text x="154" y="80" text-anchor="middle" font-size="11.5">en un período de 3 años</text>
+   <text x="318" y="62" font-size="20" font-weight="900" fill="#5b6478">|</text>
+   <rect x="336" y="6" width="360" height="92" rx="12" fill="#e8590c"/><text x="516" y="30" text-anchor="middle" font-size="14" font-weight="800" fill="#fff">TRASLADO (&gt; 12 meses en 3 años)</text>
+   <text x="352" y="54" font-size="11.5" fill="#fff">El trabajador elige:</text>
+   <text x="352" y="72" font-size="11.5" fill="#fff" font-weight="700">① impugnarlo ② rescindir con indemnización</text>
+   <text x="352" y="90" font-size="11.5" fill="#fff" font-weight="700">③ aceptarlo con compensación económica</text>
+  </svg>
+ </div>
+
+ <div class="g2 mb">
+  <div class="card k3">
+   <h3><svg><use href="#i-warn"/></svg>Modificación sustancial</h3>
+   <p style="margin:0">Cambios de <b>jornada</b>, <b>sistema de remuneración</b>, paso a <b>turnos</b>…</p>
+   <p style="margin:3px 0 0">Si perjudica al trabajador puede <b>rescindir</b> con <span class="n n3">20 días por año</span>.</p>
+  </div>
+  <div class="card k3">
+   <h3><svg><use href="#i-build"/></svg>Cambio de titular de la empresa</h3>
+   <div class="no">No extingue los contratos ni permite despedir</div>
+   <div class="yes"><b>Inter vivos</b>: cedente y cesionario responden <b>solidariamente 3 años</b> de lo debido antes</div>
+  </div>
+ </div>
+
+ <div class="card k3">
+  <h3><svg><use href="#i-hour"/></svg>Suspensión (no se trabaja ni se cobra, el contrato sigue)</h3>
+  <div class="g2">
+   <div><span class="pill" style="background:var(--c3s);color:var(--c3)">incapacidad temporal</span><span class="pill" style="background:var(--c3s);color:var(--c3)">riesgo en el embarazo</span><span class="pill" style="background:var(--c3s);color:var(--c3)">prisión sin condena</span><span class="pill" style="background:var(--c3s);color:var(--c3)">sanción disciplinaria</span><span class="pill" style="background:var(--c3s);color:var(--c3)">huelga</span><span class="pill" style="background:var(--c3s);color:var(--c3)">cargo público</span><span class="pill" style="background:var(--c3s);color:var(--c3)">excedencia forzosa</span><span class="pill" style="background:var(--c3s);color:var(--c3)">fuerza mayor temporal</span></div>
+   <div class="tile t3"><span class="big">19 semanas</span><span class="lbl">por nacimiento, igual <b>maternidad y paternidad</b></span></div>
+  </div>
+ </div>
+</div>
+
+<div class="page">
+ <div class="sec s3"><span class="badge">1C03</span><div><h2>Extinción, despidos, TRADE y huelga</h2><p>ET 49-56 · Despido disciplinario · Procedente, improcedente, nulo · Colectivo · Ley 20/2007 · RDL 17/1977</p></div></div>
+
+ <div class="card k3">
+  <h3><svg><use href="#i-gavel"/></svg>Despido disciplinario <span class="ref">ET 54</span> · incumplimiento <b>grave y culpable</b></h3>
+  <div class="g2">
+   <ul style="margin:0"><li>Faltas <b>repetidas e injustificadas</b> de asistencia o puntualidad</li><li>Indisciplina o desobediencia</li><li>Ofensas verbales o físicas</li><li>Acoso (racial, étnico…)</li></ul>
+   <ul style="margin:0"><li>Bajada <b>continuada y voluntaria</b> del rendimiento</li><li>Embriaguez habitual o toxicomanía <b>que repercuta</b> en el trabajo (si no afecta, no es causa)</li></ul>
+  </div>
+  <svg viewBox="0 0 700 100" class="diag svgtxt" style="margin-top:5px">
+   <rect x="4" y="4" width="224" height="92" rx="12" fill="#e5f7ee"/><text x="116" y="28" text-anchor="middle" font-size="15" font-weight="800" fill="#0f9d58">PROCEDENTE</text><text x="116" y="50" text-anchor="middle" font-size="11.5">se prueba el incumplimiento</text><text x="116" y="74" text-anchor="middle" font-size="12.5" font-weight="800">✘ sin indemnización</text>
+   <rect x="238" y="4" width="224" height="92" rx="12" fill="#fff7dc"/><text x="350" y="28" text-anchor="middle" font-size="15" font-weight="800" fill="#a77900">IMPROCEDENTE</text><text x="350" y="50" text-anchor="middle" font-size="11.5">no se prueba</text><text x="350" y="74" text-anchor="middle" font-size="12.5" font-weight="800">EL EMPRESARIO elige:</text><text x="350" y="90" text-anchor="middle" font-size="11.5">readmitir o indemnizar</text>
+   <rect x="472" y="4" width="224" height="92" rx="12" fill="#d6336c"/><text x="584" y="28" text-anchor="middle" font-size="15" font-weight="800" fill="#fff">NULO</text><text x="584" y="48" text-anchor="middle" font-size="11" fill="#fff">discriminación · derechos fundamentales</text><text x="584" y="64" text-anchor="middle" font-size="11" fill="#fff">· embarazada desde el inicio</text><text x="584" y="86" text-anchor="middle" font-size="12.5" font-weight="800" fill="#fff">OBLIGA A READMITIR</text>
+  </svg>
+  <p class="mini" style="margin:4px 0 0">Otras extinciones: <b>mutuo acuerdo</b>, <b>jubilación</b>. Causas <b>objetivas</b> (ET 52): <b>ineptitud sobrevenida</b> y falta de adaptación a <b>cambios técnicos razonables</b>.</p>
+ </div>
+
+ <div class="card k3">
+  <h3><svg><use href="#i-group"/></svg>Despido colectivo · causas económicas, técnicas, organizativas o de producción · en 90 días</h3>
+  <div class="g3">
+   <div class="tile t3"><span class="big">10</span><span class="lbl">empresas de <b>menos de 100</b> (en una de 50 → 10)</span></div>
+   <div class="tile t3"><span class="big">10 %</span><span class="lbl">de <b>100 a 300</b> (en una de 150 → 15)</span></div>
+   <div class="tile t3"><span class="big">30</span><span class="lbl"><b>300 o más</b> (en una de 750 → 30)</span></div>
+  </div>
+  <p style="margin:4px 0 0">Se notifica a los representantes para abrir un <b>período de consultas</b> (no existe en el disciplinario).</p>
+ </div>
+
+ <div class="g2 mb">
+  <div class="card k3">
+   <h3><svg><use href="#i-truck"/></svg>TRADE <span class="ref">Ley 20/2007</span></h3>
+   <p style="margin:0"><b>Persona física</b> que obtiene <span class="n n3">≥ 75 %</span> de sus ingresos de <b>un cliente</b>. Todo a la vez:</p>
+   <div class="no">Tener asalariados</div><div class="no">Subcontratar parte del trabajo</div><div class="no">Trabajar mezclado con la plantilla del cliente</div><div class="yes">Cobrar según el <b>resultado</b></div>
+   <p style="margin:3px 0 0">Contrato <b>escrito</b> (si no, se presume <b>indefinido</b>) · <span class="n n3">18 días hábiles</span> de vacaciones · <b>acuerdos de interés profesional</b>.</p>
+  </div>
+  <div class="card k3">
+   <h3><svg><use href="#i-mega"/></svg>Huelga y cierre patronal <span class="ref">RDL 17/1977</span></h3>
+   <ul style="margin:0">
+    <li>No se puede renunciar en el contrato, <b>ni a cambio de dinero</b>.</li>
+    <li>Acuerdo <b>expreso en cada centro</b>.</li>
+    <li>Preaviso <span class="n n3">5 días naturales</span>, <span class="n n3">10</span> en servicios públicos.</li>
+    <li><b>Sin ocupar</b> el centro. Suspende el <b>contrato</b> y la <b>cotización</b>.</li>
+   </ul>
+   <p style="margin:3px 0 0"><b>Cierre patronal</b>: peligro de violencia · ocupación ilegal · inasistencia que afecte gravemente. Comunicar a la <b>Autoridad laboral en 12 h</b>.</p>
+  </div>
+ </div>
+</div>
+
+<!-- ============ 1C04 TIEMPOS Y TACÓGRAFO ============ -->
+<div class="page">
+ <div class="sec s4"><span class="badge">1C04</span><div><h2>Tiempos de conducción: ámbito y conceptos</h2><p>Reglamento (CE) 561/2006 · Reglamento (UE) 165/2014 · A quién se aplica · Exenciones · Definiciones</p></div></div>
+
+ <div class="card k4">
+  <h3><svg><use href="#i-globe"/></svg>Para qué sirven los dos reglamentos</h3>
+  <div class="g2">
+   <div><b>561/2006</b> = <b>cuánto conducir y descansar</b>. Armoniza disposiciones <b>en materia social</b> y las <b>condiciones de competencia entre modos de transporte terrestre</b>. Mejora el control y las prácticas laborales.</div>
+   <div><b>165/2014</b> = <b>el tacógrafo</b>, el aparato que registra esos tiempos y con el que se controla su cumplimiento.</div>
+  </div>
+ </div>
+
+ <div class="card k4">
+  <h3><svg><use href="#i-truck"/></svg>¿A quién se aplica?</h3>
+  <svg viewBox="0 0 700 92" class="diag svgtxt">
+   <rect x="4" y="6" width="200" height="80" rx="12" fill="#ffe8ef"/><text x="104" y="32" text-anchor="middle" font-size="14" font-weight="800" fill="#d6336c">≤ 2,5 t MMA</text><text x="104" y="54" text-anchor="middle" font-size="11.5">no se aplica</text>
+   <rect x="214" y="6" width="220" height="80" rx="12" fill="#c8eed9"/><text x="324" y="32" text-anchor="middle" font-size="14" font-weight="800" fill="#0f9d58">&gt; 2,5 t</text><text x="324" y="54" text-anchor="middle" font-size="11.5">también con la reforma</text><text x="324" y="70" text-anchor="middle" font-size="11.5">del Reglamento</text>
+   <rect x="444" y="6" width="252" height="80" rx="12" fill="#0f9d58"/><use href="#i-truck" x="456" y="18" width="56" height="50" style="color:#fff"/><text x="604" y="34" text-anchor="middle" font-size="14" font-weight="800" fill="#fff">&gt; 3,5 t MMA</text><text x="604" y="54" text-anchor="middle" font-size="11.5" fill="#fff">incluido remolque o</text><text x="604" y="70" text-anchor="middle" font-size="11.5" fill="#fff">semirremolque</text>
+  </svg>
+  <p style="margin:4px 0 0"><b>Transporte por carretera</b> = vacío o con carga, por vías públicas <b>total o parcialmente</b>. <b>Ayudantes</b>: al menos <span class="n n4">18 años</span>.</p>
+ </div>
+
+ <div class="g2 mb">
+  <div class="card k4">
+   <h3><svg><use href="#i-check"/></svg>Exentos del 561/2006 <span class="ref">art. 3</span></h3>
+   <ul>
+    <li>Velocidad máxima <b>≤ 40 km/h</b></li>
+    <li><b>Urgencia o salvamento</b> · fines <b>médicos</b></li>
+    <li><b>Asistencia en averías</b> en <b>100 km</b> de su base</li>
+    <li>Hasta <b>7,5 t</b> en transporte <b>no comercial</b></li>
+    <li>Hasta <b>7,5 t</b> con <b>material del conductor</b> en <b>100 km</b></li>
+   </ul>
+  </div>
+  <div class="card k4">
+   <h3><svg><use href="#i-check"/></svg>Exentos en España <span class="ref">RD 640/2007</span></h3>
+   <ul>
+    <li><b>Animales vivos</b> granja–mercado local ≤ <b>100 km en línea recta</b></li>
+    <li><b>Recogida de leche</b> en <b>100 km</b></li>
+    <li><b>Autoescuelas</b> (vehículos equipados) · <b>transportes oficiales</b></li>
+    <li><b>Fondos y objetos de valor</b> · <b>circo y ferias</b> (privado complementario)</li>
+   </ul>
+   <div class="no">Farmacéuticos, químicos, lácteos, cisternas, ADR, perecederos: <b>sí obligados</b></div>
+  </div>
+ </div>
+
+ <div class="card k4">
+  <h3><svg><use href="#i-book"/></svg>Definiciones que deciden la posición del selector</h3>
+  <div class="g3">
+   <div><b>Semana</b>: lunes <b>00:00</b> a domingo <b>24:00</b>.<br><b>Conducción diaria</b>: entre dos descansos diarios (o diario y semanal).<br><b>Semanal</b>: lo acumulado en la semana.</div>
+   <div><b>Descanso</b>: ininterrumpido, <b>dispone libremente</b> de su tiempo.<br><b>Pausa</b>: <b>solo reposar</b> (ni reparar, ni ruedas, ni descargar).<br><b>Otro trabajo</b>: <b>carga y descarga</b>, <b>limpieza y mantenimiento</b>.</div>
+   <div><b>Trabajo efectivo</b> (RD 1561/1995): en su puesto, <b>a disposición del empresario</b>.<br><b>Tiempo de presencia</b>: en equipo, el que va <b>al lado o en la litera</b> con el camión en marcha.</div>
+  </div>
+ </div>
+</div>
+
+<div class="page">
+ <div class="sec s4"><span class="badge">1C04</span><div><h2>Conducción, pausas y descansos</h2><p>9 · 56 · 90 · 4 h 30 · 45 min · 11 h · 45 h — los números que más caen de todo el examen</p></div></div>
+
+ <div class="card k4">
+  <h3><svg><use href="#i-wheel"/></svg>Límites de conducción (se cumplen todos a la vez)</h3>
+  <div class="g4">
+   <div class="tile t4"><span class="big">4 h 30</span><span class="lbl">seguidas como máximo</span></div>
+   <div class="tile t4"><span class="big">9 h</span><span class="lbl">al día · <b>10 h dos veces</b> por semana</span></div>
+   <div class="tile t4"><span class="big">56 h</span><span class="lbl">a la semana</span></div>
+   <div class="tile t4"><span class="big">90 h</span><span class="lbl">en dos semanas seguidas</span></div>
+  </div>
+  <svg viewBox="0 0 700 88" class="diag svgtxt" style="margin-top:6px">
+   <text x="4" y="14" font-size="11.5" font-weight="800">Regla de las 90 h (semana 1 + semana 2):</text>
+   <rect x="4" y="22" width="140" height="22" rx="5" fill="#0f9d58"/><text x="74" y="38" text-anchor="middle" font-size="11.5" font-weight="800" fill="#fff">25–30 h</text><rect x="146" y="22" width="80" height="22" rx="5" fill="#8fd9b3"/><text x="186" y="38" text-anchor="middle" font-size="11.5" font-weight="800">56 h</text>
+   <rect x="246" y="22" width="100" height="22" rx="5" fill="#0f9d58"/><text x="296" y="38" text-anchor="middle" font-size="11.5" font-weight="800" fill="#fff">45 h</text><rect x="348" y="22" width="100" height="22" rx="5" fill="#8fd9b3"/><text x="398" y="38" text-anchor="middle" font-size="11.5" font-weight="800">45 h</text>
+   <rect x="468" y="22" width="125" height="22" rx="5" fill="#0f9d58"/><text x="530" y="38" text-anchor="middle" font-size="11.5" font-weight="800" fill="#fff">56 h</text><rect x="595" y="22" width="76" height="22" rx="5" fill="#8fd9b3"/><text x="633" y="38" text-anchor="middle" font-size="11.5" font-weight="800">34 h</text>
+   <text x="4" y="64" font-size="11">Entre <tspan font-weight="800">dos jueves</tspan> consecutivos puede haber hasta <tspan font-weight="800">4 días de 10 h</tspan> (dos en cada semana natural).</text><text x="4" y="80" font-size="11">La semana nunca pasa de 56 h aunque la otra sea corta.</text>
+  </svg>
+ </div>
+
+ <div class="card k4">
+  <h3><svg><use href="#i-clock"/></svg>Pausa: tras 4 h 30 de conducción, 45 minutos</h3>
+  <svg viewBox="0 0 700 104" class="diag svgtxt">
+   <text x="4" y="16" font-size="11.5" font-weight="800">Seguida</text>
+   <rect x="80" y="4" width="430" height="20" rx="5" fill="#0f9d58"/><text x="295" y="18" text-anchor="middle" font-size="11.5" font-weight="800" fill="#fff">conducir 4 h 30</text>
+   <rect x="512" y="4" width="100" height="20" rx="5" fill="#f5b301"/><text x="562" y="18" text-anchor="middle" font-size="11.5" font-weight="800">45 min</text>
+   <text x="4" y="48" font-size="11.5" font-weight="800">Dividida</text>
+   <rect x="80" y="36" width="190" height="20" rx="5" fill="#0f9d58"/><text x="175" y="50" text-anchor="middle" font-size="11.5" font-weight="800" fill="#fff">2 h</text>
+   <rect x="272" y="36" width="60" height="20" rx="5" fill="#f5b301"/><text x="302" y="50" text-anchor="middle" font-size="11" font-weight="800">≥ 15'</text>
+   <rect x="334" y="36" width="236" height="20" rx="5" fill="#0f9d58"/><text x="452" y="50" text-anchor="middle" font-size="11.5" font-weight="800" fill="#fff">2 h 30</text>
+   <rect x="572" y="36" width="80" height="20" rx="5" fill="#f5b301"/><text x="612" y="50" text-anchor="middle" font-size="11" font-weight="800">≥ 30'</text>
+   <text x="4" y="80" font-size="11">El orden es <tspan font-weight="800">15 y luego 30</tspan> (nunca 30 + 15). Si la primera parada fue de 30 min, la segunda sigue siendo de <tspan font-weight="800">al menos 30</tspan>.</text><text x="4" y="96" font-size="11">En equipo, la pausa vale <tspan font-weight="800">mientras conduce el otro</tspan>.</text>
+  </svg>
+ </div>
+
+ <div class="g2 mb">
+  <div class="card k4">
+   <h3><svg><use href="#i-bed"/></svg>Descanso diario (en cada 24 h)</h3>
+   <svg viewBox="0 0 340 74" class="diag svgtxt">
+    <rect x="2" y="2" width="336" height="20" rx="5" fill="#0f9d58"/><text x="170" y="16" text-anchor="middle" font-size="11.5" font-weight="800" fill="#fff">NORMAL 11 h</text>
+    <rect x="2" y="26" width="90" height="20" rx="5" fill="#8fd9b3"/><text x="47" y="40" text-anchor="middle" font-size="11" font-weight="800">≥ 3 h</text><rect x="96" y="26" width="242" height="20" rx="5" fill="#0f9d58"/><text x="217" y="40" text-anchor="middle" font-size="11" font-weight="800" fill="#fff">+ ≥ 9 h seguidas (fraccionado)</text>
+    <rect x="2" y="50" width="270" height="20" rx="5" fill="#f5b301"/><text x="137" y="64" text-anchor="middle" font-size="11" font-weight="800">REDUCIDO 9 h · máx. 3 veces</text>
+   </svg>
+   <ul><li>Reducido: <b>entre dos semanales</b> y <b>sin compensar</b>.</li><li>En el camión si está <b>equipado y parado</b>.</li></ul>
+  </div>
+  <div class="card k4">
+   <h3><svg><use href="#i-group"/></svg>Conducción en equipo</h3>
+   <div class="tile t4"><span class="big">9 h cada 30 h</span><span class="lbl">por conductor, seguidas, con el vehículo <b>parado</b></span></div>
+   <p style="margin:4px 0 0">En un viaje de <b>6 jornadas</b>: descansos de 9 h → <b>5 veces</b>; de 8 h → <b>ninguna</b>. Cada uno con <b>su tarjeta</b>.</p>
+  </div>
+ </div>
+
+ <div class="card k4">
+  <h3><svg><use href="#i-house"/></svg>Descanso semanal (como tarde tras 6 períodos de 24 h)</h3>
+  <div class="g3">
+   <div class="tile t4"><span class="big">45 h · 24 h</span><span class="lbl">normal · reducido</span></div>
+   <div>Lo que falta del reducido se compensa <b>antes del final de la 3.ª semana siguiente</b>, pegado a otro descanso de <b>≥ 9 h</b>. 30 h + 45 h no es infracción si se recuperan las 15 h.</div>
+   <div>El <b>normal no se hace en el camión</b>: alojamiento apropiado. Cada <b>4 semanas</b>, uno ordinario en <b>casa</b>. <b>Internacional</b>: 2 reducidos seguidos (iniciados fuera) y luego 2 de más de 45 h.</div>
+  </div>
+ </div>
+</div>
+
+<div class="page">
+ <div class="sec s4"><span class="badge">1C04</span><div><h2>Excepciones y obligaciones de la empresa</h2><p>Ferri y tren · Desplazamientos · Art. 12 (+1 h / +2 h) · Primas · 12 meses · LOTT 142.17</p></div></div>
+
+ <div class="g2 mb">
+  <div class="card k4">
+   <h3><svg><use href="#i-ship"/></svg>Ferri y tren</h3>
+   <p style="margin:0">El descanso puede <b>interrumpirse 2 veces</b>, en total <b>menos de 1 hora</b>.</p>
+  </div>
+  <div class="card k4">
+   <h3><svg><use href="#i-train"/></svg>Ir a buscar el camión</h3>
+   <p style="margin:0">Viajar para recoger o dejar un vehículo fuera de casa o del centro <b>no es descanso ni pausa</b> (salvo ferri o tren <b>con litera</b>). Conducir un vehículo <b>no sujeto</b> hasta uno sujeto = <b>otro trabajo</b>.</p>
+  </div>
+ </div>
+
+ <div class="card k4">
+  <h3><svg><use href="#i-house"/></svg>Art. 12: pasarse del límite para llegar a casa</h3>
+  <svg viewBox="0 0 700 150" class="diag svgtxt">
+   <rect x="4" y="6" width="210" height="138" rx="12" fill="#e5f7ee"/><text x="109" y="30" text-anchor="middle" font-size="13" font-weight="800" fill="#0f9d58">PUNTO DE PARADA</text><text x="109" y="54" text-anchor="middle" font-size="11.5">apartarse del reglamento</text><text x="109" y="70" text-anchor="middle" font-size="11.5">para llegar a un sitio</text><text x="109" y="86" text-anchor="middle" font-size="11.5">adecuado donde parar</text><text x="109" y="112" text-anchor="middle" font-size="11.5" font-weight="800">sin comprometer la</text><text x="109" y="128" text-anchor="middle" font-size="11.5" font-weight="800">seguridad vial</text>
+   <rect x="224" y="6" width="226" height="138" rx="12" fill="#8fd9b3"/><text x="337" y="34" text-anchor="middle" font-size="26" font-weight="900" fill="#0b5e35">+1 h</text><text x="337" y="58" text-anchor="middle" font-size="11.5">para llegar a su <tspan font-weight="800">domicilio</tspan></text><text x="337" y="74" text-anchor="middle" font-size="11.5">o al <tspan font-weight="800">centro de operaciones</tspan></text><text x="337" y="90" text-anchor="middle" font-size="11.5">y hacer allí el</text><text x="337" y="106" text-anchor="middle" font-size="11.5" font-weight="800">descanso semanal</text>
+   <rect x="460" y="6" width="236" height="138" rx="12" fill="#0f9d58"/><text x="578" y="34" text-anchor="middle" font-size="26" font-weight="900" fill="#fff">+2 h</text><text x="578" y="58" text-anchor="middle" font-size="11.5" fill="#fff">igual, pero con una</text><text x="578" y="74" text-anchor="middle" font-size="11.5" font-weight="800" fill="#fff">pausa de 30 min justo antes</text>
+   <text x="578" y="104" text-anchor="middle" font-size="16" font-weight="900" fill="#fff">máx. 12 h / día</text><text x="578" y="126" text-anchor="middle" font-size="16" font-weight="900" fill="#fff">máx. 58 h / semana</text>
+  </svg>
+  <div class="g3" style="margin-top:4px">
+   <div class="yes"><b>Documentar el motivo</b> al llegar</div>
+   <div class="yes"><b>Compensar</b> el exceso con descanso equivalente</div>
+   <div class="yes">Empezar el semanal <b>en su residencia</b></div>
+  </div>
+  <div class="trap">No justifican pasarse ni el <b>riesgo de que se estropee la mercancía</b> ni una <b>autorización administrativa</b>.</div>
+ </div>
+
+ <div class="card k4">
+  <h3><svg><use href="#i-build"/></svg>Obligaciones de la empresa</h3>
+  <div class="g3">
+   <div><b>Organizar el trabajo</b> para que los conductores puedan cumplir los reglamentos.</div>
+   <div><b>Prohibidas las primas por distancia</b> si comprometen la seguridad.</div>
+   <div>Conservar <span class="n n4">12 meses</span> los datos de la <b>unidad del vehículo</b> y de la <b>tarjeta</b>.</div>
+  </div>
+  <div class="trap">LOTT 142.17: <b>todo exceso</b> de conducción y <b>toda reducción</b> de descanso se sanciona. <b>No hay tolerancia</b>.</div>
+ </div>
+</div>
+
+<div class="page">
+ <div class="sec s4"><span class="badge">1C04</span><div><h2>El tacógrafo</h2><p>Reglamento 165/2014 · Qué registra · Analógico y digital · Homologación · Instalación · Tarjetas · Uso · Avería</p></div></div>
+
+ <div class="g2 mb">
+  <div class="card k4">
+   <h3><svg><use href="#i-tacho"/></svg>¿Qué registra?</h3>
+   <div class="yes">Velocidad · distancia recorrida</div>
+   <div class="yes">Conducción y otros trabajos · períodos de actividad de cada conductor</div>
+   <div class="no">Masa transportada · marcha · revoluciones · consumo · lugar de partida</div>
+   <p class="mini" style="margin:3px 0 0">Exceso de velocidad = pasarse más de <b>60 segundos</b>.</p>
+  </div>
+  <div class="card k4">
+   <h3><svg><use href="#i-tacho"/></svg>Analógico y digital</h3>
+   <p style="margin:0"><b>Analógico</b>: <b>discos u hojas</b> con <b>estiletes</b>; registra solo distancia, velocidad y <b>aperturas de la caja</b>.</p>
+   <p style="margin:3px 0 0"><b>Digital</b>: <b>sensor de movimiento + unidad intravehicular + cables</b>. Además <b>almacena en memoria</b>; controla tarjetas, controles y mide velocidad, distancia y hora.</p>
+  </div>
+ </div>
+
+ <div class="g2 mb">
+  <div class="card k4">
+   <h3><svg><use href="#i-stamp"/></svg>Homologación e instalación</h3>
+   <ul>
+    <li>Obligatoria. La da <b>un solo Estado de la UE</b> (también las tarjetas); cambios, al que dio la <b>primera</b>.</li>
+    <li>Marca de homologación en la <b>placa descriptiva</b>, que pone el <b>fabricante</b> en el aparato. Hojas y tarjetas llevan la marca impresa.</li>
+    <li>Instalan <b>talleres autorizados</b>, con marca en los <b>precintos</b>; <b>placa de instalación</b> visible tras cada intervención.</li>
+    <li>Revisión: <span class="n n4">cada 2 años</span>, analógico y digital.</li>
+   </ul>
+  </div>
+  <div class="card k4">
+   <h3><svg><use href="#i-card"/></svg>Las 4 tarjetas</h3>
+   <div class="g2" style="gap:4px">
+    <div class="tile t4" style="padding:4px"><b>Conductor</b><span class="lbl">identifica y guarda su actividad</span></div>
+    <div class="tile t4" style="padding:4px"><b>Empresa</b><span class="lbl">ver, imprimir, transferir y bloquear</span></div>
+    <div class="tile t4" style="padding:4px"><b>Control</b><span class="lbl">agentes</span></div>
+    <div class="tile t4" style="padding:4px"><b>Taller</b><span class="lbl">activar, probar y calibrar</span></div>
+   </div>
+   <p class="mini" style="margin:4px 0 0">Tarjeta inteligente: identifica la <b>función</b> de quien la mete; sirve para identificar, almacenar y transferir.</p>
+  </div>
+ </div>
+
+ <div class="card k4">
+  <h3><svg><use href="#i-card"/></svg>Tarjeta de conductor <span class="ref">OM FOM/1190/2005</span></h3>
+  <div class="g4">
+   <div class="tile t4"><span class="big">5 años</span><span class="lbl">validez</span></div>
+   <div class="tile t4"><span class="big">15 días hábiles</span><span class="lbl">antes de caducar: pedir renovación</span></div>
+   <div class="tile t4"><span class="big">7 días nat.</span><span class="lbl">pedir sustitución (pérdida, robo, daño)</span></div>
+   <div class="tile t4"><span class="big">15 días nat.</span><span class="lbl">conducir sin ella, imprimiendo <b>al inicio y al final</b> (con firma)</span></div>
+  </div>
+ </div>
+
+ <div class="g2 mb">
+  <div class="card k4">
+   <h3><svg><use href="#i-wheel"/></svg>Uso por el conductor</h3>
+   <ul>
+    <li>Tarjeta o disco: se sacan <b>al terminar la jornada</b>.</li>
+    <li><b>Cargando</b> → otros trabajos · <b>en vacío</b> a cargar → conducción.</li>
+    <li>En el disco: <b>matrícula siempre</b>, fecha y lugar de inicio y fin, <b>km</b> al empezar, al acabar y al cambiar de vehículo.</li>
+    <li>En control: <b>día en curso + 56 días</b> anteriores (tarjeta si la tiene, aunque el camión sea analógico, discos e impresiones).</li>
+   </ul>
+  </div>
+  <div class="card k4">
+   <h3><svg><use href="#i-warn"/></svg>Tacógrafo averiado</h3>
+   <div class="yes"><b>Se puede seguir conduciendo</b></div>
+   <ul>
+    <li>Repara la <b>empresa</b>, en taller autorizado, <b>tan pronto como sea posible</b> (sin plazo fijo).</li>
+    <li>Si vuelve a la base en <b>más de 1 semana</b>: reparar <b>en ruta</b>.</li>
+    <li>El conductor anota los tiempos <b>a mano</b> en hoja adjunta e informes diarios.</li>
+   </ul>
+  </div>
+ </div>
+</div>
+
+<!-- ============ 1C05 CAP ============ -->
+<div class="page">
+ <div class="sec s5"><span class="badge">1C05</span><div><h2>CAP: cualificación inicial y formación continua</h2><p>RD 284/2021 · A quién se exige · Cursos y examen · Reciclaje · Centros · Ventajas · Infracciones</p></div></div>
+
+ <div class="card k5">
+  <h3><svg><use href="#i-card"/></svg>El camino del CAP</h3>
+  <svg viewBox="0 0 700 140" class="diag svgtxt">
+   <rect x="4" y="6" width="160" height="128" rx="12" fill="#e3f4f7"/><text x="84" y="28" text-anchor="middle" font-size="13" font-weight="800" fill="#0b7285">CURSO INICIAL</text>
+   <text x="84" y="56" text-anchor="middle" font-size="20" font-weight="900" fill="#0b7285">280 h</text><text x="84" y="72" text-anchor="middle" font-size="11">ordinaria</text>
+   <text x="84" y="98" text-anchor="middle" font-size="20" font-weight="900" fill="#0b7285">140 h</text><text x="84" y="114" text-anchor="middle" font-size="11">acelerada</text>
+   <text x="84" y="130" text-anchor="middle" font-size="10" fill="#d6336c" font-weight="700">sin permiso de conducir</text>
+   <text x="172" y="76" font-size="24" font-weight="900" fill="#0b7285">→</text>
+   <rect x="198" y="6" width="150" height="128" rx="12" fill="#e3f4f7"/><text x="273" y="28" text-anchor="middle" font-size="13" font-weight="800" fill="#0b7285">EXAMEN</text>
+   <text x="273" y="58" text-anchor="middle" font-size="20" font-weight="900" fill="#0b7285">12 meses</text><text x="273" y="74" text-anchor="middle" font-size="11">para aprobar tras el curso</text>
+   <text x="273" y="102" text-anchor="middle" font-size="20" font-weight="900" fill="#0b7285">≥ 6</text><text x="273" y="118" text-anchor="middle" font-size="11">convocatorias al año</text>
+   <text x="356" y="76" font-size="24" font-weight="900" fill="#0b7285">→</text>
+   <rect x="382" y="6" width="150" height="128" rx="12" fill="#0b7285"/><use href="#i-card" x="427" y="16" width="60" height="50" style="color:#fff"/><text x="457" y="84" text-anchor="middle" font-size="12.5" font-weight="800" fill="#fff">TARJETA DE</text><text x="457" y="100" text-anchor="middle" font-size="12.5" font-weight="800" fill="#fff">CUALIFICACIÓN</text><text x="457" y="124" text-anchor="middle" font-size="18" font-weight="900" fill="#fff">5 años</text>
+   <text x="540" y="76" font-size="24" font-weight="900" fill="#0b7285">→</text>
+   <rect x="566" y="6" width="130" height="128" rx="12" fill="#e3f4f7"/><text x="631" y="28" text-anchor="middle" font-size="13" font-weight="800" fill="#0b7285">RECICLAJE</text>
+   <text x="631" y="62" text-anchor="middle" font-size="22" font-weight="900" fill="#0b7285">35 h</text><text x="631" y="80" text-anchor="middle" font-size="11">cada 5 años</text>
+   <text x="631" y="104" text-anchor="middle" font-size="11">el 1.º antes de</text><text x="631" y="120" text-anchor="middle" font-size="11">cumplir 5 años</text>
+  </svg>
+ </div>
+
+ <div class="g2 mb">
+  <div class="card k5">
+   <h3><svg><use href="#i-truck"/></svg>¿A quién se exige?</h3>
+   <div class="no">Mercancías hasta <b>3.500 kg</b> de MMA</div>
+   <div class="no">Velocidad máxima <b>≤ 45 km/h</b></div>
+   <div class="no">Transporte <b>privado particular</b> (necesidades personales o domésticas)</div>
+   <div class="yes"><b>Siempre</b> el transporte <b>público</b> de más de 3.500 kg</div>
+   <div class="yes">El <b>privado complementario</b> no está exento en general</div>
+  </div>
+  <div class="card k5">
+   <h3><svg><use href="#i-globe"/></svg>¿Quién lo puede hacer en España? <span class="ref">art. 13</span></h3>
+   <p style="margin:0"><b>Inicial</b>: nacionales UE <b>residentes en España</b> y extracomunitarios con <b>residencia permanente</b> o <b>residencia temporal y trabajo</b>.</p>
+   <p style="margin:4px 0 0"><b>Continua</b>: quien <b>resida habitualmente</b> o <b>trabaje</b> en España.</p>
+  </div>
+ </div>
+
+ <div class="card k5">
+  <h3><svg><use href="#i-cal"/></svg>Formación continua <span class="ref">art. 7</span></h3>
+  <div class="g3">
+   <div>Requisitos <b>a la vez</b> (mercancías): <b>CAP inicial</b> + permiso <b>C1, C1+E, C o C+E</b>.</div>
+   <div><b>Discontinua</b> si se cumple todo: períodos de <b>≥ 7 h</b>, en el <b>mismo año natural</b> y con la <b>misma empresa CAP</b>.</div>
+   <div>Con CAP de mercancías y viajeros, reciclarse en <b>una</b> vale <b>para las dos</b>. Quien <b>dejó la profesión</b> hace solo la <b>continua</b>, no repite la inicial.</div>
+  </div>
+  <p style="margin:5px 0 0"><b>Ampliar</b> de mercancías a viajeros (o al revés): curso de <b>parte de las materias</b> + <b>examen de esa parte</b>, las dos cosas (art. 16).</p>
+ </div>
+
+ <div class="g3 mb">
+  <div class="card k5">
+   <h3><svg><use href="#i-build"/></svg>Centros</h3>
+   <p style="margin:0">Solo <b>empresas CAP autorizadas</b> por la Administración. Cada curso, <b>homologado por el órgano que autorizó</b> a esa empresa.</p>
+  </div>
+  <div class="card k5">
+   <h3><svg><use href="#i-check"/></svg>Ventajas</h3>
+   <p style="margin:0">La formación continua devuelve <span class="n n5">hasta 6 puntos</span> del carné. La inicial de mercancías es <b>polivalente con el ADR</b> si la empresa CAP está autorizada.</p>
+  </div>
+  <div class="card k5">
+   <h3><svg><use href="#i-warn"/></svg>Infracciones (LOTT)</h3>
+   <div><span class="pill" style="background:var(--reds);color:var(--red)">MUY GRAVE</span> conductores <b>sin CAP</b> (art. 140)</div>
+   <div style="margin-top:3px"><span class="pill" style="background:var(--c3s);color:var(--c3)">GRAVE</span> cursos con <b>profesores sin titulación</b> (art. 141)</div>
+  </div>
+ </div>
+ <div class="tip">CAP en tres números: <b>280 – 140 – 35</b>. Cada uno es la mitad del anterior… y luego un octavo. La tarjeta y el reciclaje van <b>a 5 años</b>.</div>
+</div>
+
+<!-- ============ TABLA RESUMEN ============ -->
+<div class="page">
+ <div class="sec s0"><span class="badge">VS</span><div><h2>Tiempos y contratos de un vistazo</h2><p>Las dos tablas para no mezclar horas, plazos y modalidades</p></div></div>
+ <table class="cmp">
+  <thead><tr>
+   <th style="background:var(--c4);border-radius:9px 0 0 0;width:22%">Reglamento 561/2006</th><th style="background:var(--c4);width:16%">Normal</th><th style="background:var(--c4);width:28%">Excepción</th><th style="background:var(--c4);border-radius:0 9px 0 0">Ojo</th>
+  </tr></thead>
+  <tbody>
+   <tr><td style="color:var(--c4)">Conducción seguida</td><td><b>4 h 30</b></td><td>—</td><td>Luego pausa</td></tr>
+   <tr><td style="color:var(--c4)">Pausa</td><td><b>45 min</b></td><td><b>15 + 30</b> en ese orden</td><td>Solo reposo; en equipo, mientras conduce el otro</td></tr>
+   <tr><td style="color:var(--c4)">Conducción diaria</td><td><b>9 h</b></td><td><b>10 h</b> dos veces/semana · art. 12 hasta <b>12 h</b></td><td>4 días de 10 h entre dos jueves</td></tr>
+   <tr><td style="color:var(--c4)">Conducción semanal</td><td><b>56 h</b></td><td>art. 12 hasta <b>58 h</b></td><td>Semana: lunes 00:00 – domingo 24:00</td></tr>
+   <tr><td style="color:var(--c4)">Dos semanas</td><td><b>90 h</b></td><td>—</td><td>56 h → la siguiente 34 h</td></tr>
+   <tr><td style="color:var(--c4)">Descanso diario</td><td><b>11 h</b></td><td><b>3 + 9</b> · reducido <b>9 h</b> × 3</td><td>El reducido <b>no se compensa</b></td></tr>
+   <tr><td style="color:var(--c4)">Equipo</td><td><b>9 h</b> cada <b>30 h</b></td><td>—</td><td>Vehículo <b>parado</b></td></tr>
+   <tr><td style="color:var(--c4)">Descanso semanal</td><td><b>45 h</b></td><td>Reducido <b>24 h</b></td><td>Compensar antes del fin de la <b>3.ª semana</b> siguiente</td></tr>
+   <tr><td style="color:var(--c4)">Ferri / tren</td><td>—</td><td>Interrumpir <b>2 veces</b>, &lt; <b>1 h</b></td><td>Viajar sin litera no es descanso</td></tr>
+  </tbody>
+ </table>
+
+ <table class="cmp" style="margin-top:9px">
+  <thead><tr>
+   <th style="background:var(--c3);border-radius:9px 0 0 0;width:22%">Contrato</th><th style="background:var(--c3);width:16%">Forma</th><th style="background:var(--c3);width:28%">Duración / prueba</th><th style="background:var(--c3);border-radius:0 9px 0 0">Horas extra / dato estrella</th>
+  </tr></thead>
+  <tbody>
+   <tr><td style="color:var(--c3)">Indefinido completo</td><td>Verbal o escrito</td><td>Prueba <b>6 meses</b> titulados · <b>2</b> resto</td><td>Hasta <b>80/año</b>; sin pacto, descanso equivalente</td></tr>
+   <tr><td style="color:var(--c3)">Temporal</td><td>Escrito si &gt; <b>4 semanas</b></td><td>Necesita causa</td><td>Exceso imprevisible o sustitución</td></tr>
+   <tr><td style="color:var(--c3)">Fijo discontinuo</td><td><b>Escrito</b></td><td>Periodos ciertos</td><td>Trabajo intermitente</td></tr>
+   <tr><td style="color:var(--c3)">Tiempo parcial</td><td><b>Escrito</b></td><td>Puede ser indefinido</td><td>Extra solo siniestro · complementarias <b>30 % / 60 %</b></td></tr>
+   <tr><td style="color:var(--c3)">Formación en alternancia</td><td><b>Escrito</b></td><td><b>3 meses – 2 años</b> · <b>sin prueba</b></td><td>16 a 25 años · ni extra ni complementarias</td></tr>
+   <tr><td style="color:var(--c3)">Práctica profesional</td><td><b>Escrito</b></td><td><b>6 meses – 1 año</b> · prueba <b>1 mes</b></td><td>Estudios de los últimos <b>3 años</b></td></tr>
+   <tr><td style="color:var(--c3)">TRADE (no laboral)</td><td><b>Escrito</b></td><td>Sin escrito → <b>indefinido</b></td><td><b>75 %</b> de un cliente · <b>18 días hábiles</b></td></tr>
+  </tbody>
+ </table>
+
+ <div class="card" style="margin-top:9px">
+  <h3 style="color:var(--ink)">🗂️ Representantes de los trabajadores</h3>
+  <div class="g4">
+   <div class="tile t1"><span class="big">6–10</span><span class="lbl">1 delegado si vota la mayoría</span></div>
+   <div class="tile t1"><span class="big">11–49</span><span class="lbl">delegados de personal</span></div>
+   <div class="tile t1"><span class="big">≥ 50</span><span class="lbl">comité (50–100: 5 miembros)</span></div>
+   <div class="tile t1"><span class="big">&gt; 250</span><span class="lbl">delegado sindical y local</span></div>
+  </div>
+ </div>
+</div>
+
+<!-- ============ NÚMEROS ============ -->
+<div class="page">
+ <div class="sec s0"><span class="badge">#</span><div><h2>Todos los números del Tema 3 en una hoja</h2><p>Repaso relámpago: tapa la explicación y di de qué es cada número</p></div></div>
+ <div class="g4 mb nums">
+  <div class="tile t1"><span class="big">&gt; 250</span><span class="lbl">delegado sindical · local de la sección</span></div>
+  <div class="tile t1"><span class="big">6 a 10</span><span class="lbl">1 delegado de personal si lo decide la mayoría</span></div>
+  <div class="tile t1"><span class="big">11 a 49</span><span class="lbl">delegados de personal</span></div>
+  <div class="tile t1"><span class="big">50 · 5</span><span class="lbl">comité desde 50 · 5 miembros hasta 100</span></div>
+  <div class="tile t1"><span class="big">16 · 1 mes</span><span class="lbl">votar: edad · antigüedad</span></div>
+  <div class="tile t1"><span class="big">18 · 6 meses</span><span class="lbl">ser candidato: edad · antigüedad</span></div>
+  <div class="tile t1"><span class="big">4 años</span><span class="lbl">mandato de los representantes</span></div>
+  <div class="tile t1"><span class="big">15 h</span><span class="lbl">crédito mensual hasta 100 trabajadores</span></div>
+  <div class="tile t2"><span class="big">28,30 %</span><span class="lbl">contingencias comunes</span></div>
+  <div class="tile t2"><span class="big">23,60 · 4,70</span><span class="lbl">empresa · trabajador</span></div>
+  <div class="tile t2"><span class="big">14 %</span><span class="lbl">horas extra por fuerza mayor (12 + 2)</span></div>
+  <div class="tile t2"><span class="big">100 %</span><span class="lbl">AT/EP a cargo del empresario</span></div>
+  <div class="tile t2"><span class="big">Mes sig. · mismo</span><span class="lbl">pago Régimen General · autónomos</span></div>
+  <div class="tile t2"><span class="big">4 años</span><span class="lbl">prescriben cuotas e infracciones</span></div>
+  <div class="tile t2"><span class="big">5 años</span><span class="lbl">aplazamiento máximo</span></div>
+  <div class="tile t2"><span class="big">60 € · 12 meses</span><span class="lbl">tarifa del autónomo nuevo</span></div>
+  <div class="tile t2"><span class="big">80 % · 12 años</span><span class="lbl">reducción alta nueva · menor a cargo</span></div>
+  <div class="tile t3"><span class="big">4 semanas</span><span class="lbl">temporal: por escrito si las supera</span></div>
+  <div class="tile t3"><span class="big">6 · 2 meses</span><span class="lbl">prueba titulados · resto</span></div>
+  <div class="tile t3"><span class="big">30 · 60 %</span><span class="lbl">horas complementarias (sin / con convenio)</span></div>
+  <div class="tile t3"><span class="big">16-25 · 3m-2a</span><span class="lbl">formación en alternancia</span></div>
+  <div class="tile t3"><span class="big">3 años · 6m</span><span class="lbl">práctica profesional: estudios · duración mínima</span></div>
+  <div class="tile t3"><span class="big">9 h · 12 h</span><span class="lbl">jornada diaria · entre jornadas</span></div>
+  <div class="tile t3"><span class="big">80</span><span class="lbl">horas extra al año</span></div>
+  <div class="tile t3"><span class="big">10 %</span><span class="lbl">interés de mora del salario</span></div>
+  <div class="tile t3"><span class="big">30 días · 2×SMI</span><span class="lbl">salarios privilegiados en concurso</span></div>
+  <div class="tile t3"><span class="big">12 meses / 3 años</span><span class="lbl">frontera desplazamiento – traslado</span></div>
+  <div class="tile t3"><span class="big">20 días</span><span class="lbl">por año: rescindir por modificación</span></div>
+  <div class="tile t3"><span class="big">19 semanas</span><span class="lbl">permiso por nacimiento</span></div>
+  <div class="tile t3"><span class="big">10 · 10 % · 30</span><span class="lbl">umbrales del despido colectivo</span></div>
+  <div class="tile t3"><span class="big">75 % · 18 días</span><span class="lbl">TRADE: ingresos · vacaciones</span></div>
+  <div class="tile t3"><span class="big">5 · 10 d · 12 h</span><span class="lbl">preaviso huelga (serv. públicos) · aviso cierre patronal</span></div>
+  <div class="tile t4"><span class="big">4 h 30 · 45'</span><span class="lbl">conducción seguida · pausa (15 + 30)</span></div>
+  <div class="tile t4"><span class="big">9 / 10 h</span><span class="lbl">diaria (10 h dos veces por semana)</span></div>
+  <div class="tile t4"><span class="big">56 · 90 h</span><span class="lbl">semanal · bisemanal</span></div>
+  <div class="tile t4"><span class="big">11 · 9 h</span><span class="lbl">descanso diario · reducido (3 veces)</span></div>
+  <div class="tile t4"><span class="big">3 + 9</span><span class="lbl">descanso diario fraccionado</span></div>
+  <div class="tile t4"><span class="big">9 h / 30 h</span><span class="lbl">descanso en equipo</span></div>
+  <div class="tile t4"><span class="big">45 · 24 h</span><span class="lbl">semanal normal · reducido</span></div>
+  <div class="tile t4"><span class="big">6 × 24 h</span><span class="lbl">máximo antes del semanal</span></div>
+  <div class="tile t4"><span class="big">12 · 58 h</span><span class="lbl">tope con el art. 12 (+1 h / +2 h)</span></div>
+  <div class="tile t4"><span class="big">12 meses</span><span class="lbl">conservar datos de tacógrafo</span></div>
+  <div class="tile t4"><span class="big">Hoy + 56 días</span><span class="lbl">registros ante un control</span></div>
+  <div class="tile t4"><span class="big">2 años</span><span class="lbl">revisión del tacógrafo</span></div>
+  <div class="tile t4"><span class="big">5 a · 15 · 7 · 15</span><span class="lbl">tarjeta: validez · renovar · sustituir · sin tarjeta</span></div>
+  <div class="tile t4"><span class="big">2,5 · 3,5 · 7,5 t</span><span class="lbl">umbrales de MMA del 561</span></div>
+  <div class="tile t5"><span class="big">280 · 140 h</span><span class="lbl">CAP inicial ordinario · acelerado</span></div>
+  <div class="tile t5"><span class="big">35 h · 5 años</span><span class="lbl">formación continua</span></div>
+  <div class="tile t5"><span class="big">12 meses · 6</span><span class="lbl">plazo para aprobar · convocatorias/año</span></div>
+  <div class="tile t5"><span class="big">3.500 kg · 45 km/h</span><span class="lbl">por debajo, sin CAP</span></div>
+  <div class="tile t5"><span class="big">7 h · 6 puntos</span><span class="lbl">período mínimo discontinuo · puntos recuperables</span></div>
+ </div>
+ <p class="mini" style="text-align:center;margin:2px 0 0">Colores: <span class="n n1">sindical y representantes</span> <span class="n n2">Seguridad Social</span> <span class="n n3">contrato de trabajo</span> <span class="n n4">tiempos y tacógrafo</span> <span class="n n5">CAP</span></p>
+</div>
+
+<!-- ============ TRAMPAS ============ -->
+<div class="page">
+ <div class="sec" style="background:var(--red)"><span class="badge" style="color:var(--red)">⚠</span><div><h2>Las trampas que más se fallan</h2><p>Sacadas de las preguntas del banco donde la respuesta «lógica» no es la correcta</p></div></div>
+ <div class="g2">
+  <div>
+   <div class="trap">El <b>autónomo</b> solo puede afiliarse a un sindicato si <b>no tiene trabajadores</b>.</div>
+   <div class="trap">La sección sindical se crea <b>sin importar la representatividad</b>; el delegado sindical lo eligen <b>los afiliados</b>, no toda la plantilla.</div>
+   <div class="trap">Con <b>45 trabajadores no hay comité</b>: hay delegados de personal, que actúan <b>conjuntamente</b>.</div>
+   <div class="trap">El comité recibe solo las sanciones por faltas <b>muy graves</b> y no puede presentar <b>demandas particulares</b>.</div>
+   <div class="trap">La Inspección <b>no negocia convenios</b> ni controla la <b>incapacidad temporal</b>, y solo paraliza con riesgo <b>grave e inminente</b>.</div>
+   <div class="trap"><b>No existe</b> Régimen Especial de Transporte: chóferes y conductores de ADR van al <b>General</b>.</div>
+   <div class="trap">La afiliación es <b>única para toda la vida</b>; lo que se repite son las <b>altas y bajas</b>.</div>
+   <div class="trap">Las <b>horas extra sí cotizan</b>. Lo no descontado al trabajador en nómina lo paga <b>el empresario</b>.</div>
+   <div class="trap">Aplazamientos: <b>nunca más de 5 años</b>, y nunca de <b>AT/EP</b> ni de la aportación del trabajador.</div>
+   <div class="trap">La base del autónomo son sus <b>rendimientos netos anuales</b>; no la elige él.</div>
+   <div class="trap">El transportista con <b>vehículo y autorización propios</b> no es asalariado, ni trabajando en exclusiva para un solo cargador.</div>
+   <div class="trap">El <b>indefinido a jornada completa</b> puede ser <b>verbal</b>; el parcial, nunca.</div>
+  </div>
+  <div>
+   <div class="trap">Las <b>dietas y suplidos no son salario</b>; lo pagado <b>en especie sí</b>.</div>
+   <div class="trap">En el despido <b>improcedente</b> elige <b>el empresario</b>; el <b>nulo</b> obliga a readmitir.</div>
+   <div class="trap">La embriaguez solo es causa de despido si <b>repercute en el trabajo</b>.</div>
+   <div class="trap">Huelga: acuerdo <b>en cada centro</b>, preaviso de días <b>naturales</b>, <b>sin ocupar</b> el centro y <b>sin cotizar</b>.</div>
+   <div class="trap">La pausa es <b>solo reposo</b>: cargar, descargar o limpiar es <b>otro trabajo</b>. Se divide <b>15 + 30</b>, no 30 + 15.</div>
+   <div class="trap">Descanso diario reducido: <b>no se compensa</b>. Semanal reducido: <b>sí</b>, antes del fin de la <b>3.ª semana</b>.</div>
+   <div class="trap">El descanso semanal <b>normal no se puede hacer en la cabina</b>.</div>
+   <div class="trap">En equipo: <b>9 h cada 30 h</b> con el camión <b>parado</b>; descansar de 8 h, <b>ninguna vez</b>.</div>
+   <div class="trap">Art. 12: el riesgo para la <b>mercancía no justifica</b> pasarse; solo llegar a <b>casa o al centro</b> para el semanal.</div>
+   <div class="trap">LOTT: <b>todo exceso</b> se sanciona, sin margen de tolerancia.</div>
+   <div class="trap">Con el tacógrafo <b>averiado se sigue conduciendo</b>; no hay plazo fijo para repararlo.</div>
+   <div class="trap">Para el CAP inicial <b>no hace falta permiso</b>; para la <b>formación continua</b> de mercancías sí (C1, C1+E, C o C+E).</div>
+  </div>
+ </div>
+ <div class="card" style="margin-top:8px;background:var(--bg)">
+  <h3 style="color:var(--ink)">🧠 Las 5 reglas que resuelven medio examen</h3>
+  <ol style="margin:2px 0 0;padding-left:18px">
+   <li><b>4 h 30 → 45'</b> · <b>9 h</b> al día · <b>56</b> a la semana · <b>90</b> en dos: la columna del tacógrafo.</li>
+   <li>Descanso: <b>11</b> al día y <b>45</b> a la semana; reducidos <b>9</b> y <b>24</b>.</li>
+   <li>Seguridad Social: <b>4 años</b> para prescribir, <b>5 años</b> para aplazar, <b>28,30 %</b> de comunes.</li>
+   <li>Representantes: <b>50</b> = comité, <b>250</b> = delegado sindical, <b>4 años</b> de mandato.</li>
+   <li>CAP: <b>280 / 140 / 35</b> horas y todo caduca a los <b>5 años</b>.</li>
+  </ol>
+ </div>
+</div>
+
+</body>
+</html>

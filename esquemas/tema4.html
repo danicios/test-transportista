@@ -1,0 +1,1051 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<title>Esquema Tema 4 · Derecho fiscal</title>
+<style>
+@page { size: A4; margin: 11mm 11mm 12mm; }
+:root{
+  --ink:#1c2333; --mute:#5b6478; --line:#dde2ec; --bg:#f5f7fb;
+  --c1:#6d4bd8; --c1s:#efeafe;   /* sindical */
+  --c2:#1f6feb; --c2s:#e7f0ff;   /* seguridad social */
+  --c3:#e8590c; --c3s:#fff0e6;   /* contrato de trabajo */
+  --c4:#0f9d58; --c4s:#e5f7ee;   /* tacógrafo */
+  --red:#d6336c; --reds:#ffe8ef; --yel:#f5b301; --yels:#fff7dc;
+}
+*{box-sizing:border-box}
+html,body{margin:0;background:#fff;color:var(--ink);font-family:"Segoe UI",Roboto,Arial,sans-serif;font-size:9.4pt;line-height:1.34;-webkit-print-color-adjust:exact;print-color-adjust:exact}
+body{max-width:188mm;margin:0 auto}
+h1,h2,h3,h4{margin:0;line-height:1.15}
+b,strong{font-weight:700}
+.page{break-before:page}
+.sec{display:flex;align-items:center;gap:10px;border-radius:12px;padding:9px 14px;color:#fff;margin:0 0 9px}
+.sec .badge{background:#fff;border-radius:9px;font-weight:800;font-size:15pt;padding:3px 10px}
+.sec h2{font-size:15pt;font-weight:800}
+.sec p{margin:2px 0 0;font-size:9pt;opacity:.92}
+.s1{background:var(--c1)} .s1 .badge{color:var(--c1)}
+.s2{background:var(--c2)} .s2 .badge{color:var(--c2)}
+.s3{background:var(--c3)} .s3 .badge{color:var(--c3)}
+.s4{background:var(--c4)} .s4 .badge{color:var(--c4)}
+.s0{background:var(--ink)} .s0 .badge{color:var(--ink)}
+.card{border:1.3px solid var(--line);border-radius:11px;padding:8px 10px;margin:0 0 7px;break-inside:avoid;background:#fff}
+.card h3{font-size:10.6pt;font-weight:800;margin-bottom:4px;display:flex;align-items:center;gap:6px}
+.card h3 svg{width:20px;height:20px;flex:none}
+.k1 h3{color:var(--c1)} .k2 h3{color:var(--c2)} .k3 h3{color:var(--c3)} .k4 h3{color:var(--c4)}
+.k1{border-top:4px solid var(--c1)} .k2{border-top:4px solid var(--c2)} .k3{border-top:4px solid var(--c3)} .k4{border-top:4px solid var(--c4)}
+.g2{display:grid;grid-template-columns:1fr 1fr;gap:7px}
+.g3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:7px}
+.g4{display:grid;grid-template-columns:repeat(4,1fr);gap:6px}
+.g2>.card,.g3>.card,.g4>.card{margin:0}
+.mb{margin-bottom:7px}
+ul{margin:2px 0 0;padding-left:15px} li{margin:1.5px 0}
+li::marker{color:var(--mute)}
+.trap{background:var(--reds);border:1.3px solid #f5a3bd;border-left:5px solid var(--red);border-radius:9px;padding:5px 9px;margin:5px 0 0;break-inside:avoid;font-size:9pt}
+.trap::before{content:"⚠ TRAMPA  ";font-weight:800;color:var(--red);font-size:8.3pt;letter-spacing:.3px}
+.tip{background:var(--yels);border:1.3px solid #f1d27a;border-radius:9px;padding:5px 9px;margin:5px 0 0;break-inside:avoid;font-size:9pt}
+.tip::before{content:"💡 TRUCO  ";font-weight:800;color:#a77900;font-size:8.3pt}
+.n{display:inline-block;font-weight:800;border-radius:6px;padding:0 5px;white-space:nowrap}
+.n1{background:var(--c1s);color:var(--c1)} .n2{background:var(--c2s);color:var(--c2)} .n3{background:var(--c3s);color:var(--c3)} .n4{background:var(--c4s);color:var(--c4)} .nr{background:var(--reds);color:var(--red)}
+.tile{border-radius:10px;padding:6px 7px;text-align:center;break-inside:avoid}
+.tile .big{font-size:17pt;font-weight:900;line-height:1.05;display:block}
+.tile .lbl{font-size:8.2pt;color:var(--ink);display:block;margin-top:2px}
+.t1{background:var(--c1s)} .t1 .big{color:var(--c1)}
+.t2{background:var(--c2s)} .t2 .big{color:var(--c2)}
+.t3{background:var(--c3s)} .t3 .big{color:var(--c3)}
+.t4{background:var(--c4s)} .t4 .big{color:var(--c4)}
+.yes,.no{position:relative;padding-left:16px;margin:2px 0}
+.yes::before{content:"✔";color:#0f9d58;font-weight:900;position:absolute;left:0;top:0}
+.no::before{content:"✘";color:var(--red);font-weight:900;position:absolute;left:0;top:0}
+.diag{width:100%;height:auto;display:block}
+.svgtxt{font-family:"Segoe UI",Arial,sans-serif}
+table{width:100%;border-collapse:separate;border-spacing:0;font-size:8.8pt;break-inside:auto}
+th,td{padding:4px 6px;border-bottom:1px solid var(--line);vertical-align:top;text-align:left}
+thead th{color:#fff;font-size:9.2pt}
+tr{break-inside:avoid}
+.ref{font-size:7.6pt;color:var(--mute);font-weight:600}
+.mini{font-size:8.5pt;color:var(--mute)}
+.pill{display:inline-block;border-radius:20px;padding:1px 8px;font-size:8.3pt;font-weight:700;margin:1px 2px 1px 0}
+.flow{display:flex;align-items:stretch;gap:0}
+.flow .st{flex:1;border-radius:9px;padding:5px 6px;font-size:8.6pt;position:relative;text-align:center}
+.flow .ar{width:16px;display:flex;align-items:center;justify-content:center;color:var(--mute);font-weight:900;font-size:13pt}
+.flow .st>b:first-child{display:block;font-size:9pt;margin-bottom:1px}
+/* portada */
+.cover{height:272mm;display:flex;flex-direction:column}
+.hero{background:linear-gradient(135deg,#1c2333 0%,#27335a 60%,#1f6feb 130%);color:#fff;border-radius:18px;padding:22px 24px 18px;position:relative;overflow:hidden}
+.hero h1{font-size:30pt;font-weight:900;letter-spacing:-.5px}
+.hero .sub{font-size:12pt;opacity:.9;margin-top:4px}
+.hero .chips{margin-top:12px}
+.hero .chips span{display:inline-block;background:rgba(255,255,255,.15);border-radius:20px;padding:3px 10px;margin:0 5px 5px 0;font-size:9pt}
+.idx{display:grid;grid-template-columns:1fr 1fr;gap:9px;margin-top:12px}
+.idx .it{border-radius:14px;padding:11px 13px;color:#fff;break-inside:avoid}
+.idx .it h3{font-size:13pt;font-weight:800}
+.idx .it .code{font-size:9pt;font-weight:700;opacity:.85}
+.idx .it ul{padding-left:15px;font-size:9pt;margin-top:4px}
+.idx .it li::marker{color:#fff}
+.legend{display:flex;gap:10px;flex-wrap:wrap;margin-top:10px;font-size:9pt}
+</style>
+</head>
+<body>
+
+<!-- ============ ICONOS ============ -->
+<svg width="0" height="0" style="position:absolute">
+ <defs>
+  <symbol id="i-truck" viewBox="0 0 64 64"><rect x="3" y="16" width="35" height="26" rx="3" fill="currentColor"/><path d="M38 24h12.5l9 10.5V42H38z" fill="currentColor" opacity=".72"/><path d="M42 27.5h7.5l5 6H42z" fill="#fff" opacity=".9"/><circle cx="14" cy="45" r="6.5" fill="#1c2333"/><circle cx="14" cy="45" r="2.6" fill="#fff"/><circle cx="50" cy="45" r="6.5" fill="#1c2333"/><circle cx="50" cy="45" r="2.6" fill="#fff"/></symbol>
+  <symbol id="i-doc" viewBox="0 0 64 64"><path d="M13 5h27l12 12v42H13z" fill="#fff" stroke="currentColor" stroke-width="3.5" stroke-linejoin="round"/><path d="M40 5v12h12" fill="none" stroke="currentColor" stroke-width="3.5" stroke-linejoin="round"/><path d="M20 28h24M20 36h24M20 44h15" stroke="currentColor" stroke-width="3.5" stroke-linecap="round"/></symbol>
+  <symbol id="i-clock" viewBox="0 0 64 64"><circle cx="32" cy="32" r="26" fill="#fff" stroke="currentColor" stroke-width="4"/><path d="M32 16v17l11 7" fill="none" stroke="currentColor" stroke-width="4.5" stroke-linecap="round"/></symbol>
+  <symbol id="i-box" viewBox="0 0 64 64"><path d="M32 6l24 12v28L32 58 8 46V18z" fill="currentColor" opacity=".25"/><path d="M32 6l24 12-24 12L8 18z" fill="currentColor" opacity=".55"/><path d="M32 30v28M8 18v28l24 12 24-12V18" fill="none" stroke="currentColor" stroke-width="3" stroke-linejoin="round"/></symbol>
+  <symbol id="i-person" viewBox="0 0 64 64"><circle cx="32" cy="20" r="11" fill="currentColor"/><path d="M11 58c0-13 9-21 21-21s21 8 21 21z" fill="currentColor"/></symbol>
+  <symbol id="i-scale" viewBox="0 0 64 64"><path d="M32 8v46M18 56h28M12 18h40" stroke="currentColor" stroke-width="4" stroke-linecap="round"/><path d="M12 18L4 36h16zM52 18l-8 18h16z" fill="currentColor" opacity=".35" stroke="currentColor" stroke-width="2.5" stroke-linejoin="round"/><circle cx="32" cy="10" r="4" fill="currentColor"/></symbol>
+  <symbol id="i-gavel" viewBox="0 0 64 64"><rect x="20" y="8" width="26" height="13" rx="3" transform="rotate(35 33 14)" fill="currentColor"/><path d="M27 27L10 51" stroke="currentColor" stroke-width="6" stroke-linecap="round"/><rect x="30" y="50" width="28" height="7" rx="2" fill="currentColor" opacity=".6"/></symbol>
+  <symbol id="i-house" viewBox="0 0 64 64"><path d="M6 30L32 8l26 22" fill="none" stroke="currentColor" stroke-width="4.5" stroke-linecap="round" stroke-linejoin="round"/><path d="M13 27v29h38V27L32 11z" fill="currentColor" opacity=".85"/><rect x="27" y="38" width="10" height="18" fill="#fff"/></symbol>
+  <symbol id="i-key" viewBox="0 0 64 64"><circle cx="20" cy="32" r="12" fill="none" stroke="currentColor" stroke-width="5"/><path d="M32 32h26M48 32v9M56 32v7" stroke="currentColor" stroke-width="5" stroke-linecap="round"/></symbol>
+  <symbol id="i-euro" viewBox="0 0 64 64"><circle cx="32" cy="32" r="27" fill="currentColor"/><path d="M42 21a13 13 0 1 0 0 22M16 29h20M16 36h18" fill="none" stroke="#fff" stroke-width="4.5" stroke-linecap="round"/></symbol>
+  <symbol id="i-cal" viewBox="0 0 64 64"><rect x="6" y="11" width="52" height="46" rx="6" fill="#fff" stroke="currentColor" stroke-width="4"/><path d="M6 24h52" stroke="currentColor" stroke-width="4"/><path d="M19 5v12M45 5v12" stroke="currentColor" stroke-width="4.5" stroke-linecap="round"/><rect x="15" y="31" width="9" height="8" rx="1.5" fill="currentColor"/><rect x="28" y="31" width="9" height="8" rx="1.5" fill="currentColor" opacity=".4"/><rect x="41" y="31" width="9" height="8" rx="1.5" fill="currentColor" opacity=".4"/><rect x="15" y="43" width="9" height="8" rx="1.5" fill="currentColor" opacity=".4"/></symbol>
+  <symbol id="i-warn" viewBox="0 0 64 64"><path d="M32 5l29 52H3z" fill="currentColor" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/><path d="M32 23v16" stroke="#fff" stroke-width="5.5" stroke-linecap="round"/><circle cx="32" cy="48" r="3.5" fill="#fff"/></symbol>
+  <symbol id="i-globe" viewBox="0 0 64 64"><circle cx="32" cy="32" r="27" fill="#fff" stroke="currentColor" stroke-width="4"/><ellipse cx="32" cy="32" rx="12" ry="27" fill="none" stroke="currentColor" stroke-width="3"/><path d="M5 32h54M9 19h46M9 45h46" stroke="currentColor" stroke-width="3"/></symbol>
+  <symbol id="i-ware" viewBox="0 0 64 64"><path d="M4 24L32 8l28 16v32H4z" fill="currentColor" opacity=".85"/><rect x="14" y="32" width="36" height="24" fill="#fff"/><path d="M14 40h36M14 48h36" stroke="currentColor" stroke-width="2.5"/></symbol>
+  <symbol id="i-ship" viewBox="0 0 64 64"><path d="M6 38h52l-8 16H14z" fill="currentColor"/><rect x="18" y="22" width="12" height="16" fill="currentColor" opacity=".55"/><rect x="32" y="16" width="14" height="22" fill="currentColor" opacity=".75"/><path d="M2 60c5-3 10-3 15 0s10 3 15 0 10-3 15 0 10 3 15 0" fill="none" stroke="currentColor" stroke-width="2.5"/></symbol>
+  <symbol id="i-train" viewBox="0 0 64 64"><rect x="12" y="6" width="40" height="42" rx="9" fill="currentColor"/><rect x="18" y="13" width="28" height="14" rx="2" fill="#fff"/><circle cx="22" cy="38" r="3.5" fill="#fff"/><circle cx="42" cy="38" r="3.5" fill="#fff"/><path d="M20 48l-7 11M44 48l7 11M16 55h32" stroke="currentColor" stroke-width="4" stroke-linecap="round"/></symbol>
+  <symbol id="i-sofa" viewBox="0 0 64 64"><rect x="10" y="18" width="44" height="18" rx="5" fill="currentColor" opacity=".55"/><rect x="4" y="30" width="56" height="16" rx="5" fill="currentColor"/><path d="M10 46v8M54 46v8" stroke="currentColor" stroke-width="5" stroke-linecap="round"/></symbol>
+  <symbol id="i-shop" viewBox="0 0 64 64"><path d="M6 10h52l4 16H2z" fill="currentColor"/><rect x="8" y="26" width="48" height="30" fill="currentColor" opacity=".55"/><rect x="16" y="34" width="13" height="22" fill="#fff"/><rect x="35" y="34" width="14" height="11" fill="#fff"/></symbol>
+  <symbol id="i-hand" viewBox="0 0 64 64"><path d="M4 30l14-12 12 6 10-6 20 12-14 16-8-6-6 6-6-4-6 4z" fill="currentColor" opacity=".8"/><path d="M22 38l6-6 8 8M28 44l6-6" fill="none" stroke="#fff" stroke-width="3" stroke-linecap="round"/></symbol>
+  <symbol id="i-web" viewBox="0 0 64 64"><rect x="4" y="9" width="56" height="38" rx="5" fill="currentColor"/><rect x="9" y="14" width="46" height="28" rx="2" fill="#fff"/><path d="M24 56h16M32 47v9" stroke="currentColor" stroke-width="4.5" stroke-linecap="round"/><path d="M17 28l6 6 12-13" fill="none" stroke="currentColor" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+  <symbol id="i-hour" viewBox="0 0 64 64"><path d="M16 5h32M16 59h32" stroke="currentColor" stroke-width="4.5" stroke-linecap="round"/><path d="M19 6c0 16 26 16 26 26S19 42 19 58h26c0-16-26-16-26-26S45 22 45 6z" fill="none" stroke="currentColor" stroke-width="3.5" stroke-linejoin="round"/><path d="M24 54c3-6 13-6 16 0z" fill="currentColor"/></symbol>
+  <symbol id="i-check" viewBox="0 0 64 64"><circle cx="32" cy="32" r="27" fill="currentColor"/><path d="M19 33l9 9 18-20" fill="none" stroke="#fff" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+  <symbol id="i-snow" viewBox="0 0 64 64"><path d="M32 4v56M8 18l48 28M8 46l48-28" stroke="currentColor" stroke-width="4.5" stroke-linecap="round"/></symbol>
+  <symbol id="i-plane" viewBox="0 0 64 64"><path d="M30 4c3 0 4 4 4 8v14l24 14v6l-24-7v12l7 6v4l-11-3-11 3v-4l7-6V39L2 46v-6l24-14V12c0-4 1-8 4-8z" fill="currentColor"/></symbol>
+ </defs>
+</svg>
+
+<style>
+:root{ --c5:#0b7285; --c5s:#e3f4f7; }
+.s5{background:var(--c5)} .s5 .badge{color:var(--c5)}
+.k5{border-top:4px solid var(--c5)} .k5 h3{color:var(--c5)}
+.t5{background:var(--c5s)} .t5 .big{color:var(--c5)}
+.n5{background:var(--c5s);color:var(--c5)}
+.cmp th{color:#fff} .cmp td:first-child{font-weight:700}
+.nums .tile .big{font-size:13.5pt}.nums .tile{padding:5px 6px}
+</style>
+<svg width="0" height="0" style="position:absolute"><defs>
+ <symbol id="i-fuel" viewBox="0 0 64 64"><rect x="10" y="8" width="30" height="48" rx="4" fill="currentColor"/><rect x="15" y="14" width="20" height="13" rx="2" fill="#fff"/><path d="M40 22h6l6 7v20a4 4 0 0 1-8 0V38h-4" fill="none" stroke="currentColor" stroke-width="4" stroke-linejoin="round" stroke-linecap="round"/><rect x="6" y="54" width="38" height="5" rx="2" fill="currentColor"/></symbol>
+ <symbol id="i-toll" viewBox="0 0 64 64"><rect x="6" y="18" width="14" height="40" rx="2" fill="currentColor"/><rect x="9" y="22" width="8" height="8" fill="#fff"/><path d="M20 30h38" stroke="currentColor" stroke-width="6" stroke-linecap="round"/><path d="M28 30h6M42 30h6" stroke="#fff" stroke-width="6"/><path d="M4 58h56" stroke="currentColor" stroke-width="4" stroke-linecap="round"/><path d="M8 12h10" stroke="currentColor" stroke-width="4" stroke-linecap="round"/></symbol>
+ <symbol id="i-pct" viewBox="0 0 64 64"><circle cx="32" cy="32" r="27" fill="currentColor"/><path d="M20 44L44 20" stroke="#fff" stroke-width="5" stroke-linecap="round"/><circle cx="22" cy="22" r="5" fill="#fff"/><circle cx="42" cy="42" r="5" fill="#fff"/></symbol>
+ <symbol id="i-calc" viewBox="0 0 64 64"><rect x="12" y="5" width="40" height="54" rx="6" fill="currentColor"/><rect x="18" y="11" width="28" height="12" rx="2" fill="#fff"/><g fill="#fff"><rect x="18" y="29" width="7" height="6" rx="1.5"/><rect x="28.5" y="29" width="7" height="6" rx="1.5"/><rect x="39" y="29" width="7" height="6" rx="1.5"/><rect x="18" y="39" width="7" height="6" rx="1.5"/><rect x="28.5" y="39" width="7" height="6" rx="1.5"/><rect x="39" y="39" width="7" height="16" rx="1.5"/><rect x="18" y="49" width="17.5" height="6" rx="1.5"/></g></symbol>
+ <symbol id="i-hall" viewBox="0 0 64 64"><path d="M6 22L32 6l26 16z" fill="currentColor"/><rect x="8" y="24" width="48" height="5" fill="currentColor"/><g fill="currentColor" opacity=".8"><rect x="12" y="31" width="6" height="20"/><rect x="23" y="31" width="6" height="20"/><rect x="35" y="31" width="6" height="20"/><rect x="46" y="31" width="6" height="20"/></g><rect x="6" y="52" width="52" height="6" rx="1.5" fill="currentColor"/></symbol>
+ <symbol id="i-bank" viewBox="0 0 64 64"><rect x="8" y="10" width="48" height="44" rx="5" fill="currentColor"/><path d="M8 22h48" stroke="#fff" stroke-width="3"/><g fill="#fff"><circle cx="20" cy="33" r="3.5"/><circle cx="32" cy="33" r="3.5"/><circle cx="44" cy="33" r="3.5"/><circle cx="20" cy="44" r="3.5"/><circle cx="32" cy="44" r="3.5"/></g><path d="M20 4v10M44 4v10" stroke="currentColor" stroke-width="4.5" stroke-linecap="round"/></symbol>
+ <symbol id="i-flag" viewBox="0 0 64 64"><circle cx="32" cy="32" r="27" fill="currentColor"/><g fill="#ffd43b"><circle cx="32" cy="15" r="3"/><circle cx="32" cy="49" r="3"/><circle cx="15" cy="32" r="3"/><circle cx="49" cy="32" r="3"/><circle cx="20" cy="20" r="3"/><circle cx="44" cy="20" r="3"/><circle cx="20" cy="44" r="3"/><circle cx="44" cy="44" r="3"/></g></symbol>
+</defs></svg>
+
+<!-- ============ PORTADA ============ -->
+<div class="cover">
+ <div class="hero">
+  <div style="font-size:10pt;font-weight:700;letter-spacing:2px;opacity:.75">COMPETENCIA PROFESIONAL · TRANSPORTE DE MERCANCÍAS</div>
+  <h1>TEMA 4 · Derecho fiscal</h1>
+  <div class="sub">Esquema visual con <b>todos los datos</b> que caen en los test (1D01 – 1D04 · 341 preguntas del banco)</div>
+  <div class="chips"><span>🧾 IVA</span><span>🏛️ Impuesto de circulación (IVTM)</span><span>⛽ Hidrocarburos y gasóleo profesional</span><span>🛣️ Peajes (Directiva 1999/62)</span><span>📊 IRPF y Sociedades</span></div>
+  <svg viewBox="0 0 600 120" class="diag" style="margin-top:6px">
+   <path d="M0 104 H600" stroke="rgba(255,255,255,.35)" stroke-width="2" stroke-dasharray="10 8"/>
+   <use href="#i-pct" x="10" y="38" width="62" height="62" style="color:#b9a6ff"/>
+   <use href="#i-hall" x="130" y="36" width="66" height="66" style="color:#8fb8ff"/>
+   <use href="#i-fuel" x="252" y="36" width="64" height="64" style="color:#ffb27a"/>
+   <use href="#i-toll" x="372" y="36" width="66" height="66" style="color:#ffd6b0"/>
+   <use href="#i-calc" x="500" y="36" width="64" height="64" style="color:#6fe0a6"/>
+  </svg>
+ </div>
+ <div class="idx">
+  <div class="it" style="background:var(--c1)"><div class="code">1D01 · 101 preguntas</div><h3>IVA</h3><ul><li>Qué grava, tipos 21 / 10 / 4 %</li><li>Base, devengo y deducciones</li><li>Intracomunitarias, importación, lugar</li><li>Régimen simplificado (módulos) y criterio de caja</li></ul></div>
+  <div class="it" style="background:var(--c2)"><div class="code">1D02 · 24 preguntas</div><h3>Impuesto de circulación (IVTM)</h3><ul><li>Impuesto municipal obligatorio</li><li>No sujetos y exenciones</li><li>Quién paga y qué ayuntamiento</li><li>Cuota, devengo y prorrateo por trimestres</li></ul></div>
+  <div class="it" style="background:var(--c3)"><div class="code">1D03 · 61 preguntas</div><h3>Hidrocarburos y peajes</h3><ul><li>Impuesto especial de fabricación</li><li>Gasóleo profesional: ≥ 7,5 t · 50.000 l</li><li>Directiva 1999/62: &gt; 3,5 t · 12 t</li><li>Tasa por infraestructura + costes externos</li></ul></div>
+  <div class="it" style="background:var(--c4)"><div class="code">1D04 · 155 preguntas (el que más cae)</div><h3>IRPF del transportista autónomo</h3><ul><li>Rentas, base y cuota</li><li>Directa normal / simplificada / módulos</li><li>Pagos fraccionados 20 % · 4 % · 2 %</li><li>Ganancias patrimoniales</li></ul></div>
+ </div>
+ <div class="idx" style="grid-template-columns:1fr">
+  <div class="it" style="background:var(--c5)"><div class="code">1D04 · segunda mitad</div><h3>Impuesto sobre Sociedades</h3><ul><li>Tipo 25 % · Reducida dimensión &lt; 10 M€ · Base imponible y gastos · Amortizaciones · Cuota mínima · Plazos de abril, octubre y diciembre</li></ul></div>
+ </div>
+ <div class="card" style="margin-top:10px">
+  <h3 style="color:var(--ink)">Cómo usar este esquema</h3>
+  <div class="legend">
+   <span><span class="n n1">21 %</span> = dato que te preguntan tal cual</span>
+   <span class="trap" style="margin:0;padding:2px 8px">la respuesta «lógica» no es la buena</span>
+   <span class="tip" style="margin:0;padding:2px 8px">regla para acordarte</span>
+  </div>
+  <p class="mini" style="margin:6px 0 0">Al final tienes 3 páginas de repaso: <b>IVA, IRPF y Sociedades comparados</b> con su calendario, <b>todos los números</b> en una hoja y <b>las trampas</b> más típicas.</p>
+ </div>
+</div>
+
+<!-- ============ 1D01 IVA (1) ============ -->
+<div class="page">
+ <div class="sec s1"><span class="badge">1D01</span><div><h2>IVA: qué es, qué grava y a qué tipo</h2><p>Ley 37/1992 · Impuesto indirecto · Repercutido − soportado · 21 / 10 / 4 % · Sujeción y no sujeción</p></div></div>
+
+ <div class="card k1">
+  <h3><svg><use href="#i-pct"/></svg>Cómo funciona, en un dibujo</h3>
+  <svg viewBox="0 0 700 138" class="diag svgtxt">
+   <rect x="4" y="10" width="170" height="70" rx="10" fill="#efeafe"/><text x="89" y="34" text-anchor="middle" font-size="12" font-weight="800" fill="#6d4bd8">COMPRAS</text><text x="89" y="52" text-anchor="middle" font-size="11.5">gasóleo, reparaciones,</text><text x="89" y="67" text-anchor="middle" font-size="11.5">camión…</text>
+   <rect x="265" y="10" width="170" height="70" rx="10" fill="#6d4bd8"/><use href="#i-truck" x="318" y="16" width="64" height="40" style="color:#fff"/><text x="350" y="72" text-anchor="middle" font-size="12" font-weight="800" fill="#fff">TÚ (transportista)</text>
+   <rect x="526" y="10" width="170" height="70" rx="10" fill="#efeafe"/><text x="611" y="34" text-anchor="middle" font-size="12" font-weight="800" fill="#6d4bd8">CLIENTE</text><text x="611" y="52" text-anchor="middle" font-size="11.5">el consumidor final</text><text x="611" y="67" text-anchor="middle" font-size="11.5">es quien lo soporta</text>
+   <path d="M176 45h84" stroke="#6d4bd8" stroke-width="3" marker-end="url(#a1)"/><text x="218" y="38" text-anchor="middle" font-size="11" font-weight="800">pagas IVA</text><text x="218" y="62" text-anchor="middle" font-size="10.5" fill="#5b6478">SOPORTADO</text>
+   <path d="M522 45h-84" stroke="#6d4bd8" stroke-width="3" marker-end="url(#a1)"/><text x="480" y="38" text-anchor="middle" font-size="11" font-weight="800">cobras IVA</text><text x="480" y="62" text-anchor="middle" font-size="10.5" fill="#5b6478">REPERCUTIDO</text>
+   <defs><marker id="a1" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M0 0L10 5L0 10z" fill="#6d4bd8"/></marker></defs>
+   <rect x="120" y="96" width="460" height="36" rx="9" fill="#fff" stroke="#6d4bd8" stroke-width="2"/>
+   <text x="350" y="119" text-anchor="middle" font-size="13.5" font-weight="800" fill="#1c2333">A Hacienda: <tspan fill="#6d4bd8">REPERCUTIDO − SOPORTADO</tspan>   ·   cuota = tipo × base</text>
+  </svg>
+  <div class="g3" style="margin-top:3px">
+   <div>Es <b>indirecto</b>. Son <b>directos</b>: IRPF, Sociedades e IAE.</div>
+   <div>Ámbito: <b>Península y Baleares</b> (no Canarias, Ceuta ni Melilla).</div>
+   <div>El transporte de mercancías es una <b>prestación de servicios</b> y sus empresarios son <b>siempre sujetos pasivos</b>.</div>
+  </div>
+ </div>
+
+ <div class="g2 mb">
+  <div class="card k1">
+   <h3><svg><use href="#i-check"/></svg>Qué grava</h3>
+   <ul>
+    <li><b>Entregas de bienes y prestaciones de servicios</b> de empresarios y profesionales.</li>
+    <li><b>Adquisiciones intracomunitarias</b> (compras que llegan de otro país UE).</li>
+    <li><b>Importaciones</b> (de fuera de la UE).</li>
+   </ul>
+   <div class="yes">Compra de <b>vehículo nuevo</b>: gravada <b>en todo caso</b>.</div>
+   <div class="yes">Compra de <b>combustible</b>: gravada por IVA.</div>
+   <div class="no"><b>Exportaciones</b>: exentas. Exenta también la <b>enseñanza de idiomas</b>.</div>
+  </div>
+  <div class="card k1">
+   <h3><svg><use href="#i-pct"/></svg>Tipos de IVA</h3>
+   <div class="g3">
+    <div class="tile t1"><span class="big">21 %</span><span class="lbl">general · <b>mercancías</b></span></div>
+    <div class="tile t1"><span class="big">10 %</span><span class="lbl">reducido · <b>viajeros</b></span></div>
+    <div class="tile t1"><span class="big">4 %</span><span class="lbl">superreducido · vehículos para <b>movilidad reducida</b></span></div>
+   </div>
+   <div class="tip">Mercancías <b>21</b>, viajeros <b>10</b>: la carga paga el doble que las personas.</div>
+  </div>
+ </div>
+
+ <div class="g2 mb">
+  <div class="card k1">
+   <h3><svg><use href="#i-check"/></svg>Sujeto (sí paga IVA)</h3>
+   <div class="yes">Transporte por carretera de personas y mercancías (<b>servicio</b>).</div>
+   <div class="yes">Servicios de una SA a sus socios a título <b>oneroso</b>.</div>
+   <div class="yes"><b>Transmitir todo el patrimonio</b> empresarial al cesar.</div>
+   <div class="yes"><b>Autoconsumo</b> de bienes (se asimila a una entrega).</div>
+   <p class="mini" style="margin:4px 0 0">Si una operación está sujeta a IVA, por regla general <b>no</b> paga ITP-AJD (transmisiones patrimoniales).</p>
+  </div>
+  <div class="card k1">
+   <h3><svg><use href="#i-warn"/></svg>No sujeto o exento</h3>
+   <div class="no">Servicios <b>gratuitos</b> del empresario: <b>no sujetos</b>.</div>
+   <div class="no">Entrega gratuita de <b>muestras</b>: no sujeta.</div>
+   <div class="no">Servicios de <b>socios de trabajo</b> a su cooperativa: no sujetos.</div>
+   <div class="no">Exentos: <b>servicio postal universal</b>, <b>asistencia sanitaria</b> y <b>transporte en ambulancia</b>.</div>
+  </div>
+ </div>
+
+ <div class="card k1">
+  <h3><svg><use href="#i-person"/></svg>¿Quién es empresario y quién es el sujeto pasivo?</h3>
+  <div class="g2">
+   <ul>
+    <li>Basta el <b>anuncio</b> de un establecimiento mercantil para presumir actividad.</li>
+    <li>Sociedad mercantil: <b>siempre empresario, salvo prueba en contrario</b>.</li>
+    <li>Quien ordena solo medios <b>materiales</b> (sin personas) para producir: <b>también es empresario</b>.</li>
+    <li>Entes sin personalidad: sujetos pasivos si son un <b>patrimonio separado</b>.</li>
+   </ul>
+   <ul>
+    <li>Entregas: normalmente el <b>empresario que la realiza</b>; a veces <b>el que la recibe</b> (inversión del sujeto pasivo).</li>
+    <li>Importación y adquisición intracomunitaria: <b>quien la realiza</b>.</li>
+    <li>Destinatarios con <b>culpa o dolo</b>: <b>responsables solidarios</b>; también las asociaciones garantes de convenios en importación.</li>
+   </ul>
+  </div>
+ </div>
+</div>
+
+<!-- ============ 1D01 IVA (2) ============ -->
+<div class="page">
+ <div class="sec s1"><span class="badge">1D01</span><div><h2>IVA: base, devengo, deducciones y declaración</h2><p>Precio total · Cuándo nace · Qué se deduce · Trimestral · 4 años · Libros · Criterio de caja</p></div></div>
+
+ <div class="g2 mb">
+  <div class="card k1">
+   <h3><svg><use href="#i-calc"/></svg>Base imponible</h3>
+   <ul>
+    <li>En el transporte: el <b>precio total</b> del servicio.</li>
+    <li><b>Envases y embalajes</b>: se incluyen si se <b>cargan al cliente</b>.</li>
+    <li><b>Otros tributos</b>: se incluyen, salvo el <b>impuesto especial sobre determinados medios de transporte</b>.</li>
+    <li>Moneda extranjera: al <b>tipo de cambio vendedor</b> del día del <b>devengo</b>.</li>
+    <li>Autoconsumo de un bien transformado: el <b>coste</b> de lo usado.</li>
+   </ul>
+   <div class="no">Descuentos hechos <b>en el momento o antes</b>: <b>no</b> se incluyen.</div>
+   <p class="mini" style="margin:4px 0 0"><b>Se modifica</b> por: envases devueltos, descuentos posteriores, operación sin efecto y cliente que no paga y luego entra en <b>concurso</b>.</p>
+  </div>
+  <div class="card k1">
+   <h3><svg><use href="#i-cal"/></svg>Devengo y repercusión</h3>
+   <div class="flow" style="margin:2px 0 6px">
+    <div class="st" style="background:var(--c1s)"><b>Devengo</b>cuando <b>se presta</b> el servicio</div><div class="ar">›</div>
+    <div class="st" style="background:var(--c1s)"><b>Repercutir</b>al <b>expedir y entregar la factura</b></div><div class="ar">›</div>
+    <div class="st" style="background:var(--c1s)"><b>Rectificar</b>hasta <b>4 años</b></div>
+   </div>
+   <ul>
+    <li>Tracto sucesivo: cuando es <b>exigible</b> cada parte del precio.</li>
+    <li>Pagos <b>anticipados</b>: al <b>cobrarlos</b>.</li>
+    <li>Se <b>pierde</b> el derecho a repercutir al <span class="n n1">1 año</span> del devengo.</li>
+    <li>Factura completa: la cuota va <b>separada de la base</b>.</li>
+   </ul>
+  </div>
+ </div>
+
+ <div class="card k1">
+  <h3><svg><use href="#i-check"/></svg>Deducciones (régimen general)</h3>
+  <div class="g3">
+   <div>
+    <b style="color:#0f9d58">✔ Se deduce</b>
+    <ul>
+     <li>Combustible y reparaciones.</li>
+     <li>Bienes afectos <b>directa y exclusivamente</b>.</li>
+     <li><b>Turismos de uso mixto</b> (empresa y particular).</li>
+     <li><b>Muestras y objetos publicitarios</b> de poco valor (calendarios).</li>
+    </ul>
+   </div>
+   <div>
+    <b style="color:var(--red)">✘ No se deduce</b>
+    <ul>
+     <li><b>Joyas</b>.</li>
+     <li><b>Tabaco</b>.</li>
+     <li><b>Espectáculos</b> recreativos.</li>
+    </ul>
+    <p class="mini" style="margin:4px 0 0">Se deduce lo de entregas, servicios, intracomunitarias e importaciones; <b>íntegro</b> si es para operaciones sujetas y no exentas.</p>
+   </div>
+   <div>
+    <b>Justificantes válidos</b>
+    <ul>
+     <li><b>Facturas originales</b>.</li>
+     <li>Documentos de <b>liquidación de importaciones</b>.</li>
+     <li><b>Recibos de agricultores</b>.</li>
+    </ul>
+    <p class="mini" style="margin:4px 0 0">Cuotas soportadas <b>tras empezar</b> y, con condiciones, <b>antes</b>. <b>Prorrata</b>: operaciones con y sin derecho a deducir.</p>
+   </div>
+  </div>
+ </div>
+
+ <div class="g2 mb">
+  <div class="card k1">
+   <h3><svg><use href="#i-doc"/></svg>Declaración y libros</h3>
+   <ul>
+    <li>Pequeñas empresas: <span class="n n1">trimestral</span>, salvo excepciones.</li>
+    <li>Sale a devolver en un trimestre → se <b>compensa en el siguiente</b>.</li>
+    <li>A final de año → <b>devolución</b> o compensar en un máximo de <span class="n n1">4 años</span>.</li>
+    <li>Libros: <b>facturas expedidas, facturas recibidas, bienes de inversión y operaciones intracomunitarias</b>.</li>
+    <li>Declaración <b>mensual</b> → libros en la <b>Sede electrónica de la AEAT</b> (SII).</li>
+   </ul>
+  </div>
+  <div class="card k1">
+   <h3><svg><use href="#i-euro"/></svg>Criterio de caja</h3>
+   <div class="tile t1"><span class="big">≤ 2 M€</span><span class="lbl">volumen de operaciones del año anterior</span></div>
+   <ul style="margin-top:4px">
+    <li>Devengo en el <b>cobro</b> (no al facturar).</li>
+    <li>Solo para el <b>IVA</b>, no para el IRPF.</li>
+   </ul>
+   <div class="no">No se aplica a <b>intracomunitarias</b>, <b>inversión del sujeto pasivo</b> ni <b>autoconsumos</b>.</div>
+  </div>
+ </div>
+
+ <div class="card k1">
+  <h3><svg><use href="#i-flag"/></svg>Intracomunitarias, importación y lugar del servicio</h3>
+  <div class="g2">
+   <ul>
+    <li>Adquisición intracomunitaria sujeta: la <b>onerosa entre empresarios</b> y la de <b>medios de transporte nuevos</b> por particulares.</li>
+    <li><b>Exportar: exento</b> · <b>Importar: sujeto</b>.</li>
+    <li>Importación exenta: bienes personales para <b>segunda vivienda</b>, bienes de inversión, ciertos productos agrícolas y embalajes que viajan con la mercancía.</li>
+    <li>Gasóleo en el depósito de un vehículo industrial importado: exento hasta <span class="n n1">200 litros</span>.</li>
+   </ul>
+   <ul>
+    <li>Transporte intracomunitario a un <b>particular</b>: en España si <b>empieza</b> en España (igual con destino Canarias).</li>
+    <li>Servicio a un <b>empresario</b>: donde tiene su <b>sede</b>.</li>
+    <li>Servicio a un <b>particular</b>: donde está el <b>prestador</b>.</li>
+    <li>Ligados a <b>inmuebles</b>: donde está el inmueble.</li>
+    <li>Accesorios al transporte (carga, descarga…): donde se hacen <b>materialmente</b>, si el cliente <b>no es empresario</b>.</li>
+   </ul>
+  </div>
+ </div>
+</div>
+
+<!-- ============ 1D01 IVA SIMPLIFICADO ============ -->
+<div class="page">
+ <div class="sec s1"><span class="badge">1D01</span><div><h2>IVA: régimen simplificado (módulos)</h2><p>Quién puede · 250.000 € · 4 vehículos · 5 % trimestral · 10 % mínimo · 1 % de difícil justificación · 3 años</p></div></div>
+
+ <div class="card k1">
+  <h3><svg><use href="#i-person"/></svg>¿Puedo estar en el simplificado?</h3>
+  <svg viewBox="0 0 700 150" class="diag svgtxt">
+   <rect x="4" y="8" width="200" height="56" rx="10" fill="#6d4bd8"/><text x="104" y="31" text-anchor="middle" font-size="12.5" font-weight="800" fill="#fff">Empresario individual</text><text x="104" y="50" text-anchor="middle" font-size="11" fill="#fff">o comunidad en atribución de rentas</text>
+   <rect x="250" y="8" width="200" height="56" rx="10" fill="#efeafe"/><text x="350" y="31" text-anchor="middle" font-size="12.5" font-weight="800" fill="#6d4bd8">Solo actividades</text><text x="350" y="50" text-anchor="middle" font-size="11">de la lista (el transporte está)</text>
+   <rect x="496" y="8" width="200" height="56" rx="10" fill="#efeafe"/><text x="596" y="31" text-anchor="middle" font-size="12.5" font-weight="800" fill="#6d4bd8">No renuncia</text><text x="596" y="50" text-anchor="middle" font-size="11">es voluntario</text>
+   <path d="M206 36h40M452 36h40" stroke="#6d4bd8" stroke-width="3"/>
+   <text x="4" y="90" font-size="12.5" font-weight="800" fill="#d6336c">FUERA si supera cualquiera de estos límites:</text>
+   <rect x="4" y="98" width="222" height="48" rx="9" fill="#ffe8ef"/><text x="115" y="119" text-anchor="middle" font-size="15" font-weight="900" fill="#d6336c">&gt; 250.000 €</text><text x="115" y="137" text-anchor="middle" font-size="10.5">ingresos del año anterior</text>
+   <rect x="239" y="98" width="222" height="48" rx="9" fill="#ffe8ef"/><text x="350" y="119" text-anchor="middle" font-size="15" font-weight="900" fill="#d6336c">&gt; 250.000 €</text><text x="350" y="137" text-anchor="middle" font-size="10.5">de compras al año (sin inmovilizado)</text>
+   <rect x="474" y="98" width="222" height="48" rx="9" fill="#ffe8ef"/><text x="585" y="119" text-anchor="middle" font-size="15" font-weight="900" fill="#d6336c">&gt; 4 vehículos</text><text x="585" y="137" text-anchor="middle" font-size="10.5">cualquier día del año</text>
+  </svg>
+  <p class="mini" style="margin:3px 0 0">También queda fuera quien haga <b>otra actividad fuera del régimen</b>, salvo que esa otra esté en <b>agricultura, ganadería y pesca</b> o en <b>recargo de equivalencia</b>. La renuncia obliga <span class="n n1">3 años</span> como mínimo.</p>
+ </div>
+
+ <div class="card k1">
+  <h3><svg><use href="#i-calc"/></svg>Cómo se calcula: con módulos, no factura a factura</h3>
+  <div class="flow">
+   <div class="st" style="background:var(--c1s)"><b>Cuota devengada</b><b>suma de los módulos</b> que fija Hacienda</div><div class="ar">−</div>
+   <div class="st" style="background:var(--c1s)"><b>Cuotas soportadas</b>de gastos corrientes, <b>no de activos fijos</b> + <b>1 %</b> de difícil justificación</div><div class="ar">=</div>
+   <div class="st" style="background:var(--c1);color:#fff"><b>Cuota anual</b>nunca menos del <b>10 %</b> de la devengada (mínima)</div>
+  </div>
+  <div class="g3" style="margin-top:6px">
+   <div class="tile t1"><span class="big">5 %</span><span class="lbl">cuota de cada <b>trimestre</b> en transporte de mercancías</span></div>
+   <div class="tile t1"><span class="big">10 %</span><span class="lbl">cuota <b>mínima</b> (mercancías, salvo residuos)</span></div>
+   <div class="tile t1"><span class="big">1 %</span><span class="lbl">de la devengada: soportadas de <b>difícil justificación</b></span></div>
+  </div>
+  <div class="tip">El IVA del <b>camión</b> (activo fijo) <b>sí se deduce</b>, pero aparte de los módulos: se anota en el <b>libro de facturas recibidas</b>.</div>
+ </div>
+
+ <div class="g2 mb">
+  <div class="card k1">
+   <h3><svg><use href="#i-truck"/></svg>Los módulos del transporte</h3>
+   <ul>
+    <li><b>Personal asalariado</b> y <b>no asalariado</b>: el empresario <b>computa siempre</b>.</li>
+    <li><b>Carga de vehículos</b> = <b>carga útil</b>: MMA (máximo <span class="n n1">40 t</span>) <b>menos las taras</b> de los vehículos portantes.</li>
+    <li>Empresario <b>sin personal</b> en incapacidad temporal: puede <b>pedir</b> que le reduzcan los módulos.</li>
+   </ul>
+  </div>
+  <div class="card k1">
+   <h3><svg><use href="#i-cal"/></svg>Pagos y obligaciones</h3>
+   <ul>
+    <li>Pagos trimestrales: <b>20 primeros días de abril, julio y octubre</b> (el 4.º, en enero con la anual).</li>
+    <li>Llevar el <b>libro registro de facturas recibidas</b>.</li>
+    <li>Conservar las <b>facturas recibidas</b> y <b>copia de las emitidas</b>.</li>
+   </ul>
+  </div>
+ </div>
+ <div class="trap">Los límites son <b>250.000 €</b> y <b>4 vehículos</b>, iguales que en módulos del IRPF. No confundas con los <b>600.000 €</b> de la estimación directa simplificada ni con los <b>2 M€</b> del criterio de caja.</div>
+</div>
+
+<!-- ============ 1D02 IVTM ============ -->
+<div class="page">
+ <div class="sec s2"><span class="badge">1D02</span><div><h2>Impuesto sobre Vehículos de Tracción Mecánica (IVTM)</h2><p>«Impuesto de circulación» · Municipal y obligatorio · Quién paga · Exenciones · Cuota · Prorrateo por trimestres</p></div></div>
+
+ <div class="card k2">
+  <h3><svg><use href="#i-hall"/></svg>Qué es</h3>
+  <svg viewBox="0 0 700 110" class="diag svgtxt">
+   <use href="#i-hall" x="6" y="12" width="80" height="80" style="color:#1f6feb"/>
+   <text x="100" y="34" font-size="14" font-weight="800" fill="#1f6feb">Impuesto MUNICIPAL y OBLIGATORIO</text>
+   <text x="100" y="55" font-size="12">Lo cobran <tspan font-weight="800">todos</tspan> los ayuntamientos y la recaudación es <tspan font-weight="800">para el ayuntamiento</tspan>.</text>
+   <text x="100" y="76" font-size="12">Grava la <tspan font-weight="800">TITULARIDAD</tspan> de vehículos <tspan font-weight="800">aptos para circular</tspan>: matriculados y sin baja.</text>
+   <text x="100" y="97" font-size="12">También con <tspan font-weight="800">permiso temporal</tspan> y con <tspan font-weight="800">matrícula turística</tspan>.</text>
+  </svg>
+ </div>
+
+ <div class="g2 mb">
+  <div class="card k2">
+   <h3><svg><use href="#i-warn"/></svg>No sujetos</h3>
+   <div class="tile t2"><span class="big">≤ 750 kg</span><span class="lbl"><b>remolques y semirremolques</b> con esa carga útil o menos</span></div>
+   <p class="mini" style="margin:5px 0 0">Un remolque de 751 kg o más <b>sí paga</b>.</p>
+  </div>
+  <div class="card k2">
+   <h3><svg><use href="#i-health"/></svg>Exentos</h3>
+   <div class="yes"><b>Ambulancias</b> y vehículos para <b>asistencia sanitaria</b>.</div>
+   <div class="yes"><b>Autobuses de transporte público urbano</b>.</div>
+   <div class="yes">Vehículos a nombre de <b>discapacitados</b> para su <b>uso exclusivo</b>.</div>
+   <div class="yes">Vehículos <b>construidos especialmente</b> para <b>movilidad reducida</b>.</div>
+  </div>
+ </div>
+
+ <div class="g2 mb">
+  <div class="card k2">
+   <h3><svg><use href="#i-person"/></svg>Quién paga y dónde</h3>
+   <ul>
+    <li>Sujeto pasivo: la persona <b>física o jurídica</b> que figure en el <b>permiso de circulación</b>.</li>
+    <li><b>Comunidad de bienes</b> (sin personalidad, pero unidad económica): paga <b>la propia comunidad</b>.</li>
+    <li>Lo gestiona el <b>ayuntamiento del domicilio</b> que conste en el <b>permiso de circulación</b>.</li>
+    <li>Cambio de titular en Tráfico: acreditar el pago del <b>año anterior</b> al del cambio.</li>
+   </ul>
+  </div>
+  <div class="card k2">
+   <h3><svg><use href="#i-euro"/></svg>Cuota</h3>
+   <table>
+    <thead><tr><th style="background:var(--c2);border-radius:8px 0 0 0">Vehículo</th><th style="background:var(--c2);border-radius:0 8px 0 0">Se paga según</th></tr></thead>
+    <tbody>
+     <tr><td><b>Turismos</b></td><td>caballos fiscales</td></tr>
+     <tr><td><b>Autobuses</b></td><td>número de <b>plazas</b></td></tr>
+     <tr><td><b>Camiones</b></td><td>kg de <b>carga útil</b></td></tr>
+    </tbody>
+   </table>
+   <ul style="margin-top:4px">
+    <li>El ayuntamiento puede <b>subirla</b> hasta el <b>límite legal</b>.</li>
+    <li>Bonificaciones posibles: <b>carburante</b>, <b>motor</b> y antigüedad de <span class="n n2">25 años</span>.</li>
+   </ul>
+  </div>
+ </div>
+
+ <div class="card k2">
+  <h3><svg><use href="#i-cal"/></svg>Devengo y prorrateo por trimestres naturales</h3>
+  <svg viewBox="0 0 700 120" class="diag svgtxt">
+   <text x="4" y="16" font-size="12" font-weight="800">Año de compra (devenga el día de la adquisición): pagas desde el trimestre de compra</text>
+   <rect x="4" y="24" width="170" height="26" rx="6" fill="#e4e7ee"/><text x="89" y="42" text-anchor="middle" font-size="11.5" fill="#5b6478">1.er trim. — no</text>
+   <rect x="178" y="24" width="170" height="26" rx="6" fill="#1f6feb"/><text x="263" y="42" text-anchor="middle" font-size="11.5" font-weight="800" fill="#fff">2.º · compra ✔</text>
+   <rect x="352" y="24" width="170" height="26" rx="6" fill="#1f6feb"/><text x="437" y="42" text-anchor="middle" font-size="11.5" font-weight="800" fill="#fff">3.º ✔</text>
+   <rect x="526" y="24" width="170" height="26" rx="6" fill="#1f6feb"/><text x="611" y="42" text-anchor="middle" font-size="11.5" font-weight="800" fill="#fff">4.º ✔</text>
+   <text x="4" y="74" font-size="12" font-weight="800">Año de baja definitiva (o temporal por ROBO): pagas hasta el trimestre de la baja</text>
+   <rect x="4" y="82" width="170" height="26" rx="6" fill="#1f6feb"/><text x="89" y="100" text-anchor="middle" font-size="11.5" font-weight="800" fill="#fff">1.er ✔</text>
+   <rect x="178" y="82" width="170" height="26" rx="6" fill="#1f6feb"/><text x="263" y="100" text-anchor="middle" font-size="11.5" font-weight="800" fill="#fff">2.º · baja ✔</text>
+   <rect x="352" y="82" width="170" height="26" rx="6" fill="#e4e7ee"/><text x="437" y="100" text-anchor="middle" font-size="11.5" fill="#5b6478">3.º — no</text>
+   <rect x="526" y="82" width="170" height="26" rx="6" fill="#e4e7ee"/><text x="611" y="100" text-anchor="middle" font-size="11.5" fill="#5b6478">4.º — no</text>
+  </svg>
+  <div class="trap">En una <b>baja temporal</b> solo se prorratea si es por <b>robo</b>. Cualquier otra baja temporal: año <b>completo</b>.</div>
+ </div>
+ <div class="tip">IVTM = <b>Ayuntamiento + titular del permiso</b>. Las dos respuestas «del domicilio que conste en el permiso de circulación» suelen ser las buenas.</div>
+</div>
+
+<!-- ============ 1D03 HIDROCARBUROS ============ -->
+<div class="page">
+ <div class="sec s3"><span class="badge">1D03</span><div><h2>Impuesto sobre Hidrocarburos y gasóleo profesional</h2><p>Ley 38/1992 · Especial de fabricación · Fase única · Depositarios autorizados · Devolución parcial ≥ 7,5 t · 50.000 litros</p></div></div>
+
+ <div class="card k3">
+  <h3><svg><use href="#i-fuel"/></svg>Cómo funciona el impuesto</h3>
+  <div class="flow">
+   <div class="st" style="background:var(--c3s)"><b>Hecho imponible</b><b>fabricación</b> e <b>importación</b></div><div class="ar">›</div>
+   <div class="st" style="background:var(--c3s)"><b>Devengo</b><b>salida de fábrica</b> · importación: <b>despacho a libre práctica</b></div><div class="ar">›</div>
+   <div class="st" style="background:var(--c3s)"><b>Contribuyente</b>los <b>depositarios autorizados</b></div><div class="ar">›</div>
+   <div class="st" style="background:var(--c3);color:#fff"><b>Repercusión</b><b>deben</b> repercutirlo al comprador</div>
+  </div>
+  <div class="g2" style="margin-top:6px">
+   <ul>
+    <li>Impuesto <b>especial de fabricación</b>, <b>indirecto</b>, en <b>fase única</b>.</li>
+    <li>La gasolina y el gasóleo pagan <b>Hidrocarburos + IVA</b>.</li>
+    <li>Ámbito: toda España <b>salvo Canarias, Ceuta y Melilla</b>.</li>
+    <li>Gestión: <b>autoliquidaciones</b> por <b>meses naturales</b> (RD 1165/1995).</li>
+    <li>Cuota: un tipo <b>general</b> + un tipo <b>especial</b>.</li>
+   </ul>
+   <ul>
+    <li>Tributan también <b>biocarburantes y biocombustibles</b>.</li>
+    <li>Tipo estatal más alto: <b>gasolinas con plomo</b>.</li>
+    <li>Usarlo en un motor para quemarlo = <b>siempre uso como carburante</b>.</li>
+    <li>Transformación: obtener productos gravados <b>a partir de otros gravados</b>.</li>
+    <li>Pérdidas en transporte en <b>régimen suspensivo</b>: no sujetas (hasta ciertos %). <b>Exportar</b> da derecho a <b>devolución</b>.</li>
+   </ul>
+  </div>
+ </div>
+
+ <div class="g2 mb">
+  <div class="card k3">
+   <h3><svg><use href="#i-ship"/></svg>Exenciones</h3>
+   <div class="yes">Barcos: uso como <b>carburante</b>, <b>salvo navegación privada de recreo</b> (y con gasóleo con <b>trazadores</b>).</div>
+   <div class="tile t3" style="margin-top:5px"><span class="big">200 litros</span><span class="lbl">gasóleo importado en el <b>depósito normal</b> de un vehículo comercial: exento</span></div>
+  </div>
+  <div class="card k3">
+   <h3><svg><use href="#i-doc"/></svg>Circulación de los productos</h3>
+   <ul>
+    <li>Los documentos acreditan el <b>pago</b> o el <b>régimen suspensivo</b> y <b>acompañan</b> a la expedición.</li>
+    <li>Al menos <b>un documento por destinatario</b> en cada unidad de transporte.</li>
+    <li>Sin documento: se inmovilizan los <b>productos</b>, y el <b>vehículo</b> si es <b>carga completa</b>.</li>
+   </ul>
+  </div>
+ </div>
+
+ <div class="card k3">
+  <h3><svg><use href="#i-truck"/></svg>Gasóleo profesional: devolución parcial del impuesto</h3>
+  <div class="g3">
+   <div class="tile t3"><span class="big">≥ 7,5 t</span><span class="lbl">camiones de <b>MMA igual o superior</b></span></div>
+   <div class="tile t3"><span class="big">M2 · M3</span><span class="lbl"><b>autobuses</b></span></div>
+   <div class="tile t3"><span class="big">Taxis</span><span class="lbl">también tienen derecho</span></div>
+  </div>
+  <svg viewBox="0 0 700 92" class="diag svgtxt" style="margin-top:6px">
+   <rect x="4" y="6" width="160" height="80" rx="10" fill="#fff0e6"/><text x="84" y="30" text-anchor="middle" font-size="11.5" font-weight="800" fill="#e8590c">1 · Autorizaciones</text><text x="84" y="50" text-anchor="middle" font-size="10.5">tener las exigidas</text><text x="84" y="66" text-anchor="middle" font-size="10.5">para la actividad</text>
+   <rect x="182" y="6" width="160" height="80" rx="10" fill="#fff0e6"/><text x="262" y="30" text-anchor="middle" font-size="11.5" font-weight="800" fill="#e8590c">2 · Censo</text><text x="262" y="50" text-anchor="middle" font-size="10.5">inscribirse con los</text><text x="262" y="66" text-anchor="middle" font-size="10.5">vehículos <tspan font-weight="800">antes de repostar</tspan></text>
+   <rect x="360" y="6" width="160" height="80" rx="10" fill="#fff0e6"/><text x="440" y="30" text-anchor="middle" font-size="11.5" font-weight="800" fill="#e8590c">3 · Tarjeta-gasóleo</text><text x="440" y="50" text-anchor="middle" font-size="10.5">válida si está en el</text><text x="440" y="66" text-anchor="middle" font-size="10.5">Registro de tarjetas</text>
+   <rect x="538" y="6" width="158" height="80" rx="10" fill="#e8590c"/><text x="617" y="30" text-anchor="middle" font-size="11.5" font-weight="800" fill="#fff">4 · Devolución</text><text x="617" y="50" text-anchor="middle" font-size="10.5" fill="#fff"><tspan font-weight="800">mensual</tspan> (AEAT)</text><text x="617" y="66" text-anchor="middle" font-size="10.5" fill="#fff">máx. <tspan font-weight="800">50.000 l</tspan>/vehículo/año</text>
+   <path d="M165 46h15M343 46h15M521 46h15" stroke="#e8590c" stroke-width="3"/>
+  </svg>
+  <ul style="margin-top:3px">
+   <li>El beneficiario presenta cada año la <b>declaración de km recorridos</b> por vehículo.</li>
+   <li><b>Gasóleo agrícola</b>: basta con figurar en el <b>Censo de Empresarios, Profesionales y Retenedores</b>.</li>
+  </ul>
+ </div>
+ <div class="trap">Gasóleo profesional: <b>≥ 7,5 t</b>. Peajes de la Directiva: <b>&gt; 3,5 t</b>. Son dos umbrales distintos y los mezclan en las opciones.</div>
+</div>
+
+<!-- ============ 1D03 PEAJES ============ -->
+<div class="page">
+ <div class="sec s3"><span class="badge">1D03</span><div><h2>Directiva 1999/62/CE: peajes y tasas a los camiones</h2><p>Euroviñeta · &gt; 3,5 t · Red transeuropea y autopistas · No discriminar · 12 t · Tasa por infraestructura + costes externos</p></div></div>
+
+ <div class="g2 mb">
+  <div class="card k3">
+   <h3><svg><use href="#i-truck"/></svg>¿A qué vehículos?</h3>
+   <div class="tile t3"><span class="big">MMA &gt; 3,5 t</span><span class="lbl">mercancías (incluidos los de &gt; 7,5 t) <b>y viajeros</b></span></div>
+   <ul style="margin-top:4px">
+    <li>Los matriculados en <b>Canarias, Ceuta y Melilla</b> pueden quedar fuera según su uso.</li>
+    <li>Pueden tener <b>reducciones o exenciones</b>: vehículos <b>exentos de tacógrafo</b>, <b>defensa nacional</b> y <b>protección civil</b>.</li>
+   </ul>
+  </div>
+  <div class="card k3">
+   <h3><svg><use href="#i-toll"/></svg>¿En qué vías?</h3>
+   <div class="yes"><b>Red transeuropea</b> de carreteras.</div>
+   <div class="yes"><b>Autopistas</b>, aunque no sean de la red transeuropea.</div>
+   <div class="yes">Carreteras <b>convencionales</b>: solo si <b>no discrimina</b> al tráfico internacional ni <b>distorsiona la competencia</b>.</div>
+   <p class="mini" style="margin:4px 0 0">Prohibido discriminar por <b>nacionalidad</b> del transportista, <b>Estado de establecimiento</b> u <b>origen/destino</b> del transporte.</p>
+  </div>
+ </div>
+
+ <div class="card k3">
+  <h3><svg><use href="#i-warn"/></svg>¿Cobrar solo a los de 12 t o más?</h3>
+  <div class="g2">
+   <div class="tile t3"><span class="big">≥ 12 t</span><span class="lbl">el Estado puede cobrar solo a estos si incluir a los más pequeños…</span></div>
+   <div>
+    <div class="yes">…tiene consecuencias negativas en la <b>fluidez del tráfico</b>, <b>o</b></div>
+    <div class="yes">…cuesta en administración <b>más del 15 %</b> de lo que recaudaría de más.</div>
+    <p class="mini" style="margin:4px 0 0">Respuesta típica: «<b>las dos son correctas</b>».</p>
+   </div>
+  </div>
+ </div>
+
+ <div class="card k3">
+  <h3><svg><use href="#i-euro"/></svg>De qué se compone el peaje</h3>
+  <svg viewBox="0 0 700 168" class="diag svgtxt">
+   <rect x="250" y="4" width="200" height="34" rx="9" fill="#e8590c"/><text x="350" y="26" text-anchor="middle" font-size="14" font-weight="900" fill="#fff">PEAJE</text>
+   <path d="M300 38 L175 60 M400 38 L525 60" stroke="#e8590c" stroke-width="3"/>
+   <rect x="4" y="60" width="340" height="104" rx="10" fill="#fff0e6"/>
+   <text x="174" y="82" text-anchor="middle" font-size="13" font-weight="800" fill="#e8590c">Tasa por INFRAESTRUCTURA</text>
+   <text x="14" y="102" font-size="11">• Recupera <tspan font-weight="800">construcción, mantenimiento, funcionamiento</tspan></text>
+   <text x="14" y="119" font-size="11">• Puede incluir <tspan font-weight="800">rendimiento del capital y beneficio</tspan></text>
+   <text x="14" y="136" font-size="11">• <tspan font-weight="800">Recargo</tspan> en tramos con <tspan font-weight="800">congestión grave</tspan></text>
+   <text x="14" y="153" font-size="11">• Varía por EURO: máx. <tspan font-weight="800">+100 %</tspan> sobre el más limpio</text>
+   <rect x="356" y="60" width="340" height="104" rx="10" fill="#fff0e6"/>
+   <text x="526" y="82" text-anchor="middle" font-size="13" font-weight="800" fill="#e8590c">Tasa por COSTES EXTERNOS</text>
+   <text x="366" y="102" font-size="11">• Contaminación <tspan font-weight="800">atmosférica</tspan> y <tspan font-weight="800">acústica</tspan></text>
+   <text x="366" y="119" font-size="11">• El <tspan font-weight="800">ruido</tspan> puede incluirse <tspan font-weight="800">en todo caso</tspan></text>
+   <text x="366" y="136" font-size="11">• EURO más estricta: sin tasa atmosférica</text>
+   <text x="366" y="153" font-size="11">   hasta <tspan font-weight="800">4 años</tspan> después de su aplicación</text>
+  </svg>
+  <div class="g3" style="margin-top:4px">
+   <div>Sin acreditar la categoría EURO → se cobra <b>hasta el nivel máximo</b>.</div>
+   <div><b>Recibo</b>: importe <b>total</b>, tasa por <b>infraestructura</b> y tasa por <b>costes externos</b> («todas»).</div>
+   <div>Tasa por uso a vehículos del propio Estado: <b>anual</b>. Sistema común entre dos Estados: si pueden <b>adherirse otros</b>.</div>
+  </div>
+ </div>
+ <div class="trap">El recargo por congestión va en la tasa por <b>infraestructura</b>, no en la de costes externos. La congestión, el agua o los residuos <b>no</b> son costes externos de la Directiva.</div>
+ <div class="tip">Peaje = <b>I + E</b>: <b>I</b>nfraestructura (lo que costó la carretera) + <b>E</b>xternos (humo y ruido). No existe «tasa por elevada ocupación».</div>
+</div>
+
+<!-- ============ 1D04 IRPF (1) ============ -->
+<div class="page">
+ <div class="sec s4"><span class="badge">1D04</span><div><h2>IRPF: el impuesto del transportista autónomo</h2><p>Ley 35/2006 · Directo y progresivo · Quién tributa · Tipos de renta · De la base a la cuota · Ganancias patrimoniales</p></div></div>
+
+ <div class="g2 mb">
+  <div class="card k4">
+   <h3><svg><use href="#i-person"/></svg>Qué es y a quién</h3>
+   <ul>
+    <li>Impuesto <b>directo</b> con tipos <b>progresivos</b>: grava el beneficio del <b>empresario individual</b>.</li>
+    <li>Contribuyentes: <b>personas físicas</b> con <b>residencia habitual</b> en España, o con aquí el <b>núcleo principal de sus actividades</b>; y españoles fuera por <b>empleo oficial</b>.</li>
+    <li><b>Comunidades de bienes</b>: <b>no son contribuyentes</b>; sus rentas se <b>atribuyen a los comuneros</b>.</li>
+    <li>Período: <b>año natural</b> · devengo: <span class="n n4">31 de diciembre</span>.</li>
+    <li>Hacienda puede liquidar durante <span class="n n4">4 años</span>.</li>
+    <li>A pagar: de una vez o en <b>2 plazos</b>, el <span class="n n4">60 %</span> al presentar.</li>
+   </ul>
+  </div>
+  <div class="card k4">
+   <h3><svg><use href="#i-group"/></svg>Declaración conjunta</h3>
+   <p style="margin:0 0 4px"><b>Cónyuges no separados</b> + <b>hijos menores</b> que convivan + <b>mayores incapacitados</b> con patria potestad prorrogada.</p>
+   <h3 style="margin-top:6px"><svg><use href="#i-check"/></svg>Exento o no</h3>
+   <div class="yes">Exentos: algunos <b>premios literarios</b>, <b>desempleo</b> (con condiciones) y <b>becas públicas</b> (hasta un importe).</div>
+   <div class="no"><b>No</b> exentos: sueldos y jornales, rendimientos del <b>transporte</b> ni la <b>lotería nacional</b>.</div>
+   <div class="no">Lo que paga <b>Sucesiones y Donaciones</b> no está sujeto a IRPF.</div>
+  </div>
+ </div>
+
+ <div class="card k4">
+  <h3><svg><use href="#i-box"/></svg>Las 5 fuentes de renta y adónde van</h3>
+  <table>
+   <thead><tr><th style="background:var(--c4);border-radius:8px 0 0 0;width:25%">Renta</th><th style="background:var(--c4);width:50%">Qué es</th><th style="background:var(--c4);border-radius:0 8px 0 0">Base</th></tr></thead>
+   <tbody>
+    <tr><td style="color:var(--c4)">Trabajo</td><td>Salarios, pensiones de la SS, paro. Neto: <b>se restan las cotizaciones</b>. Se imputan cuando son <b>exigibles</b>.</td><td><b>General</b></td></tr>
+    <tr><td style="color:var(--c4)">Capital mobiliario</td><td>Intereses, dividendos. <b>No</b> lo es alquilar una vivienda.</td><td>Ahorro (en general)</td></tr>
+    <tr><td style="color:var(--c4)">Capital inmobiliario</td><td>Alquileres de inmuebles. Nunca los bienes <b>afectos a tu actividad</b>.</td><td>General</td></tr>
+    <tr><td style="color:var(--c4)">Actividades económicas</td><td>Ordenar por cuenta propia <b>medios de producción o recursos humanos</b>. Irregulares: <b>−30 %</b>.</td><td><b>General</b></td></tr>
+    <tr><td style="color:var(--c4)">Ganancias y pérdidas patrimoniales</td><td>Al vender un elemento patrimonial: <b>transmisión − adquisición</b>.</td><td><b>Ahorro</b></td></tr>
+   </tbody>
+  </table>
+ </div>
+
+ <div class="card k4">
+  <h3><svg><use href="#i-calc"/></svg>De la renta a lo que pagas</h3>
+  <div class="flow">
+   <div class="st" style="background:var(--c4s)"><b>Base imponible</b>la <b>renta</b> (general + ahorro)</div><div class="ar">−</div>
+   <div class="st" style="background:var(--c4s)"><b>Reducciones</b>= base <b>liquidable</b></div><div class="ar">×</div>
+   <div class="st" style="background:var(--c4s)"><b>Tipo</b>= cuota <b>íntegra</b></div><div class="ar">−</div>
+   <div class="st" style="background:var(--c4s)"><b>Deducciones</b>= cuota <b>líquida</b></div><div class="ar">−</div>
+   <div class="st" style="background:var(--c4);color:#fff"><b>Retenciones y pagos a cuenta</b>= cuota <b>diferencial</b></div>
+  </div>
+  <p class="mini" style="margin:5px 0 0"><b>Mínimo personal y familiar</b> = suma de los del <b>contribuyente, descendientes, ascendientes y discapacidad</b>. Gasto <b>no deducible</b>: las <b>sanciones</b> tributarias.</p>
+ </div>
+
+ <div class="card k4">
+  <h3><svg><use href="#i-house"/></svg>Ganancias y pérdidas patrimoniales</h3>
+  <div class="g2">
+   <ul>
+    <li><b>Valor de adquisición</b> = precio <b>+ tributos y gastos + mejoras − amortizaciones</b>.</li>
+    <li>Vender la <b>vivienda habitual</b> y <b>reinvertirlo todo</b> en otra: <b>no tributa</b>.</li>
+    <li>Bienes que no cuadran con la renta declarada: a la base <b>general</b> del año en que <b>se descubren</b>.</li>
+   </ul>
+   <div>
+    <div class="no"><b>Disolver una comunidad de bienes</b>: no hay alteración patrimonial.</div>
+    <div class="no">Transmisión por <b>muerte</b> del contribuyente: ni ganancia ni pérdida.</div>
+    <div class="no">Una <b>pérdida</b> no cuenta si <b>recompras</b> el elemento en el año siguiente.</div>
+   </div>
+  </div>
+ </div>
+</div>
+
+<!-- ============ 1D04 IRPF (2) ============ -->
+<div class="page">
+ <div class="sec s4"><span class="badge">1D04</span><div><h2>IRPF: estimación directa, módulos y pagos fraccionados</h2><p>600.000 € · 250.000 € · 4 vehículos · 0,25 personas · 40 t · 25 % · 20 % / 4 % / 2 % · 1-20 de abril, julio y octubre</p></div></div>
+
+ <div class="card k4">
+  <h3><svg><use href="#i-doc"/></svg>Los tres métodos para calcular el rendimiento</h3>
+  <table>
+   <thead><tr><th style="background:var(--c4);border-radius:8px 0 0 0;width:20%"></th><th style="background:var(--c4);width:27%">Directa normal</th><th style="background:var(--c4);width:27%">Directa simplificada</th><th style="background:var(--c4);border-radius:0 8px 0 0">Objetiva (módulos)</th></tr></thead>
+   <tbody>
+    <tr><td style="color:var(--c4)">Quién</td><td><b>Obligatoria</b> si cifra de negocios del año anterior <b>&gt; 600.000 €</b></td><td>Hasta <b>600.000 €</b> el año anterior; <b>voluntaria</b></td><td>Solo <b>empresario individual</b> no excluido que no renuncie</td></tr>
+    <tr><td style="color:var(--c4)">Cálculo</td><td>Ingresos − gastos reales</td><td>Igual, con amortización <b>lineal</b> por tabla simplificada</td><td><b>Módulos</b>: asalariados, no asalariados y <b>toneladas de carga útil</b></td></tr>
+    <tr><td style="color:var(--c4)">Detalles</td><td>Se deducen <b>primas de seguro de enfermedad</b> (con tope)</td><td>Gastos de difícil justificación hasta <b>2.000 €/año</b></td><td>Amortización <b>lineal</b>; lo que ganes de más que los módulos <b>no tributa</b></td></tr>
+    <tr><td style="color:var(--c4)">Libros</td><td><b>Contabilidad del Código de Comercio</b></td><td>Libros de <b>ventas e ingresos, compras y gastos y bienes de inversión</b></td><td><b>Conservar facturas</b> y libro de <b>bienes de inversión</b> si amortiza</td></tr>
+    <tr><td style="color:var(--c4)">Renuncia</td><td>—</td><td>Impide volver <b>3 años</b></td><td>Hasta el <b>31 de diciembre</b> anterior; fuera <b>3 años</b></td></tr>
+   </tbody>
+  </table>
+  <p class="mini" style="margin:4px 0 0">En estimación directa es <b>obligatorio expedir factura</b>. Con varias actividades, <b>un único método</b> para todas (objetiva si se puede; si no, directa).</p>
+ </div>
+
+ <div class="g2 mb">
+  <div class="card k4">
+   <h3><svg><use href="#i-warn"/></svg>Fuera de módulos si…</h3>
+   <div class="g2">
+    <div class="tile t4"><span class="big">&gt; 4</span><span class="lbl">vehículos cualquier día del año anterior</span></div>
+    <div class="tile t4"><span class="big">&gt; 250.000 €</span><span class="lbl">compras del año anterior (sin inversión)</span></div>
+   </div>
+   <p class="mini" style="margin:5px 0 0">Para el volumen se suman las actividades del <b>cónyuge</b> si son <b>idénticas, con dirección común y medios compartidos</b>. Con 2 vehículos y cifras por debajo de los límites, puede <b>elegir objetiva o directa simplificada</b>.</p>
+  </div>
+  <div class="card k4">
+   <h3><svg><use href="#i-truck"/></svg>Módulos del transporte de mercancías</h3>
+   <ul>
+    <li><b>Carga útil</b> = MMA (tope <span class="n n4">40 t</span>) − <b>taras</b> de los vehículos portantes.</li>
+    <li>No asalariado = el titular. Si <b>solo dirige</b>: <span class="n n4">0,25</span> personas/año.</li>
+    <li>Amortización de vehículos: «<b>minoración por incentivos a la inversión</b>»; coeficiente lineal máximo <span class="n n4">25 %</span>.</li>
+    <li>Se puede reducir por <b>incendio</b> u otros gastos extraordinarios ajenos a la actividad.</li>
+   </ul>
+  </div>
+ </div>
+
+ <div class="card k4">
+  <h3><svg><use href="#i-cal"/></svg>Pagos fraccionados (cada trimestre)</h3>
+  <div class="g4">
+   <div class="tile t4"><span class="big">20 %</span><span class="lbl">del rendimiento neto en <b>estimación directa</b></span></div>
+   <div class="tile t4"><span class="big">4 %</span><span class="lbl">módulos, caso general (p. ej. <b>5 trabajadores</b>)</span></div>
+   <div class="tile t4"><span class="big">3 %</span><span class="lbl">módulos con <b>1 solo</b> asalariado</span></div>
+   <div class="tile t4"><span class="big">2 %</span><span class="lbl">módulos <b>sin</b> asalariados</span></div>
+  </div>
+  <svg viewBox="0 0 700 62" class="diag svgtxt" style="margin-top:6px">
+   <rect x="4" y="6" width="166" height="50" rx="9" fill="#0f9d58"/><text x="87" y="28" text-anchor="middle" font-size="12" font-weight="800" fill="#fff">1T → 1-20 abril</text><text x="87" y="46" text-anchor="middle" font-size="10.5" fill="#fff">ene-feb-mar</text>
+   <rect x="180" y="6" width="166" height="50" rx="9" fill="#0f9d58"/><text x="263" y="28" text-anchor="middle" font-size="12" font-weight="800" fill="#fff">2T → 1-20 julio</text><text x="263" y="46" text-anchor="middle" font-size="10.5" fill="#fff">abr-may-jun</text>
+   <rect x="356" y="6" width="166" height="50" rx="9" fill="#0f9d58"/><text x="439" y="28" text-anchor="middle" font-size="12" font-weight="800" fill="#fff">3T → 1-20 octubre</text><text x="439" y="46" text-anchor="middle" font-size="10.5" fill="#fff">jul-ago-sep</text>
+   <rect x="532" y="6" width="164" height="50" rx="9" fill="#e5f7ee" stroke="#0f9d58" stroke-width="2"/><text x="614" y="28" text-anchor="middle" font-size="12" font-weight="800" fill="#0f9d58">4T → 1-30 enero</text><text x="614" y="46" text-anchor="middle" font-size="10.5">oct-nov-dic</text>
+  </svg>
+  <p class="mini" style="margin:3px 0 0">Las <b>retenciones</b> de los trabajadores también se ingresan cada <b>trimestre</b>.</p>
+ </div>
+ <div class="tip">«Directa» = <b>20 %</b> (cuentas reales). «Módulos» = <b>4-3-2</b> según cuántos asalariados tengas: muchos, uno, ninguno.</div>
+</div>
+
+<!-- ============ 1D04 IS (1) ============ -->
+<div class="page">
+ <div class="sec s5"><span class="badge">1D04</span><div><h2>Impuesto sobre Sociedades: sujetos y base imponible</h2><p>Ley 27/2014 · La SA transportista · 25 % · Reducida dimensión &lt; 10 M€ · Gastos deducibles · Amortizaciones</p></div></div>
+
+ <div class="g2 mb">
+  <div class="card k5">
+   <h3><svg><use href="#i-build"/></svg>Qué es y a quién</h3>
+   <ul>
+    <li>Impuesto <b>directo</b> sobre la renta de las sociedades (p. ej. la <b>SA</b> de transportes).</li>
+    <li>Hecho imponible: <b>obtener renta</b>, venga de donde venga.</li>
+    <li>Contribuyentes: <b>personas jurídicas</b>, salvo <b>sociedades civiles sin objeto mercantil</b>.</li>
+    <li>Residentes: las <b>constituidas conforme a leyes españolas</b>.</li>
+    <li>Domicilio fiscal: el <b>social</b>, si allí está la dirección y gestión.</li>
+    <li>Exentos: <b>Estado, CC. AA. y entidades locales</b>. Sin ánimo de lucro: <b>parcialmente exentas</b>.</li>
+   </ul>
+  </div>
+  <div class="card k5">
+   <h3><svg><use href="#i-pct"/></svg>Tipo y período</h3>
+   <div class="g2">
+    <div class="tile t5"><span class="big">25 %</span><span class="lbl">tipo <b>general</b></span></div>
+    <div class="tile t5"><span class="big">12 meses</span><span class="lbl">período máximo · devenga el <b>último día</b></span></div>
+   </div>
+   <ul style="margin-top:4px">
+    <li>Tipo <b>reducido</b>: entidades de <b>reducida dimensión</b> y de <b>nueva creación</b> (no patrimoniales).</li>
+    <li>El período acaba al cerrar el <b>ejercicio</b> o al <b>cambiar de forma jurídica</b> con cambio de tipo.</li>
+   </ul>
+  </div>
+ </div>
+
+ <div class="g2 mb">
+  <div class="card k5">
+   <h3><svg><use href="#i-box"/></svg>Reducida dimensión</h3>
+   <div class="tile t5"><span class="big">&lt; 10 M€</span><span class="lbl">cifra de negocios del período anterior</span></div>
+   <ul style="margin-top:4px">
+    <li><b>Libertad de amortización</b> de inversiones inmobiliarias (con condiciones).</li>
+    <li>Amortiza con el coeficiente de tablas <b>×2</b>.</li>
+    <li>Minoración de la base si tributa al tipo general.</li>
+   </ul>
+   <div class="no">Una <b>entidad patrimonial</b> (más de la mitad del activo en <b>valores</b>, sin actividad económica) <b>nunca</b> es de reducida dimensión.</div>
+  </div>
+  <div class="card k5">
+   <h3><svg><use href="#i-calc"/></svg>Base imponible</h3>
+   <ul>
+    <li>Método general: <b>estimación directa</b> = <b>resultado contable corregido</b> por la ley del impuesto.</li>
+    <li>El beneficio contable <b>no tiene por qué coincidir</b> con la base.</li>
+    <li>Base = renta del período − <b>bases negativas</b> de años anteriores.</li>
+    <li>Ingresos y gastos se imputan por <b>devengo</b>.</li>
+    <li>Distinto valor contable y fiscal al vender: la diferencia <b>va a la base</b>.</li>
+    <li>Vinculadas: la sociedad y familiares de sus administradores hasta <b>3.er grado</b>.</li>
+   </ul>
+  </div>
+ </div>
+
+ <div class="g2 mb">
+  <div class="card k5">
+   <h3><svg><use href="#i-check"/></svg>Gastos: sí y no</h3>
+   <div class="yes"><b>Amortizaciones</b> y <b>pérdidas por deterioro</b> (correcciones de valor).</div>
+   <div class="yes">Deterioro por <b>insolvencias</b>: a los <span class="n n5">6 meses</span> del vencimiento.</div>
+   <div class="no"><b>Multas</b>, <b>pérdidas de juego</b> y <b>donativos</b>.</div>
+   <div class="no">Retribución de <b>fondos propios</b> (dividendos).</div>
+   <div class="no">El gasto de <b>contabilizar el propio impuesto</b>.</div>
+  </div>
+  <div class="card k5">
+   <h3><svg><use href="#i-wheel"/></svg>Amortizaciones</h3>
+   <ul>
+    <li>Depreciación <b>efectiva</b> por el <b>uso</b>, con un <b>método legal</b>: es gasto deducible.</li>
+    <li>Amortizables: <b>edificios, mobiliario y marcas</b>.</li>
+    <li>Métodos: <b>tablas</b> (lineal; edificios siempre así), <b>números dígitos</b> y <b>porcentaje constante</b> (mínimo <span class="n n5">11 %</span>).</li>
+    <li><b>Libertad de amortización</b>: inmovilizado material <b>nuevo</b> de hasta <span class="n n5">300 €</span> por unidad.</li>
+   </ul>
+  </div>
+ </div>
+
+ <div class="card k5">
+  <h3><svg><use href="#i-globe"/></svg>Rentas que reducen o no entran en la base</h3>
+  <div class="g2">
+   <ul>
+    <li><b>Dividendos</b> de participadas: exentos con <b>≥ 5 %</b> y otras condiciones.</li>
+    <li>Rentas positivas de un <b>establecimiento permanente en el extranjero</b>: exentas si allí pagan un impuesto similar de <b>≥ 10 %</b>; las negativas <b>no se integran</b>.</li>
+   </ul>
+   <ul>
+    <li><b>Patentes</b> de investigación: reducción en <b>porcentaje variable</b>.</li>
+    <li><b>Reserva de capitalización</b>: reduce la base el <b>20 % del incremento</b> de fondos propios.</li>
+    <li>Bases negativas: compensables <b>sin límite de años</b> hasta <b>1 M€</b>; pasados <b>10 años</b> hay que acreditarlas.</li>
+   </ul>
+  </div>
+ </div>
+</div>
+
+<!-- ============ 1D04 IS (2) ============ -->
+<div class="page">
+ <div class="sec s5"><span class="badge">1D04</span><div><h2>Impuesto sobre Sociedades: cuota, declaración y pagos</h2><p>Cuota líquida nunca negativa · Cuota mínima · 6 meses + 25 días · Abril, octubre y diciembre · 19 %</p></div></div>
+
+ <div class="card k5">
+  <h3><svg><use href="#i-calc"/></svg>De la base a la cuota</h3>
+  <div class="flow">
+   <div class="st" style="background:var(--c5s)"><b>Base imponible</b>resultado corregido − bases negativas</div><div class="ar">×</div>
+   <div class="st" style="background:var(--c5s)"><b>Tipo</b>25 % general</div><div class="ar">=</div>
+   <div class="st" style="background:var(--c5s)"><b>Cuota íntegra</b></div><div class="ar">−</div>
+   <div class="st" style="background:var(--c5s)"><b>Bonificaciones y deducciones</b>I+D, doble imposición…</div><div class="ar">=</div>
+   <div class="st" style="background:var(--c5);color:#fff"><b>Cuota líquida</b><b>nunca negativa</b></div>
+  </div>
+  <div class="g3" style="margin-top:6px">
+   <div><b>Deducción</b> en cuota: inversión en <b>I+D</b>.</div>
+   <div><b>Bonificación</b> en cuota: servicio de <b>recogida de basuras</b>; <b>Ceuta y Melilla</b>: <b>50 %</b> si se opera allí materialmente.</div>
+   <div><b>Doble imposición internacional</b>: se resta <b>lo menor</b> entre lo pagado fuera y lo que tocaría en España.</div>
+  </div>
+ </div>
+
+ <div class="card k5">
+  <h3><svg><use href="#i-warn"/></svg>Cuota mínima de las grandes</h3>
+  <div class="g4">
+   <div class="tile t5"><span class="big">≥ 20 M€</span><span class="lbl">cifra de negocios en los <b>12 meses anteriores</b></span></div>
+   <div class="tile t5"><span class="big">15 %</span><span class="lbl">de la base si tributa al <b>tipo general</b></span></div>
+   <div class="tile t5"><span class="big">10 %</span><span class="lbl">si tributa al <b>15 %</b></span></div>
+   <div class="tile t5"><span class="big">18 %</span><span class="lbl">si tributa al <b>30 %</b></span></div>
+  </div>
+ </div>
+
+ <div class="card k5">
+  <h3><svg><use href="#i-cal"/></svg>Calendario de la sociedad</h3>
+  <svg viewBox="0 0 700 120" class="diag svgtxt">
+   <rect x="4" y="6" width="692" height="22" rx="6" fill="#e3f4f7"/>
+   <g font-size="11" font-weight="700" text-anchor="middle" fill="#0b7285">
+    <text x="33" y="22">ENE</text><text x="90" y="22">FEB</text><text x="148" y="22">MAR</text><text x="206" y="22">ABR</text><text x="264" y="22">MAY</text><text x="322" y="22">JUN</text><text x="380" y="22">JUL</text><text x="438" y="22">AGO</text><text x="496" y="22">SEP</text><text x="554" y="22">OCT</text><text x="612" y="22">NOV</text><text x="670" y="22">DIC</text>
+   </g>
+   <rect x="182" y="34" width="48" height="30" rx="6" fill="#0b7285"/><text x="206" y="54" text-anchor="middle" font-size="11" font-weight="800" fill="#fff">1-20</text>
+   <rect x="530" y="34" width="48" height="30" rx="6" fill="#0b7285"/><text x="554" y="54" text-anchor="middle" font-size="11" font-weight="800" fill="#fff">1-20</text>
+   <rect x="646" y="34" width="48" height="30" rx="6" fill="#0b7285"/><text x="670" y="54" text-anchor="middle" font-size="11" font-weight="800" fill="#fff">1-20</text>
+   <text x="4" y="52" font-size="11.5" font-weight="800" fill="#0b7285">Pagos fraccionados →</text>
+   <rect x="370" y="72" width="66" height="30" rx="6" fill="#fff" stroke="#0b7285" stroke-width="2"/><text x="403" y="92" text-anchor="middle" font-size="11" font-weight="800" fill="#0b7285">1-25 jul</text>
+   <text x="4" y="92" font-size="11.5" font-weight="800" fill="#1c2333">Declaración anual (ejercicio = año natural) →</text>
+   <text x="450" y="92" font-size="11">25 días naturales tras los 6 meses del cierre</text>
+   <text x="4" y="115" font-size="11" fill="#5b6478">IRPF e IVA trimestral, en cambio: abril, julio, octubre y enero.</text>
+  </svg>
+  <div class="g2" style="margin-top:4px">
+   <ul>
+    <li>Pagos fraccionados sobre la <b>cuota íntegra del último período</b>, o sobre la <b>base de los 3, 9 u 11 primeros meses</b> (obligatorio si la cifra de negocios <b>&gt; 6 M€</b>).</li>
+    <li>Si los pagos superan la cuota: <b>devolución de oficio</b>.</li>
+   </ul>
+   <ul>
+    <li><b>Autoliquidación</b> por el sujeto pasivo; contabilidad según el <b>Código de Comercio</b>.</li>
+    <li>Se puede pagar entregando bienes del <b>Patrimonio Histórico Español</b>.</li>
+    <li>Quien paga rentas sujetas a IS <b>retiene</b> el <span class="n n5">19 %</span> y presenta el <b>resumen anual</b>.</li>
+   </ul>
+  </div>
+ </div>
+ <div class="trap">La renta presunta no declarada va al período <b>más antiguo no prescrito</b>, no al año en que se descubre (eso es el IRPF).</div>
+ <div class="tip">IS: <b>abril, octubre, diciembre</b> (se salta julio). Retención <b>19</b>, tipo <b>25</b>, pequeña <b>&lt; 10 M€</b>, cuota mínima desde <b>20 M€</b>.</div>
+</div>
+
+<!-- ============ VS ============ -->
+<div class="page">
+ <div class="sec s0"><span class="badge">VS</span><div><h2>Los impuestos del transportista de un vistazo</h2><p>Para no mezclar quién paga, cuándo y cuánto</p></div></div>
+ <table class="cmp">
+  <thead><tr>
+   <th style="background:var(--ink);border-radius:9px 0 0 0;width:15%">Impuesto</th><th style="background:var(--ink);width:15%">Tipo</th><th style="background:var(--ink);width:20%">Quién paga</th><th style="background:var(--ink);width:22%">Cuándo / plazos</th><th style="background:var(--ink);border-radius:0 9px 0 0">Dato estrella</th>
+  </tr></thead>
+  <tbody>
+   <tr><td style="color:var(--c1)">IVA</td><td>Indirecto · estatal</td><td>El consumidor final (lo ingresa el empresario)</td><td>Trimestral (mensual las grandes)</td><td><b>21 %</b> mercancías · <b>10 %</b> viajeros · <b>4 %</b> movilidad reducida</td></tr>
+   <tr><td style="color:var(--c1)">IVA simplificado</td><td>Régimen especial</td><td>Autónomo con ≤ 4 vehículos</td><td>1-20 abril, julio, octubre</td><td><b>5 %</b> trimestral · <b>10 %</b> mínima · <b>1 %</b> difícil justificación</td></tr>
+   <tr><td style="color:var(--c2)">IVTM</td><td>Directo · <b>municipal</b> · obligatorio</td><td>Titular del <b>permiso de circulación</b></td><td>Devenga el día de la compra; prorrateo por trimestres</td><td>Remolques <b>≤ 750 kg</b> no sujetos · camiones por <b>carga útil</b></td></tr>
+   <tr><td style="color:var(--c3)">Hidrocarburos</td><td>Indirecto · especial de fabricación · fase única</td><td><b>Depositarios autorizados</b> (lo repercuten)</td><td>Salida de fábrica · autoliquidación mensual</td><td>Gasóleo profesional: <b>≥ 7,5 t</b> · <b>50.000 l</b> · devolución mensual</td></tr>
+   <tr><td style="color:var(--c3)">Peajes (Dir. 1999/62)</td><td>Tasa por uso</td><td>Vehículos <b>&gt; 3,5 t</b></td><td>Al usar la vía (anual si es tasa por uso nacional)</td><td>Infraestructura + costes externos · <b>12 t</b> · <b>15 %</b> · <b>100 %</b> · <b>4 años</b></td></tr>
+   <tr><td style="color:var(--c4)">IRPF</td><td>Directo · <b>progresivo</b></td><td>Persona física (autónomo)</td><td>Devenga <b>31-dic</b> · pagos 1-20 abr/jul/oct y 1-30 ene</td><td>Directa <b>20 %</b> · módulos <b>4/3/2 %</b> · <b>600.000 €</b> · <b>250.000 €</b></td></tr>
+   <tr><td style="color:var(--c5)">Sociedades</td><td>Directo · <b>proporcional</b></td><td>Persona jurídica (SA, SL)</td><td>Último día del período · pagos 1-20 abr/oct/dic</td><td><b>25 %</b> · reducida &lt; <b>10 M€</b> · retención <b>19 %</b></td></tr>
+  </tbody>
+ </table>
+
+ <div class="card" style="margin-top:9px">
+  <h3 style="color:var(--ink)">🗓️ Los mismos números, distinto impuesto</h3>
+  <table>
+   <thead><tr><th style="background:var(--c4);border-radius:8px 0 0 0;width:18%">Número</th><th style="background:var(--c4);border-radius:0 8px 0 0">Dónde aparece</th></tr></thead>
+   <tbody>
+    <tr><td><b>4 años</b></td><td>IRPF: prescripción · IVA: rectificar cuotas y compensar el exceso · Peajes: EURO más estricta sin tasa atmosférica</td></tr>
+    <tr><td><b>3 años</b></td><td>Renuncia al simplificado del IVA · a módulos del IRPF · a la directa simplificada</td></tr>
+    <tr><td><b>4 vehículos</b></td><td>Límite para módulos del IRPF <b>y</b> simplificado del IVA</td></tr>
+    <tr><td><b>250.000 €</b></td><td>Ingresos o compras: fuera de módulos (IRPF) y del simplificado (IVA)</td></tr>
+    <tr><td><b>40 t</b></td><td>Tope de MMA para calcular la carga útil en módulos (IVA e IRPF)</td></tr>
+    <tr><td><b>200 litros</b></td><td>Gasóleo importado en el depósito: exento de IVA <b>y</b> de Hidrocarburos</td></tr>
+    <tr><td><b>20 primeros días</b></td><td>Abril, julio y octubre (IVA e IRPF) · abril, octubre y diciembre (Sociedades)</td></tr>
+   </tbody>
+  </table>
+ </div>
+
+ <div class="card" style="margin-top:2px">
+  <h3 style="color:var(--ink)">⚖️ Directo o indirecto</h3>
+  <div class="g2">
+   <div class="tile t4"><span class="big">Directos</span><span class="lbl">IRPF · Sociedades · IAE · IVTM — gravan la renta o la titularidad de quien paga</span></div>
+   <div class="tile t1"><span class="big">Indirectos</span><span class="lbl">IVA · Hidrocarburos — gravan el consumo y se repercuten al comprador</span></div>
+  </div>
+ </div>
+</div>
+
+<!-- ============ NÚMEROS ============ -->
+<div class="page">
+ <div class="sec s0"><span class="badge">#</span><div><h2>Todos los números del Tema 4 en una hoja</h2><p>Repaso relámpago: tapa la explicación y di de qué es cada número</p></div></div>
+ <div class="g4 mb nums">
+  <div class="tile t1"><span class="big">21 %</span><span class="lbl">IVA general · transporte de mercancías</span></div>
+  <div class="tile t1"><span class="big">10 %</span><span class="lbl">IVA reducido · transporte de viajeros</span></div>
+  <div class="tile t1"><span class="big">4 %</span><span class="lbl">IVA superreducido · vehículos movilidad reducida</span></div>
+  <div class="tile t1"><span class="big">1 año</span><span class="lbl">se pierde el derecho a repercutir</span></div>
+  <div class="tile t1"><span class="big">4 años</span><span class="lbl">rectificar cuotas · compensar exceso</span></div>
+  <div class="tile t1"><span class="big">200 l</span><span class="lbl">carburante del depósito exento al importar</span></div>
+  <div class="tile t1"><span class="big">2 M€</span><span class="lbl">tope para el criterio de caja</span></div>
+  <div class="tile t1"><span class="big">250.000 €</span><span class="lbl">ingresos o compras: fuera del simplificado</span></div>
+  <div class="tile t1"><span class="big">4 vehículos</span><span class="lbl">máximo en el simplificado</span></div>
+  <div class="tile t1"><span class="big">5 %</span><span class="lbl">cuota trimestral simplificado (mercancías)</span></div>
+  <div class="tile t1"><span class="big">10 %</span><span class="lbl">cuota mínima simplificado</span></div>
+  <div class="tile t1"><span class="big">1 %</span><span class="lbl">soportadas de difícil justificación</span></div>
+  <div class="tile t1"><span class="big">40 t</span><span class="lbl">tope de MMA para la carga útil</span></div>
+  <div class="tile t1"><span class="big">3 años</span><span class="lbl">mínimo de la renuncia al simplificado</span></div>
+  <div class="tile t2"><span class="big">≤ 750 kg</span><span class="lbl">remolques no sujetos al IVTM</span></div>
+  <div class="tile t2"><span class="big">25 años</span><span class="lbl">antigüedad para bonificar el IVTM</span></div>
+  <div class="tile t2"><span class="big">Trimestres</span><span class="lbl">prorrateo en alta, baja definitiva y robo</span></div>
+  <div class="tile t2"><span class="big">Año anterior</span><span class="lbl">recibo a acreditar al cambiar de titular</span></div>
+  <div class="tile t3"><span class="big">≥ 7,5 t</span><span class="lbl">camiones con gasóleo profesional</span></div>
+  <div class="tile t3"><span class="big">50.000 l</span><span class="lbl">por vehículo y año (devolución)</span></div>
+  <div class="tile t3"><span class="big">Mensual</span><span class="lbl">devolución del gasóleo · autoliquidación</span></div>
+  <div class="tile t3"><span class="big">M2 · M3</span><span class="lbl">autobuses con gasóleo profesional</span></div>
+  <div class="tile t3"><span class="big">&gt; 3,5 t</span><span class="lbl">vehículos de la Directiva 1999/62</span></div>
+  <div class="tile t3"><span class="big">≥ 12 t</span><span class="lbl">peaje solo a estos, si…</span></div>
+  <div class="tile t3"><span class="big">15 %</span><span class="lbl">…costes administrativos superiores a esto</span></div>
+  <div class="tile t3"><span class="big">100 %</span><span class="lbl">variación máxima de la tasa por EURO</span></div>
+  <div class="tile t3"><span class="big">4 años</span><span class="lbl">EURO más estricta sin tasa atmosférica</span></div>
+  <div class="tile t4"><span class="big">31-dic</span><span class="lbl">devengo del IRPF</span></div>
+  <div class="tile t4"><span class="big">4 años</span><span class="lbl">prescripción en el IRPF</span></div>
+  <div class="tile t4"><span class="big">60 %</span><span class="lbl">primer plazo de la declaración</span></div>
+  <div class="tile t4"><span class="big">600.000 €</span><span class="lbl">frontera directa normal / simplificada</span></div>
+  <div class="tile t4"><span class="big">2.000 €</span><span class="lbl">difícil justificación (directa simplificada)</span></div>
+  <div class="tile t4"><span class="big">0,25</span><span class="lbl">personas/año si el titular solo dirige</span></div>
+  <div class="tile t4"><span class="big">25 %</span><span class="lbl">amortización lineal máxima de vehículos</span></div>
+  <div class="tile t4"><span class="big">20 %</span><span class="lbl">pago fraccionado en estimación directa</span></div>
+  <div class="tile t4"><span class="big">4 · 3 · 2 %</span><span class="lbl">módulos: general · 1 asalariado · ninguno</span></div>
+  <div class="tile t4"><span class="big">1-20</span><span class="lbl">abril, julio y octubre (1-30 enero el 4.º)</span></div>
+  <div class="tile t4"><span class="big">30 %</span><span class="lbl">reducción de rendimientos irregulares</span></div>
+  <div class="tile t5"><span class="big">25 %</span><span class="lbl">tipo general de Sociedades</span></div>
+  <div class="tile t5"><span class="big">&lt; 10 M€</span><span class="lbl">empresa de reducida dimensión</span></div>
+  <div class="tile t5"><span class="big">12 meses</span><span class="lbl">período impositivo máximo</span></div>
+  <div class="tile t5"><span class="big">6 meses</span><span class="lbl">deterioro por insolvencia deducible</span></div>
+  <div class="tile t5"><span class="big">11 %</span><span class="lbl">mínimo del porcentaje constante</span></div>
+  <div class="tile t5"><span class="big">300 €</span><span class="lbl">libertad de amortización por unidad</span></div>
+  <div class="tile t5"><span class="big">5 % · 10 %</span><span class="lbl">dividendos exentos · imp. extranjero similar</span></div>
+  <div class="tile t5"><span class="big">1 M€ · 10 años</span><span class="lbl">bases negativas: tope · acreditar</span></div>
+  <div class="tile t5"><span class="big">≥ 20 M€</span><span class="lbl">cuota mínima 15 / 10 / 18 %</span></div>
+  <div class="tile t5"><span class="big">6 m + 25 d</span><span class="lbl">plazo de la declaración anual</span></div>
+  <div class="tile t5"><span class="big">abr · oct · dic</span><span class="lbl">pagos fraccionados (1-20)</span></div>
+  <div class="tile t5"><span class="big">19 %</span><span class="lbl">retención general del IS</span></div>
+  <div class="tile t5"><span class="big">50 %</span><span class="lbl">bonificación Ceuta y Melilla</span></div>
+  <div class="tile t5"><span class="big">&gt; 6 M€</span><span class="lbl">pagos sobre la base del período (obligatorio)</span></div>
+ </div>
+ <p class="mini" style="text-align:center;margin:2px 0 0">Colores: <span class="n n1">IVA</span> <span class="n n2">IVTM</span> <span class="n n3">hidrocarburos y peajes</span> <span class="n n4">IRPF</span> <span class="n n5">Sociedades</span></p>
+</div>
+
+<!-- ============ TRAMPAS ============ -->
+<div class="page">
+ <div class="sec" style="background:var(--red)"><span class="badge" style="color:var(--red)">⚠</span><div><h2>Las trampas que más se fallan</h2><p>Sacadas de las preguntas del banco donde la respuesta «lógica» no es la correcta</p></div></div>
+ <div class="g2">
+  <div>
+   <div class="trap">El IVA es <b>indirecto</b>; IRPF, Sociedades e IAE son <b>directos</b>. Lo paga el <b>consumidor final</b>, no el transportista.</div>
+   <div class="trap">Mercancías al <b>21 %</b>, viajeros al <b>10 %</b>: no tributan igual.</div>
+   <div class="trap">Los servicios <b>gratuitos</b> del empresario <b>no</b> están sujetos, pero el <b>autoconsumo de bienes</b> y vender todo el negocio al cesar <b>sí</b>.</div>
+   <div class="trap">Exportar: <b>exento</b>. Importar: <b>sujeto</b>. No al revés.</div>
+   <div class="trap">Los descuentos hechos <b>en el momento o antes</b> no van a la base; los <b>posteriores</b> la modifican.</div>
+   <div class="trap">Los <b>calendarios</b> y muestras de poco valor <b>sí</b> se deducen; las <b>joyas</b>, nunca.</div>
+   <div class="trap">Justificantes para deducir: facturas, importaciones <b>y</b> recibos de agricultores → «<b>todas</b>».</div>
+   <div class="trap">El criterio de caja es <b>solo para IVA</b>, no para el IRPF, y no vale para intracomunitarias.</div>
+   <div class="trap">Simplificado: el trimestre es el <b>5 %</b>; la cuota mínima, el <b>10 %</b>. El camión se deduce <b>aparte</b>.</div>
+   <div class="trap">IVTM: la <b>comunidad de bienes</b> paga como tal, no sus comuneros.</div>
+   <div class="trap">Baja temporal: solo se prorratea si es por <b>robo</b>.</div>
+  </div>
+  <div>
+   <div class="trap">Hidrocarburos: lo pagan los <b>depositarios autorizados</b> y se devenga a la <b>salida de fábrica</b>, no al repostar.</div>
+   <div class="trap">El gasóleo profesional exige estar en el censo <b>antes</b> de consumir; el agrícola, solo el censo de <b>empresarios y retenedores</b>.</div>
+   <div class="trap">Recargo por congestión → tasa por <b>infraestructura</b>. Ruido → costes externos <b>en todo caso</b>.</div>
+   <div class="trap">Sin acreditar la EURO se cobra <b>hasta el nivel máximo</b>; no es un cobro «provisional con devolución».</div>
+   <div class="trap">Las comunidades de bienes <b>no</b> son contribuyentes del IRPF; tampoco hay alteración patrimonial al <b>disolverlas</b>.</div>
+   <div class="trap">Alquilar una vivienda es capital <b>inmobiliario</b>, no mobiliario.</div>
+   <div class="trap">Las <b>ganancias</b> por vender bienes van a la base del <b>ahorro</b>; el trabajo, a la <b>general</b>.</div>
+   <div class="trap">Las <b>sanciones</b> no son gasto deducible en el IRPF; en Sociedades, tampoco multas, juego ni donativos.</div>
+   <div class="trap">Módulos con <b>5 trabajadores</b> → <b>4 %</b>; sin asalariados → <b>2 %</b>. Directa → <b>20 %</b>.</div>
+   <div class="trap">El beneficio contable <b>no tiene que coincidir</b> con la base imponible de Sociedades.</div>
+   <div class="trap">La cuota líquida de Sociedades <b>nunca</b> es negativa; el exceso de pagos se devuelve <b>de oficio</b>.</div>
+  </div>
+ </div>
+ <div class="card" style="margin-top:8px;background:var(--bg)">
+  <h3 style="color:var(--ink)">🧠 Las 5 reglas que resuelven medio examen</h3>
+  <ol style="margin:2px 0 0;padding-left:18px">
+   <li>IVA: <b>21</b> mercancías, <b>10</b> viajeros, <b>4</b> movilidad reducida; repercutido − soportado.</li>
+   <li>Módulos (IVA e IRPF): <b>4 vehículos</b> y <b>250.000 €</b>; IVA <b>5 %</b> trimestral, IRPF <b>4-3-2 %</b>.</li>
+   <li>IRPF directa: <b>20 %</b> trimestral; frontera normal/simplificada <b>600.000 €</b>; devenga el <b>31-dic</b>.</li>
+   <li>Combustible: gasóleo profesional <b>≥ 7,5 t</b> y <b>50.000 l</b>; peajes <b>&gt; 3,5 t</b> = infraestructura + costes externos.</li>
+   <li>Sociedades: <b>25 %</b>, pequeña <b>&lt; 10 M€</b>, retención <b>19 %</b>, pagos en <b>abril, octubre y diciembre</b>.</li>
+  </ol>
+ </div>
+</div>
+
+</body>
+</html>
